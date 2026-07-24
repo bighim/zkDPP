@@ -1,0 +1,1482 @@
+\documentclass[11pt,a4paper]{extarticle}
+
+\usepackage{kotex}
+\usepackage[margin=18mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{array,booktabs,longtable,tabularx}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlist[itemize]{leftmargin=18pt,itemsep=2pt,topsep=2pt}
+\setlist[enumerate]{leftmargin=22pt,itemsep=3pt,topsep=3pt}
+\setcounter{tocdepth}{2}
+
+\newcommand{\Hash}{\mathrm{H}}
+\newcommand{\Poseidon}{\mathrm{Poseidon2}}
+\newcommand{\HToF}{\mathrm{HashToField}}
+\newcommand{\CM}{\mathrm{CM}}
+\newcommand{\DocumentHash}{\mathrm{DocumentHash}}
+\newcommand{\List}[1]{\mathrm{List}_{#1}}
+\newcommand{\Map}[1]{\mathrm{Map}_{#1}}
+
+\title{zkDPP Development Specification}
+\author{Canonical Implementation Specification}
+\date{2026-07-16}
+\renewcommand{\contentsname}{목차}
+
+\begin{document}
+\maketitle
+
+\section*{문서 지위}
+
+이 문서는 \texttt{Protocol Spec.tex}의 protocol semantics를
+Go, gnark, Solidity와 Foundry로 재현하기 위한 구현 명세다. 객체의 의미, Relation과
+state transition은 Protocol Specification이 우선하며, encoding, artifact, ABI,
+storage와 test의 구체값은 이 문서가 우선한다. 미확정 항목은 구현자가 임의로 결정하지
+않고 Open Decisions에 기록한다. 결정 이유는
+\texttt{Decision Log.tex}에서 관리한다.
+
+\tableofcontents
+\newpage
+
+\section{확정 개발 기준}
+
+\subsection{기술 Stack}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+구분 & 확정 선택 \\
+\midrule
+Client 및 prover & Go \\
+Circuit framework & gnark v0.15.0 \\
+Crypto dependency & gnark-crypto v0.20.1 \\
+Proof system & PLONK \\
+Curve & BLS12-381 \\
+Circuit field & BLS12-381 scalar field $\mathbb{F}_r$ \\
+Polynomial commitment & KZG \\
+Circuit-friendly hash & gnark BLS12-381 default Poseidon2 \\
+Smart Contract & Solidity \\
+Contract test & Foundry v1.7.1, Prague EVM \\
+POC KZG setup & gnark \texttt{test/unsafekzg.NewSRS} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\texttt{unsafekzg}는 local POC에만 사용한다. Production SRS 또는 trusted setup
+artifact로 취급하지 않는다.
+
+\subsection{Circuit 집합}
+
+\[
+\mathcal{I}=\{
+\mathrm{Entry},\mathrm{Transfer},\mathrm{Proceed},\mathrm{Recall},
+\mathrm{Merge},\mathrm{Split},\mathrm{Process},\mathrm{Exit}
+\}
+\]
+
+각 $i\in\mathcal{I}$에 대해 별도의 constraint system, proving key와 verifying key를
+생성한다. Relation의 정확한 statement와 witness는 Protocol Specification의 동일한
+Event 절을 따른다.
+
+\subsection{현재 POC 경계}
+
+\begin{itemize}
+  \item 저장소 root의 \path{poc/}와 \path{contracts/}는 Entry와 고정 3-to-3 Process를
+        검증한 historical baseline이다. 최신 Protocol 구현을 위해 이 두 폴더를 수정하지 않는다.
+  \item 새 구현의 source는 \path{poc-v2/}이며 Protocol Specification의 8개 Event를
+        대상으로 한다. 기능 확인용 기본 profile은 $\ell=3$, $d=32$,
+        $M_{\max}=N_{\max}=3$이고 Process는 $1\leq m,n\leq3$ active prefix와 inactive
+        zero padding을 구현한다.
+  \item Merge는 fixed 2-to-1, Split은 fixed 1-to-2 circuit이다.
+  \item 기능 확인용 기본 Process는 $M_{\max}=N_{\max}=3$이다. 성능 측정은
+        $M_{\max}=N_{\max}=a$, $a\in\{1,2,3\}$인 별도 circuit을 compile하고
+        1-to-1, 2-to-2와 3-to-3만 비교한다. 비대칭 arity는 측정하지 않는다.
+  \item 기능 확인용 기본 StateVector 길이는 $\ell=3$이다. 성능 측정은
+        $\ell\in\{0,1,2,3\}$인 별도 circuit을 compile한다.
+  \item Pedersen commitment와 circuit 내부 Pedersen opening 검증은 사용하지 않는다.
+  \item DocumentInfo와 DocumentHash의 일치는 circuit과 contract에서 검증하지 않는다.
+  \item Smart Contract는 provenance edge event를 emit하지 않는다. 다만 Client가
+        Merkle witness를 구성할 수 있도록 Tree append index event는 emit한다.
+  \item Transfer는 $q=0$이어도 sender의 change commitment를 항상 생성한다.
+  \item POC의 공급망 Event와 Recall resolution Event 함수는 caller를 제한하지 않는다.
+        Transaction submitter는 note owner일 필요가 없고, note 또는 voucher 소비 권한은
+        Circuit relation으로 검증한다. \texttt{RegisterUser}만 호출자의 Ethereum
+        \texttt{msg.sender}를 편의용 $(addr,pk_{own})$ metadata에 연결한다.
+\end{itemize}
+
+Historical baseline의 재현 명령과 기존 측정값은 \path{poc/README.md}를 따른다.
+새 POC의 구현 상태, 재현 명령과 측정값은 \path{poc-v2/README.md}에서 관리한다.
+두 POC 사이에서 generated verifier, key, fixture 또는 benchmark 결과를 공유하지 않는다.
+
+\subsection{기존 POC 재사용 경계}
+
+기존 파일을 직접 import하여 두 POC를 결합하지 않는다. 검토를 통과한 공통 구현만
+\path{poc-v2/}로 복사하고 새 module 안에서 독립적으로 유지한다.
+
+\begin{longtable}{@{}p{0.22\textwidth}p{0.31\textwidth}p{0.39\textwidth}@{}}
+\toprule
+분류 & 대상 & 처리 원칙 \\
+\midrule
+\endhead
+재사용 & gnark와 gnark-crypto version, Go version & 동일 version으로 고정하되 새
+module의 dependency로 선언 \\
+재사용 & Poseidon2 native/circuit hash와 compressor & Protocol reference vector를
+다시 통과한 소스만 복사 \\
+재사용 & Depth-32 native/circuit Merkle Tree & $MT$와 $rvMT$의 공통 component로
+사용하되 두 Tree의 storage와 root set은 분리 \\
+재사용 & Poseidon2 Solidity generator, artifact writer와 manifest 구조 & relation
+registry와 public input manifest는 8개 Event 기준으로 다시 작성 \\
+재사용 & Docker Foundry environment와 \texttt{foundry.toml} 기본값 & 새 POC 내부의
+Contract와 test만 mount하고 실행하도록 경로 변경 \\
+미재사용 & 기존 Entry/Process/SHA circuit과 scenario & 최신 Relation을 Protocol
+Specification에서 다시 전사 \\
+미재사용 & 기존 main Contract, generated verifier, key, fixture & 23-input Process와
+단일 root 등 이전 statement에 binding되어 있으므로 폐기 \\
+미재사용 & 기존 benchmark 수치와 SHA profile & historical baseline으로만 보존하고
+새 POC 결과에 혼합하지 않음 \\
+\bottomrule
+\end{longtable}
+
+\section{구현 Component}
+
+\begin{longtable}{@{}p{0.22\textwidth}p{0.70\textwidth}@{}}
+\toprule
+Component & 책임 \\
+\midrule
+\endhead
+Client & note와 secret 보관, witness 구성, proof 생성, transaction input 준비 \\
+Circuit & commitment opening, ownership, nullifier, membership, range와 Event relation 검증 \\
+Setup tool & circuit compile, POC SRS 생성, PLONK key 생성, verifier와 artifact export \\
+Smart Contract & registry와 root 검사, proof verification, duplicate/spent 검사, tree와 mapping 갱신 \\
+Off-chain 전달 & note opening, $o$, $o_{rv}$와 필요한 product data를 권한 있는 상대방에게 전달 \\
+Test harness & Go proof 검증과 Solidity verifier의 positive/negative case 재현 \\
+\bottomrule
+\end{longtable}
+
+Off-chain 전달 protocol의 암호화 방식은 현재 POC 범위에서 제외한다. 다만 receiver가
+Proceed 또는 이후 Event를 실행하려면 필요한 opening을 실제로 전달받아야 한다.
+
+\subsection{구현 준비도}
+
+2장 이후의 구현 가능 상태는 다음과 같다. ``차단''은 해당 결정을 확정하기 전에는
+canonical implementation을 고정하지 않는다는 뜻이다. 독립적인 package skeleton이나
+최소 실험까지 금지한다는 뜻은 아니다.
+
+\begin{longtable}{@{}p{0.18\textwidth}p{0.15\textwidth}p{0.59\textwidth}@{}}
+\toprule
+영역 & 상태 & 남은 결정 \\
+\midrule
+\endhead
+Component & POC 가능 & Client, Circuit, Setup, Contract와 test harness의 책임이 확정됐다. 구체 package 이름은 구현 선택이다. \\
+Data Encoding & POC 가능 & DocumentInfo는 NFC 정규화, UTF-8, 4-byte unsigned big-endian length prefix로 고정됐다. Poseidon2와 \texttt{fr.Hash}도 확정됐다. \\
+Setup/Artifact & POC 가능 & Relation별 \texttt{unsafekzg.NewSRS(ccs)}와 artifact directory 및 manifest schema가 확정됐다. \\
+Tree/Storage & POC 가능 & Depth 32, Azeroth식 raw leaf, append, accepted-root와 index event 정책이 확정됐다. Depth scaling은 수행하지 않는다. \\
+Circuit & POC 가능 & 공통 hash/tree/public-input ordering과 Transfer/Split deterministic remainder가 확정됐다. Process는 fixed-direction public $P_{pub}$, public $A$, constant $D=10^9$과 $m,n$ 기반 internal selector를 사용한다. \\
+Smart Contract & POC 가능 & POC caller policy, storage, path view 함수와 Relation별 verifier 배포 구조가 확정됐다. custom error 이름은 의미론을 바꾸지 않는 구현 선택이다. \\
+Test & POC 가능 & cross-layer reference vector, Event별 positive/negative case와 benchmark 항목이 확정됐다. 구체 test vector 값은 구현 중 생성한다. \\
+\bottomrule
+\end{longtable}
+
+\section{Data Encoding과 Layout}
+
+\subsection{DocumentInfo와 DocumentHash}
+
+POC의 logical object는 다음과 같다.
+
+\[
+\mathit{DocumentInfo}=(ProductName,LotId,Unit)
+\]
+
+\[
+ b_x=\operatorname{UTF8}(\operatorname{NFC}(x))
+\]
+
+\[
+\operatorname{EncodeText}(x)
+=\operatorname{U32BE}(|b_x|)
+\mathbin{\|}b_x
+\]
+
+\[
+\begin{aligned}
+\mathit{DocumentInfoBytes}
+={}&\operatorname{EncodeText}(ProductName)\\
+&\mathbin{\|}\operatorname{EncodeText}(LotId)\\
+&\mathbin{\|}\operatorname{EncodeText}(Unit)
+\end{aligned}
+\]
+
+\[
+\DocumentHash=\mathrm{fr.Hash}(
+\mathit{DocumentInfoBytes},
+\varepsilon,1
+)[0]
+\]
+
+\texttt{fr.Hash}는 gnark-crypto v0.20.1의 BLS12-381 scalar-field
+Hash-to-Field API다. 내부적으로 SHA-256 기반 \texttt{expand\_message\_xmd}를
+사용하지만, 단순한 \texttt{SHA256(msg) mod r} 계산은 아니다. Receiver는
+off-chain에서 동일한 serialization과 hash를 수행해 DocumentHash를 확인한다.
+두 번째 API 인자 DST에는 빈 byte string을 전달하며 별도 hash 용도 구분값은
+사용하지 않는다. Layout version은 넣지 않는다. 각 문자열은 Unicode NFC로 정규화하고
+유효한 UTF-8 bytes로 encode한다. UTF-8 rune 수가 아니라 byte 수를 unsigned 32-bit
+big-endian으로 먼저 기록한다. UTF-8이 유효하지 않거나 byte 길이가 $2^{32}-1$을
+초과하면 encoding을 거부한다.
+
+Go 구현은 \path{golang.org/x/text/unicode/norm}의 NFC 정규화와
+\path{encoding/binary.BigEndian.PutUint32}를 사용한다. Field 순서는
+\texttt{ProductName}, \texttt{LotId}, \texttt{Unit}으로 고정한다. Empty string과
+NUL byte는 length prefix로 경계가 보존되므로 encoding 자체를 허용한다. POC는
+DocumentInfo field의 비어 있음이나 business 의미를 별도로 검증하지 않는다.
+
+\subsection{Quantity와 StateVector}
+
+\[
+q\in\{0,\ldots,2^{64}-1\}
+\]
+
+\[
+\mathbf{s}=(s_1,\ldots,s_{\ell}),
+\qquad
+(s_1,s_2,s_3)=(total_{kg},carbon_{kgCO2e},recycled_{kg})
+\]
+
+기능 확인용 기본 POC에서 $\ell=3$이다. 성능 측정 profile은 다음 prefix layout을 사용한다.
+
+\[
+\begin{array}{c|l}
+\ell & \mathbf{s} \\
+\hline
+0 & () \\
+1 & (total_{kg}) \\
+2 & (total_{kg},carbon_{kgCO2e}) \\
+3 & (total_{kg},carbon_{kgCO2e},recycled_{kg})
+\end{array}
+\]
+
+$q$는 integer count이고, 각 $s_k$는 unsigned 64-bit
+integer로 제한한 nano scale $10^9$ fixed-point 값이다. 각 Event의 곱셈과 aggregate가
+$\mathbb{F}_r$에서 wraparound하지 않도록 intermediate bound를 circuit별로 분석해야 한다.
+
+\subsection{Owner와 Address}
+
+별도 설명이 없는 한 이 문서의 Field는 BLS12-381 scalar field
+$\mathbb{F}_r$를 뜻한다. Base field $\mathbb{F}_q$는 elliptic-curve point 좌표와
+pairing 구현에서 사용한다.
+
+\[
+sk_{own}\xleftarrow{\$}\mathbb{F}_r,
+\qquad
+pk_{own}=\Hash(sk_{own}),
+\qquad
+addr=\Hash(pk_{own})
+\]
+
+\[
+usk=sk_{own},
+\qquad
+upk=(addr,pk_{own})
+\]
+
+Holder는 등록된 $addr$을 알고 사용한다. Note 안에는 $addr$을 저장하지 않는다.
+Spend circuit은 witness로 받은 $sk_{own}$에서 owner binding을 검증한다.
+$pk_{own}$은 EC public key point가 아니라 Poseidon2로 도출한 public ownership
+identifier다. $sk_{own}$과 $o$는 $\mathbb{F}_r$에서 sample하고,
+$pk_{own}$, $addr$, $cm$은 Poseidon2 출력이므로 모두 $\mathbb{F}_r$ 원소다.
+
+\texttt{RegisterUser}는 누구나 호출할 수 있다. 입력은 $addr$와 $pkOwn$이다.
+Contract는 호출자의 Ethereum EOA인 \texttt{msg.sender}를 $(addr,pkOwn)$에 저장한다. POC에서는
+$addr$ 중복, 동일 EOA 재등록과 $addr=\Hash(pkOwn)$을 Contract에서 검사하지 않으며,
+같은 EOA가 다시 등록하면 최신 값으로 덮어쓴다. 이 mapping은 wallet 조회를 위한
+off-circuit metadata다. Supply-chain Event proof의 owner authorization은 이 mapping이나
+\texttt{msg.sender}가 아니라 Circuit의 $sk_{own}$ relation으로 결정된다. Public mapping의
+자동 getter를 사용하고 registration event는 emit하지 않는다.
+
+\subsection{Commitment와 Note}
+
+Go, circuit과 note reconstruction에서 다음 flat ordering을 동일하게 사용한다.
+
+\[
+cm=\Poseidon(
+\DocumentHash,q,s_1,\ldots,s_{\ell},addr,o
+)
+\]
+
+\[
+\mathit{note}=(cm,\DocumentHash,q,\mathbf{s},o)
+\]
+
+POC의 모든 $\Hash$와 $\CM$은 gnark v0.15.0이 의존하는 gnark-crypto v0.20.1의
+BLS12-381 default Poseidon2 hasher를 사용한다. 구체 instance는 width 2,
+full rounds 6, partial rounds 50, S-box $x^5$와 Merkle--Damg\aa rd construction이다.
+입력 Field Element는 각 식에 적힌 왼쪽에서 오른쪽 순서로 hasher에 전달한다. 별도
+해시 용도 구분값은 사용하지 않는다. 해시 용도 구분값은 같은 hash 함수를 서로 다른
+protocol 목적으로 사용할 때 목적을 구분하기 위해 입력에 추가하는 고정값을 뜻한다.
+DocumentHash용 \texttt{fr.Hash}도 별도 구분값을 사용하지 않으며, API가 요구하는
+DST에는 빈 byte string을 전달한다.
+
+다음 SHA-to-Field profile은 EVM SHA-256 precompile의 on-chain gas와 generated
+Poseidon2 Solidity 연산의 gas를 같은 protocol 의미론에서 비교하기 위해 구현한 historical
+benchmark다. 비교 실험은 종료했으며 이후 POC 구현과 benchmark에는 Poseidon2만 사용한다.
+SHA profile은
+DocumentHash용 \texttt{fr.Hash}와 다른 함수다. 입력
+$x_1,\ldots,x_t\in\mathbb{F}_r$에 대해 다음 SHA-to-Field를 사용한다.
+
+\[
+H_{\mathrm{SHA}}(x_1,\ldots,x_t)=
+\operatorname{OS2IP}\!\left(
+\operatorname{SHA256}(\operatorname{I2OSP}_{32}(x_1)\|\cdots\|\operatorname{I2OSP}_{32}(x_t))
+\right)\bmod r
+\]
+
+여기서 $\operatorname{I2OSP}_{32}$는 Field Element의 canonical unsigned 32-byte
+big-endian encoding이다. Native Go는 SHA-256 digest를 BLS12-381 scalar field로
+환원하고, circuit은 같은 byte ordering으로 SHA-256을 계산한 뒤 Field arithmetic으로
+동일한 환원을 수행한다. Solidity는 \texttt{sha256} 결과를 동일한 $r$로 나눈 나머지를
+사용한다. 두 Field 입력의 $H_{\mathrm{SHA}}(left,right)$가 SHA profile의 Merkle
+compressor다. 이 직접 modulo reduction은 RFC 9380 Hash-to-Field나 \texttt{fr.Hash}와
+동일하지 않으며, 256-bit digest를 Field 하나로 축약해 분포 편향이 생길 수 있다.
+이 선택은 완료된 hash scaling POC를 재현하기 위한 것이며 production hash 결정으로
+일반화하지 않는다. 새로운 SHA profile artifact는 생성하지 않는다.
+
+구현 완료 전 native Go와 gnark circuit에서 같은 input tuple이 같은 Field Element를
+출력하는 reference vector를 고정해야 한다. Library default를 변경하거나
+gnark/gnark-crypto version을 올리면 reference vector와 8개 circuit key를 다시 생성한다.
+
+\subsection{Azeroth BLS12-381 코드의 참고 경계}
+
+\texttt{Azeroth Contract}의 BLS12-381 관련 Solidity 파일은 현행 zkDPP 구현체가 아니라
+과거 EIP-2537 draft를 대상으로 작성된 Groth16 실험 경로다. zkDPP는 이 코드에서
+다음 architecture만 참고한다.
+
+\begin{itemize}
+  \item protocol state machine과 proof verifier를 별도 contract/library 경계로 분리한다.
+  \item 공통 protocol contract는 root, nullifier, tree와 registry를 관리하고,
+        Relation별 verifier는 proof와 public input 검증만 담당한다.
+  \item curve-specific point와 proof serialization이 verifier ABI에 반영되어야 한다.
+  \item expensive group operation과 pairing은 가능한 경우 EVM precompile에 위임한다.
+  \item Merkle tree는 abstract 2-to-1 node hash 경계를 두어 Go, circuit과 Contract가
+        동일한 hash를 사용하게 한다.
+\end{itemize}
+
+다음 코드는 재사용하지 않는다.
+
+\begin{itemize}
+  \item \texttt{Groth16BLS12\_381.sol}: zkDPP는 Groth16이 아니라 PLONK/KZG를 사용하며,
+        이 파일은 최종 EIP-2537과 다른 과거 precompile address와 calldata layout을
+        사용한다.
+  \item \path{BLS12_381MixerBase.sol}: 현재 \texttt{ZklayBase} constructor와 맞지 않는다.
+  \item \path{Groth16BLS12_381Mixer.sol}: 현재 \texttt{\_verifyZKProof} signature와
+        맞지 않으며 현 checkout의 완성된 deploy path가 아니다.
+  \item \texttt{Poseidon2.sol}과 \texttt{MiMC7.sol}: 상수와 modulus가 BN254용이므로
+        BLS12-381 scalar field에서 사용하는 zkDPP hash 구현으로 가져오지 않는다.
+  \item Azeroth의 verifying-key storage layout, fixed public-input count,
+        encrypted account, auditor encryption과 token/NFT 분기 로직을 복사하지 않는다.
+\end{itemize}
+
+zkDPP의 on-chain proof verifier는 gnark가 BLS12-381 PLONK verifying key에서 export한
+Solidity verifier를 기준으로 한다. Merkle node hash용 Solidity Poseidon2 compressor는
+gnark-crypto v0.20.1 BLS12-381 default parameter와 일치하도록 별도로 구현하고,
+Azeroth의 hash source를 수정해 재사용하지 않는다.
+
+Azeroth checkout에는 Groth16 setup을 실행해 key를 생성하는 code가 포함되어 있지 않다.
+Deployment script는 외부에서 미리 생성된
+\path{compiled/testParameter.json}의 \texttt{vk}와 \texttt{vk\_nft}를 읽어
+main mixer constructor에 전달한다. 따라서 이 repository는 zkDPP의 KZG SRS 생성 방식에
+대한 reference가 아니며, verifier와 protocol contract를 분리하는 architecture만 참고한다.
+
+\subsection{Nullifier와 Recall Voucher}
+
+\[
+nf=\Hash(sk_{own},cm)
+\]
+
+\[
+rv=\Hash(
+\DocumentHash,q_T,\mathbf{s}_T,
+addr_{Sender},addr_{Receiver},\Delta_{epoch},o_{rv}
+)
+\]
+
+\[
+rvnf=\Hash(rv,o_{rv})
+\]
+
+\[
+\mathit{voucher}=\{
+rv,\DocumentHash,q_T,\mathbf{s}_T,
+addr_{Sender},addr_{Receiver},\Delta_{epoch},o_{rv}
+\}
+\]
+
+$nf$는 finalized note 소비용이고, $rvnf$는 Recall Voucher resolution용이다.
+$o_{rv}$는 sender와 receiver가 off-chain으로 공유한다. Hash input에는 현재 별도의
+문자열 tag를 넣지 않는다. Voucher는 역할별로 다른 wallet schema를 사용하지 않는다.
+Sender와 Receiver는 자기 address가 중복되더라도 위 canonical object 전체를 보관한다.
+$rvnf$는 Solidity의 $\List{rvnf}$에 해당하는
+\texttt{mapping(uint256 => bool)}의 key로 사용한다. 별도
+\texttt{resolved[rv]} mapping은 두지 않는다.
+
+\subsection{Public Input Ordering과 Solidity Encoding}
+
+Protocol Specification의 각 Event에 정의된 $\mathbf{x}$와 $\mathbf{w}$는 중괄호로
+표기하지만 unordered set이 아니라 ordered tuple이다.
+Private witness는 가능한 경우 다음 canonical group 순서를 사용한다.
+
+\begin{enumerate}[nosep]
+  \item ownership secret과 public identifier: $sk$, $pk$
+  \item note 또는 voucher 저장 순서의 $\DocumentHash$, quantity와 StateVector
+  \item address, deadline과 event-specific arithmetic auxiliary
+  \item Merkle path
+  \item opening과 새로 뽑은 randomness
+\end{enumerate}
+
+공유하거나 중복되는 field는 한 번만 적되 각 group 내부의 object 순서를 유지한다.
+Tuple에 적힌 왼쪽에서 오른쪽 순서를 gnark public witness와 Solidity verifier input
+array에 동일하게 사용한다. 중첩 tuple과 고정 배열을 Field Element 단위로 펼친 최종
+순서는 다음과 같다. 아래 순서는 0-based array index 순서이며 manifest의
+\texttt{publicInputs}에도 그대로 기록한다.
+
+\begin{longtable}{@{}p{0.14\textwidth}p{0.78\textwidth}@{}}
+\toprule
+Relation & Ordered public Field Elements \\
+\midrule
+\endhead
+Entry & $cm_{new}$ \\
+Transfer & $rt,cm_{in},nf,rv,cm_C,\Delta_{epoch}$ \\
+Proceed & $rvrt,rv,rvnf,cm_{recv}$ \\
+Recall & $rvrt,rv,rvnf,cm_{return}$ \\
+Merge & $rt_1,rt_2,cm_1,cm_2,nf_1,nf_2,cm_{out}$ \\
+Split & $rt,cm_{in},nf,cm_{out,1},cm_{out,2}$ \\
+Process$^{*}$ & $\begin{aligned}
+&m,n,p_{totalLoss},p_{carbonAdded},p_{recycledDelta},\\
+&A_{1,total},A_{1,carbon},A_{1,recycled},
+ A_{2,total},A_{2,carbon},A_{2,recycled},\\
+&A_{3,total},A_{3,carbon},A_{3,recycled},\\
+&rt_1,cm_{in,1},nf_1,rt_2,cm_{in,2},nf_2,\\
+&rt_3,cm_{in,3},nf_3,\\
+&cm_{out,1},cm_{out,2},cm_{out,3}
+\end{aligned}$ \\
+Exit & $rt,cm_{in},nf$ \\
+\bottomrule
+\end{longtable}
+
+Process$^{*}$ 행은 기능 확인용 기본 $\ell=3,a=3$ profile의 26개 public input을 보인다.
+일반 benchmark
+profile에서 $a=M_{\max}=N_{\max}$이고, 공개 process-delta 개수를
+$p_\ell=\ell$로 두면 public input 수는 다음과 같다.
+
+\[
+N_{public}(\ell,a)=2+p_\ell+a\ell+4a
+\]
+
+첫 2개는 $m,n$이고, 다음 $p_\ell$개는 존재하는 State coordinate의 delta다.
+$\ell=3$의 delta 순서는 다음과 같다.
+
+\[
+(p_{totalLoss},p_{carbonAdded},p_{recycledDelta})
+\]
+
+마지막 값도 State coordinate와 일대일로 대응하는 public input으로 전달한다. Circuit은
+recycled delta 적용식과 recycled aggregate 보존식을 함께 검사하여 유효한 proof에서
+$p_{recycledDelta}=0$이 도출되게 한다. 별도의 0 assertion은 두지 않는다. 그 뒤에는
+output-major $A$의 $a\ell$개 값, $(rt_i,cm_{in,i},nf_i)$ triple $a$개와 output commitment
+$a$개를 차례로 놓는다.
+
+실제 benchmark에서 사용하는 Process public input 수는 다음과 같다.
+
+\begin{center}
+\begin{tabular}{l|c|c}
+\toprule
+실험 & Profile & Public input 수 \\
+\midrule
+State scaling & $(d,a)=(32,3)$, $\ell=0,1,2,3$ & 14, 18, 22, 26 \\
+Arity scaling & $(d,\ell)=(32,3)$, $a=1,2,3$ & 12, 19, 26 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+각 public Field Element는 canonical $0\leq x<r$ 정수 하나로 표현한다. Solidity
+adapter는 이를 \texttt{uint256} 한 word로 전달하며, ABI는 각 word를 32-byte
+big-endian으로 encode한다. Proof $\pi$는 public input tuple의 원소가 아니라 verifier에
+별도로 전달되는 proof bytes다. Contract-only 검사값도 Protocol Specification의
+$\mathbf{x}$에 포함되지 않았다면 proof public input으로 간주하지 않는다.
+
+\section{Setup과 Artifact}
+
+\subsection{POC Setup}
+
+각 Relation에 대해 다음 순서를 수행한다.
+
+\begin{enumerate}
+  \item BLS12-381 scalar field와 SCS builder로 circuit을 compile한다.
+  \item 해당 Relation의 \texttt{ccs}를 \texttt{unsafekzg.NewSRS(ccs)}에 전달해
+        local canonical SRS와 Lagrange SRS를 생성한다.
+  \item 두 SRS와 \texttt{ccs}를 PLONK Setup에 전달해 proving key와 verifying key를 생성한다.
+  \item verifying key에서 Solidity \texttt{PlonkVerifier}를 export한다.
+  \item CCS, 두 SRS, proving key, verifying key와 manifest를 Relation artifact
+        directory에 저장하고 generated verifier는 Foundry source tree에 저장한다.
+\end{enumerate}
+
+\texttt{unsafekzg.NewSRS}는 constraint 수와 public variable 수로 필요한 SRS 크기를
+계산해 canonical/Lagrange pair를 반환한다. POC에서는 각 Relation을 독립적으로 Setup한다.
+이 SRS는 test용 toxic waste로 생성되므로 production security를 제공하지 않는다.
+
+현재 setup code는 Relation마다 \texttt{NewSRS(ccs)}를 호출한다. 다만
+\texttt{unsafekzg}의 in-memory cache key는 circuit identity가 아니라 curve, canonical
+SRS size와 toxic value다. 따라서 같은 process 안에서 필요한 크기가 같은 Relation은
+같은 SRS를 재사용하고, 크기가 다르면 새로운 random toxic value로 새 SRS를 생성한다.
+Process를 다시 실행하면 memory cache도 사라지므로 새 SRS가 생성된다. 현재 artifact
+directory에는 재현 편의를 위해 Relation별 SRS copy를 저장한다.
+
+gnark v0.15.0의 required size 계산은 다음과 같다.
+
+\[
+N_{\mathrm{domain}}
+=
+\operatorname{NextPowerOfTwo}
+\left(
+\#\mathrm{constraints}+\#\mathrm{publicVariables}
+\right),
+\qquad
+N_{\mathrm{canonical}}=N_{\mathrm{domain}}+3.
+\]
+
+Ethereum KZG Ceremony output과 현재 Ethereum blob setup은 구분해야 한다. Ceremony
+specification은 서로 다른 $\tau$를 사용하는 G1 size $2^{12}$, $2^{13}$, $2^{14}$,
+$2^{15}$의 네 Powers-of-Tau set을 만들었고 각 set은 G2 point 65개를 가진다. 반면
+EIP-4844 blob consensus specification은 G1 monomial 4,096개, G1 Lagrange 4,096개와
+G2 monomial 65개를 사용한다. 이 SRS point array는 Contract storage에 공개된 자료구조가
+아니다. Ethereum client가 trusted setup을 사용하고 EVM은 point-evaluation precompile을
+노출한다. 공식 근거는
+\url{https://github.com/ethereum/kzg-ceremony-specs}와
+\url{https://ethereum.github.io/consensus-specs/deneb/polynomial-commitments/}다.
+
+현재 Poseidon2 Process는 domain 65,536과 canonical SRS 65,539 points가 필요하므로
+최대 32,768 G1 points인 Ceremony output으로도 처리할 수 없다. Poseidon2 Entry도 gnark가
+canonical 4,099 points를 요구하므로 EIP-4844의 4,096-point set을 그대로 전달할 수 없다.
+큰 Ceremony set을 gnark 형식으로 변환해 Entry에 사용하는 가능성과 production SRS 선택은
+별도 결정이며 현재 POC에는 적용하지 않는다.
+
+\newpage
+Artifact directory는 다음 형식을 사용한다.
+
+\begin{verbatim}
+circuits/profiles/
+  state-0/
+  state-1/
+  state-2/
+  state-3/
+
+artifacts/poc/state-<l>/depth-<d>/<relation-variant>/
+  ccs.bin
+  srs-canonical.bin
+  srs-lagrange.bin
+  proving.key
+  verifying.key
+  poseidon2-vectors.json
+  manifest.json
+
+contracts/src/generated/state-<l>/depth-<d>/<relation-variant>/
+  PlonkVerifier.sol
+\end{verbatim}
+
+네 \path{circuits/profiles/state-<l>} folder는 State schema와 compile constant만
+정의한다. Entry부터 Exit까지의 Relation source를 네 번 복사하지 않고 공통 circuit
+package를 호출한다. \texttt{relation-variant}는 Non-Process에서는 Relation의 lowercase
+이름이고, Process에서는 \texttt{process-1x1}, \texttt{process-2x2} 또는
+\texttt{process-3x3}이다. 새로 생성하는 profile 조합은 Benchmark Specification에 정의된
+두 Poseidon2 실험에 한정한다. Setup binary는
+\texttt{artifacts}에 두고 generated verifier만 Foundry가 compile하는
+\texttt{contracts/src/generated}에 둔다. Generated Solidity의 contract name은 gnark
+기본값인 \texttt{PlonkVerifier}를 유지한다. Foundry deployment는 동일 contract name을
+파일 경로까지 포함한 fully qualified name으로 구분한다.
+
+각 \texttt{manifest.json}은 다음 값을 갖는다.
+
+\begin{itemize}
+  \item \texttt{schemaVersion}: 정수 \texttt{1}
+  \item \texttt{relationId}: Main Contract와 같은 0부터 7까지의 정수
+  \item \texttt{relationName}: \texttt{entry}, \texttt{transfer}, \texttt{proceed},
+        \texttt{recall}, \texttt{merge}, \texttt{split}, \texttt{process},
+        \texttt{exit} 중 하나
+  \item \texttt{profileId}: Non-Process는 \path{state-<l>-depth-<d>}, Process는
+        \path{state-<l>-depth-<d>-process-<a>x<a>}
+  \item \texttt{treeDepth}: 정수 16 또는 32, \texttt{stateLength}: 0부터 3까지의 정수
+  \item Process manifest의 \texttt{processArity}: 정수 1, 2 또는 3.
+        다른 Relation manifest에는 이 key를 넣지 않는다.
+  \item \texttt{proofSystem}, \texttt{curve}, \texttt{gnarkVersion},
+        \texttt{gnarkCryptoVersion}
+  \item \texttt{constraintCount}, \texttt{publicVariableCount}
+  \item \texttt{publicInputs}: Protocol Specification과 동일한 ordered name array
+  \item \texttt{setupMode}: \texttt{unsafe-local}, \texttt{srsScope}: \texttt{relation}
+  \item \texttt{files}: repository root 기준 상대경로와 SHA-256 checksum. 최소 key는
+        \path{ccs}, \path{srsCanonical}, \path{srsLagrange},
+        \path{provingKey}, \path{verifyingKey}, \path{solidityVerifier},
+        \path{poseidon2Vectors}다.
+  \item \texttt{sourceCommit}: 생성에 사용한 Git commit ID
+\end{itemize}
+
+Manifest의 \texttt{schemaVersion}은 artifact file format version이며 DocumentInfo의
+encoding field가 아니다. Prover, verifier deployment script와 benchmark harness는
+Relation ID, ordered public inputs와 checksum이 일치하지 않으면 artifact를 사용하지 않는다.
+각 \texttt{files} value는 \texttt{path} string과 lowercase hex
+\texttt{sha256} string을 갖는다. \texttt{sourceCommit}은 Git commit ID string이며
+dirty worktree에서 생성했다면 별도 boolean \texttt{sourceDirty}를 \texttt{true}로 기록한다.
+
+\texttt{ccs.bin}, 두 SRS와 두 key file은 해당 gnark object의 \texttt{WriteTo}가 출력한
+binary bytes를 그대로 저장하고, 동일 concrete type의 \texttt{ReadFrom}으로 읽는다.
+\texttt{WriteRawTo}, gzip 또는 별도 container format은 사용하지 않는다. Reader는 manifest에
+고정된 gnark/gnark-crypto version과 checksum이 일치할 때만 역직렬화한다.
+
+\texttt{poseidon2-vectors.json}은 다음 field를 갖는다.
+
+\begin{itemize}
+  \item \texttt{schemaVersion}: 정수 \texttt{1}
+  \item \texttt{field}: 문자열 \texttt{BLS12-381-Fr}
+  \item \texttt{compressor}: 문자열 \path{gnark-poseidon2-compress-v1}
+  \item \texttt{vectors}: 각 원소가 \texttt{name}, \texttt{left}, \texttt{right},
+        \texttt{output}을 갖는 array
+  \item \texttt{emptyRoots}: \texttt{z16}, \texttt{z32}를 갖는 object
+\end{itemize}
+
+모든 Field Element는 \texttt{0x} prefix가 붙은 64자리 lowercase hexadecimal
+canonical integer string으로 기록한다.
+
+\subsection{BLS12-381 Solidity 재현 결과}
+
+2026-07-16 최소 재현 실험에서 다음 조합을 확인했다.
+
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+검증 항목 & 결과 \\
+\midrule
+gnark PLONK compile/setup/prove/verify & 성공 \\
+\texttt{vk.ExportSolidity} & 성공 \\
+\texttt{proof.MarshalSolidity} & 성공 \\
+Foundry Prague EVM valid proof & 성공 \\
+변조 public input & 거부 \\
+사용 precompile & EIP-2537 G1 MSM $0x0c$, pairing $0x0f$ \\
+Verifier 호출 gas & 약 329,076 gas \\
+Verifier 배포 gas & 약 2,229,650 gas \\
+배포 bytecode 크기 & 10,131 bytes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+이 결과는 POC stack의 호환성을 확인한 것이며, 8개 실제 circuit의 gas와 proving time을
+대신하지 않는다.
+
+\section{Tree와 On-chain State}
+
+\subsection{두 개의 Tree}
+
+\begin{itemize}
+  \item $MT$: finalized $cm$을 append하는 공급망 note tree
+  \item $rvMT$: pending $rv$를 append하는 Recall Voucher tree
+  \item 두 Tree는 동일한 depth $d$를 사용하는 fixed binary append-only Merkle tree다.
+  \item POC와 모든 benchmark profile은 $d=32$를 사용한다.
+  \item Depth scaling은 수행하지 않는다.
+  \item Merkle 비용은 depth-32 commitment 한 개에 대한 membership circuit과
+        Contract path/append microbenchmark로 한 번 측정한다.
+\end{itemize}
+
+\subsection{Empty Tree와 Node Hash}
+
+두 Tree는 Azeroth \texttt{BaseMerkleTree.sol}의 logical layout을 따른다.
+
+\[
+z_0=0,
+\qquad
+z_{h+1}=H_{\mathrm{tree}}(z_h,z_h)
+\quad h\in\{0,\ldots,d-1\}
+\]
+
+Empty root는 $z_d$다. $MT$의 leaf는 $cm$, $rvMT$의 leaf는 $rv$를 다시
+leaf-hash하지 않고 그대로 사용한다.
+
+\[
+leaf_{MT}=cm\neq0,
+\qquad
+leaf_{rvMT}=rv\neq0
+\]
+
+$H_{\mathrm{tree}}(left,right)$는 Azeroth의 abstract \texttt{\_hash(left,right)}
+경계를 유지하는 direct 2-to-1 compression function이다. Poseidon2 profile의 Native Go와
+gnark circuit은 gnark-crypto/gnark가 제공하는 BLS12-381 Poseidon2 구현을 재사용한다.
+완료된 historical SHA profile은 앞 절의 SHA-to-Field를 두 입력에 적용했다. Solidity에서도
+선택한 profile과 같은 compressor를 주입하고 reference vector로 호환성을 검증했다.
+이후 구현은 Poseidon2 compressor만 사용한다. Variable-length $H$와
+$CM$이 사용하는 hasher와 Tree의 direct compressor를 혼동하지 않는다.
+
+Bit-exact compressor는 다음 식이다.
+
+\[
+(u_0,u_1)=\mathcal{P}_{P2}(left,right),
+\qquad
+H_{\mathrm{tree}}(left,right)=u_1+right\pmod r
+\]
+
+두 permutation lane의 초기값은 정확히 $(left,right)$이며 별도의 zero capacity lane을
+추가하지 않는다. 출력은 permutation의 오른쪽 lane에 원래 $right$를 feed-forward한
+Field Element다. Native Go 구현은
+\path{github.com/consensys/gnark-crypto/ecc/bls12-381/fr/poseidon2}의
+\path{NewDefaultPermutation().Compress(leftBytes,rightBytes)}를 사용한다. 두 byte 입력은
+각 Field Element의 canonical BLS12-381 scalar-field encoding이다. Circuit은
+\path{github.com/consensys/gnark/std/permutation/poseidon2}의
+\path{NewPoseidon2(api).Compress(left,right)}를 사용한다.
+
+Pinned default permutation은 width 2, full rounds 6, partial rounds 50, degree 5이며
+round-key seed string은
+\texttt{Poseidon2-BLS12\_381[t=2,rF=6,rP=50,d=5]}다. Solidity compressor는 이
+정의와 feed-forward를 그대로 구현해야 한다. Setup tool은 각 hash profile에 대해 최소
+$H_{tree}(0,0)$, $H_{tree}(1,2)$와 $z_{32}$의 native/circuit/Solidity reference vector를 생성해
+manifest와 test fixture에 저장한다.
+
+\subsection{Append와 Contract Storage}
+
+Leaf는 index 0부터 왼쪽에서 오른쪽으로 순차 append한다. Contract는 Azeroth처럼
+실제 leaf와 append로 영향을 받은 모든 internal node를 full binary-tree heap index의
+mapping에 저장한다. 기록되지 않은 storage node의 0은 해당 level의 $z_h$로 해석한다.
+Valid $cm$과 $rv$는 0이 아니어야 하지만, Contract는 Azeroth와 동일하게 별도
+nonzero 검사를 수행하지 않는다. Commitment 또는 voucher hash가 0이 될 확률과
+Poseidon2 internal node가 0이 될 확률은 각각 약 $1/r$로 보고, 별도 existence
+bitmap 없이 무시한다.
+
+각 append는 leaf 한 개와 root까지의 $d$개 parent를 갱신한다. Tree가 $2^d$개 leaf로
+가득 차면 추가 append는 revert한다.
+
+Heap storage index는 root를 0으로 하는 0-based complete-binary-tree layout으로 고정한다.
+Leaf index $j$의 storage index와 leaf에서 $h$ level 올라간 node의 storage index는 각각
+다음과 같다.
+
+\[
+\operatorname{NodeIndex}(0,j)=2^d-1+j,
+\qquad
+\operatorname{NodeIndex}(h,j)=2^{d-h}-1+\left\lfloor\frac{j}{2^h}\right\rfloor
+\]
+
+Level $h$에서 sibling position은
+$\left\lfloor j/2^h\right\rfloor\mathbin{\mathtt{xor}}1$이고 parent position은
+$\left\lfloor j/2^{h+1}\right\rfloor$이다. Append와 path getter는 이 식을 함께 사용한다.
+
+Append 함수는 삽입 전에 현재 leaf count를 zero-based $index$로 저장하고, 삽입과 root
+갱신이 끝난 뒤 다음 event 중 하나를 emit한다.
+
+\[
+\mathrm{MTAppend}(cm,index,rt_{new})
+\]
+
+\[
+\mathrm{RVMTAppend}(rv,index,rvrt_{new})
+\]
+
+$cm$ 또는 $rv$는 indexed event field로 두어 Client가 자신의 leaf를 검색할 수 있게
+한다. Azeroth 구현은 삽입 후 증가한 \texttt{\_numLeaves}를 \texttt{index}라는 이름으로
+emit하므로 실제 zero-based leaf index보다 1 크다. zkDPP는 이 동작을 그대로 복사하지
+않고 삽입 전 값을 정확한 zero-based index로 emit한다.
+
+\subsection{Membership Witness와 Root History}
+
+Membership witness는 다음 logical object다.
+
+\[
+path=(index,sibling_0,\ldots,sibling_{d-1})
+\]
+
+$index$는 $0\leq index<2^d$인 leaf index이고, $sibling_0$은 leaf level의 sibling,
+$sibling_{d-1}$는 root 바로 아래 level의 sibling이다. Circuit은
+\texttt{api.ToBinary(index,d)}로 direction bit를 만들고 각 level에서
+$H_{\mathrm{tree}}(left,right)$의 input ordering을 선택한다. gnark가 direction 선택
+constraint를 생성하지만, Client는 index와 $d$개 sibling을 witness로 제공해야 한다.
+
+gnark의 기본 Merkle gadget은 leaf에 FieldHasher를 한 번 적용하고 internal node에도
+Merkle--Damg\aa rd hasher를 사용하므로 이 Tree와 root가 일치하지 않는다. 각 Event
+circuit은 raw leaf에서 시작해 선택한 profile의 direct 2-to-1 compressor를 정확히 $d$번
+적용하는 zkDPP 전용 membership verifier를 사용한다.
+
+Contract는 $MT$와 $rvMT$의 empty root 및 append로 생성된 모든 과거 root를 각각
+bool mapping에 영구 등록한다. Root-history window를 두지 않으며, spend와 resolution
+proof는 해당 Tree의 accepted root 중 하나에 binding되어야 한다.
+
+Client의 POC path 조회는 Contract view 함수로 제공한다.
+
+\begin{verbatim}
+getMTPath(uint256 index)
+  returns (uint256 root, uint256[] siblings)
+
+getRVMTPath(uint256 index)
+  returns (uint256 root, uint256[] siblings)
+\end{verbatim}
+
+두 함수는 $index<leafCount$를 검사하고, 조회 시점의 current root와 leaf-to-root 순서의
+sibling $d$개를 반환한다. Client는 append event에서 받은 zero-based index를 전달한다.
+View 함수는 과거 root의 path를 재구성하지 않는다. 과거 root용 proof를 생성하려는
+Client는 해당 시점의 path를 별도로 보관해야 한다.
+
+Proceed와 Recall Client는 wallet이 $rv$와 함께 보관한 $index_{rv}$를
+\texttt{getRVMTPath(index\_rv)}에 전달해 $rvrt$와 $path_{rv}$를 조회한다.
+$index_{rv}$는 Voucher hash에 포함되는 protocol data가 아니라, Transfer 성공 시
+$rvMT$ append event에서 얻어 Voucher와 연결해 보관하는 wallet metadata다.
+
+\subsection{Logical Storage}
+
+\[
+\List{rt},\List{cm},\List{nf},
+\List{rvrt},\List{rv},\List{rvnf},\Map{user},\Map{rv}
+\]
+
+POC에서 Field Element는 Solidity \texttt{uint256}으로 표현한다. 위의 logical
+\texttt{List}는 순회용 array가 아니라 다음 membership mapping으로 구현한다.
+
+\begin{itemize}
+  \item $\List{cm}$, $\List{nf}$, $\List{rv}$, $\List{rvnf}$:
+        \texttt{mapping(uint256 => bool)}
+  \item $\Map{user}$: Solidity EOA address를 key로 하고
+        \texttt{UserRegistration} struct를 value로 갖는 mapping. Struct는
+        \texttt{uint256 addr}와 \texttt{uint256 pkOwn}을 갖는다. 동일 EOA의 재등록은
+        기존 값을 덮어쓴다.
+  \item $\List{rt}$와 $\List{rvrt}$: Tree별
+        \texttt{mapping(uint256 => bool)} accepted-root set
+  \item $\Map{rv}$: \texttt{mapping(uint256 => uint256)}으로 구현하는
+        $rv\mapsto deadlineEpoch$
+  \item 각 Tree의 internal node: \texttt{mapping(uint256 => uint256)}, leaf count:
+        \texttt{uint256}
+\end{itemize}
+
+Protocol 검증에는 전체 set 순회가 필요하지 않으므로 별도 dynamic array를 두지 않는다.
+Append index와 새 root는 event로 제공한다. 이 storage layout을 POC gas benchmark의
+baseline으로 사용한다.
+
+\begin{itemize}
+  \item Transfer 시 Smart Contract가 current epoch를 계산하고 여기에
+        $\Delta_{epoch}$을 더한 값을 $\Map{rv}[rv]$에 저장한다. 완성된 deadline
+        값을 transaction input으로 받지 않는다.
+  \item $EPOCH\_SIZE$는 600초다.
+  \item Sender가 $\Delta_{epoch}\geq0$을 선택한다. Protocol policy에는 별도의
+        maximum을 두지 않는다. Circuit은 이를 별도로 bit range check하지 않고
+        voucher hash에 binding한다. Contract calldata의 $\Delta_{epoch}$은 proof public
+        input과 동일한 Field Element를 \texttt{uint256}으로 받는다. Generated verifier가
+        $\Delta_{epoch}<r$을 포함한 public-input canonicality를 검사하므로 Main Contract는
+        이를 반복 검사하지 않는다. Proof 검증 후
+        $deadlineEpoch=block.timestamp/600+\Delta_{epoch}$을 계산한다. Field modulus와
+        epoch 정의에 의해 이 합은 \texttt{uint256} 범위 안에 있다.
+  \item Recall은 $currentEpoch<\Map{rv}[rv]$일 때만 허용한다.
+        $\Delta_{epoch}=0$이면 Recall은 처음부터 불가능하다.
+  \item Recall 또는 Proceed 이후에도 $\Map{rv}[rv]$를 삭제하지 않는다.
+  \item Proceed는 $rvMT$ membership으로 Transfer에서 생성된 voucher임을 검증하므로
+        $\Map{rv}[rv]$ 존재 여부를 별도로 검사하지 않는다. Recall도 deadline 비교가
+        존재하지 않는 mapping의 기본값 0을 자동으로 거부하므로 별도 exists 검사를 두지 않는다.
+  \item Proceed와 Recall은 $rvMT$ membership proof와 별도로
+        $rv\in\List{rv}$를 proof 검증 전 검사한다. 정확성을 위한 필수 membership 검사를
+        대체하지 않고, 등록되지 않은 $rv$ 요청을 저렴하게 거부하는 사전 filter로 유지한다.
+  \item $\List{nf}$와 $\List{rvnf}$는 중복 소비와 중복 resolution을 거부한다.
+  \item accepted $MT$ root와 $rvMT$ root는 서로 다른 bool mapping으로 구현한다.
+\end{itemize}
+
+\section{Circuit 구현 요구사항}
+
+\subsection{공통 Constraint}
+
+필요한 Event는 다음 검사를 조합한다.
+
+\begin{enumerate}
+  \item old commitment membership과 opening binding
+  \item owner address와 secret-key binding
+  \item $nf$ 또는 $rvnf$ derivation
+  \item quantity와 StateVector range
+  \item input/output DocumentHash relation
+  \item output commitment binding
+  \item Event-specific conservation, proportionality 또는 process allocation
+\end{enumerate}
+
+정확한 public statement $\mathbf{x}$와 private witness $\mathbf{w}$ ordering은 Protocol
+Specification의 각 Relation을 기준으로 한다. Solidity calldata ordering은 별도의
+machine-readable manifest로 생성한다. 이는 새로운 Protocol Decision이 아니라
+Protocol Specification의 ordering을 artifact에 전사하는 구현 작업이다.
+
+Entry와 숫자 상태를 새로 계산하는 Transfer, Merge, Split, Process Relation은 새 output의
+$q$와 StateVector coordinate를 unsigned 64-bit로 range check한다. 소비 Relation은
+$MT$ 또는 $rvMT$에 append된 객체가 생성 Relation에서 이미 range를 검증받았다는
+closed-state invariant를 사용하므로 input stored value의 range를 반복 검사하지 않는다.
+Proceed와 Recall은 검증된 Voucher의 $q_T$와 $\mathbf{s}_T$를 변경하지 않고 새 holder용
+commitment로 복원하므로 해당 range를 반복 검사하지 않는다. Exit도 새 숫자 상태를
+생성하지 않으므로 input range를 반복 검사하지 않는다. Event relation에 필요한 positivity,
+aggregate와 곱셈 intermediate bound는 별도로 검사한다.
+
+\subsection{Event별 구현 범위}
+
+\begin{longtable}{@{}p{0.14\textwidth}p{0.12\textwidth}p{0.64\textwidth}@{}}
+\toprule
+Event & Arity & 구현 핵심 \\
+\midrule
+\endhead
+Entry & $0\to1$ & new commitment opening, $0<q<2^{64}$, $0\leq s_k<2^{64}$, duplicate commitment 거부, $MT$ append. 동일 DocumentHash와 fresh opening에 의한 서로 다른 commitment를 허용하며 별도 initial product semantic invariant 없음 \\
+Transfer & $1\to(rv,cm)$ & old note 소비, $rv$와 change commitment 생성, deadline 등록. change를 내림 계산하고 residual은 첫 output인 $rv$에 할당 \\
+Proceed & $rv\to cm$ & receiver authorization, unresolved voucher, receiver commitment 생성, $rvnf$ 기록 \\
+Recall & $rv\to cm$ & sender authorization, deadline boundary, return commitment 생성, $rvnf$ 기록 \\
+Merge & $2\to1$ & 동일 DocumentHash, quantity/StateVector coordinate 합, 두 input 소비 \\
+Split & $1\to2$ & 동일 DocumentHash와 input 소비. 두 번째 output을 내림 계산하고 residual은 첫 번째 output에 할당 \\
+Process & $a\to a$ profile & $a\in\{1,2,3\}$인 padded fixed circuit, input/output aggregate
+$\mathbf{s}_{in},\mathbf{s}_{out}$, delta $P$, allocation matrix $A$, output 1 residual과
+output binding \\
+Exit & $1\to0$ & membership, ownership, nullifier correctness와 소비 기록 \\
+\bottomrule
+\end{longtable}
+
+\subsection{Fixed-point Encoding과 Allocation Policy}
+
+POC의 저장값 범위와 scale은 확정됐다.
+
+\[
+0\leq q<2^{64},
+\qquad
+0\leq s_k<2^{64},
+\qquad
+\mathrm{Scale}_{State}=10^9
+\]
+
+$q$는 scale 없는 integer count이고, $s_k$는 physical value에 $10^9$을 곱해
+note에 저장하는 nano scale fixed-point integer다. Stored quantity와 StateVector의
+64-bit range는 확정됐지만 aggregate와 cross multiplication의 intermediate bound는
+Event별로 분석해야 한다.
+
+Entry는 $0<q<2^{64}$와 $0\leq s_k<2^{64}$를 검사한다. Entry quantity는
+0을 허용하지 않지만 각 $s_k=0$은 허용하며, attribute 간 별도 initial product
+semantic invariant를 추가하지 않는다.
+
+Transfer와 Split은 deterministic first-output remainder assignment를 사용한다.
+각 State coordinate에서 non-first output의 quotient와 remainder를 다음 정수 관계로
+검증한다.
+
+\[
+q_{floor}s_{in,k}=q_{in}s_{floor,k}+r_k,
+\qquad
+0\leq r_k<q_{in}
+\]
+
+첫 번째 output은 input State에서 floor output을 뺀 값으로 계산한다.
+
+\[
+s_{out,1,k}+s_{floor,k}=s_{in,k}
+\]
+
+Transfer에서는 $cm_{change}$가 floor output이고 첫 output인 $rv$가 residual을 받는다.
+Split에서는 $cm_{out,2}$가 floor output이고 $cm_{out,1}$이 residual을 받는다.
+Remainder는 private witness이며 public input이나 Contract storage에 추가하지 않는다.
+Split은 $q_1>0$ 또는 $q_2>0$ 같은 output nonzero constraint를 추가하지 않는다.
+각 output에는 공통 unsigned 64-bit range와 $q_{in}=q_1+q_2$만 적용한다.
+$0\leq r_{2,k}<q_{in}$이 성립하려면 $q_{in}$은 자동으로 양수여야 하므로,
+별도의 $q_{in}>0$ assert도 두지 않는다.
+
+$q_1=0$이면 $q_2=q_{in}$이고 Relation이 $\mathbf{s}_1=\mathbf{0}$을 강제한다.
+$q_2=0$이면 floor/remainder relation이 $\mathbf{s}_2=\mathbf{0}$을 강제한다.
+따라서 zero-quantity output commitment에 nonzero State를 할당할 수 없다.
+
+Field Element에는 자연스러운 대소관계가 없으므로 $0\leq r_{2,k}<q_{in}$은
+64-bit bounded comparison gadget으로 구현한다. 이는 별도의 Protocol-level input
+range assert를 다시 추가한다는 뜻이 아니라, field equality만으로 표현할 수 없는 정수
+부등식을 bit decomposition 또는 동등한 bounded-difference constraint로 구현한다는 뜻이다.
+Comparator 구현이 $q_{in}$의 bit decomposition을 내부적으로 요구하면 그 constraint는
+remainder bound 검증 비용에 포함한다.
+
+Split Client는 wallet이 보관한 $index_{in}$을 \texttt{getMTPath(index\_in)}에 전달해
+$rt$와 $path_{in}$을 조회한다. $index_{in}$은 note commitment payload가 아니라 MT append
+event에서 얻어 note와 함께 보관하는 wallet metadata다.
+
+\subsection{Process}
+
+각 Process circuit profile의 최대 arity는 다음으로 고정한다.
+
+\[
+M_{\max}=a,
+\qquad
+N_{\max}=a,
+\qquad
+a\in\{1,2,3\}
+\]
+
+기능 확인용 기본 profile은 $a=3$이다. 실제 active input/output 수는
+$1\leq m\leq a$, $1\leq n\leq a$이며, 활성 slot은 index
+1부터 연속된다. 별도의 public 또는 private enable vector는 사용하지 않는다. Public $m,n$에서
+도출한 고정 algebraic gating expression으로 나머지 slot을 비활성화한다. 이 POC로
+constraint 수, proof 생성 시간, Go verification 시간, Solidity verifier gas와 Process
+transaction 전체 gas를 측정한다.
+
+\[
+E^{in}_i(m)=\mathbf{1}[i\leq m],
+\qquad
+E^{out}_j(n)=\mathbf{1}[j\leq n]
+\]
+
+이 값은 Client가 제공하는 witness가 아니라 circuit에 고정된 expression이다. $a=3$ profile은
+다음 식을 사용할 수 있다. $2^{-1}$은 scalar field에서 2의 multiplicative inverse다.
+
+\[
+E_1(z)=1,
+\qquad
+E_2(z)=1-(z-2)(z-3)2^{-1},
+\qquad
+E_3(z)=(z-1)(z-2)2^{-1}
+\]
+
+\[
+(m-1)(m-2)(m-3)=0,
+\qquad
+(n-1)(n-2)(n-3)=0
+\]
+
+각 input/output note의 StateVector와 aggregate를 다음처럼 구분한다.
+
+\[
+\mathbf{s}_{in}:=\sum_{i=1}^{m}\mathbf{s}_{in,i},
+\qquad
+\mathbf{s}_{out}:=\sum_{j=1}^{n}\mathbf{s}_{out,j}
+\]
+
+$P\in\mathbb{Z}^{\ell}$는 공정 중 발생한 coordinate별 net delta다. Profile별 State
+prefix와 방향은 다음과 같다.
+
+\[
+\begin{array}{c|c|c}
+\ell & P & P_{pub} \\
+\hline
+0 & () & () \\
+1 & (-p_{totalLoss}) & (p_{totalLoss}) \\
+2 & (-p_{totalLoss},+p_{carbonAdded}) & (p_{totalLoss},p_{carbonAdded}) \\
+3 & (-p_{totalLoss},+p_{carbonAdded},+p_{recycledDelta}) &
+(p_{totalLoss},p_{carbonAdded},p_{recycledDelta})
+\end{array}
+\]
+
+$P_{pub}$의 coordinate는 public unsigned magnitude다. $\mathbf{s}_{in}$과
+$\mathbf{s}_{out}$은 circuit 내부에서 계산하고 다음 relation으로 공정 변화량을
+정확히 검사한다. 두 aggregate는 별도 input으로 전달하지 않는다. 기능 확인용 Relation은
+$\ell=3$으로 compile한다. $\ell<3$ benchmark circuit은 StateVector prefix만 사용하고
+존재하지 않는 coordinate의 delta relation을 compile하지 않는다.
+
+Protocol Relation의 vector 표기는 다음과 같다.
+
+\[
+P:=(-p_{totalLoss},+p_{carbonAdded},+p_{recycledDelta}),
+\qquad
+\mathbf{s}_{out}=\mathbf{s}_{in}+P
+\]
+
+Circuit에서는 음수 Field input을 직접 받지 않고 public unsigned magnitude를 사용하므로
+위 vector equality를 다음 coordinate별 equality로 구현한다.
+
+\[
+\begin{aligned}
+s_{in,total}&=s_{out,total}+p_{totalLoss},\\
+s_{out,carbon}&=s_{in,carbon}+p_{carbonAdded},\\
+s_{out,recycled}&=s_{in,recycled}+p_{recycledDelta},\\
+s_{out,recycled}&=s_{in,recycled}.
+\end{aligned}
+\]
+
+마지막 두 relation을 함께 만족하면 $p_{recycledDelta}=0$이 도출된다. 별도의
+$p_{recycledDelta}=0$ assertion은 추가하지 않는다.
+
+\[
+0\leq p_{totalLoss}<2^{66},
+\qquad
+0\leq p_{carbonAdded}<2^{66}
+\]
+
+$M_{\max}=N_{\max}=3$이고 각 active State가 64-bit이므로 aggregate는
+$3(2^{64}-1)<2^{66}$이다. 이 bound는 aggregate와 public delta를 Field의 modular
+wraparound 없이 정수 의미로 비교하기 위해 사용한다.
+
+Allocation denominator는 circuit constant로 고정한다.
+
+\[
+D:=10^9
+\]
+
+$A\in\mathbb{Z}^{n\times\ell}$는 Client와 transaction이 전달하는 active matrix다.
+Client와 Contract는 뒤에 $a-n$개의 zero row를 붙여 verifier용
+$A^{pad}\in\mathbb{Z}^{a\times\ell}$을 구성한다. 각 active coordinate에 대해
+$0\leq A^{pad}_{j,k}\leq D$와 $\sum_jA^{pad}_{j,k}=D$를 검사한다.
+
+Verifier public input의 $A^{pad}$는 profile별 fixed $a\times\ell$ row-major 순서로
+직렬화한다. 기본
+$a=3,\ell=3$ profile의 순서는 다음과 같다.
+
+\[
+(A_{1,total},A_{1,carbon},A_{1,recycled},
+  A_{2,total},A_{2,carbon},A_{2,recycled},
+  A_{3,total},A_{3,carbon},A_{3,recycled})
+\]
+
+$j>n$인 inactive output row의 $\ell$개 값은 Client와 Contract가 모두 0으로 채운다.
+
+\[
+s_{out,k}A^{pad}_{j,k}=Ds_{out,j,k}+r_{j,k},
+\qquad
+0\leq r_{j,k}<D
+\quad j\in\{2,\ldots,n\}
+\]
+
+\[
+s_{out,1,k}+\sum_{j=2}^{n}s_{out,j,k}=s_{out,k},
+\qquad
+\sum_{j=1}^{n}A_{j,k}=D
+\]
+
+Process는 output 2부터 active output $n$까지 내림을 검증하고, output 1이 모든
+State coordinate의 residual을 받는다. 따라서 State coordinate마다 $n-1$개의
+floor relation과 remainder range check, 한 개의 aggregate conservation equality를
+사용한다. POC의 $n=3$, $\ell=3$ maximum case에서는 각각 6개의 floor relation과
+remainder range check, 3개의 conservation equality가 필요하다.
+
+Inactive input의 public $rt_i,cm_i,nf_i$와 private note opening/path는 0으로 고정한다.
+Inactive output의 public $cm_j$, private note opening, remainder와 $A$의 해당 row도 0으로
+고정한다. Active input만 membership/nullifier/commitment relation을 검증하고 active
+output만 commitment/allocation relation을 검증한다.
+
+Main Contract의 Process ABI는 active input root, commitment, nullifier 배열, active
+$n\times\ell$ allocation과 output commitment 배열을 받는다. Contract는
+배열 길이에서 $m,n$을 구하고 verifier용 fixed-length public input을 trailing zero로
+padding한다. $m,n$은 별도 calldata argument로 받지 않는다. Contract는 input root,
+input commitment와 nullifier 배열의 길이가 같은지,
+$1\leq m\leq M_{\max}$와 $1\leq n\leq N_{\max}$를 검사한다. State update에서는
+active $nf$만 기록하고 active output $cm$만 $MT$에
+append한다. Inactive zero slot은 calldata의 active 배열과 Tree에 포함되지 않는다.
+
+Process Client는 $m$개의 input note/index pair와 $n$개의
+$(\DocumentHash_{out,j},q_{out,j})$ output descriptor를 입력받는다. $m,n$은 이 tuple 표기의
+cardinality이며 Client Scheme에서 배열 길이 계산과 arity assertion을 반복하지 않는다.
+Client는 active $A\in\mathbb{F}^{n\times\ell}$만 입력받고 proof statement를 만들 때
+$A^{pad}$로 zero-padding한다. Contract도 transaction의 같은 active $A$를 동일한 순서로
+padding해야 하며, 두 결과가 다르면 proof verification이 실패한다.
+Process는 quantity transition과 input/output
+DocumentHash relation을 강제하지 않으므로 이 값들은 $P$ 또는 $A$에서 도출하지 않는다.
+Relation은 각 값이 해당 output commitment에 binding되고
+$1\leq q_{out,j}<2^{64}$를 만족하는지만 검증한다. Active Process output은 quantity가
+0일 수 없다. 필요하지 않은 output은 active 배열과 $n$에서 제외한다.
+
+하나의 Process transaction에서 active input $cm$은 pairwise distinct여야 한다. 이 검사는
+같은 finalized note를 여러 slot에 반복해 aggregate에 중복 반영하는 것을 막기 위해 proof
+verification 전에 수행한다.
+
+Split과 Process output에는 별도 pairwise 비교를 추가하지 않는다. Proof verification 후
+각 output에 대해 $\List{cm}$ 부재 확인, $\List{cm}$ 등록, $MT$ append를 index 순서로
+실행한다. 앞 output이 등록된 뒤 다음 output을 검사하므로 같은 transaction 안의 중복도
+기존 $\List{cm}$ 검사에서 거부된다. 중간 iteration에서 실패하면 Solidity transaction의
+atomicity에 의해 앞선 mapping과 Tree update도 모두 revert된다.
+
+POC는 on-chain recipe registry를 두지 않는다. Public $A$는 proof와 allocation을
+공개적으로 binding하지만, 호출자가 선택한 $A$가 물리적으로 올바르거나 승인된
+allocation rule임을 보장하지 않는다.
+Public $P$도 동일하게 선언된 process delta를 proof에 binding할 뿐 실제 설비에서 발생한
+변화량임을 보장하지 않는다. 이번 POC는 State accounting cost와 Relation 동작을 측정하는
+범위로 제한하며, MaterialClassId, Quantity transition, Recipe commitment/root,
+Recipe membership proof와 Recipe별 verifier를 구현하지 않는다.
+Process input/output의 DocumentHash 사이에는 equality 또는 transition relation을 두지
+않는다. 각 DocumentHash가 해당 input/output commitment에 binding되는지만 검사한다.
+Process의 input/output quantity 사이에는 conservation, proportionality 또는 allocation
+relation을 두지 않는다. $q_{in,i}$의 unsigned 64-bit range는 기존 note에서 계승하고
+input commitment opening에 binding되는지만 검사한다. 새 $q_{out,j}$는
+$1\leq q_{out,j}<2^{64}$와 output commitment binding을 검사한다. 추후 quantity transition이 필요하면
+StateAllocationMatrix와 별도의 QuantityAllocationVector relation으로 추가한다.
+
+\section{Smart Contract 구현 요구사항}
+
+POC의 공급망 Event와 Recall resolution Event 함수는 permissionless다. Contract는
+Event submitter의 \texttt{msg.sender}를 protocol $addr$ 또는 proof witness와 비교하지
+않는다. \texttt{RegisterUser}는 permissionless registration이지만 호출자의
+\texttt{msg.sender}를 편의용 $(addr,pkOwn)$ metadata에 연결한다. 등록 관계의
+uniqueness나 hash relation은 검사하지 않고 public mapping getter만 제공한다.
+Registration event는 emit하지 않는다. 따라서 registration storage gas는
+측정하되, supply-chain Event별 role/administrator access-control gas는 측정하지 않는다.
+
+\begin{itemize}
+  \item 8개 Relation별 generated \texttt{PlonkVerifier}를 각각 독립 contract로 배포한다.
+  \item Main zkDPP contract constructor는 8개 verifier address를 받아 고정 Relation ID에 binding한다.
+  \item Main contract는 공통 \texttt{Verify(bytes,uint256[])} interface로 해당 Relation verifier를 호출한다.
+  \item 함수별 실행은 on-chain precondition 검사, proof verification, state update의
+        세 단계 순서를 따른다.
+  \item 이미 존재하는 $cm$, $nf$, $rv$, $rvnf$와 허용되지 않은 root는 거부한다.
+  \item Process의 active input commitment 중복은 proof verification 전에 거부한다.
+        다중 output에는 pairwise 비교를 추가하지 않는다. Proof verification 후
+        $\List{cm}$ 부재 확인, 등록과 Tree append를 output 순서대로 실행해 같은
+        transaction 내부의 중복도 거부한다.
+  \item proof verification이 성공하기 전 영구 state를 변경하지 않는다.
+  \item proof 또는 state check 실패 시 transaction 전체가 revert되어야 한다.
+  \item Merge의 두 public input commitment는 proof verification 전에
+        $cm_1\neq cm_2$인지 검사한다. Public 값의 non-equality를 Circuit에서 반복 검증하지 않는다.
+  \item Merge는 input별 accepted root $rt_1,rt_2$를 public input으로 받는다.
+        각 $cm_i$의 membership path는 해당 $rt_i$에 binding하고, Contract는 두 root를
+        각각 $\List{rt}$에서 검사한다.
+  \item Recall/Proceed 이후에도 deadline history를 삭제하지 않는다.
+  \item provenance graph edge event는 emit하지 않는다.
+  \item $MT$와 $rvMT$ append 후에는 leaf, zero-based index와 new root를 담은
+        index event를 emit한다.
+\end{itemize}
+
+Generated verifier의 ABI는 gnark v0.15.0 BLS12-381 PLONK export가 제공하는 다음
+함수를 사용한다.
+
+\[
+\texttt{Verify(bytes proof, uint256[] publicInputs)}
+\]
+
+Prover는 반드시 \texttt{proof.MarshalSolidity()}의 반환 bytes를 transaction의
+\texttt{proof} argument로 사용한다. Main Contract는 이 bytes를 수정하거나 다시 encode하지
+않고 generated verifier에 그대로 전달한다. Public input은 위에서 고정한 ordered Field
+Element를 \texttt{uint256[]}로 만든다.
+Custom error의 구체 이름은 구현 단계에서 정하되 revert 조건은 이 문서의 state check를 따른다.
+
+\subsection{Main Contract ABI}
+
+Verifier address 배열의 Relation ID는 다음 순서로 고정한다.
+
+\[
+0=Entry,\ 1=Transfer,\ 2=Proceed,\ 3=Recall,\
+4=Merge,\ 5=Split,\ 6=Process,\ 7=Exit
+\]
+
+POC Main Contract의 외부 ABI는 다음 signature를 제공한다. Parameter 이름은 설명용이며
+ABI compatibility는 type과 배열 순서로 결정된다.
+
+\begin{verbatim}
+constructor(address[8] memory verifiers)
+
+registerUser(uint256 addr, uint256 pkOwn)
+entry(bytes proof, uint256 cmNew)
+transfer(bytes proof, uint256 rt, uint256 cmIn, uint256 nf,
+         uint256 rv, uint256 cmChange, uint256 deltaEpoch)
+proceed(bytes proof, uint256 rvrt, uint256 rv, uint256 rvnf,
+        uint256 cmRecv)
+recall(bytes proof, uint256 rvrt, uint256 rv, uint256 rvnf,
+       uint256 cmReturn)
+merge(bytes proof, uint256 rt1, uint256 rt2, uint256 cm1, uint256 cm2,
+      uint256 nf1, uint256 nf2, uint256 cmOut)
+split(bytes proof, uint256 rt, uint256 cmIn, uint256 nf,
+      uint256 cmOut1, uint256 cmOut2)
+process(bytes proof, uint256[] rtIn, uint256[] processDelta,
+        uint256[] allocation, uint256[] cmIn,
+        uint256[] nfIn, uint256[] cmOut)
+exit(bytes proof, uint256 rt, uint256 cmIn, uint256 nf)
+\end{verbatim}
+
+\texttt{process}는 배포 profile에 고정된 $\ell,a$를 사용한다. Contract는
+\texttt{processDelta.length}가 $\ell$인지 검사한다. 또한
+\texttt{allocation.length}가 $n\ell$인지 검사하고 뒤에 $(a-n)\ell$개의 zero를 붙여
+verifier용 allocation을 구성한다. Calldata의 active array 길이로
+$m,n$을 계산한 후 해당 profile의 ordered public input을 구성한다. 기본
+$\ell=3,a=3$ profile에서는 26개다. Tree path getter와 public storage getter는 앞 절의
+signature와 layout을 따른다.
+
+\section{Benchmark Specification}
+
+\subsection{비교 Profile}
+
+benchmark depth는 $d=32$로 고정하며, 모든 축을 Cartesian product로 반복하지 않는다.
+이후에는 다음 두 Poseidon2 실험을 독립적으로 수행한다.
+
+\begin{longtable}{@{}p{0.19\textwidth}p{0.29\textwidth}p{0.44\textwidth}@{}}
+\toprule
+실험 & 고정값 & 변화값 \\
+\midrule
+\endhead
+State scaling & $d=32$, Process $a=3$ & 모든 Event에서
+$\ell=0,1,2,3$ \\
+Process arity scaling & $d=32$, $\ell=3$ & Process만
+$a=1,2,3$, $m=n=a$ \\
+\bottomrule
+\end{longtable}
+
+Process 1-to-1과 2-to-2는 State 3, Depth 32에서만 생성한다. 비대칭 Process와
+$(\ell<3,a<3)$의 교차 조합은 측정하지 않는다.
+
+공통 기준점인 $(d,\ell,a)=(32,3,3)$은 한 번만 compile/setup하고 두 결과표에서
+재사용한다. 중복을 제거한 artifact configuration 수는 다음과 같다.
+
+\begin{itemize}
+  \item 각 Non-Process Event: Poseidon2 State scaling 4개
+  \item Process: Poseidon2 State scaling 4개와 추가 arity 1-to-1/2-to-2 2개, 총 6개
+  \item 전체: $7\times4+6=34$개 benchmark configuration
+  \item distinct circuit 수도 34개
+\end{itemize}
+
+여기서 configuration 수는 측정값 종류의 수가 아니다. 각 configuration마다 다음 절의
+constraint, time, size와 gas 지표를 모두 기록한다.
+
+\subsection{측정 상태}
+
+Canonical Process profile은 input별 $rt_i$와 $P_{pub}$의 세 번째 coordinate를 포함하는
+26-public-input 명세다. 이전 single-root 23-public-input implementation과 중간 24-input
+명세에서 얻은 측정값은 사용하지 않는다. 최신 34개 configuration은
+\path{poc-v2/benchmarks/raw.json}과 \path{poc-v2/benchmarks/summary.csv}에 기록한다.
+
+측정은 Poseidon2, depth 32만 사용한다. Profile table의 gas는 generated verifier의
+EVM \texttt{CREATE}와 \texttt{Verify} 호출을 분리해 기록한다. Storage update를 포함한
+전체 Event gas는 canonical scenario의 실제 Main Contract call을
+\path{poc-v2/benchmarks/canonical-event-gas.json}에 별도로 기록한다. Proof와 public-input
+fixture parsing은 Event gas 측정 구간에서 제외한다.
+
+현재 smoke run 환경은 Apple M1 Pro 10-core, 32 GB MacBook Pro, macOS 26.3이다.
+시간은 단일 실행값이며 통계적 평균이 아니다. \texttt{totalAllocatedBytes}는 Go runtime의
+누적 allocation 증가량이고 peak RSS가 아니다.
+
+한 profile의 proof, proving key, verifying key와 Contract는 다른 profile과 공유하지
+않는다. 측정 머신, OS, CPU, RAM, Go/gnark/Foundry 버전과 실행 옵션을 결과표에 함께
+기록한다.
+
+\subsection{측정 Layer}
+
+\begin{longtable}{@{}p{0.21\textwidth}p{0.71\textwidth}@{}}
+\toprule
+Layer & 측정값 \\
+\midrule
+\endhead
+Circuit & constraint 수, compile time, PLONK setup time, proving key 크기, verifying key 크기 \\
+Prover & witness 생성 시간, proof 생성 시간, peak memory, proof 크기 \\
+Off-chain verifier & Go verification 시간 \\
+On-chain verifier & verifier deployment gas, \texttt{verifyProof} 단독 gas \\
+Protocol transaction & 전체 gas, calldata/transaction 크기, 변경된 storage slot 수 \\
+Merkle tree & append gas, path 생성 시간, sibling 수와 hash profile별 compression 수 \\
+\bottomrule
+\end{longtable}
+
+Proof 생성과 Go verification은 warm-up 이후 동일 witness로 반복 측정하고 최소
+median, mean, standard deviation과 p95를 기록한다. Foundry에서는 wall-clock
+transaction time을 blockchain latency로 해석하지 않고 gas만 canonical on-chain
+metric으로 사용한다.
+
+\subsection{Event별 기준 Scenario}
+
+\begin{longtable}{@{}p{0.13\textwidth}p{0.12\textwidth}p{0.67\textwidth}@{}}
+\toprule
+Event & 전이 & 기준 측정 Scenario \\
+\midrule
+\endhead
+Entry & $0\to1$ & membership 없음, finalized $cm$ 한 개를 $MT$에 append \\
+Transfer & $1\to2$ objects & $MT$ membership 한 개, $nf$ 한 개, $cm_{change}$를 $MT$에
+append하고 $rv$를 $rvMT$에 append \\
+Proceed & $rv\to1$ & $rvMT$ membership 한 개, $rvnf$ 한 개, $cm_{recv}$ 한 개 append \\
+Recall & $rv\to1$ & $rvMT$ membership 한 개, deadline 검사, $rvnf$ 한 개,
+$cm_{return}$ 한 개 append \\
+Merge & $2\to1$ & $MT$ membership 두 개, $nf$ 두 개, output $cm$ 한 개 append \\
+Split & $1\to2$ & $MT$ membership 한 개, $nf$ 한 개, output $cm$ 두 개 append.
+non-divisible vector와 first-output residual 경계를 포함 \\
+Process & $a\to a$ & $a\in\{1,2,3\}$별 모든 slot enabled, $MT$ membership $a$개,
+$nf$ $a$개, output $cm$ $a$개 append \\
+Exit & $1\to0$ & $MT$ membership 한 개와 $nf$ 한 개, Tree append 없음 \\
+\bottomrule
+\end{longtable}
+
+Depth 비교는 State 3의 동일한 semantic input을 사용하고, State scaling은 앞서 정의한
+prefix만 확장한다. 추가 boundary scenario는 Transfer의 zero change, $a=3$ Process에서
+일부 slot만 활성화한 경우와 Recall의 deadline 경계를 포함하되 기준 비교표와 분리한다.
+
+\section{Test Specification}
+
+각 Event는 최소한 다음 test를 가져야 한다.
+
+\begin{enumerate}
+  \item valid witness의 Go proof 생성과 Go verification 성공
+  \item 동일 proof의 Solidity verifier 성공
+  \item public input 한 항목 변조 시 실패
+  \item private witness relation 위반 시 proof 생성 또는 verification 실패
+  \item duplicate $cm$, $nf$, $rv$, $rvnf$ 거부
+  \item 잘못된 root와 expired/not-yet-valid timing boundary 거부
+  \item state update 전후 tree root와 mapping 확인
+  \item stored 64-bit upper bound, zero value와 Event별 intermediate bound 확인
+  \item Transfer/Split의 divisible, non-divisible와 최대 residual 경계 확인
+  \item Split/Process의 순차 $\List{cm}$ 등록에 의한 duplicate output 거부와
+        Process duplicate input 거부
+\end{enumerate}
+
+Process는 사용 slot 수가 0, 1, maximum인 경우, non-prefix selector와 inactive slot에
+nonzero witness를 넣은 경우를 추가로 검증한다. Foundry test는
+\texttt{evm\_version = "prague"}를 명시한다.
+
+Depth는 변화시키지 않는다. 별도 depth-32 membership microbenchmark는 commitment 한 개,
+public root 한 개와 private index/sibling 32개를 사용하고 constraint 수, proof 생성 시간,
+Go verification 시간과 Solidity verifier gas를 기록한다.
+
+\section{Open Decisions}
+
+다음 항목은 아직 확정되지 않았다. 구현자는 선택값을 코드에 고정하기 전에 Decision
+Log를 갱신하고 이 문서를 수정해야 한다.
+
+\begin{longtable}{@{}p{0.31\textwidth}p{0.61\textwidth}@{}}
+\toprule
+영역 & 미확정 질문 \\
+\midrule
+\endhead
+Registration policy & EOA와 protocol address의 uniqueness, key rotation, overwrite 허용과
+registration event 정책. POC Event 구현을 차단하지 않는 비핵심 결정 \\
+Contract & custom error naming과 production deployment의 upgradeability \\
+Provenance & Tree index event와 별개로 input/output commitment edge event를 도입할지 여부 \\
+Production setup & canonical KZG SRS 출처, integrity 검증과 artifact 변환 \\
+\bottomrule
+\end{longtable}
+
+\subsection{POC 결정과 구현의 우선순위}
+
+Stored value와 intermediate range의 Protocol 경계는 확정됐다. $q$와 $s_k$는 unsigned
+64-bit이고, Transfer/Split의 곱은 128-bit 미만이다. Process는
+$s_{out,k}<3\cdot2^{64}<2^{66}$, $D=10^9<2^{30}$,
+$s_{out,k}A_{j,k}<2^{96}$을 사용한다. 이를 gnark constraint와 test vector로 전사하는 작업은
+추가 Protocol Decision이 아니라 implementation task다.
+
+\begin{enumerate}
+  \item 확정된 64-bit range만 적용해 Entry vertical slice를 구현한다.
+  \item deterministic remainder를 적용한 Transfer/Split 식에 대해
+        확정된 intermediate bound와 remainder 경계를 test vector로 검증한다.
+  \item Poseidon2 Process State scaling 4개와 State-3 arity scaling 3개를 검증한다.
+        공통 $(d,\ell,a)=(32,3,3)$ 결과는 중복 생성하지 않는다.
+\end{enumerate}
+
+Solidity BLS12-381 Poseidon2 compressor와 Depth-32 Merkle Tree는 사용자 정책 결정이
+남은 항목은 아니지만 모든 Event가 의존하는 첫 engineering critical path다. Entry
+vertical slice에서 Go, circuit과 Solidity reference vector, append root와 gas를 먼저
+검증한다. Registration policy, provenance edge event와 production SRS는 POC Event 구현을
+차단하지 않는다.
+
+Poseidon2의 Field, parameter, construction, protocol input ordering, Merkle direct
+compressor와 Azeroth 코드 재사용 경계는 더 이상 Open Decision이 아니다. Native Go,
+gnark circuit과 Solidity 구현의 reference vector 작성은 이미 정해진 결정을 검증하는
+implementation task다. \texttt{DocumentHash}의 Hash-to-Field primitive는
+BLS12-381 \texttt{fr.Hash}로 확정됐다. DocumentInfo는 NFC, UTF-8와 unsigned
+32-bit big-endian byte-length prefix로 고정됐고 DST는 빈 byte string이다. Public input
+순서는 Protocol Specification의 $\mathbf{x}$ tuple을 따르며 Solidity에서는 canonical
+Field Element를 \texttt{uint256} word로 전달한다.
+
+\section{추후 고려 사항}
+
+이 절에는 사용자가 직접 추후 고려 대상으로 지정한 항목만 기록한다. Open Decisions의
+항목을 구현 우선순위나 작성자의 판단으로 이 절에 이동하지 않는다.
+
+\subsection{Policy/Recipe 기반 Process}
+
+사후 감사 의존을 줄이려면 Process가 input/output Material class, Quantity transition,
+State delta와 State allocation policy를 Recipe로 검증해야 한다. Recipe별 circuit은
+구현이 직접적이지만 verifier 선택으로 공정을 노출한다. 하나의 공통 circuit과 hidden
+Recipe membership proof는 Recipe 승인 주체, registry governance, data availability와
+path 획득 문제를 추가한다. 이 trust/privacy model이 확정되기 전에는 POC에 도입하지
+않는다.
+
+현재 구현은 public $P,A$를 사용하는 generic State Allocation Process를 유지한다.
+이 구현은 선언된 transition의 consistency와 공개 가능성을 검증하지만, $P,A$의 물리적
+정당성이나 Material/Quantity process semantics를 보장하지 않는다.
+
+\section{변경 규칙}
+
+\begin{enumerate}
+  \item Protocol 의미가 바뀌면 Protocol Specification을 먼저 변경한다.
+  \item 구현 선택이 바뀌면 Development Specification과 test acceptance를 변경한다.
+  \item 선택 이유, 반려안과 실험 근거는 Decision Log에 기록한다.
+  \item Paper Scheme과 HTML은 위 문서에서 파생하며 source of truth로 사용하지 않는다.
+\end{enumerate}
+
+\end{document}

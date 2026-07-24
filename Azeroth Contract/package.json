@@ -1,0 +1,9 @@
+{
+  "name": "solc",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "scripts/complieContract.js",
+  "author": "cjk2889@gmail.com",
+  "license": "ISC"
+}

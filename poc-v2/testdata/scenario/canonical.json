@@ -1,0 +1,111 @@
+{
+  "profile": {"stateLength": "3", "treeDepth": "32", "maxProcessInputs": "3", "maxProcessOutputs": "3"},
+  "epoch": {"start": "100", "proceedDelta": "6", "recallDelta": "3", "recallAt": "101"},
+  "actors": {
+    "aluminum-supplier": {"secretKey": "11"},
+    "cathode-supplier": {"secretKey": "22"},
+    "anode-supplier": {"secretKey": "33"},
+    "foil-manufacturer": {"secretKey": "44"},
+    "cell-manufacturer": {"secretKey": "55"}
+  },
+  "documents": {
+    "aluminum-first": {"productName": "Aluminum", "lotId": "AL-2026-001", "unit": "container"},
+    "aluminum-second": {"productName": "Aluminum", "lotId": "AL-2026-002", "unit": "container"},
+    "cathode": {"productName": "Cathode Active Material", "lotId": "CAM-2026-001", "unit": "container"},
+    "anode": {"productName": "Graphite Anode Material", "lotId": "ANODE-2026-001", "unit": "container"},
+    "foil": {"productName": "Battery Aluminum Foil", "lotId": "FOIL-2026-001", "unit": "coil"},
+    "foil-scrap": {"productName": "Foil Scrap", "lotId": "FOIL-SCRAP-2026-001", "unit": "container"},
+    "cell": {"productName": "Battery Cell", "lotId": "CELL-2026-001", "unit": "cell"},
+    "cell-scrap": {"productName": "Cell Scrap", "lotId": "CELL-SCRAP-2026-001", "unit": "container"},
+    "waste": {"productName": "Process Waste", "lotId": "WASTE-2026-001", "unit": "container"}
+  },
+  "entries": [
+    {"id": "aluminum-first", "document": "aluminum-first", "owner": "aluminum-supplier", "quantity": "10", "state": ["20000000000", "160000000000", "10000000000"], "opening": "1001"},
+    {"id": "aluminum-second", "document": "aluminum-second", "owner": "aluminum-supplier", "quantity": "5", "state": ["10000000000", "150000000000", "0"], "opening": "1002"},
+    {"id": "cathode", "document": "cathode", "owner": "cathode-supplier", "quantity": "4", "state": ["200000000000", "400000000000", "40000000000"], "opening": "1003"},
+    {"id": "anode", "document": "anode", "owner": "anode-supplier", "quantity": "3", "state": ["100000000000", "150000000000", "20000000000"], "opening": "1004"}
+  ],
+  "openings": {
+    "transfer-aluminum-initial-change": "1005",
+    "transfer-aluminum-initial-voucher": "1006",
+    "recall-aluminum": "1007",
+    "transfer-aluminum-retry-change": "1008",
+    "transfer-aluminum-retry-voucher": "1009",
+    "proceed-aluminum-retry": "1010",
+    "transfer-aluminum-second-change": "1011",
+    "transfer-aluminum-second-voucher": "1012",
+    "proceed-aluminum-second": "1013",
+    "process-foil-first": "1014",
+    "process-foil-scrap-first": "1015",
+    "process-foil-second": "1016",
+    "process-foil-scrap-second": "1017",
+    "transfer-foil-first-change": "1018",
+    "transfer-foil-first-voucher": "1019",
+    "proceed-foil-first": "1020",
+    "transfer-foil-second-change": "1021",
+    "transfer-foil-second-voucher": "1022",
+    "proceed-foil-second": "1023",
+    "merge-foil": "1024",
+    "transfer-cathode-change": "1025",
+    "transfer-cathode-voucher": "1026",
+    "proceed-cathode": "1027",
+    "transfer-anode-change": "1028",
+    "transfer-anode-voucher": "1029",
+    "proceed-anode": "1030",
+    "process-cell": "1031",
+    "process-cell-scrap": "1032",
+    "process-waste": "1033",
+    "split-cell-first": "1034",
+    "split-cell-second": "1035"
+  },
+  "processes": {
+    "foil-first": {
+      "inputs": ["proceed-aluminum-first"],
+      "outputs": ["foil-first", "foil-scrap-first"],
+      "outputDocuments": ["foil", "foil-scrap"],
+      "outputQuantities": ["8", "2"],
+      "owner": "foil-manufacturer",
+      "publicDelta": ["2000000000", "10000000000", "0"],
+      "allocation": [["933333333", "950000001", "1000000000"], ["66666667", "49999999", "0"]],
+      "outputOpenings": ["process-foil-first", "process-foil-scrap-first"]
+    },
+    "foil-second": {
+      "inputs": ["proceed-aluminum-second"],
+      "outputs": ["foil-second", "foil-scrap-second"],
+      "outputDocuments": ["foil", "foil-scrap"],
+      "outputQuantities": ["4", "1"],
+      "owner": "foil-manufacturer",
+      "publicDelta": ["1000000000", "10000000000", "0"],
+      "allocation": [["933333333", "950000001", "1000000000"], ["66666667", "49999999", "0"]],
+      "outputOpenings": ["process-foil-second", "process-foil-scrap-second"]
+    },
+    "cell": {
+      "inputs": ["proceed-cathode", "proceed-anode", "merged-foil"],
+      "outputs": ["cell", "cell-scrap", "waste"],
+      "outputDocuments": ["cell", "cell-scrap", "waste"],
+      "outputQuantities": ["1000", "20", "10"],
+      "owner": "cell-manufacturer",
+      "publicDelta": ["20000000000", "50000000000", "0"],
+      "allocation": [["900000001", "950000001", "1000000000"], ["79999999", "39999999", "0"], ["20000000", "10000000", "0"]],
+      "outputOpenings": ["process-cell", "process-cell-scrap", "process-waste"]
+    }
+  },
+  "split": {
+    "input": "cell", "output1": "cell-exit", "output2": "cell-held",
+    "quantity1": "600", "quantity2": "400", "owner": "cell-manufacturer",
+    "opening1": "split-cell-first", "opening2": "split-cell-second"
+  },
+  "eventChain": [
+    "entry:aluminum-first", "entry:aluminum-second", "entry:cathode", "entry:anode",
+    "transfer:aluminum-initial", "recall:aluminum-initial",
+    "transfer:aluminum-retry", "proceed:aluminum-retry",
+    "transfer:aluminum-second", "proceed:aluminum-second",
+    "process:foil-first", "process:foil-second",
+    "transfer:foil-first", "proceed:foil-first",
+    "transfer:foil-second", "proceed:foil-second",
+    "merge:foil",
+    "transfer:cathode", "proceed:cathode",
+    "transfer:anode", "proceed:anode",
+    "process:cell", "split:cell", "exit:cell", "exit:waste"
+  ]
+}

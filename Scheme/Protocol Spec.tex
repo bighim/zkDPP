@@ -1,0 +1,1897 @@
+\documentclass[11pt,a4paper]{extarticle}
+
+\usepackage{kotex}
+\usepackage[margin=17mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{mdframed}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlist[itemize]{leftmargin=18pt,itemsep=2pt,topsep=2pt}
+\setlist[enumerate]{leftmargin=22pt,itemsep=3pt,topsep=3pt}
+\setcounter{tocdepth}{2}
+
+\newcommand{\CM}{\mathrm{CM}}
+\newcommand{\Poseidon}{\mathrm{Poseidon2}}
+\newcommand{\Hash}{\mathrm{H}}
+\newcommand{\HToF}{\mathrm{HashToField}}
+\newcommand{\FrHash}{\mathrm{fr.Hash}}
+\newcommand{\Verify}{\mathrm{Verify}}
+\newcommand{\Prove}{\mathrm{Prove}}
+\newcommand{\Append}{\mathrm{Append}}
+\newcommand{\Member}{\mathrm{Member}}
+\newcommand{\Range}{\mathrm{Range}}
+\newcommand{\sample}{\xleftarrow{\$}}
+\newcommand{\DocumentHash}{\mathrm{DocumentHash}}
+\newcommand{\Document}{\mathrm{Document}}
+\newcommand{\addrSender}{addr_{Sender}}
+\newcommand{\addrReceiver}{addr_{Receiver}}
+\newcommand{\DeltaEpoch}{\Delta_{epoch}}
+\newcommand{\Assert}{\mathbf{assert}\;}
+\newcommand{\Return}{\mathrm{return}\;}
+\newcommand{\List}[1]{\mathrm{List}_{#1}}
+\newcommand{\Map}[1]{\mathrm{Map}_{#1}}
+\newcommand{\MT}{\mathrm{MT}}
+\newcommand{\rvMT}{\mathrm{rvMT}}
+\newcommand{\CurrentEpoch}{\mathrm{CurrentEpoch}}
+
+\newenvironment{schemeblock}
+{%
+  \begingroup
+  \setlength{\jot}{8pt}%
+  \setlength{\parskip}{0pt}%
+  \setlength{\abovedisplayskip}{9pt}%
+  \setlength{\belowdisplayskip}{0pt}%
+  \setlength{\abovedisplayshortskip}{9pt}%
+  \setlength{\belowdisplayshortskip}{0pt}%
+  \begin{mdframed}[
+    linewidth=0.4pt,
+    linecolor=black,
+    innerleftmargin=8pt,
+    innerrightmargin=8pt,
+    innertopmargin=8pt,
+    innerbottommargin=8pt,
+    skipabove=0pt,
+    skipbelow=5pt,
+    splittopskip=8pt,
+    splitbottomskip=8pt
+  ]
+  \centering
+}
+{%
+  \end{mdframed}
+  \endgroup
+}
+
+\title{zkDPP Protocol Specification}
+\author{Canonical Protocol Specification}
+\date{2026-07-16}
+\renewcommand{\contentsname}{목차}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{프로토콜 기준과 공통 객체}
+
+\subsection{문서 역할}
+
+이 문서는 zkDPP의 canonical protocol semantics를 정의한다. Protocol object,
+Client와 Smart Contract의 역할, public/private statement, 8개 Relation, contract 검사와
+상태 갱신 경계를 이 문서의 source of truth로 사용한다. 특정 library API, package type,
+serialization code와 test harness는 정의하지 않는다. 해당 구현 선택은
+\texttt{Dev Spec.tex}에서 정의한다.
+
+\subsection{프로토콜 개요}
+
+zkDPP는 product information을 숨긴 finalized note를 공급망 Event 사이에서 소비하고
+새로 생성하면서, quantity와 consistency-critical StateVector의 전이가 각 Event
+Relation을 만족했음을 증명한다.
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+구분 & Event & Protocol object 전이 \\
+\hline
+공급망 & Entry & $\varnothing\rightarrow cm_{new}$ \\
+공급망 & Transfer & $cm_{old}\rightarrow (cm_{change},rv_{new})$ \\
+Resolution & Proceed & $rv_{old}\rightarrow cm_{new}$ \\
+Resolution & Recall & $rv_{old}\rightarrow cm_{new}$ \\
+공급망 & Merge & $(cm_{old,1},cm_{old,2})\rightarrow cm_{new}$ \\
+공급망 & Split & $cm_{old}\rightarrow (cm_{new,1},cm_{new,2})$ \\
+공급망 & Process & $(cm_{old,i})_{i=1}^{m}\rightarrow(cm_{new,j})_{j=1}^{n}$ \\
+공급망 & Exit & $cm_{old}\rightarrow\varnothing$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Finalized $cm$은 $\MT$에, pending Recall Voucher $rv$는 $\rvMT$에 append한다.
+$nf$는 finalized note 소비를, $rvnf$는 Recall Voucher의 단일 resolution을 강제한다.
+
+\subsection{암호학적 추상화}
+
+각 Relation $\mathcal{R}_i$에는 proving key와 verifying key가 존재한다.
+$\mathrm{Setup}_{Client}$는 Relation 집합을 입력받아 공통 system parameter와 각
+Relation의 key pair를 생성한다. $pp$에는 system parameter와 proof key가 함께 들어가지만,
+$\mathrm{KeyGenUser}_{Client}$는 이 중 Field와 hash 같은 system parameter만 사용하고
+PLONK proving/verifying key는 사용하지 않는다. Proof system, curve, library version,
+POC SRS 생성 방식과 verifier 배포 방식은 Development Specification에서 고정한다.
+
+$\Hash$는 key derivation, nullifier와 Recall Voucher derivation에 사용하는
+추상 hash interface다. POC에서는 Poseidon2를 사용하지만, Scheme에는 package API나
+parameter object를 노출하지 않는다. $nf=\Hash(sk_{own},cm)$은 기존
+PRF 기반 nullifier가 담당하는 deterministic secret-key derivation 역할을 hash로
+구현한다는 수준으로 해석한다. Hash가 PRF와 동일하다는 일반적 주장을 의미하지는 않는다.
+
+$\CM$은 finalized note를 binding하는 추상 commitment constructor다. POC에서는
+Poseidon2로 구현하지만, Scheme은 입력값과 binding relation만 정의한다.
+
+\subsection{확정 Protocol 경계}
+
+\begin{itemize}
+  \item Circuit 집합은 Entry, Transfer, Proceed, Recall, Merge, Split,
+        Process, Exit의 8개다.
+  \item Merge와 Split은 각각 fixed 2-to-1, 1-to-2 circuit으로 구현한다.
+  \item Process는 fixed maximum input/output arity $M_{\max}$와 $N_{\max}$를 갖는다.
+        기능 확인용 기본값은 $M_{\max}=N_{\max}=3$이다. 성능 측정은
+        $M_{\max}=N_{\max}=a$, $a\in\{1,2,3\}$인 별도 circuit을 사용한다.
+  \item 각 Process profile은 $1\leq m,n\leq a$를 지원한다. $m,n$은 active input/output
+        개수를 나타내는 public Field Element이며 활성 slot은 index 1부터 연속된다.
+        별도 public 또는 private enable vector는 두지 않는다. Inactive input의 $rt$, $cm$,
+        $nf$와 inactive output의 $cm$, $A$ row는 0이다.
+  \item Process의 semantic delta는 State prefix에 따라
+        $P=(-p_{totalLoss},+p_{carbonAdded},+p_{recycledDelta})$의 앞 $\ell$개
+        coordinate를 사용한다.
+        Public input은 각 State coordinate에 대응하는 unsigned 값을 포함한다.
+        $\ell=3$에서는
+        $P_{pub}=(p_{totalLoss},p_{carbonAdded},p_{recycledDelta})$이고
+        recycled delta 적용식과 recycled aggregate 보존식을 함께 검증한다. 따라서
+        유효한 proof에서는 $p_{recycledDelta}=0$이 도출되며 별도 0 assertion은 두지 않는다.
+        Circuit은 $\mathbf{s}_{in}$을 input State aggregate,
+        $\mathbf{s}_{out}$을 output State aggregate로 계산하고
+        $\mathbf{s}_{out}=\mathbf{s}_{in}+P$에 대응하는 coordinate별 relation을 검증한다.
+  \item Process allocation denominator는 circuit constant $D=10^9$으로 고정하고,
+        StateAllocationMatrix $A$는 public input으로 둔다.
+  \item $q$는 unsigned 64-bit integer로 제한한다. Transfer의
+        $cm_{change}$는 $q=0$인 경우에도 항상 생성한다.
+  \item StateVector의 각 coordinate는 unsigned 64-bit integer이며,
+        nano scale $10^9$ fixed-point 값으로 encode한다.
+  \item Entry는 $0<q<2^{64}$와
+        $0\leq s_k<2^{64}$를 검사한다. Entry의 신규 Product quantity는 0일 수 없지만,
+        State coordinate는 0을 허용한다. 별도의 initial product semantic invariant는
+        강제하지 않는다.
+  \item Transfer의 output ordering은 $rv$를 첫 번째, $cm_{change}$를 두 번째로 둔다.
+        Transfer와 Split은 deterministic first-output remainder를 사용한다.
+        Process도 output 1이 모든 State coordinate의 residual을 받는다.
+  \item Field 내부의 aggregate, cross multiplication, Process allocation에서
+        modular wraparound가 발생하지 않도록 필요한 intermediate bound는
+        circuit별 range 분석 후 확정한다.
+  \item Pedersen commitment는 사용하지 않는다. Note opening과 event relation은
+        circuit 내부에서 Poseidon2 commitment에 직접 binding한다.
+  \item POC의 $\Hash$와 $\CM$은 gnark v0.15.0과 gnark-crypto v0.20.1이 제공하는
+        BLS12-381 default Poseidon2 hasher를 사용한다. 구체 parameter와 reference
+        vector는 Development Specification에서 고정한다.
+  \item 이후 POC 구현과 benchmark는 Poseidon2 profile만 사용한다. SHA-to-Field
+        profile은 EVM SHA-256 precompile의 gas와 circuit 비용을 확인하기 위한 일회성
+        비교로 종료했으며, 이미 얻은 결과와 재현 코드는 Development Specification에
+        보존한다. 새로운 SHA circuit, setup, proof와 gas 실험은 수행하지 않는다.
+  \item Azeroth의 BLS12-381 Solidity 파일은 protocol/verifier separation과
+        Merkle hash abstraction만 참고한다. Groth16 verifier, 과거 EIP-2537 ABI와
+        BN254용 Poseidon2/MiMC source는 재사용하지 않는다.
+  \item DocumentInfo와 DocumentHash의 일치 여부는 circuit 또는 contract에서
+        검증하지 않는다. Receiver가 off-chain에서 재계산한다.
+  \item Input/output commitment edge를 공개하는 provenance event는 현재 구현
+        범위에서 제외한다. 다만 Client가 Merkle witness를 구성할 수 있도록
+        $MT$와 $rvMT$ append의 leaf와 zero-based index는 event로 공개한다.
+\end{itemize}
+
+\subsection{POC 구현 Profile}
+
+Protocol의 일반 모델은 위 경계를 유지한다. 최초 vertical slice는 Entry와 고정
+3-to-3 Process로 시작했으며, 현재 \path{poc-v2/}는 8개 Event를 모두 구현한다.
+Canonical 기능 profile은 다음과 같다.
+
+\begin{itemize}
+  \item StateVector 길이 $\ell=3$, Merkle Tree depth $d=32$
+  \item Entry, Transfer, Proceed, Recall, Merge, Split, Process와 Exit를 하나의
+        canonical scenario에서 순서대로 실행
+  \item Process 기능 기준은 정확히 3 input과 3 output이며 public $m,n$은 모두 3
+  \item Go proof와 generated Solidity verifier를 함께 검증하고 Main Contract의
+        $MT$, $rvMT$, nullifier와 voucher state update까지 확인
+\end{itemize}
+
+성능 profile은 State 길이 0부터 3, Process arity 1-to-1부터 3-to-3을 별도 circuit으로
+compile한다. 이는 일반 Protocol relation을 변경하지 않는 benchmark 전용 compile-time
+specialization이다.
+
+\subsection{관련 문서}
+
+Data encoding, hash parameter, Merkle tree, proof serialization, contract ABI와 test
+세부사항은 같은 폴더의 \texttt{Dev Spec.tex}을 따른다.
+결정 이유와 반려된 선택지는 \texttt{Decision Log.tex}에 기록한다.
+
+\subsection{문서 구성}
+
+1장은 zkDPP Scheme을 읽기 위한 공통 객체와 표기를 설명한다. 2장은 Client와
+Smart Contract의 초기화를 정의한다. 3장은 Azeroth Scheme과 같은 형식으로 각
+Event를 Client 함수, circuit relation, Smart Contract 함수 순서로 배치한다.
+
+공급망 event는 Entry, Transfer, Merge, Split, Process, Exit이다. Proceed와 Recall은
+Transfer가 생성한 Recall Voucher를 해소하는 resolution event다. 문서의 event 순서는
+Entry, Transfer, Proceed, Recall, Merge, Split, Process, Exit이다.
+
+\subsection{DocumentInfo와 DocumentHash}
+
+\[
+  \mathit{DocumentInfo}=(ProductName,LotId,Unit)
+\]
+
+\[
+  b_x=\operatorname{UTF8}(\operatorname{NFC}(x))
+\]
+
+\[
+  \operatorname{EncodeText}(x)
+  =
+  \operatorname{U32BE}(|b_x|)
+  \mathbin{\|}b_x
+\]
+
+\[
+  \begin{aligned}
+  \mathit{DocumentInfoBytes}
+  ={}&\operatorname{EncodeText}(ProductName)\\
+     &\mathbin{\|}\operatorname{EncodeText}(LotId)\\
+     &\mathbin{\|}\operatorname{EncodeText}(Unit)
+  \end{aligned}
+\]
+
+\[
+  \DocumentHash
+  =
+  \FrHash(
+    \mathit{DocumentInfoBytes},
+    \varepsilon,1
+  )[0]
+\]
+
+$\mathit{DocumentInfo}$는 circuit input이 아니다.
+
+POC의 \texttt{HashToField}는 BLS12-381 scalar field의 \texttt{fr.Hash}를
+사용한다. 이 함수는 SHA-256 기반 XMD로 byte string을 확장한 뒤
+$\mathbb{F}_r$ 원소로 변환한다. 두 번째 인자는 API에서 요구하는 DST지만,
+POC는 별도의 hash 용도 구분값을 사용하지 않고 빈 byte string $\varepsilon$을
+전달한다. 직렬화에는 layout version을 넣지 않는다. 각 문자열은 Unicode NFC로
+정규화한 뒤 UTF-8로 encode한다. 해당 UTF-8 byte 길이를 4-byte unsigned
+big-endian으로 먼저 기록하고 UTF-8 bytes를 이어 붙인다. 수령자는 off-chain에서 위의
+$\DocumentHash$ 식을 재계산한다.
+Circuit은 이 hash가 event 사이에서 유지되거나 정해진 relation에 따라
+변경되는지만 검증한다.
+
+\subsection{Owner, StateVector, finalized note}
+
+별도 설명이 없는 한 이 문서의 Field는 BLS12-381 scalar field
+$\mathbb{F}_r$를 뜻한다. Base field $\mathbb{F}_q$는 curve point의 좌표와
+pairing 구현에 사용하며 protocol payload를 담는 Circuit Field가 아니다.
+
+\[
+  sk_{own},pk_{own},addr,\DocumentHash,q,s_k,o,cm
+  \in\mathbb{F}_r
+\]
+
+\[
+  pk_{own}=\Hash(sk_{own})
+  \,;\,
+  addr=\Hash(pk_{own})
+\]
+
+\[
+  q\in\mathbb{Z}_{\geq0}
+  \,;\,
+  \mathbf{s}=(s_1,\ldots,s_{\ell})
+\]
+
+\[
+  k\in\{1,\ldots,\ell\}
+  \,;\,
+  (s_1,s_2,s_3)=(total_{kg},carbon_{kgCO2e},recycled_{kg})
+\]
+
+기능 확인용 기본 POC는 $\ell=3$을 사용한다. 성능 확장성 측정에서는
+$\ell\in\{0,1,2,3\}$인 별도 circuit profile을 compile하며, 각 profile의 StateVector는
+위 순서의 prefix를 사용한다. 따라서 $\ell=0$은 empty StateVector, $\ell=1$은
+$total_{kg}$, $\ell=2$는 $total_{kg}$와 $carbon_{kgCO2e}$, $\ell=3$은 세 coordinate
+전체를 뜻한다. Profile 사이에서 note, proof와 verifier를 혼용하지 않는다.
+
+\[
+  \begin{aligned}
+  \CM(\DocumentHash,q,\mathbf{s},addr,o)
+  =\Poseidon(\DocumentHash,q,s_1,\ldots,s_{\ell},addr,o)
+  \end{aligned}
+\]
+
+\[
+  \mathit{note}=(cm,\DocumentHash,q,\mathbf{s},o)
+\]
+
+\texttt{quantity}는 integer다. StateVector coordinate는 nano scale $10^9$의
+unsigned fixed-point integer다. $q$와 $s_k$는 Field Element이면서 동시에
+unsigned 64-bit range를 만족해야 한다. $pk_{own}$은 elliptic-curve point가 아니라
+$sk_{own}$에서 Poseidon2로 도출한 public ownership identifier다. Note는 $addr$을
+저장하지 않는다. Holder는
+$\mathrm{KeyGenUser}_{Client}$에서 받은 $addr$을 별도로 알고 있으며, spend circuit은
+$addr=\Hash(\Hash(sk_{own}))$를 검증한다.
+
+\subsection{Nullifier, Recall Voucher, on-chain state}
+
+\[
+  nf=\Hash(sk_{own},cm)
+\]
+
+\[
+  rv=
+  \Hash(
+    \DocumentHash,q_T,\mathbf{s}_T,
+    \addrSender,\addrReceiver,\DeltaEpoch,o_{rv}
+  )
+\]
+
+\[
+  rvnf=\Hash(rv,o_{rv})
+\]
+
+\[
+  \mathit{voucher}=\{
+    rv,\DocumentHash,q_T,\mathbf{s}_T,
+    \addrSender,\addrReceiver,\DeltaEpoch,o_{rv}
+  \}
+\]
+
+$nf$는 finalized note의 중복 소비를 방지한다. $rvnf$는 하나의 Recall Voucher가
+Proceed와 Recall 중 정확히 한 번만 해소되도록 한다. $o_{rv}$는 sender와 receiver가
+off-chain으로 공유한다. $\mathit{voucher}$는 Sender와 Receiver가 동일한 schema로
+보관하는 canonical off-chain object다. 각 holder가 자신의 address를 이미 알고 있어도
+역할별 schema를 나누지 않고 두 address를 모두 저장한다.
+
+Recall Voucher의 resolution 상태는 raw $rv$를 key로 하는 $resolved[rv]$ mapping이 아니라
+$rvnf=\Hash(rv,o_{rv})$와 $\List{rvnf}$로 관리한다. Proceed와 Recall transaction에는
+$rv$와 $rvnf$가 함께 공개되므로 이 선택이 둘 사이의 on-chain linking을 숨긴다고
+주장하지 않는다. 목적은 finalized note의 $nf$와 일관된 secret-derived nullifier 구조와
+Sender/Receiver가 동일한 resolution identifier를 계산하도록 하는 것이다.
+
+Finalized note와 Recall Voucher는 서로 다른 append-only Merkle tree에 저장한다.
+
+\[
+\operatorname{depth}(MT)=\operatorname{depth}(rvMT)=d,
+\qquad
+d=32\ \text{for the POC}
+\]
+
+Depth scaling은 수행하지 않는다. State scaling과 Process arity scaling은
+$d=32$로 고정한다. 별도 Merkle microbenchmark에서 depth-32 commitment 한 개의
+membership verification 비용만 측정한다.
+
+\[
+z_0=0,
+\qquad
+z_{h+1}=H_{\mathrm{tree}}(z_h,z_h),
+\qquad
+root_{\mathrm{empty}}=z_d
+\]
+
+Width-2 default Poseidon2 permutation을 $\mathcal{P}_{P2}$라 할 때 Tree compressor는
+다음으로 고정한다.
+
+\[
+(u_0,u_1)=\mathcal{P}_{P2}(left,right),
+\qquad
+H_{\mathrm{tree}}(left,right)=u_1+right\pmod r
+\]
+
+즉 초기 두 lane은 $(left,right)$이고, permutation 이후 오른쪽 lane에 원래
+$right$를 feed-forward한 값을 출력한다. Native Go와 gnark circuit은 pinned library의
+동일한 \texttt{Compress(left,right)} 의미론을 사용한다.
+
+$MT$에는 $cm$을, $rvMT$에는 $rv$를 leaf-hash 없이 그대로 append한다. Valid $cm$과
+$rv$는 0이 아니지만, Azeroth와 동일하게 별도 nonzero Contract 검사는 하지 않는다.
+두 Tree는 왼쪽부터 순차 append하며 각 Tree의 empty root와 모든 과거 root를 accepted
+root로 유지한다. Membership witness는 leaf index와 leaf-to-root 순서의 sibling
+$d$개로 구성한다. Append 후에는 leaf, zero-based index와 new root를 event로
+공개한다. 구체 storage layout과 $H_{\mathrm{tree}}$ 구현은 Development
+Specification을 따른다.
+
+\[
+  \List{rt},\List{cm},\List{nf},
+  \List{rvrt},\List{rv},\List{rvnf},
+  \Map{user},\Map{rv}
+\]
+
+POC의 8개 Event 함수는 permissionless다. Transaction을 제출한 Ethereum
+\texttt{msg.sender}를 note owner로 요구하지 않으며, Note와 Recall
+Voucher의 소비 권한은 Circuit relation으로 검증한다. User registration은 호출 EOA를
+등록한 $(addr,pk_{own})$에 연결한다. Logical List는
+membership set이고, Solidity의 구체 mapping과 Tree storage layout은 Development
+Specification을 따른다.
+
+각 Smart Contract Event 함수는 원칙적으로 다음 세 단계를 따른다.
+
+\begin{enumerate}
+  \item public argument, accepted root, 기존 List 중복, nullifier와 deadline 같은
+        on-chain precondition을 검사한다.
+  \item ordered public statement를 구성하고 해당 Relation proof를 검증한다.
+  \item proof가 유효할 때만 List와 Map을 갱신하고 $MT$ 또는 $rvMT$에 append한다.
+\end{enumerate}
+
+Proceed와 Recall은 accepted $rvMT$ root와 Circuit membership proof에 더해
+$rv\in\List{rv}$도 사전 검사한다. 이 검사는 membership soundness를 대신하지 않으며,
+명백히 등록되지 않은 $rv$를 proof 검증 전에 거부하는 저비용 on-chain filter로 유지한다.
+
+다중 output의 같은 transaction 내부 중복에는 pairwise 비교를 추가하지 않는다. Proof
+검증 후 output을 순서대로 기존 List에 없는지 검사하고 등록한 다음 Tree에 append한다.
+뒤 output이 앞 output과 같으면 순차 check-and-insert가 실패하며, transaction atomicity에
+따라 해당 transaction의 앞선 List, Tree와 event 변경도 모두 revert된다.
+
+\[
+  EPOCH\_SIZE=600\ \mathrm{seconds}
+\]
+
+\[
+  \CurrentEpoch()
+  =
+  \left\lfloor\frac{block.timestamp}{EPOCH\_SIZE}\right\rfloor
+\]
+
+\[
+\Map{rv}[rv]
+  =
+  \CurrentEpoch()+\DeltaEpoch
+\]
+
+Sender는 Transfer를 생성할 때 $\Delta_{epoch}$을 선택한다. Protocol policy는
+$\Delta_{epoch}\geq0$만 요구하며 별도의 business maximum을 두지 않는다.
+$\Delta_{epoch}$은 public Field Element로 voucher에 binding되지만 Circuit에서 별도
+bit range check를 하지 않는다. Generated verifier가 모든 public input과 마찬가지로
+$0\leq\Delta_{epoch}<r$인 canonical scalar-field 표현인지 확인하므로 Main Contract는
+같은 검사를 반복하지 않는다.
+
+Transfer가 실행될 때 Smart Contract가 현재 epoch를 계산하고, 여기에
+$\Delta_{epoch}$을 더한 값을 $\Map{rv}[rv]$에 저장한다. 외부에서 완성된 deadline
+값을 입력받아 저장하지 않는다. Deadline은 proof 검증 후 일반 \texttt{uint256} 덧셈으로
+계산한다. $\Delta_{epoch}<r<2^{255}$이고
+$\CurrentEpoch()<2^{256}/600<2^{247}$이므로 protocol input 범위에서 합은
+\texttt{uint256}을 overflow하지 않는다. Recall 또는 Proceed 이후에도 이 entry를
+삭제하지 않는다.
+
+Recall은 $\CurrentEpoch()<\Map{rv}[rv]$일 때만 허용한다. 따라서
+$\Delta_{epoch}=0$인 Transfer는 생성 직후부터 Recall할 수 없다. Proceed는 voucher가
+아직 resolve되지 않았다면 deadline 이후에도 허용한다.
+
+Client는 leaf의 zero-based index를 Tree별 view 함수에 전달해 현재 root와 Merkle path를
+조회하고 이를 witness로 준비한다.
+
+\[
+\mathrm{GetPath}_{MT}(index)\to(rt_{current},sibling_0,\ldots,sibling_{d-1})
+\]
+
+\[
+\mathrm{GetPath}_{rvMT}(index)\to(rvrt_{current},sibling_0,\ldots,sibling_{d-1})
+\]
+
+각 spend Relation은 $\mathrm{Member}(rt,leaf,path)=1$을 Circuit 내부에서 검증한다.
+Smart Contract는 path를 다시 계산하지 않고 public input $rt$가 accepted-root 목록에
+있는지와 proof가 유효한지를 검사한다. View 함수가 반환하는 path는 조회 시점의 현재
+root에 대한 path다. 이미 저장한 과거 root용 path는 Client가 별도로 보관할 수 있다.
+새 leaf append와 새 root 계산은 Smart Contract가 수행한다.
+
+2장 이후에서 $\mathbf{x}$는 public statement, $\mathbf{w}$는 private witness를 뜻한다.
+$\mathbf{x}$와 $\mathbf{w}$는 중괄호로 표기하지만 unordered set이 아니라 ordered tuple이다.
+각 $\mathbf{x}$ tuple에 적힌 왼쪽에서 오른쪽 순서가 Circuit과 Solidity verifier가
+사용하는 canonical public-input 순서다.
+Process는 on-chain recipe registry를 가정하지 않는다. 공개된 $A$는 해당 proof가
+사용한 allocation을 나타내지만, $A$ 자체가 승인된 물리 공정 규칙임을 보장하지 않는다.
+공개된 $P,A$는 선언된 State transition의 transparency와 accounting consistency를
+제공할 뿐, 실제 물리 공정과의 일치나 산업적으로 정당한 allocation을 증명하지 않는다.
+초기 State의 현실 정확성은 Entry issuer에, $P,A$의 현실 정확성은 Process operator 또는
+외부 검증 주체에 의존한다. Recipe/Policy 기반 Material 및 Quantity transition 검증은
+이번 POC 범위에서 제외한다.
+Process는 input과 output의 DocumentHash 사이에 equality 또는 transition policy를
+두지 않는다. 서로 다른 material과 product를 나타내므로 각 DocumentHash가 해당
+input/output commitment에 binding되는지만 검증한다.
+
+\section{초기화}
+
+\subsection{\texorpdfstring{$\mathrm{Setup}_{Client} / \mathrm{Setup}_{SC}$}{Setup\_Client / Setup\_SC}}
+
+{
+\setlength{\jot}{8pt}
+\setlength{\abovedisplayskip}{9pt}
+\setlength{\belowdisplayskip}{0pt}
+\setlength{\fboxsep}{8pt}
+
+\noindent
+\fbox{%
+\begin{minipage}{0.96\textwidth}
+\begin{tabular}{@{}p{0.475\linewidth}|p{0.475\linewidth}@{}}
+\begin{minipage}[t]{\linewidth}
+\centering
+\(
+  \mathbf{Setup}_{Client}
+  (\{\mathcal{R}_i\}_{i\in\mathcal{I}})
+\)
+
+\begin{gather*}
+\mathcal{I}=
+  \{\mathrm{Entry},\mathrm{Transfer},\mathrm{Proceed},\mathrm{Recall}, \\
+  \mathrm{Merge},\mathrm{Split},\mathrm{Process},\mathrm{Exit}\} \\
+(ek_i,vk_i)
+  \gets
+  \mathrm{Setup}_{PLONK}(\mathcal{R}_i),
+  \quad i\in\mathcal{I} \\
+pp_{sys}\gets(\mathbb{F},\Hash,\CM,\Hash_{tree}) \\
+pp\gets(pp_{sys},\{ek_i,vk_i\}_{i\in\mathcal{I}}) \\
+\Return pp
+\end{gather*}
+\end{minipage}
+&
+\begin{minipage}[t]{\linewidth}
+\centering
+\(
+  \mathbf{Setup}_{SC}
+  (\{vk_i\}_{i\in\mathcal{I}})
+\)
+
+\begin{gather*}
+vk_{SC,i}\gets vk_i,
+  \quad i\in\mathcal{I} \\
+\mathrm{Init}_{\MT}
+  \,;\,
+  \mathrm{Init}_{\rvMT} \\
+\mathrm{Init}\bigl(
+  \List{rt},\List{cm},\List{nf}, \\
+  \List{rvrt},\List{rv},\List{rvnf}, \\
+  \Map{user}, \Map{rv}
+\bigr)
+\end{gather*}
+\end{minipage}
+\\
+\end{tabular}
+\end{minipage}%
+  }
+}
+
+\subsection{\texorpdfstring{$\mathrm{KeyGenUser}_{Client} / \mathrm{RegisterUser}_{SC}$}{KeyGenUser\_Client / RegisterUser\_SC}}
+
+{
+\setlength{\jot}{8pt}
+\setlength{\abovedisplayskip}{9pt}
+\setlength{\belowdisplayskip}{0pt}
+\setlength{\fboxsep}{8pt}
+
+\noindent
+\fbox{%
+\begin{minipage}{0.96\textwidth}
+\begin{tabular}{@{}p{0.475\linewidth}|p{0.475\linewidth}@{}}
+\begin{minipage}[t]{\linewidth}
+\centering
+\(
+  \mathbf{KeyGenUser}_{Client}(pp_{sys})
+\)
+
+\begin{gather*}
+sk_{own}\sample\mathbb{F}
+  \,;\,
+  pk_{own}\gets\Hash(sk_{own}) \\
+addr\gets\Hash(pk_{own}) \\
+usk=sk_{own}
+  \,;\,
+  upk=(addr,pk_{own}) \\
+\mathit{Tx}_{KGU}=(addr,pk_{own}) \\
+\Return (usk,upk),\mathit{Tx}_{KGU}
+\end{gather*}
+\end{minipage}
+&
+\begin{minipage}[t]{\linewidth}
+\centering
+\(
+  \mathbf{RegisterUser}_{SC}(addr,pk_{own})
+\)
+
+\begin{gather*}
+eoa\gets\mathrm{msg.sender} \\
+\Map{user}[eoa]\gets(addr,pk_{own})
+\end{gather*}
+\end{minipage}
+\\
+\end{tabular}
+\end{minipage}%
+}
+}
+
+$\Map{user}$는 POC Client가 EOA로 $(addr,pk_{own})$을 조회하기 위한 편의용 metadata다.
+Registration은 Event authorization에 사용하지 않으며 address uniqueness, EOA 재등록과
+$addr=\Hash(pk_{own})$을 Contract에서 강제하지 않는다. $pk_{own}=\Hash(sk_{own})$과
+$addr=\Hash(pk_{own})$에 의한 note ownership은 각 Event circuit에서 검증한다.
+
+\section{공급망 이벤트}
+
+각 Event 상단의 전이식은 소비되는 protocol object와 생성되는 protocol object를
+요약한다. $cm_{old}$는 소비 대상, $cm_{new}$는 신규 생성 대상을 뜻한다. Transfer의
+출력 ordered pair는 Recall Voucher multiset과 finalized $cm$ multiset 순서다. 세부
+Client와 Relation에서는 역할에 따라 기존 $cm_{in}$, $cm_{out}$ 표기를 사용한다.
+
+\subsection{Entry}
+
+\[
+  \varnothing
+  \xrightarrow{\mathrm{Entry}}
+  \{cm_{new}\}
+\]
+
+\noindent\textbf{표기.}
+\begin{itemize}[nosep]
+  \item $new$: 새로 발행하는 finalized note
+\end{itemize}
+
+Entry는 외부의 Product information을 새로운 finalized note로 발행하여 공급망의
+$MT$에 등록하는 event다. POC는 issuer authorization, origin data의 사실성 또는
+DocumentHash별 최초 발행의 유일성을 강제하지 않는다. 동일한 DocumentHash를 사용하더라도
+fresh opening $o$와 note payload에 의해 서로 다른 $cm$을 생성할 수 있다.
+
+Entry Relation은 $0<q<2^{64}$와 각 State coordinate의
+$0\leq s_k<2^{64}$를 검사한다. 따라서 Entry quantity는 0일 수 없지만 State
+coordinate는 0을 허용한다.
+
+\subsubsection{\texorpdfstring{$\mathrm{Entry}_{Client}$}{Entry\_Client}}
+
+\begin{schemeblock}
+\(
+  \mathbf{Entry}_{Client}
+  (\DocumentHash,q,\mathbf{s},addr)
+\)
+
+\begin{gather*}
+  o\sample\mathbb{F}; \, cm_{new}
+  \gets
+  \CM(\DocumentHash,q,\mathbf{s},addr,o)
+  \\
+  \mathbf{x}=\{cm_{new}\}
+  \\
+  \mathbf{w}=\{\DocumentHash,q,\mathbf{s},addr,o\}
+  \\
+  \pi_{Entry}
+  \gets
+  \Prove(ek_{Entry},\mathbf{x};\mathbf{w})
+  \\
+  \mathit{note}=(cm_{new},\DocumentHash,q,\mathbf{s},o)
+  \\
+  \mathit{Tx}_{Entry}=(\pi_{Entry},cm_{new})
+  \\
+  \Return (\mathit{note},\mathit{Tx}_{Entry})
+\end{gather*}
+\end{schemeblock}
+
+\subsubsection{\texorpdfstring{$\mathcal{R}_{Entry}$}{R\_Entry}}
+
+\begin{schemeblock}
+\(
+  \mathcal{R}_{Entry}(\mathbf{x};\mathbf{w})
+\)
+
+\begin{gather*}
+  \Assert
+  cm_{new}
+  =
+  \CM(\DocumentHash,q,\mathbf{s},addr,o)
+  \\
+  \Assert 0<q<2^{64}
+  \,;\,
+  \Assert 0\leq s_k<2^{64}
+  \quad k\in\{1,\ldots,\ell\}
+\end{gather*}
+\end{schemeblock}
+
+\subsubsection{\texorpdfstring{$\mathrm{Entry}_{SC}$}{Entry\_SC}}
+
+\begin{schemeblock}
+\(
+  \mathbf{Entry}_{SC}(\pi_{Entry},cm_{new})
+\)
+
+\begin{gather*}
+  \mathbf{x}=\{cm_{new}\}
+  \\
+  \Assert cm_{new}\notin\List{cm}
+  \\
+  \Assert
+  \Verify(vk_{SC,Entry},\pi_{Entry},\mathbf{x})=1
+  \\
+  rt_{new}\gets\Append(\MT,cm_{new})
+  \\
+  \List{rt}.append(rt_{new})
+  \,;\,
+  \List{cm}.append(cm_{new})
+\end{gather*}
+\end{schemeblock}
+
+\subsection{Transfer}
+
+\[
+  \{cm_{old}\}
+  \xrightarrow{\mathrm{Transfer}}
+  (\{rv_{new}\},\{cm_{new,change}\})
+\]
+
+\noindent\textbf{표기.}
+\begin{itemize}[nosep]
+  \item $in$: 소비하는 input note
+  \item $T$: Receiver에게 transfer하는 pending portion
+  \item $C$: Sender에게 남는 change portion
+  \item $S$, $R$: 각각 Sender와 Receiver
+  \item $k$: State coordinate index
+  \item $r_{C,k}$: change State를 내림 계산할 때 생기는 나머지. Circuit witness로만
+        사용하며 note, voucher와 transaction에는 저장하지 않는다.
+\end{itemize}
+
+\subsubsection{\textsc{TransferClient}}
+
+\begin{schemeblock}
+\(
+  \textsc{TransferClient}(
+    \mathit{note}_{in},usk_S,upk_S,upk_R,
+    q_T,\DeltaEpoch,rt,path_{in})
+\)
+
+\begin{gather*}
+(cm_{in},\DocumentHash,q_{in},\mathbf{s}_{in},o_{in})
+  \Leftarrow
+  \mathit{note}_{in}
+  \\
+sk_S\Leftarrow usk_S
+  \,;\,
+  (\addrSender,pk_S)\Leftarrow upk_S
+  \,;\,
+  (\addrReceiver,pk_R)\Leftarrow upk_R
+  \\
+q_C\gets q_{in}-q_T
+  \\
+s_{C,k}\gets
+\left\lfloor\frac{q_Cs_{in,k}}{q_{in}}\right\rfloor
+  \,;\,
+r_{C,k}\gets q_Cs_{in,k}-q_{in}s_{C,k}
+  \quad k\in\{1,\ldots,\ell\}
+  \\
+\mathbf{s}_T\gets\mathbf{s}_{in}-\mathbf{s}_C
+  \\
+o_C,o_{rv}\sample\mathbb{F}
+  \\
+nf\gets\Hash(sk_S,cm_{in})
+  \\
+rv\gets
+  \Hash(
+    \DocumentHash,q_T,\mathbf{s}_T,
+    \addrSender,\addrReceiver,\DeltaEpoch,o_{rv}
+  )
+  \\
+cm_C\gets
+  \CM(\DocumentHash,q_C,\mathbf{s}_C,\addrSender,o_C)
+  \\
+\mathbf{x}_T=\{rt,cm_{in},nf,rv,cm_C,\DeltaEpoch\}
+  \\
+\begin{aligned}
+  \mathbf{w}_T=\{
+    &sk_S,pk_S,pk_R,\\
+    &\DocumentHash,q_{in},\mathbf{s}_{in},
+    q_T,\mathbf{s}_T,\addrSender,\addrReceiver,\DeltaEpoch,\\
+    &q_C,\mathbf{s}_C,\mathbf{r}_C,path_{in},
+    o_{in},o_C,o_{rv}\}
+  \end{aligned}
+  \\
+\pi_T\gets
+  \Prove(ek_{Transfer},\mathbf{x}_T;\mathbf{w}_T)
+  \\
+\mathit{note}_C=(cm_C,\DocumentHash,q_C,\mathbf{s}_C,o_C)
+  \\
+\mathit{voucher}=\{
+    rv,\DocumentHash,q_T,\mathbf{s}_T,
+    \addrSender,\addrReceiver,\DeltaEpoch,o_{rv}\}
+  \\
+\mathit{Tx}_T=(\pi_T,rt,cm_{in},nf,rv,cm_C,\DeltaEpoch)
+  \\
+\Return(\mathit{voucher},\mathit{note}_C,\mathit{Tx}_T)
+\end{gather*}
+\end{schemeblock}
+
+\subsubsection{Transfer Relation}
+
+\begin{schemeblock}
+\(
+  \mathcal{R}_T(\mathbf{x}_T;\mathbf{w}_T)
+\)
+
+\begin{gather*}
+\Assert pk_S=\Hash(sk_S)
+  \,;\,
+  \Assert \addrSender=\Hash(pk_S)
+  \\
+\Assert \addrReceiver=\Hash(pk_R)
+  \\
+\Assert
+  cm_{in}=\CM(\DocumentHash,q_{in},\mathbf{s}_{in},\addrSender,o_{in})
+  \\
+\Assert\Member(rt,cm_{in},path_{in})=1
+  \,;\,
+  \Assert nf=\Hash(sk_S,cm_{in})
+  \\
+\Assert 0<q_T<2^{64}
+  \,;\,
+  \Assert 0\leq q_C<2^{64}
+  \\
+\Assert 0\leq s_{T,k},s_{C,k}<2^{64}
+  \quad k\in\{1,\ldots,\ell\}
+  \\
+\Assert q_{in}=q_T+q_C
+  \\
+\Assert
+  q_Cs_{in,k}=q_{in}s_{C,k}+r_{C,k}
+  \quad k\in\{1,\ldots,\ell\}
+  \\
+\Assert 0\leq r_{C,k}<q_{in}
+  \quad k\in\{1,\ldots,\ell\}
+  \\
+\Assert s_{T,k}+s_{C,k}=s_{in,k}
+  \quad k\in\{1,\ldots,\ell\}
+  \\
+\Assert
+  rv=
+  \Hash(
+    \DocumentHash,q_T,\mathbf{s}_T,
+    \addrSender,\addrReceiver,\DeltaEpoch,o_{rv}
+  )
+  \\
+\Assert
+  cm_C=\CM(\DocumentHash,q_C,\mathbf{s}_C,\addrSender,o_C)
+  \\
+\end{gather*}
+\end{schemeblock}
+
+\subsubsection{\textsc{TransferSC}}
+
+\begin{schemeblock}
+\(
+  \textsc{TransferSC}(\pi_T,rt,cm_{in},nf,rv,cm_C,\DeltaEpoch)
+\)
+
+\begin{gather*}
+\mathbf{x}_T=\{rt,cm_{in},nf,rv,cm_C,\DeltaEpoch\}
+  \\
+\Assert rt\in\List{rt}
+  \,;\,
+  \Assert nf\notin\List{nf}
+  \\
+\Assert cm_C\notin\List{cm}
+  \,;\,
+  \Assert rv\notin\List{rv}
+  \\
+\Assert
+  \Verify(vk_{SC,Transfer},\pi_T,\mathbf{x}_T)=1
+  \\
+rt_{new}\gets\Append(\MT,cm_C)
+  \,;\,
+  rvrt_{new}\gets\Append(\rvMT,rv)
+  \\
+\List{rt}.append(rt_{new})
+  \,;\,
+  \List{rvrt}.append(rvrt_{new})
+  \\
+\List{nf}.append(nf)
+  \,;\,
+  \List{cm}.append(cm_C)
+  \,;\,
+  \List{rv}.append(rv)
+  \\
+\Map{rv}[rv]
+  \gets
+  \CurrentEpoch()+\DeltaEpoch
+\end{gather*}
+\end{schemeblock}
+
+\subsection{Proceed}
+
+\[
+  rv\xrightarrow{\mathrm{Proceed}}cm_{recv}
+\]
+
+\noindent\textbf{표기.}
+\begin{itemize}[nosep]
+  \item $T$: Transfer가 만든 pending portion
+  \item $R$: Receiver
+  \item $recv$: Receiver가 finalize하여 새로 받는 note
+\end{itemize}
+
+\subsubsection{\textsc{ProceedClient}}
+
+\begin{schemeblock}
+\(
+  \textsc{ProceedClient}(\mathit{voucher},usk_R,upk_R,index_{rv})
+\)
+
+\begin{gather*}
+  \begin{aligned}
+  (&rv,\DocumentHash,q_T,\mathbf{s}_T,
+    \addrSender,\addrReceiver,\DeltaEpoch,o_{rv})\\
+  &\Leftarrow\mathit{voucher}
+  \end{aligned}
+  \\
+  sk_R\Leftarrow usk_R
+  \,;\,
+  (\addrReceiver,pk_R)\Leftarrow upk_R
+  \\
+  (rvrt,path_{rv})
+  \gets
+  \mathrm{GetPath}_{rvMT}(index_{rv})
+  \\
+  o_{recv}\sample\mathbb{F}
+  \\
+  rvnf\gets\Hash(rv,o_{rv})
+  \\
+  cm_{recv}
+  \gets
+  \CM(\DocumentHash,q_T,\mathbf{s}_T,\addrReceiver,o_{recv})
+  \\
+  \mathbf{x}_P=\{rvrt,rv,rvnf,cm_{recv}\}
+  \\
+  \mathbf{w}_P=\{
+    sk_R,pk_R,
+    \DocumentHash,q_T,\mathbf{s}_T,
+    \addrSender,\addrReceiver,\DeltaEpoch,
+    path_{rv},o_{rv},o_{recv}\}
+  \\
+  \pi_P\gets
+  \Prove(ek_{Proceed},\mathbf{x}_P;\mathbf{w}_P)
+  \\
+  \mathit{note}_{recv}=(cm_{recv},\DocumentHash,q_T,\mathbf{s}_T,o_{recv})
+  \\
+  \mathit{Tx}_P=(\pi_P,rvrt,rv,rvnf,cm_{recv})
+  \\
+  \Return(\mathit{note}_{recv},\mathit{Tx}_P)
+\end{gather*}
+\end{schemeblock}
+
+\subsubsection{Proceed Relation}
+
+\begin{schemeblock}
+\(
+  \mathcal{R}_P(\mathbf{x}_P;\mathbf{w}_P)
+\)
+
+\begin{gather*}
+  \Assert pk_R=\Hash(sk_R)
+  \,;\,
+  \Assert \addrReceiver=\Hash(pk_R)
+  \\
+  \Assert\Member(rvrt,rv,path_{rv})=1
+  \\
+  \Assert
+  rv=
+  \Hash(
+    \DocumentHash,q_T,\mathbf{s}_T,
+    \addrSender,\addrReceiver,\DeltaEpoch,o_{rv}
+  )
+  \\
+  \Assert rvnf=\Hash(rv,o_{rv})
+  \\
+  \Assert
+  cm_{recv}=\CM(\DocumentHash,q_T,\mathbf{s}_T,\addrReceiver,o_{recv})
+\end{gather*}
+\end{schemeblock}
+
+\subsubsection{\textsc{ProceedSC}}
+
+\begin{schemeblock}
+\(
+  \textsc{ProceedSC}(\pi_P,rvrt,rv,rvnf,cm_{recv})
+\)
+
+\begin{gather*}
+  \mathbf{x}_P=\{rvrt,rv,rvnf,cm_{recv}\}
+  \\
+  \Assert rvrt\in\List{rvrt}
+  \,;\,
+  \Assert rv\in\List{rv}
+  \\
+  \Assert rvnf\notin\List{rvnf}
+  \,;\,
+  \Assert cm_{recv}\notin\List{cm}
+  \\
+  \Assert
+  \Verify(vk_{SC,Proceed},\pi_P,\mathbf{x}_P)=1
+  \\
+  rt_{new}\gets\Append(\MT,cm_{recv})
+  \\
+  \List{rt}.append(rt_{new})
+  \,;\,
+  \List{cm}.append(cm_{recv})
+  \,;\,
+  \List{rvnf}.append(rvnf)
+\end{gather*}
+\end{schemeblock}
+
+\subsection{Recall}
+
+\[
+  rv\xrightarrow{\mathrm{Recall}}cm_{return}
+\]
+
+\noindent\textbf{표기.}
+\begin{itemize}[nosep]
+  \item $T$: Transfer가 만든 pending portion
+  \item $S$, $R$: 각각 직전 Sender와 Receiver
+  \item $return$: Sender에게 되돌아가는 새 finalized note
+\end{itemize}
+
+\subsubsection{\textsc{RecallClient}}
+
+\begin{schemeblock}
+\(
+  \textsc{RecallClient}(\mathit{voucher},usk_S,upk_S,index_{rv})
+\)
+
+\begin{gather*}
+  \begin{aligned}
+  (&rv,\DocumentHash,q_T,\mathbf{s}_T,
+    \addrSender,\addrReceiver,\DeltaEpoch,o_{rv})\\
+  &\Leftarrow\mathit{voucher}
+  \end{aligned}
+  \\
+  sk_S\Leftarrow usk_S
+  \,;\,
+  (\addrSender,pk_S)\Leftarrow upk_S
+  \\
+  (rvrt,path_{rv})
+  \gets
+  \mathrm{GetPath}_{rvMT}(index_{rv})
+  \\
+  o_{return}\sample\mathbb{F}
+  \\
+  rvnf\gets\Hash(rv,o_{rv})
+  \\
+  cm_{return}
+  \gets
+  \CM(\DocumentHash,q_T,\mathbf{s}_T,\addrSender,o_{return})
+  \\
+  \mathbf{x}_R=\{rvrt,rv,rvnf,cm_{return}\}
+  \\
+  \mathbf{w}_R=\{
+    sk_S,pk_S,
+    \DocumentHash,q_T,\mathbf{s}_T,
+    \addrSender,\addrReceiver,\DeltaEpoch,
+    path_{rv},o_{rv},o_{return}\}
+  \\
+  \pi_R\gets
+  \Prove(ek_{Recall},\mathbf{x}_R;\mathbf{w}_R)
+  \\
+  \mathit{note}_{return}=(cm_{return},\DocumentHash,q_T,\mathbf{s}_T,o_{return})
+  \\
+  \mathit{Tx}_R=(\pi_R,rvrt,rv,rvnf,cm_{return})
+  \\
+  \Return(\mathit{note}_{return},\mathit{Tx}_R)
+\end{gather*}
+\end{schemeblock}
+
+\subsubsection{Recall Relation}
+
+\begin{schemeblock}
+\(
+  \mathcal{R}_R(\mathbf{x}_R;\mathbf{w}_R)
+\)
+
+\begin{gather*}
+  \Assert pk_S=\Hash(sk_S)
+  \,;\,
+  \Assert \addrSender=\Hash(pk_S)
+  \\
+  \Assert\Member(rvrt,rv,path_{rv})=1
+  \\
+  \Assert
+  rv=
+  \Hash(
+    \DocumentHash,q_T,\mathbf{s}_T,
+    \addrSender,\addrReceiver,\DeltaEpoch,o_{rv}
+  )
+  \\
+  \Assert rvnf=\Hash(rv,o_{rv})
+  \\
+  \Assert
+  cm_{return}=\CM(\DocumentHash,q_T,\mathbf{s}_T,\addrSender,o_{return})
+\end{gather*}
+\end{schemeblock}
+
+\subsubsection{\textsc{RecallSC}}
+
+\begin{schemeblock}
+\(
+  \textsc{RecallSC}(\pi_R,rvrt,rv,rvnf,cm_{return})
+\)
+
+\begin{gather*}
+  \mathbf{x}_R=\{rvrt,rv,rvnf,cm_{return}\}
+  \\
+  \Assert rvrt\in\List{rvrt}
+  \,;\,
+  \Assert rv\in\List{rv}
+  \\
+  \Assert \CurrentEpoch()<\Map{rv}[rv]
+  \\
+  \Assert rvnf\notin\List{rvnf}
+  \,;\,
+  \Assert cm_{return}\notin\List{cm}
+  \\
+  \Assert
+  \Verify(vk_{SC,Recall},\pi_R,\mathbf{x}_R)=1
+  \\
+  rt_{new}\gets\Append(\MT,cm_{return})
+  \\
+  \List{rt}.append(rt_{new})
+  \,;\,
+  \List{cm}.append(cm_{return})
+  \,;\,
+  \List{rvnf}.append(rvnf)
+\end{gather*}
+\end{schemeblock}
+
+\subsection{Merge}
+
+\[
+  \{cm_{old,1},cm_{old,2}\}
+  \xrightarrow{\mathrm{Merge}}
+  \{cm_{new}\}
+\]
+
+\noindent\textbf{표기.}
+\begin{itemize}[nosep]
+  \item $1,2$: 두 input note의 고정 index
+  \item $out$ 또는 $new$: 두 input을 합쳐 만드는 하나의 output note
+  \item $k$: State coordinate index
+\end{itemize}
+
+\subsubsection{\textsc{MergeClient}}
+
+\begin{schemeblock}
+\(
+  \textsc{MergeClient}(
+    \mathit{note}_1,\mathit{note}_2,usk,upk,
+    index_1,index_2)
+\)
+
+\begin{gather*}
+(cm_i,\DocumentHash_i,q_i,\mathbf{s}_i,o_i)
+  \Leftarrow\mathit{note}_i
+  \quad i\in\{1,2\}
+  \\
+sk\Leftarrow usk
+  \,;\,
+  (addr,pk)\Leftarrow upk
+  \\
+(rt_i,path_i)\gets\mathrm{GetPath}_{MT}(index_i)
+  \quad i\in\{1,2\}
+  \\
+q_{out}\gets q_1+q_2
+  \,;\,
+  \mathbf{s}_{out}\gets\mathbf{s}_1+\mathbf{s}_2
+  \\
+o_{out}\sample\mathbb{F}
+  \\
+nf_i\gets\Hash(sk,cm_i)
+  \quad i\in\{1,2\}
+  \\
+cm_{out}\gets
+  \CM(\DocumentHash_1,q_{out},\mathbf{s}_{out},addr,o_{out})
+  \\
+\mathbf{x}_M=\{rt_1,rt_2,cm_1,cm_2,nf_1,nf_2,cm_{out}\}
+  \\
+\mathbf{w}_M=\{
+    sk,pk,
+    \{\DocumentHash_i,q_i,\mathbf{s}_i\}_{i=1}^{2},
+    q_{out},\mathbf{s}_{out},addr,
+    \{path_i\}_{i=1}^{2},\{o_i\}_{i=1}^{2},o_{out}\}
+  \\
+\pi_M\gets
+  \Prove(ek_{Merge},\mathbf{x}_M;\mathbf{w}_M)
+  \\
+\mathit{note}_{out}=(cm_{out},\DocumentHash_1,q_{out},\mathbf{s}_{out},o_{out})
+  \\
+\mathit{Tx}_M=(\pi_M,rt_1,rt_2,cm_1,cm_2,nf_1,nf_2,cm_{out})
+  \\
+\Return(\mathit{note}_{out},\mathit{Tx}_M)
+\end{gather*}
+\end{schemeblock}
+
+\subsubsection{Merge Relation}
+
+\begin{schemeblock}
+\(
+  \mathcal{R}_M(\mathbf{x}_M;\mathbf{w}_M)
+\)
+
+\begin{gather*}
+\Assert pk=\Hash(sk)
+  \,;\,
+  \Assert addr=\Hash(pk)
+  \\
+\Assert
+  cm_i=\CM(\DocumentHash_i,q_i,\mathbf{s}_i,addr,o_i)
+  \quad i\in\{1,2\}
+  \\
+\Assert\Member(rt_i,cm_i,path_i)=1
+  \quad i\in\{1,2\}
+  \\
+\Assert nf_i=\Hash(sk,cm_i)
+  \quad i\in\{1,2\}
+  \\
+\Assert \DocumentHash_1=\DocumentHash_2
+  \\
+\Assert q_{out}=q_1+q_2
+  \,;\,
+  \Assert s_{out,k}=s_{1,k}+s_{2,k}
+  \quad k\in\{1,\ldots,\ell\}
+  \\
+\Assert 0\leq q_{out}<2^{64}
+  \,;\,
+  \Assert 0\leq s_{out,k}<2^{64}
+  \quad k\in\{1,\ldots,\ell\}
+  \\
+\Assert
+  cm_{out}=\CM(\DocumentHash_1,q_{out},\mathbf{s}_{out},addr,o_{out})
+\end{gather*}
+\end{schemeblock}
+
+\subsubsection{\textsc{MergeSC}}
+
+\begin{schemeblock}
+\(
+  \textsc{MergeSC}(\pi_M,rt_1,rt_2,cm_1,cm_2,nf_1,nf_2,cm_{out})
+\)
+
+\begin{gather*}
+\mathbf{x}_M=\{rt_1,rt_2,cm_1,cm_2,nf_1,nf_2,cm_{out}\}
+  \\
+\Assert rt_i\in\List{rt}
+  \quad i\in\{1,2\}
+  \\
+\Assert cm_1\neq cm_2
+  \\
+\Assert nf_i\notin\List{nf}
+  \quad i\in\{1,2\}
+  \\
+\Assert cm_{out}\notin\List{cm}
+  \\
+\Assert
+  \Verify(vk_{SC,Merge},\pi_M,\mathbf{x}_M)=1
+  \\
+rt_{new}\gets\Append(\MT,cm_{out})
+  \\
+\List{nf}.append(nf_1,nf_2)
+  \,;\,
+  \List{cm}.append(cm_{out})
+  \,;\,
+  \List{rt}.append(rt_{new})
+\end{gather*}
+\end{schemeblock}
+
+\subsection{Split}
+
+\[
+  \{cm_{old}\}
+  \xrightarrow{\mathrm{Split}}
+  \{cm_{new,1},cm_{new,2}\}
+\]
+
+\noindent\textbf{표기.}
+\begin{itemize}[nosep]
+  \item $in$: 소비하는 input note
+  \item $1,2$: 두 output note의 고정 index
+  \item $k$: State coordinate index
+  \item Output 2: 내림 계산 대상
+  \item Output 1: residual을 받는 대상
+\end{itemize}
+
+\subsubsection{\textsc{SplitClient}}
+
+\begin{schemeblock}
+\(
+  \textsc{SplitClient}(
+    \mathit{note}_{in},usk,upk,q_1,q_2,index_{in})
+\)
+
+\begin{gather*}
+(cm_{in},\DocumentHash,q_{in},\mathbf{s}_{in},o_{in})
+  \Leftarrow\mathit{note}_{in}
+  \\
+sk\Leftarrow usk
+  \,;\,
+  (addr,pk)\Leftarrow upk
+  \\
+(rt,path_{in})\gets\mathrm{GetPath}_{MT}(index_{in})
+  \\
+s_{2,k}\gets
+\left\lfloor\frac{q_2s_{in,k}}{q_{in}}\right\rfloor
+  \,;\,
+r_{2,k}\gets q_2s_{in,k}-q_{in}s_{2,k}
+  \quad k\in\{1,\ldots,\ell\}
+  \\
+\mathbf{s}_1\gets\mathbf{s}_{in}-\mathbf{s}_2
+  \\
+o_1,o_2\sample\mathbb{F}
+  \,;\,
+  nf\gets\Hash(sk,cm_{in})
+  \\
+cm_{out,j}
+  \gets
+  \CM(\DocumentHash,q_j,\mathbf{s}_j,addr,o_j)
+  \quad j\in\{1,2\}
+  \\
+\mathbf{x}_S=\{rt,cm_{in},nf,cm_{out,1},cm_{out,2}\}
+  \\
+\mathbf{w}_S=\{
+    sk,pk,\DocumentHash,q_{in},\mathbf{s}_{in},
+    \{q_j,\mathbf{s}_j\}_{j=1}^{2},addr,\mathbf{r}_2,
+    path_{in},o_{in},\{o_j\}_{j=1}^{2}\}
+  \\
+\pi_S\gets
+  \Prove(ek_{Split},\mathbf{x}_S;\mathbf{w}_S)
+  \\
+\mathit{note}_{out,j}=(cm_{out,j},\DocumentHash,q_j,\mathbf{s}_j,o_j)
+  \quad j\in\{1,2\}
+  \\
+\mathit{Tx}_S=(\pi_S,rt,cm_{in},nf,cm_{out,1},cm_{out,2})
+  \\
+\Return(\mathit{note}_{out,1},\mathit{note}_{out,2},\mathit{Tx}_S)
+\end{gather*}
+\end{schemeblock}
+
+\subsubsection{Split Relation}
+
+\begin{schemeblock}
+\(
+  \mathcal{R}_S(\mathbf{x}_S;\mathbf{w}_S)
+\)
+
+\begin{gather*}
+\Assert pk=\Hash(sk)
+  \,;\,
+  \Assert addr=\Hash(pk)
+  \\
+\Assert
+  cm_{in}=\CM(\DocumentHash,q_{in},\mathbf{s}_{in},addr,o_{in})
+  \\
+\Assert\Member(rt,cm_{in},path_{in})=1
+  \,;\,
+  \Assert nf=\Hash(sk,cm_{in})
+  \\
+\Assert 0\leq q_1,q_2<2^{64}
+  \\
+\Assert 0\leq s_{1,k},s_{2,k}<2^{64}
+  \quad k\in\{1,\ldots,\ell\}
+  \\
+\Assert q_{in}=q_1+q_2
+  \\
+\Assert
+  q_2s_{in,k}=q_{in}s_{2,k}+r_{2,k}
+  \quad k\in\{1,\ldots,\ell\}
+  \\
+\Assert 0\leq r_{2,k}<q_{in}
+  \quad k\in\{1,\ldots,\ell\}
+  \\
+\Assert s_{1,k}+s_{2,k}=s_{in,k}
+  \quad k\in\{1,\ldots,\ell\}
+  \\
+\Assert
+  cm_{out,j}=\CM(\DocumentHash,q_j,\mathbf{s}_j,addr,o_j)
+  \quad j\in\{1,2\}
+\end{gather*}
+\end{schemeblock}
+
+Output quantity가 0이면 해당 output의 모든 State coordinate도 0으로 강제된다.
+$q_2=0$이면 floor/remainder relation에서 $s_{2,k}=r_{2,k}=0$이고,
+$q_1=0$이면 $q_2=q_{in}$이므로 $s_{2,k}=s_{in,k}$와 $s_{1,k}=0$이 성립한다.
+$q_{in}=0$인 note는 $0\leq r_{2,k}<q_{in}$을 만족할 수 없어 Split할 수 없다.
+
+\subsubsection{\textsc{SplitSC}}
+
+\begin{schemeblock}
+\(
+  \textsc{SplitSC}(\pi_S,rt,cm_{in},nf,cm_{out,1},cm_{out,2})
+\)
+
+\begin{gather*}
+\mathbf{x}_S=\{rt,cm_{in},nf,cm_{out,1},cm_{out,2}\}
+  \\
+\Assert rt\in\List{rt}
+  \,;\,
+  \Assert nf\notin\List{nf}
+  \\
+\Assert
+  \Verify(vk_{SC,Split},\pi_S,\mathbf{x}_S)=1
+  \\
+\List{nf}.append(nf)
+  \\
+\begin{aligned}
+&\Assert cm_{out,j}\notin\List{cm}
+  \,;\,
+  \List{cm}.append(cm_{out,j})\\
+&rt_j\gets\Append(\MT,cm_{out,j})
+  \,;\,
+  \List{rt}.append(rt_j)
+\end{aligned}
+  \quad j=1,2\ \text{ 순서로 실행}
+\end{gather*}
+\end{schemeblock}
+
+\subsection{Process}
+
+현재 Process는 arbitrary industrial process를 일반화한 Relation이 아니라, 호출자가
+공개한 $P$와 $A$에 대한 generic State Allocation Relation이다. 이번 POC는 Recipe,
+MaterialClassId와 Quantity transition을 검증하지 않는다. 따라서 Process proof가
+보장하는 범위는 input State가 공개된 $P,A$에 따라 output State로 일관되게 전이되었다는
+사실이며, $P,A$ 자체가 실제 공정에 맞는지는 보장하지 않는다.
+
+\[
+  1\leq m\leq M_{\max}=a,
+  \qquad
+  1\leq n\leq N_{\max}=a,
+  \qquad
+  a\in\{1,2,3\}
+\]
+
+기능 확인용 기본 POC는 $a=3$이다. Process arity benchmark는 $d=32,\ell=3$으로
+고정하고 $a=1,2,3$인 circuit을 각각 별도로 compile한다. 기준 scenario에서 모든 slot을 활성화해
+$m=n=a$인 1-to-1, 2-to-2와 3-to-3만 측정한다. 비대칭 arity는 benchmark에서 제외한다.
+
+첫 구현 milestone의 Process circuit은 selector를 아직 포함하지 않고 $m=n=3$을 직접
+강제한다. 아래 $m,n$ 기반 active-slot 정의는 3-to-3 vertical slice가 완료된 뒤 추가하는
+일반 최대 3-slot profile의 요구사항이다.
+
+\[
+  D:=10^9
+\]
+
+Public $m,n$은 각각 active input/output의 개수를 나타낸다. Circuit은 index
+$1,\ldots,m$과 $1,\ldots,n$에 해당하는 fixed slot만 active relation에 포함한다.
+별도 $e^{in},e^{out}$ vector는 statement와 witness에 포함하지 않는다. Inactive input의
+$rt_i,cm_i,nf_i$와 inactive output의 $cm_j$는 0이며, inactive output의 $A$ row도 0이다.
+고정 circuit에서 $m,n$을 slot별 constraint에 적용하는 algebraic gating은 Development
+Specification에서 정의한다.
+
+\[
+  \{cm_{old,i}\}_{i=1}^{m}
+  \xrightarrow{\mathrm{Process}}
+  \{cm_{new,j}\}_{j=1}^{n}
+\]
+
+\noindent\textbf{표기.}
+\begin{itemize}[nosep]
+  \item $i$, $j$: 각각 input index와 output index
+  \item $k$, $\ell$: 각각 State coordinate index와 StateVector 길이
+  \item $[t]:=\{1,\ldots,t\}$: index 범위를 짧게 쓰기 위한 표기
+  \item $m$, $n$: 실제 input 개수와 output 개수
+  \item $a$: circuit의 maximum arity
+  \item $\mathbf{s}_{in,i}$: $i$번째 input note의 StateVector
+  \item $\mathbf{s}_{out,j}$: $j$번째 output note의 StateVector
+  \item $\mathbf{s}_{in}:=\sum_{i=1}^{m}\mathbf{s}_{in,i}$: input aggregate StateVector
+  \item $\mathbf{s}_{out}:=\sum_{j=1}^{n}\mathbf{s}_{out,j}$: output aggregate StateVector
+  \item $P$: 공정 변화량
+  \item $A\in\mathbb{F}^{n\times\ell}$: Client와 transaction이 전달하는 active
+        StateAllocationMatrix
+  \item $A^{pad}\in\mathbb{F}^{N_{\max}\times\ell}$: $A$ 뒤에 zero row를 붙여
+        verifier statement에 사용하는 fixed-size matrix
+\end{itemize}
+
+\Needspace{0.68\textheight}
+\subsubsection{\textsc{ProcessClient}}
+
+$P$는 Client가 실제 공정 결과를 나타내기 위해 공개하는 semantic process delta다.
+Benchmark profile의 State 길이에 따라 다음 prefix를 사용한다.
+
+\[
+\begin{array}{c|c|c}
+\ell & P & P_{pub} \\
+\hline
+0 & () & () \\
+1 & (-p_{totalLoss}) & (p_{totalLoss}) \\
+2 & (-p_{totalLoss},+p_{carbonAdded}) & (p_{totalLoss},p_{carbonAdded}) \\
+3 & (-p_{totalLoss},+p_{carbonAdded},+p_{recycledDelta}) &
+(p_{totalLoss},p_{carbonAdded},p_{recycledDelta})
+\end{array}
+\]
+
+Transaction과 public input에는 음수 Field Element 대신 $P_{pub}$의 unsigned 값을
+포함한다. $\ell=3$에서는 recycled coordinate도 생략하지 않는다. Relation은
+$\mathbf{s}_{out}=\mathbf{s}_{in}+P$와 recycled aggregate 보존을 함께 검증하므로
+유효한 proof에서 $p_{recycledDelta}=0$이 도출된다.
+$\mathbf{s}_{in}$과 $\mathbf{s}_{out}$은 전달하지 않으며 Relation이 각각 input과
+output StateVector의 합으로 계산한다.
+아래 수식은 active slot만 표시한다. Client는 $\Prove$ 호출 전에 Relation의 inactive
+slot 규칙에 따라 fixed-size statement와 witness의 나머지 값을 0으로 채운다.
+
+\begin{schemeblock}
+\(
+  \textsc{ProcessClient}(
+    \{\mathit{note}_{in,i},index_i\}_{i=1}^{m},usk,upk,
+    \{\DocumentHash_{out,j},q_{out,j}\}_{j=1}^{n},
+    P_{pub},A)
+\)
+
+\begin{gather*}
+\text{\bfseries 1. Input note, 소유자 key와 MT path 준비}
+  \\
+(cm_{in,i},\DocumentHash_{in,i},q_{in,i},\mathbf{s}_{in,i},o_{in,i})
+  \Leftarrow\mathit{note}_{in,i}
+  \quad i\in[m]
+  \\
+sk\Leftarrow usk
+  \,;\,
+  (addr,pk)\Leftarrow upk
+  \\
+(rt_i,path_i)\gets\mathrm{GetPath}_{MT}(index_i)
+  \quad i\in[m]
+  \\
+\text{\bfseries 2. Process delta 반영과 output State 계산}
+  \\
+P\gets(-p_{totalLoss},+p_{carbonAdded},+p_{recycledDelta})
+  \quad (\ell=3)
+  \\
+\mathbf{s}_{in}\gets\sum_{i=1}^{m}\mathbf{s}_{in,i}
+  \,;\,
+\mathbf{s}_{out}\gets\mathbf{s}_{in}+P
+  \\
+s_{out,j,k}\gets
+\left\lfloor\frac{s_{out,k}A_{j,k}}{D}\right\rfloor
+  \,;\,
+r_{j,k}\gets s_{out,k}A_{j,k}-Ds_{out,j,k}
+  \quad j\in[n]\setminus\{1\},\;k\in[\ell]
+  \\
+s_{out,1,k}\gets s_{out,k}-\sum_{j=2}^{n}s_{out,j,k}
+  \quad k\in[\ell]
+  \\
+\text{\bfseries 3. Nullifier와 active output note 생성}
+  \\
+nf_i\gets\Hash(sk,cm_{in,i})
+  \quad i\in[m]
+  \\
+o_{out,j}\sample\mathbb{F}
+  \quad j\in[n]
+  \\
+cm_{out,j}
+  \gets
+  \CM(\DocumentHash_{out,j},q_{out,j},\mathbf{s}_{out,j},addr,o_{out,j})
+  \quad j\in[n]
+  \\
+\mathit{note}_{out,j}=(
+  cm_{out,j},\DocumentHash_{out,j},q_{out,j},
+  \mathbf{s}_{out,j},o_{out,j})
+  \quad j\in[n]
+  \\
+\text{\bfseries 4. Fixed-size statement와 witness 구성}
+  \\
+A^{pad}\gets\operatorname{PadZeroRows}_{N_{\max}}(A)
+  \\
+\mathbf{x}_{Proc}=\{
+    m,n,P_{pub},A^{pad},
+    \{rt_i,cm_{in,i},nf_i\}_{i=1}^{M_{\max}},
+    \{cm_{out,j}\}_{j=1}^{N_{\max}}\}
+  \\
+\begin{aligned}
+  \mathbf{w}_{Proc}=\{
+    &sk,pk,\\
+    &\{\DocumentHash_{in,i},q_{in,i},\mathbf{s}_{in,i}\}_{i=1}^{M_{\max}},\\
+    &\{\DocumentHash_{out,j},q_{out,j},\mathbf{s}_{out,j}\}_{j=1}^{N_{\max}},\\
+    &addr,\{r_{j,k}\}_{j=2,k=1}^{N_{\max},\ell},
+    \{path_i\}_{i=1}^{M_{\max}},\\
+    &\{o_{in,i}\}_{i=1}^{M_{\max}},\{o_{out,j}\}_{j=1}^{N_{\max}}\}
+  \end{aligned}
+  \\
+\text{\bfseries 5. Proof와 active-size transaction 생성}
+  \\
+\pi_{Proc}
+  \gets
+  \Prove(ek_{Process},\mathbf{x}_{Proc};\mathbf{w}_{Proc})
+  \\
+\mathit{Tx}_{Proc}=(
+    \pi_{Proc},P_{pub},A,
+    \{rt_i,cm_{in,i},nf_i\}_{i=1}^{m},
+    \{cm_{out,j}\}_{j=1}^{n})
+  \\
+\Return(\{\mathit{note}_{out,j}\}_{j=1}^{n},\mathit{Tx}_{Proc})
+\end{gather*}
+\end{schemeblock}
+
+\Needspace{0.16\textheight}
+\subsubsection{Process Relation}
+
+아래 본문은 기능 확인용 $\ell=3$ profile을 기준으로 한다. $\ell<3$인 benchmark
+profile은 StateVector prefix만 사용하고 존재하지 않는 coordinate의 delta relation을
+compile하지 않는다. 따라서 $\ell$은 아래 Relation의 runtime 분기값이 아니다.
+
+\begin{schemeblock}
+\(
+  \mathcal{R}_{Proc}
+  (\mathbf{x}_{Proc};\mathbf{w}_{Proc})
+\)
+
+\begin{gather*}
+\text{\bfseries 1. 소유자와 active arity}
+  \\
+\Assert pk=\Hash(sk)
+  \,;\,
+  \Assert addr=\Hash(pk)
+  \\
+\Assert 1\leq m\leq M_{\max}
+  \,;\,
+\Assert 1\leq n\leq N_{\max}
+  \\
+\text{\bfseries 2. Active input의 opening, membership와 nullifier}
+  \\
+\Assert
+  cm_{in,i}=\CM(
+    \DocumentHash_{in,i},q_{in,i},\mathbf{s}_{in,i},addr,o_{in,i})
+  \quad i\in[m]
+  \\
+\Assert\Member(rt_i,cm_{in,i},path_i)=1
+  \,;\,
+  \Assert nf_i=\Hash(sk,cm_{in,i})
+  \quad i\in[m]
+  \\
+\text{\bfseries 3. State aggregate와 active output range}
+  \\
+\mathbf{s}_{in}:=\sum_{i=1}^{m}\mathbf{s}_{in,i}
+  \\
+\mathbf{s}_{out}:=\sum_{j=1}^{n}\mathbf{s}_{out,j}
+  \\
+\Assert 1\leq q_{out,j}<2^{64}
+  \,;\,
+  \Assert 0\leq s_{out,j,k}<2^{64}
+  \quad j\in[n],\;k\in[\ell]
+  \\
+\text{\bfseries 4. Public process delta}
+  \\
+P:=(-p_{totalLoss},+p_{carbonAdded},+p_{recycledDelta})
+  \\
+\Assert 0\leq p_{totalLoss}<2^{66}
+  \quad\bigl(M_{\max}=3:\;3(2^{64}-1)<2^{66}\bigr)
+  \\
+\Assert 0\leq p_{carbonAdded}<2^{66}
+  \quad\bigl(N_{\max}=3:\;3(2^{64}-1)<2^{66}\bigr)
+  \\
+  \Assert \mathbf{s}_{out}=\mathbf{s}_{in}+P
+  \,;\,
+  \Assert s_{out,recycled}=s_{in,recycled}
+  \\
+\text{\bfseries 5. State allocation과 output 1 residual}
+  \\
+\Assert 0\leq A^{pad}_{j,k}\leq D
+  \quad j\in[n],\;k\in[\ell]
+  \\
+\Assert s_{out,k}A^{pad}_{j,k}=Ds_{out,j,k}+r_{j,k}
+  \quad j\in[n]\setminus\{1\},\;k\in[\ell]
+  \\
+\Assert 0\leq r_{j,k}<D
+  \quad j\in[n]\setminus\{1\},\;k\in[\ell]
+  \\
+\Assert\sum_{j=1}^{n}A^{pad}_{j,k}=D
+  \quad k\in[\ell]
+  \\
+\text{\bfseries 6. Inactive slot의 zero padding}
+  \\
+\Assert rt_i=cm_{in,i}=nf_i=0
+  \quad i\in[M_{\max}]\setminus[m]
+  \\
+\Assert
+  \DocumentHash_{in,i}=q_{in,i}=s_{in,i,k}=o_{in,i}=0
+  \quad i\in[M_{\max}]\setminus[m],\;k\in[\ell]
+  \\
+\Assert path_i=\mathbf{0}^{d}
+  \quad i\in[M_{\max}]\setminus[m]
+  \\
+\Assert cm_{out,j}=0
+  \,;\,
+  \Assert A^{pad}_{j,k}=0
+  \quad j\in[N_{\max}]\setminus[n],\;k\in[\ell]
+  \\
+\Assert
+  \DocumentHash_{out,j}=q_{out,j}=s_{out,j,k}=o_{out,j}=r_{j,k}=0
+  \quad j\in[N_{\max}]\setminus[n],\;k\in[\ell]
+  \\
+\text{\bfseries 7. Active output commitment binding}
+  \\
+\Assert
+  cm_{out,j}=\CM(
+    \DocumentHash_{out,j},q_{out,j},\mathbf{s}_{out,j},addr,o_{out,j})
+  \quad j\in[n]
+\end{gather*}
+\end{schemeblock}
+
+\Needspace{0.38\textheight}
+\subsubsection{\textsc{ProcessSC}}
+
+\begin{schemeblock}
+\(
+  \textsc{ProcessSC}(\mathit{Tx}_{Proc})
+\)
+
+\begin{gather*}
+\text{\bfseries 1. Active array 길이와 public input shape 확인}
+  \\
+ m\gets\operatorname{len}(\{cm_{in,i}\})
+  \,;\,
+  n\gets\operatorname{len}(\{cm_{out,j}\})
+  \\
+\Assert m=\operatorname{len}(\{rt_i\})=\operatorname{len}(\{nf_i\})
+  \,;\,
+  \Assert 1\leq m\leq M_{\max}
+  \,;\,
+  \Assert 1\leq n\leq N_{\max}
+  \\
+\Assert \operatorname{len}(P_{pub})=\ell
+  \,;\,
+  \Assert \operatorname{len}(\operatorname{vec}(A))=n\ell
+  \,;\,
+  A^{pad}\gets\operatorname{PadZeroRows}_{N_{\max}}(A)
+  \\
+\text{\bfseries 2. Fixed-size verifier public input 구성}
+  \\
+\{rt_i,cm_{in,i},nf_i\}_{i=1}^{M_{\max}}
+  \gets\operatorname{PadZero}_{M_{\max}}(\{rt_i,cm_{in,i},nf_i\}_{i=1}^{m})
+  \\
+\{cm_{out,j}\}_{j=1}^{N_{\max}}
+  \gets\operatorname{PadZero}_{N_{\max}}(\{cm_{out,j}\}_{j=1}^{n})
+  \\
+\mathbf{x}_{Proc}=\{
+    m,n,P_{pub},A^{pad},
+    \{rt_i,cm_{in,i},nf_i\}_{i=1}^{M_{\max}},
+    \{cm_{out,j}\}_{j=1}^{N_{\max}}\}
+  \\
+\text{\bfseries 3. Proof 이전 root, input 중복과 spent 검사}
+  \\
+\Assert rt_i\in\List{rt}
+  \quad i\in[m]
+  \\
+\Assert cm_{in,i}\neq cm_{in,i'}
+  \quad 1\leq i<i'\leq m
+  \\
+\Assert nf_i\notin\List{nf}
+  \quad i\in[m]
+  \\
+\text{\bfseries 4. Process proof 검증}
+  \\
+\Assert
+  \Verify(
+    vk_{SC,Process},
+    \pi_{Proc},\mathbf{x}_{Proc})=1
+  \\
+\text{\bfseries 5. Nullifier와 output commitment 상태 갱신}
+  \\
+\List{nf}.append(\{nf_i\}_{i=1}^{m})
+  \\
+\begin{aligned}
+&\Assert cm_{out,j}\notin\List{cm}
+  \,;\,
+  \List{cm}.append(cm_{out,j})\\
+&rt_{new,j}\gets\Append(\MT,cm_{out,j})
+  \,;\,
+  \List{rt}.append(rt_{new,j})
+\end{aligned}
+  \quad j=1,\ldots,n\ \text{ 순서로 실행}
+\end{gather*}
+\end{schemeblock}
+
+\subsection{Exit}
+
+\[
+  \{cm_{old}\}
+  \xrightarrow{\mathrm{Exit}}
+  \varnothing
+\]
+
+\noindent\textbf{표기.}
+\begin{itemize}[nosep]
+  \item $in$ 또는 $old$: 공급망에서 제거하기 위해 소비하는 finalized note
+\end{itemize}
+
+\Needspace{0.38\textheight}
+\subsubsection{\textsc{ExitClient}}
+
+\begin{schemeblock}
+\(
+  \textsc{ExitClient}(\mathit{note}_{in},index_{in},usk,upk)
+\)
+
+\begin{gather*}
+\text{\bfseries 1. Input note, 소유자 key와 MT path 준비}
+  \\
+(cm_{in},\DocumentHash,q_{in},\mathbf{s}_{in},o_{in})
+  \Leftarrow\mathit{note}_{in}
+  \\
+sk\Leftarrow usk
+  \,;\,
+  (addr,pk)\Leftarrow upk
+  \\
+(rt,path_{in})\gets\mathrm{GetPath}_{MT}(index_{in})
+  \\
+\text{\bfseries 2. Nullifier와 proof input 구성}
+  \\
+nf\gets\Hash(sk,cm_{in})
+  \\
+\mathbf{x}_{Exit}=\{rt,cm_{in},nf\}
+  \\
+\mathbf{w}_{Exit}=\{
+    sk,pk,\DocumentHash,q_{in},\mathbf{s}_{in},addr,path_{in},o_{in}\}
+  \\
+\text{\bfseries 3. Proof와 transaction 생성}
+  \\
+\pi_{Exit}\gets
+  \Prove(ek_{Exit},\mathbf{x}_{Exit};\mathbf{w}_{Exit})
+  \\
+\mathit{Tx}_{Exit}=(\pi_{Exit},rt,cm_{in},nf)
+  \\
+\Return\mathit{Tx}_{Exit}
+\end{gather*}
+\end{schemeblock}
+
+\subsubsection{Exit Relation}
+
+\begin{schemeblock}
+\(
+  \mathcal{R}_{Exit}(\mathbf{x}_{Exit};\mathbf{w}_{Exit})
+\)
+
+\begin{gather*}
+\text{\bfseries 1. 소유자와 input commitment opening}
+  \\
+\Assert pk=\Hash(sk)
+  \,;\,
+  \Assert addr=\Hash(pk)
+  \\
+\Assert
+  cm_{in}=\CM(\DocumentHash,q_{in},\mathbf{s}_{in},addr,o_{in})
+  \\
+\text{\bfseries 2. MT membership와 nullifier binding}
+  \\
+\Assert\Member(rt,cm_{in},path_{in})=1
+  \,;\,
+  \Assert nf=\Hash(sk,cm_{in})
+\end{gather*}
+\end{schemeblock}
+
+\subsubsection{\textsc{ExitSC}}
+
+\begin{schemeblock}
+\(
+  \textsc{ExitSC}(\mathit{Tx}_{Exit})
+\)
+
+\begin{gather*}
+\text{\bfseries 1. Public input과 proof 이전 상태 검사}
+  \\
+\mathbf{x}_{Exit}=\{rt,cm_{in},nf\}
+  \\
+\Assert rt\in\List{rt}
+  \,;\,
+  \Assert nf\notin\List{nf}
+  \\
+\text{\bfseries 2. Exit proof 검증}
+  \\
+\Assert
+  \Verify(vk_{SC,Exit},\pi_{Exit},\mathbf{x}_{Exit})=1
+  \\
+\text{\bfseries 3. Nullifier spent 처리}
+  \\
+\List{nf}.append(nf)
+\end{gather*}
+\end{schemeblock}
+
+\end{document}

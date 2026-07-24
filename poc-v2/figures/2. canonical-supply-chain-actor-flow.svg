@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="900" viewBox="0 0 1800 900" role="img" aria-labelledby="title desc">
+  <title id="title">Canonical zkDPP actor-centric supply-chain flow</title>
+  <desc id="desc">Seven protocol owners contain finalized product commitments. Pending Recall Vouchers are placed inside receiver containers. Events follow the canonical 25-call order.</desc>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#111"/>
+    </marker>
+    <symbol id="document" viewBox="0 0 36 44">
+      <path d="M5 1.5h17l9 9v31H5z" fill="#fff" stroke="#111" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M22 1.5v9h9" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M10 17h16M10 23h16M10 29h13M10 35h13" fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="voucher" viewBox="0 0 34 34">
+      <circle cx="17" cy="17" r="15" fill="#fff" stroke="#111" stroke-width="1.8"/>
+      <text x="17" y="22" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="15" font-style="italic" fill="#111">rv</text>
+    </symbol>
+    <style>
+      .actor-box { fill: #fff; stroke: #111; stroke-width: 1.8; }
+      .actor-header { fill: none; stroke: #111; stroke-width: 1.4; }
+      .actor-title { font: 600 21px Georgia, 'Times New Roman', serif; fill: #111; text-anchor: middle; }
+      .product { font: 19px Georgia, 'Times New Roman', serif; fill: #111; text-anchor: middle; }
+      .event-label { font: italic 19px Georgia, 'Times New Roman', serif; fill: #111; text-anchor: middle; }
+      .annotation { font: italic 16px Georgia, 'Times New Roman', serif; fill: #111; text-anchor: middle; }
+      .note { font: 16px Georgia, 'Times New Roman', serif; fill: #111; }
+      .edge { fill: none; stroke: #111; stroke-width: 1.7; marker-end: url(#arrow); }
+      .stem { fill: none; stroke: #111; stroke-width: 1.7; }
+      .junction { fill: #111; }
+      .terminal { fill: #fff; stroke: #111; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="1800" height="900" fill="#fff"/>
+
+  <!-- Actor containers -->
+  <rect class="actor-box" x="20" y="42" width="300" height="278"/>
+  <path class="actor-header" d="M20 80 H320"/>
+  <text class="actor-title" x="170" y="68">Aluminum Supplier 1</text>
+
+  <rect class="actor-box" x="20" y="340" width="300" height="180"/>
+  <path class="actor-header" d="M20 378 H320"/>
+  <text class="actor-title" x="170" y="366">Aluminum Supplier 2</text>
+
+  <rect class="actor-box" x="20" y="530" width="300" height="145"/>
+  <path class="actor-header" d="M20 568 H320"/>
+  <text class="actor-title" x="170" y="556">Cathode Supplier</text>
+
+  <rect class="actor-box" x="20" y="695" width="300" height="140"/>
+  <path class="actor-header" d="M20 733 H320"/>
+  <text class="actor-title" x="170" y="721">Anode Supplier</text>
+
+  <rect class="actor-box" x="350" y="42" width="470" height="278"/>
+  <path class="actor-header" d="M350 80 H820"/>
+  <text class="actor-title" x="585" y="68">Foil Manufacturer 1</text>
+
+  <rect class="actor-box" x="350" y="340" width="470" height="240"/>
+  <path class="actor-header" d="M350 378 H820"/>
+  <text class="actor-title" x="585" y="366">Foil Manufacturer 2</text>
+
+  <rect class="actor-box" x="850" y="42" width="930" height="793"/>
+  <path class="actor-header" d="M850 80 H1780"/>
+  <text class="actor-title" x="1315" y="68">Cell Manufacturer</text>
+
+  <!-- 1, 5: first Aluminum Entry and Transfer -->
+  <text class="event-label" x="85" y="96">1. Entry</text>
+  <use href="#document" x="67" y="98" width="36" height="44"/>
+  <text class="product" x="85" y="166">Aluminum</text>
+  <path class="edge" d="M103 120 H371"/>
+  <text class="event-label" x="237" y="104">5. Transfer</text>
+  <use href="#voucher" x="373" y="103" width="34" height="34"/>
+
+  <!-- 6: Recall returns to a new Supplier cm through a separate upper corridor -->
+  <path class="edge" d="M390 137 V180 H210 V207"/>
+  <text class="event-label" x="300" y="166">6. Recall</text>
+  <use href="#document" x="192" y="208" width="36" height="44"/>
+  <text class="product" x="210" y="286">Aluminum</text>
+
+  <!-- 7, 8: returned note is transferred again and accepted -->
+  <path class="edge" d="M228 230 H371"/>
+  <text class="event-label" x="300" y="214">7. Transfer</text>
+  <use href="#voucher" x="373" y="213" width="34" height="34"/>
+  <path class="edge" d="M407 230 H454 V190 H500"/>
+  <text class="event-label" x="454" y="174">8. Proceed</text>
+  <use href="#document" x="502" y="168" width="36" height="44"/>
+  <text class="product" x="520" y="240">Aluminum</text>
+
+  <!-- 11: first Foil Process, centered between its two outputs -->
+  <path class="edge" d="M538 190 H638"/>
+  <text class="event-label" x="588" y="174">11. Process</text>
+  <path class="stem" d="M640 130 V250"/>
+  <circle class="junction" cx="640" cy="190" r="3.5"/>
+  <path class="edge" d="M640 130 H740"/>
+  <path class="edge" d="M640 250 H740"/>
+  <use href="#document" x="742" y="108" width="36" height="44"/>
+  <text class="product" x="760" y="176">Foil</text>
+  <use href="#document" x="742" y="228" width="36" height="44"/>
+  <text class="product" x="760" y="296">Foil Scrap</text>
+
+  <!-- 2, 9, 10: second Aluminum Entry, Transfer and acceptance -->
+  <text class="event-label" x="85" y="436">2. Entry</text>
+  <use href="#document" x="67" y="438" width="36" height="44"/>
+  <text class="product" x="85" y="506">Aluminum</text>
+  <path class="edge" d="M103 460 H371"/>
+  <text class="event-label" x="237" y="444">9. Transfer</text>
+  <use href="#voucher" x="373" y="443" width="34" height="34"/>
+  <path class="edge" d="M407 460 H500"/>
+  <text class="event-label" x="454" y="444">10. Proceed</text>
+  <use href="#document" x="502" y="438" width="36" height="44"/>
+  <text class="product" x="520" y="510">Aluminum</text>
+
+  <!-- 12: second Foil Process, centered between its two outputs -->
+  <path class="edge" d="M538 460 H638"/>
+  <text class="event-label" x="588" y="444">12. Process</text>
+  <path class="stem" d="M640 410 V510"/>
+  <circle class="junction" cx="640" cy="460" r="3.5"/>
+  <path class="edge" d="M640 410 H740"/>
+  <path class="edge" d="M640 510 H740"/>
+  <use href="#document" x="742" y="388" width="36" height="44"/>
+  <text class="product" x="760" y="456">Foil</text>
+  <use href="#document" x="742" y="488" width="36" height="44"/>
+  <text class="product" x="760" y="556">Foil Scrap</text>
+
+  <!-- 13-16: Foil transfers use the same receiver-voucher and receiver-note columns -->
+  <path class="edge" d="M778 130 H871"/>
+  <text class="event-label" x="825" y="114">13. Transfer</text>
+  <use href="#voucher" x="873" y="113" width="34" height="34"/>
+  <path class="edge" d="M907 130 H1010"/>
+  <text class="event-label" x="959" y="114">14. Proceed</text>
+  <use href="#document" x="1012" y="108" width="36" height="44"/>
+  <text class="product" x="1030" y="176">Foil</text>
+
+  <path class="edge" d="M778 410 H871"/>
+  <text class="event-label" x="825" y="394">15. Transfer</text>
+  <use href="#voucher" x="873" y="393" width="34" height="34"/>
+  <path class="edge" d="M907 410 H1010"/>
+  <text class="event-label" x="959" y="394">16. Proceed</text>
+  <use href="#document" x="1012" y="388" width="36" height="44"/>
+  <text class="product" x="1030" y="456">Foil</text>
+
+  <!-- 17: Merge uses one collector and one output arrow -->
+  <path class="stem" d="M1048 130 H1150 V410 H1048"/>
+  <circle class="junction" cx="1150" cy="270" r="3.5"/>
+  <path class="edge" d="M1150 270 H1250"/>
+  <text class="event-label" x="1200" y="254">17. Merge</text>
+  <use href="#document" x="1252" y="248" width="36" height="44"/>
+  <text class="product" x="1270" y="316">Foil</text>
+  <text class="annotation" x="1200" y="439">same DocumentHash</text>
+
+  <!-- 3, 18, 19: Cathode follows the same stage columns -->
+  <text class="event-label" x="85" y="586">3. Entry</text>
+  <use href="#document" x="67" y="588" width="36" height="44"/>
+  <text class="product" x="85" y="656">Cathode</text>
+  <path class="edge" d="M103 610 H871"/>
+  <text class="event-label" x="487" y="594">18. Transfer</text>
+  <use href="#voucher" x="873" y="593" width="34" height="34"/>
+  <path class="edge" d="M907 610 H1010"/>
+  <text class="event-label" x="959" y="594">19. Proceed</text>
+  <use href="#document" x="1012" y="588" width="36" height="44"/>
+  <text class="product" x="1030" y="656">Cathode</text>
+
+  <!-- 4, 20, 21: Anode follows the same stage columns -->
+  <text class="event-label" x="85" y="751">4. Entry</text>
+  <use href="#document" x="67" y="753" width="36" height="44"/>
+  <text class="product" x="85" y="821">Anode</text>
+  <path class="edge" d="M103 775 H871"/>
+  <text class="event-label" x="487" y="759">20. Transfer</text>
+  <use href="#voucher" x="873" y="758" width="34" height="34"/>
+  <path class="edge" d="M907 775 H1010"/>
+  <text class="event-label" x="959" y="759">21. Proceed</text>
+  <use href="#document" x="1012" y="753" width="36" height="44"/>
+  <text class="product" x="1030" y="821">Anode</text>
+
+  <!-- 22: Cell Process collector and a centered three-output branch -->
+  <path class="stem" d="M1288 270 H1360 V775 M1048 610 H1360 M1048 775 H1360"/>
+  <circle class="junction" cx="1360" cy="610" r="3.5"/>
+  <path class="edge" d="M1360 610 H1478"/>
+  <text class="event-label" x="1419" y="594">22. Process</text>
+  <path class="stem" d="M1480 500 V720"/>
+  <circle class="junction" cx="1480" cy="610" r="3.5"/>
+  <path class="edge" d="M1480 500 H1490"/>
+  <path class="edge" d="M1480 610 H1490"/>
+  <path class="edge" d="M1480 720 H1490"/>
+  <use href="#document" x="1492" y="478" width="36" height="44"/>
+  <text class="product" x="1510" y="546">Cell</text>
+  <use href="#document" x="1492" y="588" width="36" height="44"/>
+  <text class="product" x="1510" y="656">Cell Scrap</text>
+  <use href="#document" x="1492" y="698" width="36" height="44"/>
+  <text class="product" x="1510" y="766">Waste</text>
+
+  <!-- 23, 24: Cell Split is symmetric about the input row -->
+  <path class="edge" d="M1528 500 H1638"/>
+  <text class="event-label" x="1583" y="484">23. Split</text>
+  <path class="stem" d="M1640 460 V540"/>
+  <circle class="junction" cx="1640" cy="500" r="3.5"/>
+  <path class="edge" d="M1640 460 H1670"/>
+  <path class="edge" d="M1640 540 H1670"/>
+  <use href="#document" x="1672" y="438" width="36" height="44"/>
+  <text class="product" x="1690" y="506">Cell</text>
+  <use href="#document" x="1672" y="518" width="36" height="44"/>
+  <text class="product" x="1690" y="586">Cell</text>
+  <path class="edge" d="M1708 460 H1774"/>
+  <text class="event-label" x="1741" y="418">24. Exit</text>
+  <circle class="terminal" cx="1787" cy="460" r="12"/>
+  <path d="M1781 454 L1793 466 M1793 454 L1781 466" stroke="#111" stroke-width="1.8"/>
+
+  <!-- 25: Waste Exit -->
+  <path class="edge" d="M1528 720 H1753"/>
+  <text class="event-label" x="1640" y="704">25. Exit</text>
+  <circle class="terminal" cx="1770" cy="720" r="13"/>
+  <path d="M1763 713 L1777 727 M1777 713 L1763 727" stroke="#111" stroke-width="1.8"/>
+
+  <!-- Legend and abstraction boundary -->
+  <use href="#document" x="24" y="853" width="28" height="34"/>
+  <text class="note" x="64" y="876">finalized cm</text>
+  <use href="#voucher" x="178" y="853" width="34" height="34"/>
+  <text class="note" x="222" y="876">pending rv at receiver</text>
+  <path class="edge" d="M380 870 H438"/>
+  <text class="note" x="452" y="876">numbered protocol state transition</text>
+  <circle class="terminal" cx="720" cy="870" r="12"/>
+  <path d="M713 863 L727 877 M727 863 L713 877" stroke="#111" stroke-width="1.8"/>
+  <text class="note" x="742" y="876">Exit</text>
+  <text class="note" x="1785" y="876" text-anchor="end">nf, rvnf, and zero-quantity change notes are omitted.</text>
+</svg>

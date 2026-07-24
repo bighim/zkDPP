@@ -1,0 +1,11 @@
+.DS_Store
+**/.DS_Store
+**/.cache/
+**/.latex-build/
+**/cache/
+**/out/
+**/artifacts/
+**/broadcast/
+
+poc-v2/contracts/src/generated/
+poc-v2/contracts/test/fixtures/

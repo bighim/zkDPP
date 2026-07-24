@@ -1,0 +1,506 @@
+\documentclass[11pt,a4paper]{extarticle}
+
+\usepackage{kotex}
+\usepackage[margin=18mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{array,booktabs,longtable,tabularx}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlist[itemize]{leftmargin=18pt,itemsep=2pt,topsep=2pt}
+\setlist[enumerate]{leftmargin=22pt,itemsep=3pt,topsep=3pt}
+\setcounter{tocdepth}{1}
+
+\newcommand{\CM}{\mathrm{CM}}
+\newcommand{\Hash}{\mathrm{H}}
+\newcommand{\MT}{\mathrm{MT}}
+\newcommand{\rvMT}{\mathrm{rvMT}}
+\newcommand{\State}{\mathbf{s}}
+
+\title{zkDPP POC 시나리오 및 성능 평가 보고서}
+\author{Canonical Scenario와 34개 Benchmark Profile 해설}
+\date{2026-07-23}
+\renewcommand{\contentsname}{목차}
+
+\begin{document}
+\maketitle
+
+\section*{보고서 목적}
+
+이 문서는 다음 원시 artifact를 사람이 읽고 해석할 수 있는 형태로 재구성한다.
+
+\begin{itemize}
+  \item \path{testdata/scenario/canonical.json}: POC에서 실행한 공급망 시나리오
+  \item \path{benchmarks/summary.csv}: State 길이와 Process 입출력 크기에 따른 circuit 성능
+  \item \path{benchmarks/anvil-transaction-gas.json}: 실제 Anvil transaction gas와 calldata
+  \item \path{benchmarks/anvil-e2e-time.json}: live proof를 포함한 5회 E2E 시간
+\end{itemize}
+
+원시 JSON의 commitment, nullifier와 Merkle root 숫자를 다시 나열하는 것이 목적이 아니다.
+대신 ``어떤 물품이 어떤 Event를 거쳤는가'', ``각 proof가 무엇을 검증했는가'',
+``측정값이 어느 실행 계층의 비용인가''를 설명한다.
+
+\tableofcontents
+\newpage
+
+\section{POC 한눈에 보기}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}p{0.22\textwidth}X@{}}
+\toprule
+항목 & POC 설정 \\
+\midrule
+Proof system & PLONK-KZG on BLS12-381 \\
+Circuit framework & Go, gnark v0.15.0, gnark-crypto v0.20.1 \\
+Hash & BLS12-381 scalar field용 Poseidon2 \\
+Tree & commitment용 $\MT$와 voucher용 $\rvMT$, 모두 depth 32 \\
+StateVector & $(total\_kg, carbon\_kgCO2e, recycled\_kg)$, 기본 길이 3 \\
+숫자 표현 & Quantity는 integer, State는 $10^9$을 곱한 nano-scale unsigned integer \\
+구현 Event & Entry, Transfer, Proceed, Recall, Merge, Split, Process, Exit \\
+Process & Foil 1-to-2 두 번과 Cell 3-to-3 한 번; 성능 profile은 1-to-1, 2-to-2, 3-to-3 \\
+Contract 환경 & Solidity 0.8.30, Foundry v1.7.1, Prague EVM \\
+Transaction 환경 & Docker Anvil, chain ID 31337, block gas limit 30,000,000 \\
+POC SRS & \texttt{unsafekzg.NewSRS}; production setup으로 사용하지 않음 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection*{프로토콜 개요}
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+Event & Protocol object 전이 \\
+\hline
+Entry & $\varnothing\rightarrow cm_{new}$ \\
+Transfer & $cm_{old}\rightarrow (cm_{change},rv_{new})$ \\
+Proceed & $rv_{old}\rightarrow cm_{new}$ \\
+Recall & $rv_{old}\rightarrow cm_{new}$ \\
+Merge & $(cm_{old,1},cm_{old,2})\rightarrow cm_{new}$ \\
+Split & $cm_{old}\rightarrow (cm_{new,1},cm_{new,2})$ \\
+Process & $(cm_{old,i})_{i=1}^{m}\rightarrow(cm_{new,j})_{j=1}^{n}$ \\
+Exit & $cm_{old}\rightarrow\varnothing$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\[
+\begin{aligned}
+\mathit{DocumentInfo}
+  &= (ProductName,LotId,Unit) \\[5pt]
+cm
+  &= \Hash(\mathit{DocumentHash},q,\mathbf{s},addr,o) \\
+\mathbf{s}
+  &= (total_{kg},carbon_{kgCO2e},recycled_{kg}) \\[5pt]
+nf
+  &= \Hash(sk_{own},cm) \\[5pt]
+rv
+  &= \Hash(
+    \mathit{DocumentHash},q,\mathbf{s},
+    addr_{sender},addr_{receiver},\Delta_{epoch},o_{rv}
+  ) \\[5pt]
+rvnf
+  &= \Hash(o_{rv},rv) \\[5pt]
+pk_{own}
+  &= \Hash(sk_{own})
+  \,;\,
+addr=\Hash(pk_{own})
+\end{aligned}
+\]
+
+\subsection*{POC Process}
+
+\[
+\begin{aligned}
+\mathbf{s}_{in}
+  &:= \sum_{i=1}^{m}\mathbf{s}_{in,i} \\[4pt]
+\mathbf{I}
+  &:= \mathbf{s}_{in}+\mathbf{P} \\[4pt]
+\mathbf{I}\mathbf{A}
+  &:= \mathbf{S}_{out}
+   =
+  \begin{bmatrix}
+    \mathbf{s}_{out,1} & \cdots & \mathbf{s}_{out,n}
+  \end{bmatrix}
+\end{aligned}
+\]
+
+\section{Canonical 공급망 시나리오}
+
+\subsection{참여자와 등록 물품}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+참여자 & 역할 \\
+\midrule
+Aluminum Supplier & Aluminum Entry와 Foil Manufacturer 대상 Transfer 수행 \\
+Cathode Supplier & Cathode Entry와 Cell Manufacturer 대상 Transfer 수행 \\
+Anode Supplier & Anode Entry와 Cell Manufacturer 대상 Transfer 수행 \\
+Foil Manufacturer & 두 제조 공장에서 Foil Process를 수행하고 Foil을 Cell Manufacturer에게 Transfer \\
+Cell Manufacturer & 두 Foil을 Merge하고 Cathode, Anode와 Foil을 사용해 Cell Process 수행 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+State 값은 $10^9$으로 encode되어 저장된다. 아래 표의 State는 사람이 읽는 단위로
+표시한다. 동일한 Product의 개별 note는 Product 이름에 별도 접미사를 붙이지 않고
+서로 다른 commitment와 opening으로 구분한다.
+
+\begin{center}
+\begin{tabular}{@{}l@{\hspace{10mm}}llll@{}}
+\toprule
+Entry Product & $q$ & total kg & carbon kgCO2e & recycled kg \\
+\midrule
+Aluminum & 10 & 20 & 160 & 10 \\
+Aluminum & 5 & 10 & 150 & 0 \\
+Cathode & 4 & 200 & 400 & 40 \\
+Anode & 3 & 100 & 150 & 20 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Event 흐름}
+
+Canonical scenario는 다음 공급망 흐름을 25번의 Contract call로 실행한다.
+
+\begin{enumerate}
+  \item Aluminum Supplier가 두 Aluminum을 등록한다. 첫 Transfer는 Recall한 뒤 다시
+        Transfer하고, 두 Aluminum 모두 Foil Manufacturer가 Proceed한다.
+  \item Foil Manufacturer는 각 Aluminum을 Foil과 Foil Scrap으로 Process한다. 생성된 두
+        Foil을 Cell Manufacturer에게 Transfer하고, Cell Manufacturer는 Proceed 후 Merge한다.
+  \item Cathode와 Anode도 각 Supplier가 Cell Manufacturer에게 Transfer하고, Cell
+        Manufacturer가 Proceed한다.
+  \item Cell Manufacturer는 Cathode, Anode와 Merge된 Foil을 Cell, Cell Scrap과 Waste로
+        Process한다. Cell을 Split한 뒤 첫 Cell output과 Waste를 Exit한다.
+\end{enumerate}
+
+각 Contract call의 protocol object 전이와 측정값은 5장에서 확인한다.
+
+\clearpage
+\section{Circuit scaling 결과}
+
+\subsection{Canonical verifier의 circuit 크기}
+
+25-call scenario가 실제로 사용하는 Relation의 constraint 수는 다음과 같다.
+
+\begin{center}
+\begin{tabular}{@{}p{0.32\textwidth}l@{}}
+\toprule
+Relation & Constraints \\
+\midrule
+Entry & 2,621 \\
+Transfer & 28,843 \\
+Proceed & 15,855 \\
+Recall & 15,855 \\
+Merge & 28,298 \\
+Split & 27,938 \\
+Process & 62,833 \\
+Exit & 13,136 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Canonical Process 하나가 Foil 1-to-2와 Cell 3-to-3을 모두 처리한다. 이 circuit은 public
+$m,n$에서 active slot을 만들고 inactive input/output과 $\mathbf{A}$의 inactive row를 zero로
+강제한다.
+
+\subsection{State 길이에 따른 constraint 증가}
+
+아래 표는 State coordinate를 0개에서 3개까지 늘렸을 때의 constraint 수다.
+
+\begin{center}
+\begin{tabular}{@{}llllll@{}}
+\toprule
+\# of State & \multicolumn{1}{l}{0} & \multicolumn{1}{l}{1} & \multicolumn{1}{l}{2} & \multicolumn{1}{l}{3} & Constraints 증가량 \\
+\midrule
+Entry & 1,334 & 1,763 & 2,192 & 2,621 & 429 \\
+Transfer & 15,808 & 20,153 & 24,498 & 28,843 & 4,345 \\
+Proceed & 14,046 & 14,649 & 15,252 & 15,855 & 603 \\
+Recall & 14,046 & 14,649 & 15,252 & 15,855 & 603 \\
+Merge & 25,199 & 26,232 & 27,265 & 28,298 & 1,033 \\
+Split & 14,903 & 19,248 & 23,593 & 27,938 & 4,345 \\
+Process & 39,495 & 47,174 & 54,853 & 62,533 & 7,679.3 \\
+Exit & 12,233 & 12,534 & 12,835 & 13,136 & 301 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Process의 증가폭이 가장 크다. 3-to-3 Process는 각 State coordinate마다 input/output
+commitment binding, aggregate transition, allocation과 두 floor/remainder relation을
+추가한다. Transfer와 Split도 proportional floor relation, remainder bound와 exact aggregate
+conservation 때문에 증가폭이 크다. Proceed와 Recall은 voucher payload와 output State의
+equality를 확인하므로 증가폭이 작다.
+
+3-to-3 Process에서는 State coordinate 하나가 늘어날 때 public delta $P_k$ 하나와
+세 output의 allocation $A_{1,k},A_{2,k},A_{3,k}$가 추가된다. 따라서 State coordinate당
+public input이 4개 증가한다.
+
+\subsection{Process 입출력 크기에 따른 변화}
+
+State 길이를 3으로 고정하고 circuit의 최대 input/output slot 수를 늘린 결과다. 여기서
+Process 입출력 크기 $a$는 compile 시 고정되는 최대 크기
+$M_{\max}=N_{\max}=a$를 뜻한다. 예를 들어 3-to-3은 circuit이 input과 output을 각각
+최대 3개까지 수용하도록 구성됐다는 의미다.
+
+\begin{center}
+\begin{tabular}{@{}l@{\hspace{28mm}}l@{\hspace{28mm}}l@{}}
+\toprule
+Process 입출력 크기 & Constraints & Prove ms \\
+\midrule
+$M=1,\,N=1$ & 19,309 & 438 \\
+$M=2,\,N=2$ & 40,921 & 841 \\
+$M=3,\,N=3$ & 62,533 & 847 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+최대 입출력 크기가 증가하면 input commitment의 opening과 membership, nullifier, output commitment와
+allocation relation이 함께 추가되므로 constraint 수가 거의 선형으로 증가한다. Prove 시간은
+단일 smoke run의 참고값이므로 constraint 증가에 정확히 비례하거나 대표 성능으로 해석하지 않는다.
+반복 측정한 시간 지표는 4.2의 clean Anvil 5회 E2E 결과를 사용한다.
+
+\section{On-chain gas 결과}
+
+\subsection{Canonical Contract 배포 gas}
+
+각 Contract를 독립 Anvil deployment transaction으로 제출하고 receipt의
+\texttt{gasUsed}를 측정했다. \texttt{ZkDPP}는 별도 Merkle Tree Contract를 배포하지 않고
+내부에 $\MT$와 $\rvMT$ Tree struct를 가진다. 따라서 Main Contract 배포값에는
+constructor가 두 Tree의 depth-32 zero node를 계산하고 저장하는 비용이 포함된다.
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+배포 대상 & Gas \\
+\midrule
+Poseidon2BLS12381 & 2,282,769 \\
+Entry verifier & 1,602,240 \\
+Transfer verifier & 1,600,848 \\
+Proceed verifier & 1,601,580 \\
+Recall verifier & 1,601,532 \\
+Merge verifier & 1,602,240 \\
+Split verifier & 1,601,568 \\
+Process verifier & 1,602,372 \\
+Exit verifier & 1,601,820 \\
+ZkDPP (MT/rvMT 초기화 포함) & 4,908,046 \\
+\midrule
+컴포넌트 합계 & 20,005,015 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+배포 10건을 각각 독립 transaction으로 보냈으며, ZkDPP 배포값은 constructor의
+$\MT/\rvMT$ depth-32 초기화를 포함한다.
+
+\clearpage
+\subsection{Event별 Gas 및 E2E 시간}
+
+아래 값은 canonical scenario에서 같은 Event가 여러 번 실행된 경우 각 transaction 결과의
+median이다. Process는 canonical 최대 입출력 크기인 3-to-3을 실행한 22번 transaction만
+사용한다. 한 번만 실행된 Event도 해당 transaction의 측정값을 그대로 사용한다. Gas는
+고정 proof를 제출한 Anvil transaction의 \texttt{gasUsed}, E2E ms는 live proof 생성부터
+receipt 수신까지 clean Anvil 5회 측정의 median이다.
+
+\begin{center}
+\begin{tabular}{@{}l@{\hspace{25mm}}l@{\hspace{25mm}}l@{}}
+\toprule
+Event & Gas & E2E ms \\
+\midrule
+Entry & 1,498,510 & 96.725 \\
+Transfer & 2,673,552 & 476.554 \\
+Proceed & 1,519,990 & 269.926 \\
+Recall & 1,521,787 & 284.994 \\
+Merge & 1,561,954 & 459.582 \\
+Split & 2,352,584 & 476.843 \\
+Process & 3,315,365 & 846.296 \\
+Exit & 401,736 & 258.162 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+같은 Event라도 append index와 storage slot의 zero-to-nonzero 전환 여부에 따라 gas가 달라질
+수 있다. Merkle Tree leaf 하나를 append할 때 Poseidon2 compression을 32회 실행하며,
+Transfer는 $\MT$와 $\rvMT$를 함께 갱신한다. 개별 transaction의 차이는 5.2에서 확인한다.
+
+\clearpage
+\section{Canonical scenario 상세 결과}
+
+\subsection{Transaction별 Event 흐름}
+
+5.1과 5.2의 Index는 동일한 canonical Contract call을 가리킨다.
+
+\begin{longtable}{@{}p{0.07\textwidth}p{0.14\textwidth}p{0.69\textwidth}@{}}
+\toprule
+Index & Event & Protocol object 전이 \\
+\midrule
+\endhead
+1 & Entry & $0\rightarrow cm_{\mathrm{Aluminum},1}$ \\
+2 & Entry & $0\rightarrow cm_{\mathrm{Aluminum},2}$ \\
+3 & Entry & $0\rightarrow cm_{\mathrm{Cathode}}$ \\
+4 & Entry & $0\rightarrow cm_{\mathrm{Anode}}$ \\
+5 & Transfer & $cm_{\mathrm{Aluminum},1}\rightarrow(rv_{\mathrm{Aluminum},1},cm_{\mathrm{change},1})$ \\
+6 & Recall & $rv_{\mathrm{Aluminum},1}\rightarrow cm_{\mathrm{return}}$ \\
+7 & Transfer & $cm_{\mathrm{return}}\rightarrow(rv_{\mathrm{Aluminum},2},cm_{\mathrm{change},2})$ \\
+8 & Proceed & $rv_{\mathrm{Aluminum},2}\rightarrow cm_{\mathrm{Aluminum},3}$ \\
+9 & Transfer & $cm_{\mathrm{Aluminum},2}\rightarrow(rv_{\mathrm{Aluminum},3},cm_{\mathrm{change},3})$ \\
+10 & Proceed & $rv_{\mathrm{Aluminum},3}\rightarrow cm_{\mathrm{Aluminum},4}$ \\
+11 & Process & $cm_{\mathrm{Aluminum},3}\rightarrow(cm_{\mathrm{Foil},1},cm_{\mathrm{FoilScrap},1})$ \\
+12 & Process & $cm_{\mathrm{Aluminum},4}\rightarrow(cm_{\mathrm{Foil},2},cm_{\mathrm{FoilScrap},2})$ \\
+13 & Transfer & $cm_{\mathrm{Foil},1}\rightarrow(rv_{\mathrm{Foil},1},cm_{\mathrm{change},4})$ \\
+14 & Proceed & $rv_{\mathrm{Foil},1}\rightarrow cm'_{\mathrm{Foil},1}$ \\
+15 & Transfer & $cm_{\mathrm{Foil},2}\rightarrow(rv_{\mathrm{Foil},2},cm_{\mathrm{change},5})$ \\
+16 & Proceed & $rv_{\mathrm{Foil},2}\rightarrow cm'_{\mathrm{Foil},2}$ \\
+17 & Merge & $(cm'_{\mathrm{Foil},1},cm'_{\mathrm{Foil},2})\rightarrow cm_{\mathrm{Foil}}$ \\
+18 & Transfer & $cm_{\mathrm{Cathode}}\rightarrow(rv_{\mathrm{Cathode}},cm_{\mathrm{change},6})$ \\
+19 & Proceed & $rv_{\mathrm{Cathode}}\rightarrow cm'_{\mathrm{Cathode}}$ \\
+20 & Transfer & $cm_{\mathrm{Anode}}\rightarrow(rv_{\mathrm{Anode}},cm_{\mathrm{change},7})$ \\
+21 & Proceed & $rv_{\mathrm{Anode}}\rightarrow cm'_{\mathrm{Anode}}$ \\
+22 & Process & $(cm'_{\mathrm{Cathode}},cm'_{\mathrm{Anode}},cm_{\mathrm{Foil}})
+  \rightarrow(cm_{\mathrm{Cell}},cm_{\mathrm{CellScrap}},cm_{\mathrm{Waste}})$ \\
+23 & Split & $cm_{\mathrm{Cell}}\rightarrow(cm_{\mathrm{Cell},1},cm_{\mathrm{Cell},2})$ \\
+24 & Exit & $cm_{\mathrm{Cell},1}\rightarrow0$ \\
+25 & Exit & $cm_{\mathrm{Waste}}\rightarrow0$ \\
+\bottomrule
+\end{longtable}
+
+\subsection{Transaction별 Gas 및 E2E 시간}
+
+Gas는 고정 proof를 사용한 Anvil transaction의 \texttt{gasUsed}다. E2E ms는 live proof를
+생성한 clean Anvil 5회의 median이며, 마지막 열은 동일한 5회의 min--max다.
+
+{\small
+\begin{longtable}{@{}p{0.08\textwidth}p{0.17\textwidth}p{0.19\textwidth}p{0.18\textwidth}p{0.26\textwidth}@{}}
+\toprule
+Index & Event & Gas & E2E ms & E2E min--max ms \\
+\midrule
+\endhead
+1 & Entry & 2,056,352 & 97.902 & 93.211--108.453 \\
+2 & Entry & 1,489,978 & 98.459 & 94.615--102.190 \\
+3 & Entry & 1,507,042 & 95.548 & 93.475--96.485 \\
+4 & Entry & 1,487,820 & 95.008 & 93.869--104.164 \\
+5 & Transfer & 3,259,160 & 478.788 & 466.465--499.958 \\
+6 & Recall & 1,521,787 & 284.994 & 263.890--316.189 \\
+7 & Transfer & 2,673,552 & 477.061 & 473.265--588.660 \\
+8 & Proceed & 1,517,874 & 268.193 & 260.188--307.967 \\
+9 & Transfer & 2,726,962 & 480.590 & 455.507--493.482 \\
+10 & Proceed & 1,520,020 & 281.241 & 263.464--298.725 \\
+11 & Process & 2,385,979 & 841.452 & 824.666--850.305 \\
+12 & Process & 2,403,091 & 839.126 & 833.020--883.232 \\
+13 & Transfer & 2,669,344 & 472.743 & 458.948--529.966 \\
+14 & Proceed & 1,515,764 & 269.471 & 260.251--272.064 \\
+15 & Transfer & 2,761,198 & 469.997 & 465.704--492.411 \\
+16 & Proceed & 1,519,960 & 270.381 & 267.622--276.066 \\
+17 & Merge & 1,561,954 & 459.582 & 454.967--522.587 \\
+18 & Transfer & 2,652,244 & 476.554 & 470.200--484.047 \\
+19 & Proceed & 1,554,172 & 266.827 & 258.736--288.917 \\
+20 & Transfer & 2,669,320 & 476.230 & 461.333--503.480 \\
+21 & Proceed & 1,535,022 & 270.534 & 261.469--281.826 \\
+22 & Process & 3,315,365 & 846.296 & 827.337--854.559 \\
+23 & Split & 2,352,584 & 476.843 & 463.276--605.012 \\
+24 & Exit & 401,742 & 261.554 & 252.118--303.593 \\
+25 & Exit & 401,730 & 254.769 & 251.522--271.306 \\
+\bottomrule
+\end{longtable}
+}
+
+25개 Event transaction의 Gas 합계는 49,460,016이다. E2E 측정 경계는 Event witness
+생성 직전부터 live proof 생성, transaction 제출과 성공 receipt 수신까지다.
+
+\section{Open Problems}
+
+\subsection{Provenance}
+
+현재 POC는 $\MT$와 $\rvMT$에 leaf를 append할 때 leaf, index와 new root를 event로
+발행한다. 이 event는 Client의 Merkle path 조회를 위한 것이며, 소비된 input $cm$과
+생성된 output $cm$ 사이의 provenance edge를 직접 선언하지 않는다.
+
+미해결 질문은 input/output $cm$을 연결하는 provenance event를 발행할 것인지다.
+
+\begin{itemize}
+  \item Event를 발행하면 commitment 간 linking, product graph와 $cm$ spent time이
+        공개된다.
+  \item 직접 downstream뿐 아니라 edge를 재귀적으로 따라간 간접 downstream도 추적할 수
+        있다.
+  \item 현재 calldata에도 input/output $cm$이 포함되므로, event를 발행하지 않아도 동일한
+        linking이 가능한지 확인해야 한다.
+\end{itemize}
+
+DocumentInfo와 State 값을 숨기는 것과 product graph 및 timing을 숨기는 것은 별개의
+privacy 문제다. Provenance를 제공할 범위와 논문에서 주장할 privacy 경계를 함께 결정해야
+한다.
+
+\subsection{Recipe 기반 Process}
+
+현재 Process는 input State를 합산하고 public process delta $\mathbf{P}$와
+StateAllocationMatrix $\mathbf{A}$를 적용했을 때 output State가 선언된 relation과
+일치하는지만 증명한다. Output quantity는 range와 commitment binding만 검증하며,
+input/output Material Type과 Quantity transition은 강제하지 않는다. 따라서 호출자는
+circuit 식을 만족하는 범위에서 $\mathbf{P}$와 $\mathbf{A}$를 임의로 선택할 수 있다.
+
+Recipe 기반 Process는 다음 조건을 함께 강제해야 한다.
+
+\begin{itemize}
+  \item 허용되는 input/output Material Type
+  \item input quantity에서 output quantity로의 transition rule
+  \item 허용되는 State delta
+  \item output별 State allocation policy
+\end{itemize}
+
+Material Type을 검증하려면 MaterialClassId를 note에 binding하거나 DocumentHash와
+Material Type을 연결하는 별도 proof가 필요하다. 이때 Process를 거친 물품의
+input/output Material 관계가 공개될 수 있고, 유효한 Recipe를 등록하고 관리할
+신뢰 주체도 필요하다. Recipe privacy와 Recipe registry의 trust model을 함께 해결해야
+한다.
+
+\section{결과 해석}
+
+\begin{enumerate}
+  \item \textbf{State transition consistency는 실제 8-Event chain에서 동작했다.}
+        Merge/Split 합 보존, Transfer 비례 배분, Proceed/Recall의 voucher 단일 소비,
+        Foil 1-to-2 및 Cell 3-to-3 Process의 public delta/allocation과 Exit 소비가 같은
+        scenario에서 검증됐다.
+  \item \textbf{비례 배분이 가장 큰 circuit 증가 요인이다.}
+        Transfer와 Split은 State coordinate당 4,345 constraints, 3-to-3 Process는 약
+        7,679 constraints가 증가했다.
+  \item \textbf{전체 Event gas는 storage update가 크게 좌우한다.}
+        Exit은 append가 없어 약 402K gas인 반면, 두 Tree를 갱신하는 Transfer는
+        2.65--3.26M gas, output 두 개를 append하는 Foil Process는 약 2.39--2.40M gas,
+        output 세 개를 append하는 Cell Process는 약 3.32M gas를 사용했다.
+  \item \textbf{Prover 시간과 Event gas는 같은 비율로 증가하지 않는다.}
+        Circuit 규모 증가는 주로 off-chain proof 생성 시간에 반영된다. On-chain Event
+        gas는 proof verification뿐 아니라 Tree append와 storage write의 영향을 크게 받는다.
+  \item \textbf{E2E 시간은 proof 생성이 지배한다.}
+        Foil Process 두 건의 E2E median은 841.452ms와 839.126ms였고, Cell Process는
+        전체 E2E 846.296ms였다.
+        E2E는 clean Anvil 5회 median과 min/max를 함께 기록했다.
+\end{enumerate}
+
+\section{재현 방법}
+
+\begin{verbatim}
+cd poc-v2
+make test-go
+make setup
+make test-contract
+make benchmark
+make benchmark-anvil-gas ANVIL_PORT=18545
+make benchmark-anvil-e2e RUNS=5 ANVIL_PORT=18545
+make benchmark-anvil RUNS=5 ANVIL_PORT=18545
+\end{verbatim}
+
+\texttt{make benchmark}는 34개 profile의 Go compile/setup/prove/verify 결과와 Solidity
+verifier fixture를 생성한다.
+\texttt{make benchmark-anvil-gas}는 고정 proof를 사용해 실제 Anvil gas를 생성한다.
+\texttt{make benchmark-anvil-e2e}는 각 Event proof를 실행 중 생성하며 clean chain을 다섯 번
+반복한다. Host port 8545가 이미 사용 중이면 위 예시처럼 \texttt{ANVIL\_PORT}를 변경한다.
+
+Canonical input을 변경할 때는 \path{testdata/scenario/canonical.json}만 수정하고
+\texttt{make generate-reference}로 derived fixture를 다시 생성한다. Event별 숫자를 별도
+fixture에 수작업으로 중복 정의하지 않는다.
+
+\end{document}
