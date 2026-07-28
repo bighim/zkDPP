@@ -1,0 +1,771 @@
+\documentclass[11pt,a4paper]{extarticle}
+
+\usepackage{kotex}
+\usepackage[margin=17mm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{array,booktabs,tabularx}
+\usepackage{enumitem}
+\usepackage[table]{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{4pt}
+\setlength{\belowdisplayshortskip}{4pt}
+\setlist[itemize]{leftmargin=18pt,itemsep=2pt,topsep=2pt}
+\setcounter{tocdepth}{1}
+
+\definecolor{lightgray}{RGB}{246,247,248}
+
+\title{zkDPP 연구 맥락과 설계의 발전 과정}
+\author{Research Context and Design Evolution}
+\date{2026-07-24}
+\renewcommand{\contentsname}{목차}
+
+\begin{document}
+\maketitle
+
+\section*{문서 목적}
+
+zkDPP 연구에서 고민한 문제와 설계 방향을 기록한다. 1, 2장은 선택적으로
+읽는 배경이며, 현재 연구를 이해하기 위한 필수 흐름은 아니다.
+
+\tableofcontents
+\newpage
+
+\section{연구의 출발}
+
+\subsection{최초 목표}
+
+최초 목표는 \textbf{원자재를 거래하는 플랫폼}을 만드는 것이었다. 이 플랫폼의
+이름은 \textbf{zkDPP}로 정했었다. 거래 대상은 원자재부터 진행하여
+모든 제조 공정을 마친 완제품까지 확장하는 구조로 생각했다.
+
+\begin{itemize}
+  \item 원자재의 정보를 투명하게 관리하고 거래한다.
+  \item 원자재의 정보는 제조 공정을 거치며 누적되고 변경된다.
+  \item 이러한 정보의 흐름은 완제품이 만들어질 때까지 투명하게 관리된다.
+  \item 이처럼 누적되고 변경되는 제품 정보 자체를 DPP로 본다.
+\end{itemize}
+
+\subsection{플랫폼 구조}
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabularx}{\textwidth}{@{}lX@{}}
+    \toprule
+    \textbf{객체}         & \textbf{역할}                       \\
+    \midrule
+    \textbf{Issuer}     & 사용자를 확인하고 Credential을 발급한다.       \\
+    \textbf{사용자}        & 인증된 참여자이며, 거래에 따라 판매자 또는 구매자가 된다. \\
+    \textbf{Server}     & 제품 정보, 생산 정보, 상품 검색과 구매 요청을 관리한다. \\
+    \textbf{Blockchain} & 사용자와 각 사용자가 보유한 물품 목록을 기록한다.      \\
+    \bottomrule
+  \end{tabularx}
+\end{center}
+
+\subsection{다섯 가지 이벤트}
+
+\[
+  \boxed{\text{사용자 등록}}
+  \;\longrightarrow\;
+  \boxed{\text{제품 생산}}
+  \;\longrightarrow\;
+  \boxed{\text{제품 등록}}
+  \;\longrightarrow\;
+  \boxed{\text{제품 구매}}
+  \;\longrightarrow\;
+  \boxed{\text{제품 수령}}
+\]
+
+\textbf{1. 사용자 등록}
+
+\[
+  \begin{gathered}
+    \text{Issuer의 사용자 확인 및 Credential 발급}
+    \longrightarrow\;
+    \text{Blockchain 및 Server에 사용자 등록}
+  \end{gathered}
+\]
+
+등록 요청은 사용자를 Server와 Blockchain에 등록하기 위한 요청이다.
+
+Server 및 Blockchain에는 등록된 사용자의 물품 목록을 관리할 수 있는 영역을 생성한다.
+
+\textbf{2. 제품 생산}
+
+\[
+  \begin{gathered}
+    \text{제품 생산}
+    \longrightarrow\;
+    \text{사용자가 자신의 DB에 제품 생산 정보 기록}
+    \;\longrightarrow\;
+    \text{총 제품 개수 등 DB 정보 갱신}
+  \end{gathered}
+\]
+
+\textbf{3. 제품 등록}
+
+\[
+  \text{판매자의 제품 생산}
+  \;\longrightarrow\;
+  \text{Blockchain의 판매자 물품 목록에 등록}
+  \;\longrightarrow\;
+  \text{Server에 동일한 제품 등록}
+\]
+
+\textbf{4. 제품 구매}
+
+\[
+  \begin{gathered}
+    \text{구매자가 Server에서 상품 확인}
+    \;\longrightarrow\;
+    \text{판매자에게 구매 요청}
+    \longrightarrow \\
+    \text{판매자가 Blockchain에 자신의 물품 목록 갱신 요청}
+    \longrightarrow \\
+    \text{판매자가 거래용 }cm,nf\text{ 준비}
+    \;\longrightarrow\;
+    \text{구매자에게 전달}
+  \end{gathered}
+\]
+
+\textbf{5. 제품 수령}
+
+\[
+  \begin{gathered}
+    \text{구매자가 실제 제품 수령}
+    \;\longrightarrow\;
+    \text{구매자가 Blockchain에 자신의 물품 목록 갱신 요청} \\
+    \;\longrightarrow\;
+    \text{구매자의 보유 상태에 반영}
+  \end{gathered}
+\]
+
+\section{상태 전이 모델}
+
+zkDPP 플랫폼을 구현하기 위한 모델로 제품의 Lifecycle을 State Machine으로
+표현하고자 했다. 이 모델에서, 암호학적인 기여가 추가적으로 필요하다고 보았다.
+
+\[
+  \boxed{\text{제품 Lifecycle}}
+  \;\longrightarrow\;
+  \boxed{\text{Lifecycle State Machine}}
+\]
+
+상품을 거래하는 구조에는 \textbf{Revert}가 필요하며, Revert를 암호학적으로
+해결하는 과정에서 연구의 기여를 만들 수 있다고 생각했다.
+
+\section{Revert 연구}
+
+\subsection{Revert의 의미와 필요성}
+
+Revert는 \textbf{이미 판매한 상품을 판매자가 직접 회수하는 것}을 의미한다.
+
+\[
+  \boxed{\text{Seller A}}
+  \;\longrightarrow\;
+  \boxed{\text{Buyer B}}
+  \qquad
+  \overset{\text{Revert}}{\longrightarrow}
+  \qquad
+  \boxed{\text{Seller A}}
+\]
+
+다음과 같은 상황에서 A가 다른 주체에 의존하지 않고, \textbf{A 자신의
+  능력으로} 상품을 회수할 수 있어야 한다고 생각했다.
+
+\begin{itemize}
+  \item B가 상품 대금을 지불하지 않은 경우
+  \item A가 B가 아닌 다른 사용자 \(B'\)에게 상품을 잘못 전송한 경우
+  \item 판매 상품의 탄소 배출량, 재활용률 또는 수량을 잘못 입력한 경우
+\end{itemize}
+
+\subsection{공급망의 상류와 하류}
+
+상품이 A에서 B를 거쳐 C에게 판매되는 공급망을 다음과 같이 구분했다.
+
+\[
+  \boxed{\text{A: upstream}}
+  \;\longrightarrow\;
+  \boxed{\text{B: A의 direct downstream}}
+  \;\longrightarrow\;
+  \boxed{\text{C: A의 indirect downstream}}
+\]
+
+A는 직접 하류인 B를 알지만, 간접 하류인 C는 알지 못하는 구조로 보았다.
+
+\subsection{간접 하류에서 발생하는 한계}
+
+상품이 C까지 전달되면 A가 해당 상품의 정보를 직접 수정하기 어렵다. 특히 탄소
+배출량이나 제품의수량처럼 직접 하류와 간접 하류에 모두 영향을 주는 정보는 상류에서
+단순히 변경할 수 없다고 보았다.\\
+
+상품의 부가 정보인 \texttt{DocumentInfo}만 수정하는 경우에도 A는 직접 하류인
+B에게 변경 사실을 알릴 수 있지만, 간접 하류인 C에게는 변경된 정보를 전달하기
+어렵다. (Pointer-based redact 논문을 응용할 수 있다고 보았음.)\\
+
+정보 수정뿐 아니라 회수를 허용할지 결정하는 과정이 필요하다고도 생각하여 Voting-based redactable 방식도 살펴봤으나
+논문의 주제를 크게 벗어난다고 생각하고, 적절하지 않다고 판단했다.
+
+\subsection{결론}
+
+upstream에서 출발해 indirect downstream까지 전달된 공급망을
+다시 upstream 방향으로 되돌리는 것은 어렵다고 보았다.
+
+
+\subsection{현재 프로토콜에서 Revert를 구현한 방법}
+
+A가 직접 하류인 B와 거래한 상품을 다시 회수할 수 있도록, 현재 프로토콜은
+\texttt{RecallVoucher}를 사용한다.
+
+\[
+  \boxed{\text{A: sender}}
+  \;\xrightarrow{\text{Transfer + RecallVoucher}}\;
+  \boxed{\text{B: direct downstream}}
+\]
+
+A는 \texttt{RecallVoucher}가 제품 수령이나 Recall에 아직 사용되지 않았고
+deadline 이전인 경우에 자신의 권한으로 Recall할 수 있다. \(\Delta t\)는
+Transfer 시점부터 Recall을 허용하는 \textbf{최대 시간 구간의 길이}다.
+
+\[
+  t_{\mathrm{Recall}}
+  \;<\;
+  t_{\mathrm{Transfer}}+\Delta t
+\]
+
+\(\Delta t\)가 지나면 판매자의 Recall 권한은 만료된다.
+
+\subsection{RecallVoucher의 한계}
+
+Transfer
+이후 상품은 pending 상태에 놓이고, Buyer의 제품 수령 또는 Seller의 Recall 중 먼저
+실행된 동작에 따라 최종 상태가 결정된다.
+
+\textbf{Buyer가 먼저 수령하는 경우.}
+Buyer가 \(\Delta t\) 안에 제품 수령을 진행하면
+\texttt{RecallVoucher}를 사용한 거래가 확정되고 Seller의 Recall 권한은 사라진다.
+따라서 현재 프로토콜은 Seller가 \(\Delta t\) 전체 기간 동안 Recall 권한을
+유지하도록 강제하지 못한다.
+
+\[
+  \boxed{\text{RecallVoucher: Pending}}
+  \;\longrightarrow\;
+  \begin{cases}
+    \text{Buyer가 제품 수령}   & \Rightarrow \text{Seller의 Recall 권한 소멸} \\
+    \text{Seller가 Recall} & \Rightarrow \text{상품 회수}
+  \end{cases}
+\]
+
+\textbf{Freeze를 적용하는 경우.}
+\(\Delta t\) 동안 \(cm\)을 거래하지 못하게 freeze하면 Recall 가능 기간을 보장할
+수 있다. 그러나 그 기간 동안 B가 C에게 상품을 전달하지 못하므로, 공급망의 흐름이
+\(\Delta t\)만큼 중단되는 문제가 발생한다.
+
+\[
+  \boxed{\text{B가 상품 수령}}
+  \;\xrightarrow{\text{freeze for }\Delta t}\;
+  \boxed{\text{C에게 전달 불가}}
+\]
+
+\subsection{참고한 연구}
+
+\textbf{ERC-20R and ERC-721R}은 짧은 이의 제기 기간(dispute window) 동안
+분쟁 대상이 된 token transfer를 동결하고, distributed judge의 결정에 따라 해당 거래를 되돌릴 수 있도록 설계한
+가역적인 token standard 이다.
+
+현재 프로토콜의 RecallVoucher는 이 논문에서 \textbf{일정 기간 동안만 거래의 회수를 허용하는 개념}을 참고했다.
+
+다만 ERC-20R/721R은 \textbf{judge}의 판단을 거쳐 거래를 되돌리는 반면, 현재 프로토콜에서는
+sender가 \(\Delta t\) 안에 자신의 직접 하류와 이루어진 거래를 직접 Recall한다.
+
+
+\section{현재 프로토콜의 구조}
+
+\subsection{DPP의 등장 배경, 정의와 목적}
+
+제품의 지속가능성 및 생애주기 정보가 제조사, 공급사, 재활용업체 등 여러 조직에 분산되어 있어,
+하류 참여자가 제품의 원산지·구성·사용·수리 정보를 신뢰할 수 있는 형태로 확인하기 어렵다. \\
+이를 해결하기 위해서 각 물품에 대한 정보를 담는 객체, 즉 디지털 제품 여권인 DPP(Digital Product Passport)가 필요하다는 요구가 제기되었다. \\
+
+EU에서는 DPP를 다음과 같이 설명한다:
+\begin{itemize}
+  \item DPP는 제품별로 규제를 만족하기 위한 정보를 포함하고, data carrier(QR code 등)를 통해
+        전자적으로 접근할 수 있는 특정 제품에 관한 데이터 집합이다.
+\end{itemize}
+
+본 논문에서는 DPP를 제품의 생애주기 동안 갱신할 수 있는 동적 디지털 데이터 객체라 정의한다.  \\
+
+DPP는 고유 식별자와 연결되며 제품에 대한 정보(State)는 생애주기 동안 갱신될 수 있지만, 동일한 식별 대상을 나타내는 동안 해당 식별자는 유지된다.
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.35}
+  \setlength{\tabcolsep}{8pt}
+  \begin{tabularx}{\textwidth}{
+      @{}
+      >{\raggedright\arraybackslash}p{28mm}
+      >{\raggedright\arraybackslash}X
+      >{\raggedright\arraybackslash}X
+      @{}
+    }
+    \toprule
+    \textbf{DPP 식별 수준} & \textbf{식별자 설명}       & \textbf{식별 대상} \\
+    \midrule
+    Model level
+                       & 제품 모델에 부여된 고유 식별자
+                       & 동일한 기본 설계를 공유하는 제품 모델                  \\
+    Batch/Lot level
+                       & 생산 배치에 부여된 고유 식별자
+                       & 동일한 생산 배치에 속하는 제품 집합                   \\
+    Item level
+                       & 개별 제품에 부여된 고유 식별자
+                       & 하나의 물리적인 고유한 제품                        \\
+    \bottomrule
+  \end{tabularx}
+\end{center}
+
+따라서 고유 식별자는 항상 개별 제품 하나를 의미하지 않는다.
+
+\subsection{zkDPP의 목표}
+
+zkDPP는 회사 및 제품에 대한 정보를 공개하지 않으면서, 공급망 Event를 거치면서 갱신된 DPP 정보가
+이전 정보로부터 올바르게 도출되었음을 검증하는 프로토콜이다.
+
+\subsection{핵심 가정}
+
+1. \textbf{State 정의 가정}
+
+제품 또는 산업별로 관리할 State의 종류, 단위가 사전에 정의되어 있다고 가정한다. \\
+정의된 State에 따라서, Merge, Split, Transfer에서 발생할 State Transition이 결정되어 있다고 가정한다. \\
+
+2. \textbf{Entry 신뢰 가정}
+
+TTP가 실제 물품과 최초 DPP 정보의 일치 여부를 확인하거나, 인증된 업체에 Entry 권한을 부여한다. \\
+zkDPP는 Entry 이후 발생하는 State transition의 일관성을 검증한다. \\
+
+3. \textbf{Process TTP 신뢰 가정}
+
+TTP가 Process 단계에서 사용할 \(ek, vk\)를 제공한다고 가정한다. \\
+Process 단계에서는 입력/출력 제품의 종류, quantity, state가 올바른지 확인한다.\\
+
+4. \textbf{Provenance 추적 가정}
+
+Input과 output commitment의 관계를 직접 공개하는 별도 provenance event는 발행하지 않는다.\\
+
+문제가 발생한 \(cm\)을 감사할 때에는 관련 참여자가 보관한 note와 이전 거래 정보를
+감사자에게 제공하고, 감사자는 참여자의 협조를 받아 상류 방향으로 이 과정을 반복한다고
+가정한다.
+
+\subsection{데이터 모델}
+
+\subsubsection*{1. \(Document\)}
+
+\[
+  \mathit{Document}
+  =
+  (\mathit{DocumentHash},q,\mathbf{a},\mathbf{s})
+\]
+
+\begin{itemize}
+  \item \(\mathit{DocumentHash}=H(\mathit{DocumentInfo})\):
+        Event에서 직접 검증하지 않는 제품 메타데이터의 hash
+
+        \begin{itemize}
+          \item \(\mathit{DocumentInfo}=(d_1,d_2,\ldots,d_n)\):
+                제품을 설명하기 위한 정보
+        \end{itemize}
+
+
+  \item \(q\):
+        물품의 quantity
+
+  \item \(\mathbf{a}=(a_1,a_2,\ldots,a_u)\):
+        비산술적 속성 전이를 결정하는 policy attributes
+
+        \begin{itemize}
+          \item 예:
+                \(\mathit{ProductIdentity}\), \(\mathit{OriginId}\),
+                \(\mathit{UnitId}\)
+                \begin{itemize}
+                  \item \(\mathit{ProductIdentity}\): \{Model, Batch, Item\}
+                \end{itemize}
+        \end{itemize}
+
+  \item \(\mathbf{s}=(s_1,s_2,\ldots,s_{\ell})\):
+        공급망 Event에서 보존, 분배, 증가 또는 감소 관계를 검증하는
+        quantitative flow states
+
+        \begin{itemize}
+          \item 예:
+                \(\mathit{total}_{kg}\), \(\mathit{carbon}_{kgCO2e}\),
+                \(\mathit{recycled}_{kg}\)
+        \end{itemize}
+\end{itemize}
+
+\subsubsection*{2. \(cm\)}
+
+\[
+  cm
+  =
+  H(
+  \mathit{Document},
+  addr,
+  o_{cm}
+  )
+\]
+
+\[
+  sk_{own}\xleftarrow{\$}\mathbb{F}_r,
+  \qquad
+  pk_{own}=H(sk_{own}),
+  \qquad
+  addr=H(pk_{own})
+\]
+
+
+
+\begin{itemize}
+  \item \(o_{cm}\):
+        randomness
+
+  \item \(addr\):
+        \(pk_{own}\)으로부터 도출되는 holder의 address
+
+        \begin{itemize}
+          \item \(sk_{own}\):
+                holder의 secret key
+
+          \item \(pk_{own}\):
+                \(sk_{own}\)으로부터 도출되는 public key
+        \end{itemize}
+\end{itemize}
+
+\subsubsection*{2.1 \(nf\)}
+
+\[
+  nf=H(sk_{own},cm)
+\]
+
+\(cm\)의 중복 소비를 방지하는 nullifier
+
+\subsubsection*{2.2 \(note\)}
+
+\[
+  note=(cm,\mathit{Document},o_{cm})
+\]
+
+Holder가 지갑에 보관하는 note
+
+\subsubsection*{3. \(rv\)}
+
+
+\[
+  rv
+  =
+  H(
+  \mathit{Document},
+  addr_{Sender},
+  addr_{Receiver},
+  deadline_{epoch},
+  o_{rv}
+  )
+\]
+
+\begin{itemize}
+  \item \(deadline_{epoch}=transfer_{epoch}+\Delta_{epoch}\):
+        Sender가 Recall할 수 있는 마지막 경계를 나타내는 private deadline
+        \begin{itemize}
+          \item \(current_{epoch}<deadline_{epoch}\):
+                Recall 허용 조건
+        \end{itemize}
+\end{itemize}
+
+Transfer된 \(\mathit{Document}\)가 Proceed 또는 Recall되기 전의 대기 상태를 나타내는 commitment
+
+\subsubsection*{3.1 \(nf_{rv}\)}
+
+\[
+  nf_{rv}=H(o_{rv},rv)
+\]
+
+Proceed와 Recall 중 한 번만 처리되도록 하는 nullifier
+
+\subsubsection*{3.2 \(note_{rv}\)}
+
+\[
+  note_{rv}
+  =
+  (
+  rv,
+  \mathit{Document},
+  addr_{Sender},
+  addr_{Receiver},
+  deadline_{epoch},
+  o_{rv}
+  )
+\]
+
+Sender와 Receiver가 동일한 구조로 note를 보관한다.
+
+\subsection{프로토콜 개요}
+
+\begin{center}
+  \begin{tabular}{ll}
+    \hline
+    Event    & Protocol                                          \\
+    \hline
+    Entry    & $\varnothing\rightarrow cm$                       \\
+    Transfer & $cm\rightarrow (rv, cm_{change},)$                \\
+    Proceed  & $rv\rightarrow cm$                                \\
+    Recall   & $rv\rightarrow cm$                                \\
+    Merge    & $(cm_{1},cm_{2})\rightarrow cm$                   \\
+    Split    & $cm\rightarrow (cm_{1},cm_{2})$                   \\
+    Process  & $(cm_{i})_{i=1}^{m}\rightarrow(cm_{j})_{j=1}^{n}$ \\
+    Exit     & $cm\rightarrow\varnothing$                        \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Quantity, Policy Attributes, State}
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.35}
+  \setlength{\tabcolsep}{8pt}
+  \begin{tabularx}{\textwidth}{
+      @{}
+      >{\raggedright\arraybackslash}p{28mm}
+      >{\raggedright\arraybackslash}X
+      @{}
+    }
+    \toprule
+    \textbf{구성} & \textbf{구분 기준}                    \\
+    \midrule
+    \(\mathit{DocumentHash}\)
+                & Event에서 직접 일관성을 검사하지 않는 제품 정보     \\
+    \(q\)
+                & 물품의 quantity                      \\
+    \(\mathbf{a}\)
+                & 제품의 식별단위, 원산지, 수치단위처럼 물품을 구분하는 속성 \\
+    \(\mathbf{s}\)
+                & 수치적 보존, 분배, 증가 또는 감소 관계를 갖는 State \\
+    \bottomrule
+  \end{tabularx}
+\end{center}
+
+\subsubsection*{Merge}
+
+Merge 가능 여부와 출력 policy attributes는 산업별
+\(\mathsf{MergePolicy}\)로 추상화한다.
+
+\[
+  \mathsf{MergePolicy}
+  (\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_{out})
+  =1
+\]
+
+\[
+  q_{out}=q_1+q_2,
+  \qquad
+  \mathbf{s}_{out}=\mathbf{s}_1+\mathbf{s}_2
+\]
+
+\subsubsection*{Split}
+
+Split 가능 여부와 출력 policy attributes는
+\(\mathsf{SplitPolicy}\)로 추상화한다.
+
+\[
+  \mathsf{SplitPolicy}
+  (\mathbf{a}_{in},\mathbf{a}_{out,1},\mathbf{a}_{out,2})
+  =1
+\]
+
+\[
+  q_{in}=q_1+q_2,
+  \qquad
+  \mathbf{s}_{in}=\mathbf{s}_1+\mathbf{s}_2
+\]
+
+\(\mathsf{MergePolicy}\)와 \(\mathsf{SplitPolicy}\)는 산업군별로 결정되며,
+policy를 검증하는 고정된 vk를 사용한다.
+
+\subsubsection*{Process}
+
+Process는 입력 물품을 소비하고 새로운 물품을 생성할 수 있으므로
+\(q\), \(\mathbf{a}\), \(\mathbf{s}\)의 전이를 함께 검증한다.
+
+\[
+  \mathsf{ProcessPolicy}
+  (
+  \mathbf{q}_{in},
+  \mathbf{a}_{in},
+  \mathbf{s}_{in},
+  \mathbf{q}_{out},
+  \mathbf{a}_{out},
+  \mathbf{s}_{out}
+  )
+  =1
+\]
+
+Process는 공정마다 서로 다른 입력과 출력 조건을 가질 수 있다.
+TTP는 공정별 \(\mathsf{ProcessPolicy}\)를 검증하는 vk를 매번 등록한다.
+
+\subsection{8개 Event의 동작}
+
+\subsubsection*{Entry}
+
+\[
+  \varnothing
+  \xrightarrow{\mathrm{Entry}}
+  cm_{new}
+\]
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=18pt]
+  \item Issuer TTP 또는 인증된 업체가 실제 물품과 최초
+        \(\mathit{Document}\)의 일치 여부를 확인한다.
+  \item 최초 holder가 \((\mathit{Document},addr,o_{cm})\)로
+        \(cm_{new}\)를 생성한다.
+  \item Contract는 중복되지 않은 \(cm_{new}\)를 \(MT\)에 등록한다.
+\end{enumerate}
+
+\subsubsection*{Transfer}
+
+\[
+  cm_{old}
+  \xrightarrow{\mathrm{Transfer}}
+  (rv_{new},cm_{change})
+\]
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=18pt]
+  \item Sender는 자신이 소유한 \(cm_{old}\)에서 Receiver에게 전달할 quantity와
+        자신에게 남길 change quantity를 정한다.
+  \item \(\mathbf{a}\)는 유지하고, \(\mathbf{s}\)는 두 quantity에 따라
+        transfer 부분과 change 부분으로 분배한다.
+  \item proof는 \(MT\) membership, nf, quantity와
+        State 분배, \(rv_{new}\)와 \(cm_{change}\)의 생성을 검증한다.
+  \item Contract는 \(cm_{old}\)를 소비하고, \(cm_{change}\)를 \(MT\)에,
+        \(rv_{new}\)를 \(rvMT\)에 등록한다.
+\end{enumerate}
+
+\subsubsection*{Proceed}
+
+\[
+  rv_{old}
+  \xrightarrow{\mathrm{Proceed}}
+  cm_{receiver}
+\]
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=18pt]
+  \item Receiver는 전달받은 \(note_{rv}\)와 \(rvMT\) membership path를 준비한다.
+  \item Receiver는 \(rv_{old}\)로부터 \(nf_{rv}\)를 만들고, 동일한
+        \(\mathit{Document}\)를 자신에게 귀속하는 \(cm_{receiver}\)를 생성한다.
+  \item Proceed proof는 Receiver의 권한, \(rv_{old}\)의 membership,
+        \(nf_{rv}\)와 \(cm_{receiver}\)의 생성을 검증한다.
+  \item Contract는 \(nf_{rv}\)를 등록하여 해당 voucher의 재사용을 막고,
+        \(cm_{receiver}\)를 \(MT\)에 등록한다.
+\end{enumerate}
+
+\subsubsection*{Recall}
+
+\[
+  rv_{old}
+  \xrightarrow{\mathrm{Recall}}
+  cm_{sender}
+\]
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=18pt]
+  \item Sender는 자신이 생성했던 \(note_{rv}\)와 \(rvMT\) membership path를
+        준비한다.
+  \item Sender는 \(rv_{old}\)로부터 \(nf_{rv}\)를 만들고, 동일한
+        \(\mathit{Document}\)를 자신에게 되돌리는 \(cm_{sender}\)를 생성한다.
+  \item Recall proof는 Sender의 권한, \(rv_{old}\)의 membership,
+        \(current_{epoch}<deadline_{epoch}\), \(nf_{rv}\)와
+        \(cm_{sender}\)의 생성을 검증한다.
+  \item Contract는 \(nf_{rv}\)를 등록하여 Proceed와 Recall의 중복 실행을 막고,
+        \(cm_{sender}\)를 \(MT\)에 등록한다.
+\end{enumerate}
+
+\subsubsection*{Merge}
+
+\[
+  (cm_{old,1},cm_{old,2})
+  \xrightarrow{\mathrm{Merge}}
+  cm_{new}
+\]
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=18pt]
+  \item Holder는 자신이 소유한 서로 다른 두 finalized note를 선택한다.
+  \item 배포 시 고정된 \(\mathsf{MergePolicy}\)가
+        \((\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_{new})\)의 조합을 허용하는지
+        검사한다.
+  \item Merge proof는 두 input의 소유권과 membership,
+        \(q_{new}=q_1+q_2\), \(\mathbf{s}_{new}=\mathbf{s}_1+\mathbf{s}_2\),
+        \(cm_{new}\)의 생성을 검증한다.
+  \item Contract는 두 input nullifier를 등록하고 \(cm_{new}\)를 \(MT\)에
+        등록한다.
+\end{enumerate}
+
+\subsubsection*{Split}
+
+\[
+  cm_{old}
+  \xrightarrow{\mathrm{Split}}
+  (cm_{new,1},cm_{new,2})
+\]
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=18pt]
+  \item Holder는 input quantity를 두 output quantity로 나눈다.
+  \item 배포 시 고정된 \(\mathsf{SplitPolicy}\)가
+        \((\mathbf{a}_{old},\mathbf{a}_{new,1},\mathbf{a}_{new,2})\)의
+        전이를 허용하는지 검사한다. 동일한 Item-level identifier를 두 output에
+        복제하는 Split은 허용하지 않는다.
+  \item Split proof는 소유권과 membership, quantity 보존,
+        \(\mathbf{s}\)의 분배와 residual 처리, 두 output commitment의 생성을
+        검증한다.
+  \item Contract는 input nullifier를 등록하고 두 output commitment를 순서대로
+        \(MT\)에 등록한다.
+\end{enumerate}
+
+\subsubsection*{Process}
+
+\[
+  (cm_{old,i})_{i=1}^{m}
+  \xrightarrow{\mathrm{ProcessPolicyId}}
+  (cm_{new,j})_{j=1}^{n}
+\]
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=18pt]
+  \item Processor는 사용할 공정의 \(\mathit{ProcessPolicyId}\), input note와
+        생성할 output을 선택한다.
+  \item Contract는 \(\mathit{ProcessPolicyId}\)에 등록된 Process verifier를
+        선택한다.
+  \item Process proof는 input의 소유권과 membership, 중복 사용 방지,
+        \((\mathbf{q}_{in},\mathbf{a}_{in},\mathbf{s}_{in})\)에서
+        \((\mathbf{q}_{out},\mathbf{a}_{out},\mathbf{s}_{out})\)으로의 전이가
+        해당 공정 policy를 만족하는지 검증한다.
+  \item Contract는 모든 input nullifier를 등록하고, 생성된 output commitment를
+        순서대로 \(MT\)에 등록한다.
+\end{enumerate}
+
+\subsubsection*{Exit}
+
+\[
+  cm_{old}
+  \xrightarrow{\mathrm{Exit}}
+  \varnothing
+\]
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=18pt]
+  \item Holder는 공급망에서 제거할 finalized note를 선택한다.
+  \item Exit proof는 해당 note의 소유권, \(MT\) membership과 올바른
+        nullifier 생성을 검증한다.
+  \item Contract는 nullifier가 아직 사용되지 않았는지 확인하고 proof를 검증한다.
+  \item Contract는 nullifier만 등록하며 새로운 commitment는 생성하지 않는다.
+\end{enumerate}
+
+\subsection{고민 사항}
+
+\end{document}

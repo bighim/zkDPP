@@ -6,6 +6,7 @@
 **/out/
 **/artifacts/
 **/broadcast/
+**/tmp/
 
 poc-v2/contracts/src/generated/
 poc-v2/contracts/test/fixtures/
