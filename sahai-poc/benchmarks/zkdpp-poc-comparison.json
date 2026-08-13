@@ -1,0 +1,93 @@
+{
+  "backend": "anvil",
+  "comparisonBoundary": "각 protocol의 연결 시나리오에서 같은 이름 또는 가장 가까운 기능 relation의 case 중앙값을 비교한다. 동일 semantics를 주장하지 않는다.",
+  "hashProfile": "poseidon2",
+  "ratioFormula": "Sahai-POC actual / zkDPP-POC actual",
+  "requestedThreads": 8,
+  "results": [
+    {
+      "sahaiEvent": "Entry",
+      "zkdppClosestRelation": "entry",
+      "sahaiCaseCount": 2,
+      "zkdppCaseCount": 4,
+      "sahaiGasMedian": 809029,
+      "zkdppGasMedianAcrossCases": 1498540,
+      "sahaiOverZkdppGas": 0.5398781480641157,
+      "sahaiE2EMsMedian": 242.07812950000005,
+      "zkdppE2EMsMedianAcrossCases": 98.849042,
+      "sahaiOverZkdppE2E": 2.448967886810679,
+      "semanticsBoundary": "가장 가까운 기능 대응이며 commitment와 공개 입력은 서로 다름"
+    },
+    {
+      "sahaiEvent": "Ship",
+      "zkdppClosestRelation": "transfer",
+      "sahaiCaseCount": 2,
+      "zkdppCaseCount": 7,
+      "sahaiGasMedian": 1917717,
+      "zkdppGasMedianAcrossCases": 2673540,
+      "sahaiOverZkdppGas": 0.7172950470163154,
+      "sahaiE2EMsMedian": 567.39715,
+      "zkdppE2EMsMedianAcrossCases": 492.840209,
+      "sahaiOverZkdppE2E": 1.1512801505203485,
+      "semanticsBoundary": "Sahai Ship을 zkDPP Transfer에 대응하며 소유권 및 hidden-state semantics는 다름"
+    },
+    {
+      "sahaiEvent": "Merge",
+      "zkdppClosestRelation": "merge",
+      "sahaiCaseCount": 1,
+      "zkdppCaseCount": 1,
+      "sahaiGasMedian": 2308199,
+      "zkdppGasMedianAcrossCases": 1561882,
+      "sahaiOverZkdppGas": 1.477831872062038,
+      "sahaiE2EMsMedian": 736.81711,
+      "zkdppE2EMsMedianAcrossCases": 482.73975,
+      "sahaiOverZkdppE2E": 1.5263236764737107,
+      "semanticsBoundary": "두 input을 한 output으로 결합하지만 predicate와 provenance 표현은 다름"
+    },
+    {
+      "sahaiEvent": "Split",
+      "zkdppClosestRelation": "split",
+      "sahaiCaseCount": 1,
+      "zkdppCaseCount": 1,
+      "sahaiGasMedian": 2390246,
+      "zkdppGasMedianAcrossCases": 2352560,
+      "sahaiOverZkdppGas": 1.0160191451015064,
+      "sahaiE2EMsMedian": 733.720566,
+      "zkdppE2EMsMedianAcrossCases": 495.456583,
+      "sahaiOverZkdppE2E": 1.4808978045206433,
+      "semanticsBoundary": "한 input을 두 output으로 나누지만 output commitment semantics는 다름"
+    },
+    {
+      "sahaiEvent": "Process",
+      "zkdppClosestRelation": "process",
+      "sahaiCaseCount": 1,
+      "zkdppCaseCount": 3,
+      "sahaiGasMedian": 2308110,
+      "zkdppGasMedianAcrossCases": 2403091,
+      "sahaiOverZkdppGas": 0.9604754876115803,
+      "sahaiE2EMsMedian": 759.532231,
+      "zkdppE2EMsMedianAcrossCases": 884.769042,
+      "sahaiOverZkdppE2E": 0.858452539527259,
+      "semanticsBoundary": "두 input을 제품 output으로 바꾸지만 relation predicate 구성은 다름"
+    },
+    {
+      "sahaiEvent": "Exit",
+      "zkdppClosestRelation": "exit",
+      "sahaiCaseCount": 1,
+      "zkdppCaseCount": 2,
+      "sahaiGasMedian": 857814,
+      "zkdppGasMedianAcrossCases": 401760,
+      "sahaiOverZkdppGas": 2.1351403823178017,
+      "sahaiE2EMsMedian": 241.20356700000002,
+      "zkdppE2EMsMedianAcrossCases": 272.39512449999995,
+      "sahaiOverZkdppE2E": 0.8854914985822372,
+      "semanticsBoundary": "terminal 처리의 가장 가까운 대응이며 Sahai는 terminal output document를 생성함"
+    }
+  ],
+  "runsPerCombination": 1,
+  "threadMode": "MT",
+  "unmatchedZkDPPRelations": [
+    "proceed",
+    "recall"
+  ]
+}

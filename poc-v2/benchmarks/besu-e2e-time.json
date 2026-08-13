@@ -1,0 +1,1612 @@
+{
+  "generatedAt": "2026-08-12T13:26:19Z",
+  "backend": "besu",
+  "measurementType": "live-proof-evm-e2e",
+  "measurementBoundary": "witness construction start through successful EVM transaction receipt; compile, setup, deployment, and artifact loading excluded",
+  "runs": 1,
+  "representative": "median",
+  "machine": {
+    "os": "darwin",
+    "osVersion": "26.3",
+    "arch": "arm64",
+    "cpu": "Apple M1 Pro",
+    "cpuCores": 10,
+    "ramBytes": "34359738368",
+    "goVersion": "go1.25.7"
+  },
+  "software": {
+    "gnark": "v0.15.0",
+    "gnarkCrypto": "v0.20.1",
+    "goEthereum": "v1.17.4",
+    "foundry": "v1.7.1",
+    "besu": "v26.7.1",
+    "solidity": "0.8.30",
+    "proofSystem": "PLONK-KZG",
+    "curve": "BLS12-381"
+  },
+  "chain": {
+    "chainId": 31337,
+    "hardfork": "prague",
+    "genesisTimestamp": 60000,
+    "blockGasLimit": 30000000,
+    "transactionGasLimit": 29000000
+  },
+  "artifactLoadSummary": [
+    {
+      "relation": "entry",
+      "artifactLoadMs": {
+        "median": 91.659,
+        "min": 91.659,
+        "max": 91.659
+      }
+    },
+    {
+      "relation": "transfer",
+      "artifactLoadMs": {
+        "median": 689.573583,
+        "min": 689.573583,
+        "max": 689.573583
+      }
+    },
+    {
+      "relation": "proceed",
+      "artifactLoadMs": {
+        "median": 302.1515,
+        "min": 302.1515,
+        "max": 302.1515
+      }
+    },
+    {
+      "relation": "recall",
+      "artifactLoadMs": {
+        "median": 309.229458,
+        "min": 309.229458,
+        "max": 309.229458
+      }
+    },
+    {
+      "relation": "merge",
+      "artifactLoadMs": {
+        "median": 665.12175,
+        "min": 665.12175,
+        "max": 665.12175
+      }
+    },
+    {
+      "relation": "split",
+      "artifactLoadMs": {
+        "median": 708.187875,
+        "min": 708.187875,
+        "max": 708.187875
+      }
+    },
+    {
+      "relation": "process",
+      "artifactLoadMs": {
+        "median": 1262.266875,
+        "min": 1262.266875,
+        "max": 1262.266875
+      }
+    },
+    {
+      "relation": "exit",
+      "artifactLoadMs": {
+        "median": 298.662166,
+        "min": 298.662166,
+        "max": 298.662166
+      }
+    }
+  ],
+  "eventSummary": [
+    {
+      "sequence": 1,
+      "event": "entry",
+      "case": "aluminum-first",
+      "actor": "AluminumSupplier",
+      "witnessMs": {
+        "median": 0.35425,
+        "min": 0.35425,
+        "max": 0.35425
+      },
+      "proveMs": {
+        "median": 126.577208,
+        "min": 126.577208,
+        "max": 126.577208
+      },
+      "txPrepareMs": {
+        "median": 0.84,
+        "min": 0.84,
+        "max": 0.84
+      },
+      "submitToReceiptMs": {
+        "median": 1324.728041,
+        "min": 1324.728041,
+        "max": 1324.728041
+      },
+      "e2eMs": {
+        "median": 1452.50975,
+        "min": 1452.50975,
+        "max": 1452.50975
+      },
+      "receiptGasUsed": {
+        "median": 2056340,
+        "min": 2056340,
+        "max": 2056340
+      },
+      "calldataBytes": {
+        "median": 1156,
+        "min": 1156,
+        "max": 1156
+      }
+    },
+    {
+      "sequence": 2,
+      "event": "entry",
+      "case": "aluminum-second",
+      "actor": "AluminumSupplier",
+      "witnessMs": {
+        "median": 0.029791,
+        "min": 0.029791,
+        "max": 0.029791
+      },
+      "proveMs": {
+        "median": 152.118583,
+        "min": 152.118583,
+        "max": 152.118583
+      },
+      "txPrepareMs": {
+        "median": 0.066917,
+        "min": 0.066917,
+        "max": 0.066917
+      },
+      "submitToReceiptMs": {
+        "median": 724.404542,
+        "min": 724.404542,
+        "max": 724.404542
+      },
+      "e2eMs": {
+        "median": 876.62775,
+        "min": 876.62775,
+        "max": 876.62775
+      },
+      "receiptGasUsed": {
+        "median": 1489978,
+        "min": 1489978,
+        "max": 1489978
+      },
+      "calldataBytes": {
+        "median": 1156,
+        "min": 1156,
+        "max": 1156
+      }
+    },
+    {
+      "sequence": 3,
+      "event": "entry",
+      "case": "cathode",
+      "actor": "CathodeSupplier",
+      "witnessMs": {
+        "median": 0.060458,
+        "min": 0.060458,
+        "max": 0.060458
+      },
+      "proveMs": {
+        "median": 131.476791,
+        "min": 131.476791,
+        "max": 131.476791
+      },
+      "txPrepareMs": {
+        "median": 0.067625,
+        "min": 0.067625,
+        "max": 0.067625
+      },
+      "submitToReceiptMs": {
+        "median": 993.797625,
+        "min": 993.797625,
+        "max": 993.797625
+      },
+      "e2eMs": {
+        "median": 1125.416083,
+        "min": 1125.416083,
+        "max": 1125.416083
+      },
+      "receiptGasUsed": {
+        "median": 1507054,
+        "min": 1507054,
+        "max": 1507054
+      },
+      "calldataBytes": {
+        "median": 1156,
+        "min": 1156,
+        "max": 1156
+      }
+    },
+    {
+      "sequence": 4,
+      "event": "entry",
+      "case": "anode",
+      "actor": "AnodeSupplier",
+      "witnessMs": {
+        "median": 0.064042,
+        "min": 0.064042,
+        "max": 0.064042
+      },
+      "proveMs": {
+        "median": 129.179542,
+        "min": 129.179542,
+        "max": 129.179542
+      },
+      "txPrepareMs": {
+        "median": 0.071208,
+        "min": 0.071208,
+        "max": 0.071208
+      },
+      "submitToReceiptMs": {
+        "median": 705.022417,
+        "min": 705.022417,
+        "max": 705.022417
+      },
+      "e2eMs": {
+        "median": 834.350125,
+        "min": 834.350125,
+        "max": 834.350125
+      },
+      "receiptGasUsed": {
+        "median": 1487856,
+        "min": 1487856,
+        "max": 1487856
+      },
+      "calldataBytes": {
+        "median": 1156,
+        "min": 1156,
+        "max": 1156
+      }
+    },
+    {
+      "sequence": 5,
+      "event": "transfer",
+      "case": "aluminum-initial",
+      "actor": "AluminumSupplier",
+      "witnessMs": {
+        "median": 0.292208,
+        "min": 0.292208,
+        "max": 0.292208
+      },
+      "proveMs": {
+        "median": 566.733875,
+        "min": 566.733875,
+        "max": 566.733875
+      },
+      "txPrepareMs": {
+        "median": 0.064583,
+        "min": 0.064583,
+        "max": 0.064583
+      },
+      "submitToReceiptMs": {
+        "median": 596.2225,
+        "min": 596.2225,
+        "max": 596.2225
+      },
+      "e2eMs": {
+        "median": 1163.327166,
+        "min": 1163.327166,
+        "max": 1163.327166
+      },
+      "receiptGasUsed": {
+        "median": 3259160,
+        "min": 3259160,
+        "max": 3259160
+      },
+      "calldataBytes": {
+        "median": 1316,
+        "min": 1316,
+        "max": 1316
+      }
+    },
+    {
+      "sequence": 6,
+      "event": "recall",
+      "case": "aluminum-initial",
+      "actor": "AluminumSupplier",
+      "witnessMs": {
+        "median": 0.102959,
+        "min": 0.102959,
+        "max": 0.102959
+      },
+      "proveMs": {
+        "median": 308.237208,
+        "min": 308.237208,
+        "max": 308.237208
+      },
+      "txPrepareMs": {
+        "median": 0.0705,
+        "min": 0.0705,
+        "max": 0.0705
+      },
+      "submitToReceiptMs": {
+        "median": 491.086,
+        "min": 491.086,
+        "max": 491.086
+      },
+      "e2eMs": {
+        "median": 799.508209,
+        "min": 799.508209,
+        "max": 799.508209
+      },
+      "receiptGasUsed": {
+        "median": 1521811,
+        "min": 1521811,
+        "max": 1521811
+      },
+      "calldataBytes": {
+        "median": 1252,
+        "min": 1252,
+        "max": 1252
+      }
+    },
+    {
+      "sequence": 7,
+      "event": "transfer",
+      "case": "aluminum-retry",
+      "actor": "AluminumSupplier",
+      "witnessMs": {
+        "median": 0.25575,
+        "min": 0.25575,
+        "max": 0.25575
+      },
+      "proveMs": {
+        "median": 554.323584,
+        "min": 554.323584,
+        "max": 554.323584
+      },
+      "txPrepareMs": {
+        "median": 0.075167,
+        "min": 0.075167,
+        "max": 0.075167
+      },
+      "submitToReceiptMs": {
+        "median": 618.989417,
+        "min": 618.989417,
+        "max": 618.989417
+      },
+      "e2eMs": {
+        "median": 1173.653584,
+        "min": 1173.653584,
+        "max": 1173.653584
+      },
+      "receiptGasUsed": {
+        "median": 2673516,
+        "min": 2673516,
+        "max": 2673516
+      },
+      "calldataBytes": {
+        "median": 1316,
+        "min": 1316,
+        "max": 1316
+      }
+    },
+    {
+      "sequence": 8,
+      "event": "proceed",
+      "case": "aluminum-retry",
+      "actor": "FoilManufacturer",
+      "witnessMs": {
+        "median": 0.089375,
+        "min": 0.089375,
+        "max": 0.089375
+      },
+      "proveMs": {
+        "median": 326.628875,
+        "min": 326.628875,
+        "max": 326.628875
+      },
+      "txPrepareMs": {
+        "median": 0.0625,
+        "min": 0.0625,
+        "max": 0.0625
+      },
+      "submitToReceiptMs": {
+        "median": 491.694791,
+        "min": 491.694791,
+        "max": 491.694791
+      },
+      "e2eMs": {
+        "median": 818.481083,
+        "min": 818.481083,
+        "max": 818.481083
+      },
+      "receiptGasUsed": {
+        "median": 1517850,
+        "min": 1517850,
+        "max": 1517850
+      },
+      "calldataBytes": {
+        "median": 1252,
+        "min": 1252,
+        "max": 1252
+      }
+    },
+    {
+      "sequence": 9,
+      "event": "transfer",
+      "case": "aluminum-second",
+      "actor": "AluminumSupplier",
+      "witnessMs": {
+        "median": 0.077542,
+        "min": 0.077542,
+        "max": 0.077542
+      },
+      "proveMs": {
+        "median": 562.666333,
+        "min": 562.666333,
+        "max": 562.666333
+      },
+      "txPrepareMs": {
+        "median": 0.061875,
+        "min": 0.061875,
+        "max": 0.061875
+      },
+      "submitToReceiptMs": {
+        "median": 617.618875,
+        "min": 617.618875,
+        "max": 617.618875
+      },
+      "e2eMs": {
+        "median": 1180.438042,
+        "min": 1180.438042,
+        "max": 1180.438042
+      },
+      "receiptGasUsed": {
+        "median": 2726950,
+        "min": 2726950,
+        "max": 2726950
+      },
+      "calldataBytes": {
+        "median": 1316,
+        "min": 1316,
+        "max": 1316
+      }
+    },
+    {
+      "sequence": 10,
+      "event": "proceed",
+      "case": "aluminum-second",
+      "actor": "FoilManufacturer",
+      "witnessMs": {
+        "median": 0.088791,
+        "min": 0.088791,
+        "max": 0.088791
+      },
+      "proveMs": {
+        "median": 302.007292,
+        "min": 302.007292,
+        "max": 302.007292
+      },
+      "txPrepareMs": {
+        "median": 0.059916,
+        "min": 0.059916,
+        "max": 0.059916
+      },
+      "submitToReceiptMs": {
+        "median": 500.824167,
+        "min": 500.824167,
+        "max": 500.824167
+      },
+      "e2eMs": {
+        "median": 802.989875,
+        "min": 802.989875,
+        "max": 802.989875
+      },
+      "receiptGasUsed": {
+        "median": 1519936,
+        "min": 1519936,
+        "max": 1519936
+      },
+      "calldataBytes": {
+        "median": 1252,
+        "min": 1252,
+        "max": 1252
+      }
+    },
+    {
+      "sequence": 11,
+      "event": "process",
+      "case": "foil-first",
+      "actor": "FoilManufacturer",
+      "witnessMs": {
+        "median": 0.237875,
+        "min": 0.237875,
+        "max": 0.237875
+      },
+      "proveMs": {
+        "median": 1084.305875,
+        "min": 1084.305875,
+        "max": 1084.305875
+      },
+      "txPrepareMs": {
+        "median": 0.079833,
+        "min": 0.079833,
+        "max": 0.079833
+      },
+      "submitToReceiptMs": {
+        "median": 1101.136791,
+        "min": 1101.136791,
+        "max": 1101.136791
+      },
+      "e2eMs": {
+        "median": 2185.773917,
+        "min": 2185.773917,
+        "max": 2185.773917
+      },
+      "receiptGasUsed": {
+        "median": 2386003,
+        "min": 2386003,
+        "max": 2386003
+      },
+      "calldataBytes": {
+        "median": 1956,
+        "min": 1956,
+        "max": 1956
+      }
+    },
+    {
+      "sequence": 12,
+      "event": "process",
+      "case": "foil-second",
+      "actor": "FoilManufacturer",
+      "witnessMs": {
+        "median": 0.196667,
+        "min": 0.196667,
+        "max": 0.196667
+      },
+      "proveMs": {
+        "median": 1019.938584,
+        "min": 1019.938584,
+        "max": 1019.938584
+      },
+      "txPrepareMs": {
+        "median": 0.081084,
+        "min": 0.081084,
+        "max": 0.081084
+      },
+      "submitToReceiptMs": {
+        "median": 872.199083,
+        "min": 872.199083,
+        "max": 872.199083
+      },
+      "e2eMs": {
+        "median": 1892.428416,
+        "min": 1892.428416,
+        "max": 1892.428416
+      },
+      "receiptGasUsed": {
+        "median": 2403043,
+        "min": 2403043,
+        "max": 2403043
+      },
+      "calldataBytes": {
+        "median": 1956,
+        "min": 1956,
+        "max": 1956
+      }
+    },
+    {
+      "sequence": 13,
+      "event": "transfer",
+      "case": "foil-first",
+      "actor": "FoilManufacturer",
+      "witnessMs": {
+        "median": 0.100833,
+        "min": 0.100833,
+        "max": 0.100833
+      },
+      "proveMs": {
+        "median": 549.804291,
+        "min": 549.804291,
+        "max": 549.804291
+      },
+      "txPrepareMs": {
+        "median": 0.064083,
+        "min": 0.064083,
+        "max": 0.064083
+      },
+      "submitToReceiptMs": {
+        "median": 519.494542,
+        "min": 519.494542,
+        "max": 519.494542
+      },
+      "e2eMs": {
+        "median": 1069.476833,
+        "min": 1069.476833,
+        "max": 1069.476833
+      },
+      "receiptGasUsed": {
+        "median": 2669320,
+        "min": 2669320,
+        "max": 2669320
+      },
+      "calldataBytes": {
+        "median": 1316,
+        "min": 1316,
+        "max": 1316
+      }
+    },
+    {
+      "sequence": 14,
+      "event": "proceed",
+      "case": "foil-first",
+      "actor": "CellManufacturer",
+      "witnessMs": {
+        "median": 0.0915,
+        "min": 0.0915,
+        "max": 0.0915
+      },
+      "proveMs": {
+        "median": 334.604959,
+        "min": 334.604959,
+        "max": 334.604959
+      },
+      "txPrepareMs": {
+        "median": 0.065041,
+        "min": 0.065041,
+        "max": 0.065041
+      },
+      "submitToReceiptMs": {
+        "median": 491.84075,
+        "min": 491.84075,
+        "max": 491.84075
+      },
+      "e2eMs": {
+        "median": 826.613167,
+        "min": 826.613167,
+        "max": 826.613167
+      },
+      "receiptGasUsed": {
+        "median": 1515740,
+        "min": 1515740,
+        "max": 1515740
+      },
+      "calldataBytes": {
+        "median": 1252,
+        "min": 1252,
+        "max": 1252
+      }
+    },
+    {
+      "sequence": 15,
+      "event": "transfer",
+      "case": "foil-second",
+      "actor": "FoilManufacturer",
+      "witnessMs": {
+        "median": 0.105458,
+        "min": 0.105458,
+        "max": 0.105458
+      },
+      "proveMs": {
+        "median": 600.692792,
+        "min": 600.692792,
+        "max": 600.692792
+      },
+      "txPrepareMs": {
+        "median": 0.070042,
+        "min": 0.070042,
+        "max": 0.070042
+      },
+      "submitToReceiptMs": {
+        "median": 499.037417,
+        "min": 499.037417,
+        "max": 499.037417
+      },
+      "e2eMs": {
+        "median": 1099.919709,
+        "min": 1099.919709,
+        "max": 1099.919709
+      },
+      "receiptGasUsed": {
+        "median": 2761162,
+        "min": 2761162,
+        "max": 2761162
+      },
+      "calldataBytes": {
+        "median": 1316,
+        "min": 1316,
+        "max": 1316
+      }
+    },
+    {
+      "sequence": 16,
+      "event": "proceed",
+      "case": "foil-second",
+      "actor": "CellManufacturer",
+      "witnessMs": {
+        "median": 0.08275,
+        "min": 0.08275,
+        "max": 0.08275
+      },
+      "proveMs": {
+        "median": 284.614,
+        "min": 284.614,
+        "max": 284.614
+      },
+      "txPrepareMs": {
+        "median": 0.065542,
+        "min": 0.065542,
+        "max": 0.065542
+      },
+      "submitToReceiptMs": {
+        "median": 663.228291,
+        "min": 663.228291,
+        "max": 663.228291
+      },
+      "e2eMs": {
+        "median": 947.995125,
+        "min": 947.995125,
+        "max": 947.995125
+      },
+      "receiptGasUsed": {
+        "median": 1519984,
+        "min": 1519984,
+        "max": 1519984
+      },
+      "calldataBytes": {
+        "median": 1252,
+        "min": 1252,
+        "max": 1252
+      }
+    },
+    {
+      "sequence": 17,
+      "event": "merge",
+      "case": "foil",
+      "actor": "CellManufacturer",
+      "witnessMs": {
+        "median": 0.100667,
+        "min": 0.100667,
+        "max": 0.100667
+      },
+      "proveMs": {
+        "median": 569.042375,
+        "min": 569.042375,
+        "max": 569.042375
+      },
+      "txPrepareMs": {
+        "median": 0.07425,
+        "min": 0.07425,
+        "max": 0.07425
+      },
+      "submitToReceiptMs": {
+        "median": 443.918292,
+        "min": 443.918292,
+        "max": 443.918292
+      },
+      "e2eMs": {
+        "median": 1013.149333,
+        "min": 1013.149333,
+        "max": 1013.149333
+      },
+      "receiptGasUsed": {
+        "median": 1561954,
+        "min": 1561954,
+        "max": 1561954
+      },
+      "calldataBytes": {
+        "median": 1348,
+        "min": 1348,
+        "max": 1348
+      }
+    },
+    {
+      "sequence": 18,
+      "event": "transfer",
+      "case": "cathode",
+      "actor": "CathodeSupplier",
+      "witnessMs": {
+        "median": 0.152917,
+        "min": 0.152917,
+        "max": 0.152917
+      },
+      "proveMs": {
+        "median": 538.185875,
+        "min": 538.185875,
+        "max": 538.185875
+      },
+      "txPrepareMs": {
+        "median": 0.06625,
+        "min": 0.06625,
+        "max": 0.06625
+      },
+      "submitToReceiptMs": {
+        "median": 506.568625,
+        "min": 506.568625,
+        "max": 506.568625
+      },
+      "e2eMs": {
+        "median": 1045.015125,
+        "min": 1045.015125,
+        "max": 1045.015125
+      },
+      "receiptGasUsed": {
+        "median": 2652244,
+        "min": 2652244,
+        "max": 2652244
+      },
+      "calldataBytes": {
+        "median": 1316,
+        "min": 1316,
+        "max": 1316
+      }
+    },
+    {
+      "sequence": 19,
+      "event": "proceed",
+      "case": "cathode",
+      "actor": "CellManufacturer",
+      "witnessMs": {
+        "median": 0.132416,
+        "min": 0.132416,
+        "max": 0.132416
+      },
+      "proveMs": {
+        "median": 329.3015,
+        "min": 329.3015,
+        "max": 329.3015
+      },
+      "txPrepareMs": {
+        "median": 0.063459,
+        "min": 0.063459,
+        "max": 0.063459
+      },
+      "submitToReceiptMs": {
+        "median": 600.867334,
+        "min": 600.867334,
+        "max": 600.867334
+      },
+      "e2eMs": {
+        "median": 930.37275,
+        "min": 930.37275,
+        "max": 930.37275
+      },
+      "receiptGasUsed": {
+        "median": 1554244,
+        "min": 1554244,
+        "max": 1554244
+      },
+      "calldataBytes": {
+        "median": 1252,
+        "min": 1252,
+        "max": 1252
+      }
+    },
+    {
+      "sequence": 20,
+      "event": "transfer",
+      "case": "anode",
+      "actor": "AnodeSupplier",
+      "witnessMs": {
+        "median": 0.104541,
+        "min": 0.104541,
+        "max": 0.104541
+      },
+      "proveMs": {
+        "median": 539.835917,
+        "min": 539.835917,
+        "max": 539.835917
+      },
+      "txPrepareMs": {
+        "median": 0.061541,
+        "min": 0.061541,
+        "max": 0.061541
+      },
+      "submitToReceiptMs": {
+        "median": 545.296167,
+        "min": 545.296167,
+        "max": 545.296167
+      },
+      "e2eMs": {
+        "median": 1085.318958,
+        "min": 1085.318958,
+        "max": 1085.318958
+      },
+      "receiptGasUsed": {
+        "median": 2669320,
+        "min": 2669320,
+        "max": 2669320
+      },
+      "calldataBytes": {
+        "median": 1316,
+        "min": 1316,
+        "max": 1316
+      }
+    },
+    {
+      "sequence": 21,
+      "event": "proceed",
+      "case": "anode",
+      "actor": "CellManufacturer",
+      "witnessMs": {
+        "median": 0.188375,
+        "min": 0.188375,
+        "max": 0.188375
+      },
+      "proveMs": {
+        "median": 289.738542,
+        "min": 289.738542,
+        "max": 289.738542
+      },
+      "txPrepareMs": {
+        "median": 0.062958,
+        "min": 0.062958,
+        "max": 0.062958
+      },
+      "submitToReceiptMs": {
+        "median": 615.852916,
+        "min": 615.852916,
+        "max": 615.852916
+      },
+      "e2eMs": {
+        "median": 905.852583,
+        "min": 905.852583,
+        "max": 905.852583
+      },
+      "receiptGasUsed": {
+        "median": 1534986,
+        "min": 1534986,
+        "max": 1534986
+      },
+      "calldataBytes": {
+        "median": 1252,
+        "min": 1252,
+        "max": 1252
+      }
+    },
+    {
+      "sequence": 22,
+      "event": "process",
+      "case": "cell",
+      "actor": "CellManufacturer",
+      "witnessMs": {
+        "median": 0.246292,
+        "min": 0.246292,
+        "max": 0.246292
+      },
+      "proveMs": {
+        "median": 906.60075,
+        "min": 906.60075,
+        "max": 906.60075
+      },
+      "txPrepareMs": {
+        "median": 0.081125,
+        "min": 0.081125,
+        "max": 0.081125
+      },
+      "submitToReceiptMs": {
+        "median": 1212.109875,
+        "min": 1212.109875,
+        "max": 1212.109875
+      },
+      "e2eMs": {
+        "median": 2119.051541,
+        "min": 2119.051541,
+        "max": 2119.051541
+      },
+      "receiptGasUsed": {
+        "median": 3315365,
+        "min": 3315365,
+        "max": 3315365
+      },
+      "calldataBytes": {
+        "median": 2276,
+        "min": 2276,
+        "max": 2276
+      }
+    },
+    {
+      "sequence": 23,
+      "event": "split",
+      "case": "cell",
+      "actor": "CellManufacturer",
+      "witnessMs": {
+        "median": 0.205792,
+        "min": 0.205792,
+        "max": 0.205792
+      },
+      "proveMs": {
+        "median": 519.320042,
+        "min": 519.320042,
+        "max": 519.320042
+      },
+      "txPrepareMs": {
+        "median": 0.066583,
+        "min": 0.066583,
+        "max": 0.066583
+      },
+      "submitToReceiptMs": {
+        "median": 444.457334,
+        "min": 444.457334,
+        "max": 444.457334
+      },
+      "e2eMs": {
+        "median": 964.060667,
+        "min": 964.060667,
+        "max": 964.060667
+      },
+      "receiptGasUsed": {
+        "median": 2352608,
+        "min": 2352608,
+        "max": 2352608
+      },
+      "calldataBytes": {
+        "median": 1284,
+        "min": 1284,
+        "max": 1284
+      }
+    },
+    {
+      "sequence": 24,
+      "event": "exit",
+      "case": "cell",
+      "actor": "CellManufacturer",
+      "witnessMs": {
+        "median": 0.073,
+        "min": 0.073,
+        "max": 0.073
+      },
+      "proveMs": {
+        "median": 278.228125,
+        "min": 278.228125,
+        "max": 278.228125
+      },
+      "txPrepareMs": {
+        "median": 0.062083,
+        "min": 0.062083,
+        "max": 0.062083
+      },
+      "submitToReceiptMs": {
+        "median": 601.867667,
+        "min": 601.867667,
+        "max": 601.867667
+      },
+      "e2eMs": {
+        "median": 880.233917,
+        "min": 880.233917,
+        "max": 880.233917
+      },
+      "receiptGasUsed": {
+        "median": 401754,
+        "min": 401754,
+        "max": 401754
+      },
+      "calldataBytes": {
+        "median": 1220,
+        "min": 1220,
+        "max": 1220
+      }
+    },
+    {
+      "sequence": 25,
+      "event": "exit",
+      "case": "waste",
+      "actor": "CellManufacturer",
+      "witnessMs": {
+        "median": 0.077959,
+        "min": 0.077959,
+        "max": 0.077959
+      },
+      "proveMs": {
+        "median": 292.7455,
+        "min": 292.7455,
+        "max": 292.7455
+      },
+      "txPrepareMs": {
+        "median": 0.059333,
+        "min": 0.059333,
+        "max": 0.059333
+      },
+      "submitToReceiptMs": {
+        "median": 656.778792,
+        "min": 656.778792,
+        "max": 656.778792
+      },
+      "e2eMs": {
+        "median": 949.664916,
+        "min": 949.664916,
+        "max": 949.664916
+      },
+      "receiptGasUsed": {
+        "median": 401706,
+        "min": 401706,
+        "max": 401706
+      },
+      "calldataBytes": {
+        "median": 1220,
+        "min": 1220,
+        "max": 1220
+      }
+    }
+  ],
+  "rawRuns": [
+    {
+      "run": 1,
+      "generatedAt": "2026-08-12T13:25:49.900485Z",
+      "measurementType": "live-proof-evm-e2e",
+      "backend": "besu",
+      "rpc": "http://127.0.0.1:9545",
+      "chainId": 31337,
+      "machine": {
+        "os": "darwin",
+        "osVersion": "26.3",
+        "arch": "arm64",
+        "cpu": "Apple M1 Pro",
+        "cpuCores": 10,
+        "ramBytes": "34359738368",
+        "goVersion": "go1.25.7"
+      },
+      "contract": "0x9d4454B023096f34B160D6B654540c56A1F81688",
+      "artifactLoads": [
+        {
+          "relation": "entry",
+          "artifactLoadMs": 91.659
+        },
+        {
+          "relation": "transfer",
+          "artifactLoadMs": 689.573583
+        },
+        {
+          "relation": "proceed",
+          "artifactLoadMs": 302.1515
+        },
+        {
+          "relation": "recall",
+          "artifactLoadMs": 309.229458
+        },
+        {
+          "relation": "merge",
+          "artifactLoadMs": 665.12175
+        },
+        {
+          "relation": "split",
+          "artifactLoadMs": 708.187875
+        },
+        {
+          "relation": "process",
+          "artifactLoadMs": 1262.266875
+        },
+        {
+          "relation": "exit",
+          "artifactLoadMs": 298.662166
+        }
+      ],
+      "calls": [
+        {
+          "sequence": 1,
+          "event": "entry",
+          "case": "aluminum-first",
+          "actor": "AluminumSupplier",
+          "witnessMs": 0.35425,
+          "proveMs": 126.577208,
+          "txPrepareMs": 0.84,
+          "submitToReceiptMs": 1324.728041,
+          "e2eMs": 1452.50975,
+          "transactionHash": "0xb2ffa672900a83b1d4a5e0acca90061cbb11781a6029d8d5e8e47b66e771dd07",
+          "blockNumber": 96,
+          "receiptGasUsed": 2056340,
+          "calldataBytes": 1156,
+          "zeroBytes": 68,
+          "nonZeroBytes": 1088
+        },
+        {
+          "sequence": 2,
+          "event": "entry",
+          "case": "aluminum-second",
+          "actor": "AluminumSupplier",
+          "witnessMs": 0.029791,
+          "proveMs": 152.118583,
+          "txPrepareMs": 0.066917,
+          "submitToReceiptMs": 724.404542,
+          "e2eMs": 876.62775,
+          "transactionHash": "0x205fe6eae2f5662b938a678af7524cec00221689827422c4f40fa1986ef52b03",
+          "blockNumber": 97,
+          "receiptGasUsed": 1489978,
+          "calldataBytes": 1156,
+          "zeroBytes": 64,
+          "nonZeroBytes": 1092
+        },
+        {
+          "sequence": 3,
+          "event": "entry",
+          "case": "cathode",
+          "actor": "CathodeSupplier",
+          "witnessMs": 0.060458,
+          "proveMs": 131.476791,
+          "txPrepareMs": 0.067625,
+          "submitToReceiptMs": 993.797625,
+          "e2eMs": 1125.416083,
+          "transactionHash": "0x313b7b52eeb1aa860b405430692c9c07a13cfc0cc96e7e9e110fe86b72dee008",
+          "blockNumber": 98,
+          "receiptGasUsed": 1507054,
+          "calldataBytes": 1156,
+          "zeroBytes": 66,
+          "nonZeroBytes": 1090
+        },
+        {
+          "sequence": 4,
+          "event": "entry",
+          "case": "anode",
+          "actor": "AnodeSupplier",
+          "witnessMs": 0.064042,
+          "proveMs": 129.179542,
+          "txPrepareMs": 0.071208,
+          "submitToReceiptMs": 705.022417,
+          "e2eMs": 834.350125,
+          "transactionHash": "0x982b67cb01c13395bde2f80944c3ce78ae404d225ba00f2c796c1f6aff05ba32",
+          "blockNumber": 99,
+          "receiptGasUsed": 1487856,
+          "calldataBytes": 1156,
+          "zeroBytes": 65,
+          "nonZeroBytes": 1091
+        },
+        {
+          "sequence": 5,
+          "event": "transfer",
+          "case": "aluminum-initial",
+          "actor": "AluminumSupplier",
+          "witnessMs": 0.292208,
+          "proveMs": 566.733875,
+          "txPrepareMs": 0.064583,
+          "submitToReceiptMs": 596.2225,
+          "e2eMs": 1163.327166,
+          "transactionHash": "0xfa04f64b256ab9825f7de1fae59813520860aaee07bcffc9ba2450bb9476f459",
+          "blockNumber": 100,
+          "receiptGasUsed": 3259160,
+          "calldataBytes": 1316,
+          "zeroBytes": 98,
+          "nonZeroBytes": 1218
+        },
+        {
+          "sequence": 6,
+          "event": "recall",
+          "case": "aluminum-initial",
+          "actor": "AluminumSupplier",
+          "witnessMs": 0.102959,
+          "proveMs": 308.237208,
+          "txPrepareMs": 0.0705,
+          "submitToReceiptMs": 491.086,
+          "e2eMs": 799.508209,
+          "transactionHash": "0x8b2696cb3323aa52844f0526f35c66cadcba70d862e4a7eb899f2c8df9b952f2",
+          "blockNumber": 101,
+          "receiptGasUsed": 1521811,
+          "calldataBytes": 1252,
+          "zeroBytes": 63,
+          "nonZeroBytes": 1189
+        },
+        {
+          "sequence": 7,
+          "event": "transfer",
+          "case": "aluminum-retry",
+          "actor": "AluminumSupplier",
+          "witnessMs": 0.25575,
+          "proveMs": 554.323584,
+          "txPrepareMs": 0.075167,
+          "submitToReceiptMs": 618.989417,
+          "e2eMs": 1173.653584,
+          "transactionHash": "0xd17cc80bd605037244f63a1b7e48216663bac5df6d3ce617563537c3c6869e8f",
+          "blockNumber": 102,
+          "receiptGasUsed": 2673516,
+          "calldataBytes": 1316,
+          "zeroBytes": 100,
+          "nonZeroBytes": 1216
+        },
+        {
+          "sequence": 8,
+          "event": "proceed",
+          "case": "aluminum-retry",
+          "actor": "FoilManufacturer",
+          "witnessMs": 0.089375,
+          "proveMs": 326.628875,
+          "txPrepareMs": 0.0625,
+          "submitToReceiptMs": 491.694791,
+          "e2eMs": 818.481083,
+          "transactionHash": "0x483eaf2a319024714c3a8eac6d74982fd398b5baeb82c4350b56ab7a2e861e34",
+          "blockNumber": 103,
+          "receiptGasUsed": 1517850,
+          "calldataBytes": 1252,
+          "zeroBytes": 69,
+          "nonZeroBytes": 1183
+        },
+        {
+          "sequence": 9,
+          "event": "transfer",
+          "case": "aluminum-second",
+          "actor": "AluminumSupplier",
+          "witnessMs": 0.077542,
+          "proveMs": 562.666333,
+          "txPrepareMs": 0.061875,
+          "submitToReceiptMs": 617.618875,
+          "e2eMs": 1180.438042,
+          "transactionHash": "0xb075f933e2a2df5b0c5ec5f5392bba35faaf6b6776f8ebc4018737799a31099c",
+          "blockNumber": 104,
+          "receiptGasUsed": 2726950,
+          "calldataBytes": 1316,
+          "zeroBytes": 98,
+          "nonZeroBytes": 1218
+        },
+        {
+          "sequence": 10,
+          "event": "proceed",
+          "case": "aluminum-second",
+          "actor": "FoilManufacturer",
+          "witnessMs": 0.088791,
+          "proveMs": 302.007292,
+          "txPrepareMs": 0.059916,
+          "submitToReceiptMs": 500.824167,
+          "e2eMs": 802.989875,
+          "transactionHash": "0xf773ec70cc9ebf9e216759d51e2712ed172b1575a47c864be590c36907e5d6f8",
+          "blockNumber": 105,
+          "receiptGasUsed": 1519936,
+          "calldataBytes": 1252,
+          "zeroBytes": 71,
+          "nonZeroBytes": 1181
+        },
+        {
+          "sequence": 11,
+          "event": "process",
+          "case": "foil-first",
+          "actor": "FoilManufacturer",
+          "witnessMs": 0.237875,
+          "proveMs": 1084.305875,
+          "txPrepareMs": 0.079833,
+          "submitToReceiptMs": 1101.136791,
+          "e2eMs": 2185.773917,
+          "transactionHash": "0x9ae4c83658e96c4e2881ee50ef28012da8e683e68c825daa8fa4b00d14069944",
+          "blockNumber": 107,
+          "receiptGasUsed": 2386003,
+          "calldataBytes": 1956,
+          "zeroBytes": 693,
+          "nonZeroBytes": 1263
+        },
+        {
+          "sequence": 12,
+          "event": "process",
+          "case": "foil-second",
+          "actor": "FoilManufacturer",
+          "witnessMs": 0.196667,
+          "proveMs": 1019.938584,
+          "txPrepareMs": 0.081084,
+          "submitToReceiptMs": 872.199083,
+          "e2eMs": 1892.428416,
+          "transactionHash": "0xd8f44f0f5278c97de545dd1f0d19ade38c2d646f2d2b8e8590b05666f48a053d",
+          "blockNumber": 109,
+          "receiptGasUsed": 2403043,
+          "calldataBytes": 1956,
+          "zeroBytes": 698,
+          "nonZeroBytes": 1258
+        },
+        {
+          "sequence": 13,
+          "event": "transfer",
+          "case": "foil-first",
+          "actor": "FoilManufacturer",
+          "witnessMs": 0.100833,
+          "proveMs": 549.804291,
+          "txPrepareMs": 0.064083,
+          "submitToReceiptMs": 519.494542,
+          "e2eMs": 1069.476833,
+          "transactionHash": "0xe65fbf0a6d5e86c110a140bbbd0e7d860e80a44cae1efc4869f1347e56ac15ac",
+          "blockNumber": 110,
+          "receiptGasUsed": 2669320,
+          "calldataBytes": 1316,
+          "zeroBytes": 98,
+          "nonZeroBytes": 1218
+        },
+        {
+          "sequence": 14,
+          "event": "proceed",
+          "case": "foil-first",
+          "actor": "CellManufacturer",
+          "witnessMs": 0.0915,
+          "proveMs": 334.604959,
+          "txPrepareMs": 0.065041,
+          "submitToReceiptMs": 491.84075,
+          "e2eMs": 826.613167,
+          "transactionHash": "0x072b0268bb0a8a9b027e902b20c2918f1272884360d4c8abfe240dfc9a838295",
+          "blockNumber": 111,
+          "receiptGasUsed": 1515740,
+          "calldataBytes": 1252,
+          "zeroBytes": 69,
+          "nonZeroBytes": 1183
+        },
+        {
+          "sequence": 15,
+          "event": "transfer",
+          "case": "foil-second",
+          "actor": "FoilManufacturer",
+          "witnessMs": 0.105458,
+          "proveMs": 600.692792,
+          "txPrepareMs": 0.070042,
+          "submitToReceiptMs": 499.037417,
+          "e2eMs": 1099.919709,
+          "transactionHash": "0xc3df82054f847dfd3284cd37c8218a5048b6712a520b0e23bd04489d56c52754",
+          "blockNumber": 112,
+          "receiptGasUsed": 2761162,
+          "calldataBytes": 1316,
+          "zeroBytes": 97,
+          "nonZeroBytes": 1219
+        },
+        {
+          "sequence": 16,
+          "event": "proceed",
+          "case": "foil-second",
+          "actor": "CellManufacturer",
+          "witnessMs": 0.08275,
+          "proveMs": 284.614,
+          "txPrepareMs": 0.065542,
+          "submitToReceiptMs": 663.228291,
+          "e2eMs": 947.995125,
+          "transactionHash": "0x256b6de879c525388c11d73ff0c3c5fd720f35ed55458ef26faca6ce109993e9",
+          "blockNumber": 113,
+          "receiptGasUsed": 1519984,
+          "calldataBytes": 1252,
+          "zeroBytes": 67,
+          "nonZeroBytes": 1185
+        },
+        {
+          "sequence": 17,
+          "event": "merge",
+          "case": "foil",
+          "actor": "CellManufacturer",
+          "witnessMs": 0.100667,
+          "proveMs": 569.042375,
+          "txPrepareMs": 0.07425,
+          "submitToReceiptMs": 443.918292,
+          "e2eMs": 1013.149333,
+          "transactionHash": "0xfd409004ba4ae382a734bc84b1650401cd9a21e92ccba3d4160dc7b711f493a3",
+          "blockNumber": 114,
+          "receiptGasUsed": 1561954,
+          "calldataBytes": 1348,
+          "zeroBytes": 69,
+          "nonZeroBytes": 1279
+        },
+        {
+          "sequence": 18,
+          "event": "transfer",
+          "case": "cathode",
+          "actor": "CathodeSupplier",
+          "witnessMs": 0.152917,
+          "proveMs": 538.185875,
+          "txPrepareMs": 0.06625,
+          "submitToReceiptMs": 506.568625,
+          "e2eMs": 1045.015125,
+          "transactionHash": "0x82c042e8851feb6869c48b4421b4c5231802b92e122959f8b4dc09631f944bf1",
+          "blockNumber": 115,
+          "receiptGasUsed": 2652244,
+          "calldataBytes": 1316,
+          "zeroBytes": 96,
+          "nonZeroBytes": 1220
+        },
+        {
+          "sequence": 19,
+          "event": "proceed",
+          "case": "cathode",
+          "actor": "CellManufacturer",
+          "witnessMs": 0.132416,
+          "proveMs": 329.3015,
+          "txPrepareMs": 0.063459,
+          "submitToReceiptMs": 600.867334,
+          "e2eMs": 930.37275,
+          "transactionHash": "0x2bfc4a3866cef33731a709c389fa56b89a8f8ace559714db354ee37e79d09b81",
+          "blockNumber": 116,
+          "receiptGasUsed": 1554244,
+          "calldataBytes": 1252,
+          "zeroBytes": 62,
+          "nonZeroBytes": 1190
+        },
+        {
+          "sequence": 20,
+          "event": "transfer",
+          "case": "anode",
+          "actor": "AnodeSupplier",
+          "witnessMs": 0.104541,
+          "proveMs": 539.835917,
+          "txPrepareMs": 0.061541,
+          "submitToReceiptMs": 545.296167,
+          "e2eMs": 1085.318958,
+          "transactionHash": "0x010445157019687f745791baf6ecce8c456d111343f4f377d8cfc272b802e3eb",
+          "blockNumber": 117,
+          "receiptGasUsed": 2669320,
+          "calldataBytes": 1316,
+          "zeroBytes": 98,
+          "nonZeroBytes": 1218
+        },
+        {
+          "sequence": 21,
+          "event": "proceed",
+          "case": "anode",
+          "actor": "CellManufacturer",
+          "witnessMs": 0.188375,
+          "proveMs": 289.738542,
+          "txPrepareMs": 0.062958,
+          "submitToReceiptMs": 615.852916,
+          "e2eMs": 905.852583,
+          "transactionHash": "0x17424225944fae76204f55e1f8726dba7fb12927c7787e8f3f2668fbd3068705",
+          "blockNumber": 118,
+          "receiptGasUsed": 1534986,
+          "calldataBytes": 1252,
+          "zeroBytes": 66,
+          "nonZeroBytes": 1186
+        },
+        {
+          "sequence": 22,
+          "event": "process",
+          "case": "cell",
+          "actor": "CellManufacturer",
+          "witnessMs": 0.246292,
+          "proveMs": 906.60075,
+          "txPrepareMs": 0.081125,
+          "submitToReceiptMs": 1212.109875,
+          "e2eMs": 2119.051541,
+          "transactionHash": "0xad5bbc75475a6a085b9a156266dcdf9ed0fe5254deba6a910ac1ee8bb44c5fec",
+          "blockNumber": 120,
+          "receiptGasUsed": 3315365,
+          "calldataBytes": 2276,
+          "zeroBytes": 786,
+          "nonZeroBytes": 1490
+        },
+        {
+          "sequence": 23,
+          "event": "split",
+          "case": "cell",
+          "actor": "CellManufacturer",
+          "witnessMs": 0.205792,
+          "proveMs": 519.320042,
+          "txPrepareMs": 0.066583,
+          "submitToReceiptMs": 444.457334,
+          "e2eMs": 964.060667,
+          "transactionHash": "0xdaf761e6e4f1db61ada171222d6521a9830065c3c456a5a0f9534e903d4f9e43",
+          "blockNumber": 121,
+          "receiptGasUsed": 2352608,
+          "calldataBytes": 1284,
+          "zeroBytes": 65,
+          "nonZeroBytes": 1219
+        },
+        {
+          "sequence": 24,
+          "event": "exit",
+          "case": "cell",
+          "actor": "CellManufacturer",
+          "witnessMs": 0.073,
+          "proveMs": 278.228125,
+          "txPrepareMs": 0.062083,
+          "submitToReceiptMs": 601.867667,
+          "e2eMs": 880.233917,
+          "transactionHash": "0x98058c6ed73e4b626fd7b2bf66616c7c31815e69e65ffe89a8cbd3b3b958709d",
+          "blockNumber": 122,
+          "receiptGasUsed": 401754,
+          "calldataBytes": 1220,
+          "zeroBytes": 65,
+          "nonZeroBytes": 1155
+        },
+        {
+          "sequence": 25,
+          "event": "exit",
+          "case": "waste",
+          "actor": "CellManufacturer",
+          "witnessMs": 0.077959,
+          "proveMs": 292.7455,
+          "txPrepareMs": 0.059333,
+          "submitToReceiptMs": 656.778792,
+          "e2eMs": 949.664916,
+          "transactionHash": "0x549aae808f15a974ea76ffb49849b2b56fa2d378961e7f540c6f53a07c55895d",
+          "blockNumber": 123,
+          "receiptGasUsed": 401706,
+          "calldataBytes": 1220,
+          "zeroBytes": 69,
+          "nonZeroBytes": 1151
+        }
+      ],
+      "mtAppendCount": 28,
+      "rvMTAppendCount": 7,
+      "mtLeafCount": 28,
+      "rvMTLeafCount": 7
+    }
+  ]
+}

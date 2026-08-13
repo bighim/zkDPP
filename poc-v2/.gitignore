@@ -6,3 +6,12 @@ contracts/cache/
 contracts/out/
 contracts/src/generated/
 contracts/test/fixtures/
+benchmarks/e2e-runs/
+benchmarks/besu-e2e-runs/
+.latex-build/
+POC Evaluation Report.pdf
+*.aux
+*.log
+*.toc
+*.synctex.gz
+.env

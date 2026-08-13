@@ -31,10 +31,7 @@ import (
 )
 
 const (
-	chainID        = 31337
 	transactionGas = 29_000_000
-	receiptTimeout = 30 * time.Second
-	receiptPoll    = 10 * time.Millisecond
 )
 
 type proofMarshaler interface{ MarshalSolidity() []byte }
@@ -96,17 +93,22 @@ type callResult struct {
 }
 
 type runResult struct {
-	Run           int             `json:"run"`
-	GeneratedAt   string          `json:"generatedAt"`
-	Measurement   string          `json:"measurementType"`
-	Machine       machineMetadata `json:"machine"`
-	Contract      string          `json:"contract"`
-	ArtifactLoads []loadResult    `json:"artifactLoads"`
-	Calls         []callResult    `json:"calls"`
-	MTAppendCount int             `json:"mtAppendCount"`
-	RVAppendCount int             `json:"rvMTAppendCount"`
-	MTLeafCount   uint64          `json:"mtLeafCount"`
-	RVMTLeafCount uint64          `json:"rvMTLeafCount"`
+	Run            int             `json:"run"`
+	GeneratedAt    string          `json:"generatedAt"`
+	Measurement    string          `json:"measurementType"`
+	Backend        string          `json:"backend"`
+	RPC            string          `json:"rpc"`
+	ChainID        uint64          `json:"chainId"`
+	ReceiptTimeout string          `json:"receiptTimeout"`
+	PollInterval   string          `json:"pollInterval"`
+	Machine        machineMetadata `json:"machine"`
+	Contract       string          `json:"contract"`
+	ArtifactLoads  []loadResult    `json:"artifactLoads"`
+	Calls          []callResult    `json:"calls"`
+	MTAppendCount  int             `json:"mtAppendCount"`
+	RVAppendCount  int             `json:"rvMTAppendCount"`
+	MTLeafCount    uint64          `json:"mtLeafCount"`
+	RVMTLeafCount  uint64          `json:"rvMTLeafCount"`
 }
 
 type sender struct {
@@ -116,7 +118,11 @@ type sender struct {
 
 func main() {
 	root := flag.String("root", ".", "poc-v2 root")
-	rpcURL := flag.String("rpc", "http://127.0.0.1:8545", "Anvil JSON-RPC URL")
+	backend := flag.String("backend", "anvil", "EVM backend label (anvil or besu)")
+	rpcURL := flag.String("rpc", "http://127.0.0.1:8545", "EVM JSON-RPC URL")
+	chainID := flag.Uint64("chain-id", 31337, "expected EVM chain ID")
+	receiptTimeout := flag.Duration("receipt-timeout", 30*time.Second, "transaction receipt timeout")
+	pollInterval := flag.Duration("poll-interval", 10*time.Millisecond, "transaction receipt polling interval")
 	broadcastPath := flag.String("broadcast", "", "DeployCanonical broadcast JSON")
 	runNumber := flag.Int("run", 1, "run number")
 	out := flag.String("out", "", "run JSON output")
@@ -125,12 +131,15 @@ func main() {
 		flag.Usage()
 		os.Exit(2)
 	}
-	if err := run(*root, *rpcURL, *broadcastPath, *runNumber, *out); err != nil {
+	if *backend != "anvil" && *backend != "besu" {
+		panic(fmt.Errorf("unsupported backend %q", *backend))
+	}
+	if err := run(*root, *backend, *rpcURL, *chainID, *receiptTimeout, *pollInterval, *broadcastPath, *runNumber, *out); err != nil {
 		panic(err)
 	}
 }
 
-func run(root, rpcURL, broadcastPath string, runNumber int, out string) error {
+func run(root, backend, rpcURL string, expectedChainID uint64, receiptTimeout, pollInterval time.Duration, broadcastPath string, runNumber int, out string) error {
 	derived, err := scenario.LoadCanonical(root)
 	if err != nil {
 		return err
@@ -171,7 +180,7 @@ func run(root, rpcURL, broadcastPath string, runNumber int, out string) error {
 	if err != nil {
 		return err
 	}
-	if actualChainID.Uint64() != chainID {
+	if actualChainID.Uint64() != expectedChainID {
 		return fmt.Errorf("unexpected chain ID %s", actualChainID)
 	}
 	senders := make(map[string]*sender, 5)
@@ -190,7 +199,8 @@ func run(root, rpcURL, broadcastPath string, runNumber int, out string) error {
 
 	result := runResult{
 		Run: runNumber, GeneratedAt: time.Now().UTC().Format(time.RFC3339Nano),
-		Measurement: "live-proof-anvil-e2e", Machine: machine(), Contract: contractAddress.Hex(),
+		Measurement: "live-proof-evm-e2e", Backend: backend, RPC: rpcURL, ChainID: expectedChainID,
+		ReceiptTimeout: receiptTimeout.String(), PollInterval: pollInterval.String(), Machine: machine(), Contract: contractAddress.Hex(),
 		ArtifactLoads: loads, Calls: make([]callResult, 0, len(proofspec.CanonicalEvents)),
 	}
 	for sequence, event := range proofspec.CanonicalEvents {
@@ -213,7 +223,7 @@ func run(root, rpcURL, broadcastPath string, runNumber int, out string) error {
 		if !ok {
 			return fmt.Errorf("missing sender for actor %s", event.Actor)
 		}
-		tx, err := signTransaction(selected, contractAddress, calldata)
+		tx, err := signTransaction(selected, contractAddress, calldata, expectedChainID)
 		if err != nil {
 			return err
 		}
@@ -223,7 +233,7 @@ func run(root, rpcURL, broadcastPath string, runNumber int, out string) error {
 		if err := client.SendTransaction(ctx, tx); err != nil {
 			return fmt.Errorf("submit %s/%s: %w", event.Relation, event.Case, err)
 		}
-		receipt, err := waitReceipt(ctx, client, tx.Hash())
+		receipt, err := waitReceipt(ctx, client, tx.Hash(), receiptTimeout, pollInterval)
 		submitTime := time.Since(submitStart)
 		if err != nil {
 			return fmt.Errorf("receipt %s/%s: %w", event.Relation, event.Case, err)
@@ -303,12 +313,12 @@ func packCall(contractABI abi.ABI, event string, proof []byte, inputs []fr.Eleme
 	}
 }
 
-func signTransaction(selected *sender, to common.Address, calldata []byte) (*types.Transaction, error) {
+func signTransaction(selected *sender, to common.Address, calldata []byte, chainID uint64) (*types.Transaction, error) {
 	tx := types.NewTx(&types.DynamicFeeTx{
-		ChainID: big.NewInt(chainID), Nonce: selected.nonce, GasTipCap: big.NewInt(1_000_000_000),
+		ChainID: new(big.Int).SetUint64(chainID), Nonce: selected.nonce, GasTipCap: big.NewInt(1_000_000_000),
 		GasFeeCap: big.NewInt(100_000_000_000), Gas: transactionGas, To: &to, Value: new(big.Int), Data: calldata,
 	})
-	return types.SignTx(tx, types.LatestSignerForChainID(big.NewInt(chainID)), selected.key)
+	return types.SignTx(tx, types.LatestSignerForChainID(new(big.Int).SetUint64(chainID)), selected.key)
 }
 
 func newSender(ctx context.Context, client *ethclient.Client, encodedKey string) (*sender, error) {
@@ -326,8 +336,8 @@ func newSender(ctx context.Context, client *ethclient.Client, encodedKey string)
 	return &sender{key: key, nonce: nonce}, nil
 }
 
-func waitReceipt(parent context.Context, client *ethclient.Client, hash common.Hash) (*types.Receipt, error) {
-	ctx, cancel := context.WithTimeout(parent, receiptTimeout)
+func waitReceipt(parent context.Context, client *ethclient.Client, hash common.Hash, timeout, poll time.Duration) (*types.Receipt, error) {
+	ctx, cancel := context.WithTimeout(parent, timeout)
 	defer cancel()
 	for {
 		receipt, err := client.TransactionReceipt(ctx, hash)
@@ -340,7 +350,7 @@ func waitReceipt(parent context.Context, client *ethclient.Client, hash common.H
 		select {
 		case <-ctx.Done():
 			return nil, ctx.Err()
-		case <-time.After(receiptPoll):
+		case <-time.After(poll):
 		}
 	}
 }

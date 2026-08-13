@@ -1,0 +1,105 @@
+{
+  "curve": "BLS12-381",
+  "generatedAt": "2026-08-12T15:47:50Z",
+  "goArch": "arm64",
+  "goMaxProcs": 8,
+  "goOS": "darwin",
+  "hashProfile": "poseidon2",
+  "numCPU": 10,
+  "proofCalls": "sequential; gnark internal parallelism only",
+  "proofSystem": "PLONK-KZG",
+  "requestedThreads": 8,
+  "results": [
+    {
+      "case": "entry_a",
+      "event": "Entry",
+      "proofs": 2,
+      "logicalBytes": 5206,
+      "buildMs": 0.853812,
+      "witnessMs": 0.104708,
+      "proveMs": 231.32725,
+      "encodeMs": 0.052125,
+      "totalMs": 232.337895
+    },
+    {
+      "case": "ship_a",
+      "event": "Ship",
+      "proofs": 5,
+      "logicalBytes": 12582,
+      "buildMs": 0.853812,
+      "witnessMs": 0.135833,
+      "proveMs": 530.371832,
+      "encodeMs": 0.060083,
+      "totalMs": 531.42156
+    },
+    {
+      "case": "split_a",
+      "event": "Split",
+      "proofs": 6,
+      "logicalBytes": 15343,
+      "buildMs": 0.853812,
+      "witnessMs": 0.139207,
+      "proveMs": 679.92975,
+      "encodeMs": 0.056,
+      "totalMs": 680.978769
+    },
+    {
+      "case": "merge_a",
+      "event": "Merge",
+      "proofs": 6,
+      "logicalBytes": 15413,
+      "buildMs": 0.853812,
+      "witnessMs": 0.141458,
+      "proveMs": 678.560333,
+      "encodeMs": 0.054875,
+      "totalMs": 679.610478
+    },
+    {
+      "case": "entry_b",
+      "event": "Entry",
+      "proofs": 2,
+      "logicalBytes": 5209,
+      "buildMs": 0.853812,
+      "witnessMs": 0.047875,
+      "proveMs": 224.549708,
+      "encodeMs": 0.027667,
+      "totalMs": 225.479062
+    },
+    {
+      "case": "ship_b",
+      "event": "Ship",
+      "proofs": 5,
+      "logicalBytes": 12582,
+      "buildMs": 0.853812,
+      "witnessMs": 0.145624,
+      "proveMs": 709.503083,
+      "encodeMs": 0.053709,
+      "totalMs": 710.556228
+    },
+    {
+      "case": "process_product",
+      "event": "Process",
+      "proofs": 6,
+      "logicalBytes": 15425,
+      "buildMs": 0.853812,
+      "witnessMs": 0.182835,
+      "proveMs": 779.781543,
+      "encodeMs": 0.049083,
+      "totalMs": 780.867273
+    },
+    {
+      "case": "exit_product",
+      "event": "Exit",
+      "proofs": 2,
+      "logicalBytes": 5390,
+      "buildMs": 0.853812,
+      "witnessMs": 0.059124,
+      "proveMs": 239.058917,
+      "encodeMs": 0.029,
+      "totalMs": 240.000853
+    }
+  ],
+  "runs": 1,
+  "scenario": "canonical",
+  "threadMode": "mt"
+}

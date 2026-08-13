@@ -1,0 +1,22 @@
+{
+  "crossProfileRootDifferent": true,
+  "schemaVersion": 1,
+  "vectors": [
+    {
+      "hashProfile": "poseidon2",
+      "root": "0x6017e855c69da3b8eb2fbd5759b4d16860a22653b5824abfd9b2fb9fb23ed1f3",
+      "attributeCommitment": "0x1f1b89f4a8925ed82002a0a9877c8d97f42308977057b3513980085a9184c68e",
+      "digestPublicInputs": 1,
+      "openingVerified": true,
+      "saltMutationRejected": true
+    },
+    {
+      "hashProfile": "sha256",
+      "root": "0xa4d4be5871fb8cbe87573fab9c75c40af061be98bf3c3c362ca839891dd4be0d",
+      "attributeCommitment": "0x1fa6bc446c9c75678f59d542363c2ed9be9e71d2ef1c46f49335180fa316fe53",
+      "digestPublicInputs": 2,
+      "openingVerified": true,
+      "saltMutationRejected": true
+    }
+  ]
+}

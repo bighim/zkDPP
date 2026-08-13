@@ -1,0 +1,21 @@
+.cache/
+artifacts/
+benchmarks/generated/
+benchmarks/*-runs/
+benchmarks/zkdpp-poc/*run-*.json
+contracts/cache/
+contracts/out/
+contracts/broadcast/
+contracts/src/generated/
+contracts/test/fixtures/
+testdata/generated/
+besu/generated/
+besu/data/
+output/
+tmp/
+Sahai POC Evaluation Report.pdf
+*.aux
+*.log
+*.toc
+*.synctex.gz
+.env

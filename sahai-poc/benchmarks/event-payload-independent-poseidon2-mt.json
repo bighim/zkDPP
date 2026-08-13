@@ -1,0 +1,83 @@
+{
+  "curve": "BLS12-381",
+  "generatedAt": "2026-08-12T15:47:45Z",
+  "goArch": "arm64",
+  "goMaxProcs": 8,
+  "goOS": "darwin",
+  "hashProfile": "poseidon2",
+  "numCPU": 10,
+  "proofCalls": "sequential; gnark internal parallelism only",
+  "proofSystem": "PLONK-KZG",
+  "requestedThreads": 8,
+  "results": [
+    {
+      "case": "entry",
+      "event": "Entry",
+      "proofs": 2,
+      "logicalBytes": 5206,
+      "buildMs": 1.119743,
+      "witnessMs": 0.075001,
+      "proveMs": 228.204291,
+      "encodeMs": 0.052709,
+      "totalMs": 229.451744
+    },
+    {
+      "case": "ship",
+      "event": "Ship",
+      "proofs": 5,
+      "logicalBytes": 12575,
+      "buildMs": 1.119743,
+      "witnessMs": 0.124042,
+      "proveMs": 527.841375,
+      "encodeMs": 0.042166,
+      "totalMs": 529.127326
+    },
+    {
+      "case": "merge",
+      "event": "Merge",
+      "proofs": 6,
+      "logicalBytes": 15407,
+      "buildMs": 1.119743,
+      "witnessMs": 0.14825,
+      "proveMs": 672.960167,
+      "encodeMs": 0.054667,
+      "totalMs": 674.282827
+    },
+    {
+      "case": "split",
+      "event": "Split",
+      "proofs": 6,
+      "logicalBytes": 15342,
+      "buildMs": 1.119743,
+      "witnessMs": 0.146874,
+      "proveMs": 677.748749,
+      "encodeMs": 0.046959,
+      "totalMs": 679.062325
+    },
+    {
+      "case": "process",
+      "event": "Process",
+      "proofs": 6,
+      "logicalBytes": 15419,
+      "buildMs": 1.119743,
+      "witnessMs": 0.135374,
+      "proveMs": 672.642707,
+      "encodeMs": 0.044708,
+      "totalMs": 673.942532
+    },
+    {
+      "case": "exit",
+      "event": "Exit",
+      "proofs": 2,
+      "logicalBytes": 5379,
+      "buildMs": 1.119743,
+      "witnessMs": 0.045041,
+      "proveMs": 222.253458,
+      "encodeMs": 0.021667,
+      "totalMs": 223.439909
+    }
+  ],
+  "runs": 1,
+  "scenario": "independent",
+  "threadMode": "mt"
+}

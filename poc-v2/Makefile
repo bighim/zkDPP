@@ -1,6 +1,6 @@
 GO ?= go
 GO_ENV = GOCACHE=$(CURDIR)/.cache/go-build GOMODCACHE=$(CURDIR)/.cache/gomod GOTOOLCHAIN=go1.25.7
-RUNS ?= 5
+RUNS ?= 1
 ANVIL_PORT ?= 8545
 
 .PHONY: test-go generate-reference generate-poseidon setup test-contract test-e2e benchmark benchmark-anvil benchmark-anvil-gas benchmark-anvil-e2e benchmark-process3x3

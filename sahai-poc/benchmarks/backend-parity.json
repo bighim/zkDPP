@@ -1,0 +1,72 @@
+{
+  "definition": "identical fixed proof, connected state, calldata, chain ID and Prague revision",
+  "hashProfile": "poseidon2",
+  "passed": true,
+  "results": [
+    {
+      "event": "BaselineNoop",
+      "caseCount": 1,
+      "anvilGas": 21408,
+      "besuGas": 21408,
+      "gasEqual": true,
+      "calldataEqual": true
+    },
+    {
+      "event": "BaselineStorageWrite",
+      "caseCount": 1,
+      "anvilGas": 43592,
+      "besuGas": 43592,
+      "gasEqual": true,
+      "calldataEqual": true
+    },
+    {
+      "event": "Entry",
+      "caseCount": 2,
+      "anvilGas": 809029,
+      "besuGas": 809029,
+      "gasEqual": true,
+      "calldataEqual": true
+    },
+    {
+      "event": "Ship",
+      "caseCount": 2,
+      "anvilGas": 1917717,
+      "besuGas": 1917717,
+      "gasEqual": true,
+      "calldataEqual": true
+    },
+    {
+      "event": "Merge",
+      "caseCount": 1,
+      "anvilGas": 2308199,
+      "besuGas": 2308199,
+      "gasEqual": true,
+      "calldataEqual": true
+    },
+    {
+      "event": "Split",
+      "caseCount": 1,
+      "anvilGas": 2390246,
+      "besuGas": 2390246,
+      "gasEqual": true,
+      "calldataEqual": true
+    },
+    {
+      "event": "Process",
+      "caseCount": 1,
+      "anvilGas": 2308110,
+      "besuGas": 2308110,
+      "gasEqual": true,
+      "calldataEqual": true
+    },
+    {
+      "event": "Exit",
+      "caseCount": 1,
+      "anvilGas": 857814,
+      "besuGas": 857814,
+      "gasEqual": true,
+      "calldataEqual": true
+    }
+  ],
+  "scenario": "canonical"
+}

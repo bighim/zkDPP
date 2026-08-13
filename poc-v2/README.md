@@ -73,11 +73,11 @@ make benchmark-anvil
 - `make test-contract`: 실제 PLONK proof로 8개 Event E2E 및 negative test 수행
 - `make benchmark`: Poseidon2, depth-32의 34개 compile/setup/prove/verify profile 실행
 - `make benchmark-anvil-gas`: 고정 proof로 10개 배포와 25개 Event를 독립 Anvil transaction으로 제출
-- `make benchmark-anvil-e2e`: live proof 생성부터 receipt까지 clean Anvil scenario를 5회 측정
+- `make benchmark-anvil-e2e`: live proof 생성부터 receipt까지 clean Anvil scenario를 1회 측정
 - `make benchmark-anvil`: receipt gas와 E2E benchmark를 모두 실행
 
-빠른 E2E smoke run은 `make benchmark-anvil-e2e RUNS=1`로 실행한다. Host port 8545가
-사용 중이면 `ANVIL_PORT=18545`처럼 변경할 수 있다.
+모든 benchmark의 기본 반복 횟수는 1회다. Host port 8545가 사용 중이면
+`ANVIL_PORT=18545`처럼 변경할 수 있다.
 
 ## Benchmark 결과
 
@@ -93,7 +93,8 @@ State 0--3 profile 4개, State-3 Process 1-to-1 및 2-to-2 profile 2개다. SHA�
 
 측정 환경, constraints, native prove/verify 시간, Anvil receipt gas와 E2E 시간은
 `POC Evaluation Report.tex` 및 `benchmarks/summary.csv`에서 확인한다.
-Anvil E2E는 clean chain 5회의 median과 min/max를 기록한다.
+Anvil E2E는 clean chain 1회를 기록한다. 출력 schema 호환을 위해 median/min/max 필드는
+유지하며 세 값은 모두 동일한 단일 측정값이다.
 
 ## 재현성 경계
 

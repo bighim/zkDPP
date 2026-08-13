@@ -1,0 +1,434 @@
+{
+  "backend": "anvil",
+  "blockGasLimit": 30000000,
+  "chainId": 31337,
+  "goMaxProcs": 8,
+  "hashProfile": "sha256",
+  "liveProofs": false,
+  "measurementBoundary": "Event receipt gasUsed and sequential witness/prove/encode/submit-to-receipt; independent-only seed transactions excluded",
+  "numCPU": 10,
+  "requestedThreads": 8,
+  "results": [
+    {
+      "event": "BaselineNoop",
+      "caseCount": 1,
+      "cases": [
+        "BaselineNoop"
+      ],
+      "receiptGasUsed": {
+        "median": 21408,
+        "min": 21408,
+        "max": 21408
+      },
+      "calldataBytes": {
+        "median": 4,
+        "min": 4,
+        "max": 4
+      },
+      "submitToReceiptMs": {
+        "median": 2.033458,
+        "min": 2.033458,
+        "max": 2.033458
+      },
+      "buildMs": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "witnessMs": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "proveMs": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "encodeMs": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "e2eMs": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "excludedSetupGas": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "event": "BaselineStorageWrite",
+      "caseCount": 1,
+      "cases": [
+        "BaselineStorageWrite"
+      ],
+      "receiptGasUsed": {
+        "median": 43592,
+        "min": 43592,
+        "max": 43592
+      },
+      "calldataBytes": {
+        "median": 36,
+        "min": 36,
+        "max": 36
+      },
+      "submitToReceiptMs": {
+        "median": 2.002416,
+        "min": 2.002416,
+        "max": 2.002416
+      },
+      "buildMs": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "witnessMs": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "proveMs": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "encodeMs": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "e2eMs": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "excludedSetupGas": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "event": "Entry",
+      "caseCount": 2,
+      "cases": [
+        "entry_a",
+        "entry_b"
+      ],
+      "receiptGasUsed": {
+        "median": 862947,
+        "min": 862935,
+        "max": 862959
+      },
+      "calldataBytes": {
+        "median": 3300,
+        "min": 3300,
+        "max": 3300
+      },
+      "submitToReceiptMs": {
+        "median": 19.341124999999998,
+        "min": 13.735333,
+        "max": 24.946917
+      },
+      "buildMs": {
+        "median": 0.039765,
+        "min": 0.039765,
+        "max": 0.039765
+      },
+      "witnessMs": {
+        "median": 0.10660349999999999,
+        "min": 0.066541,
+        "max": 0.146666
+      },
+      "proveMs": {
+        "median": 32671.642583499997,
+        "min": 32648.073209,
+        "max": 32695.211958
+      },
+      "encodeMs": {
+        "median": 0.0441035,
+        "min": 0.026291,
+        "max": 0.061916
+      },
+      "e2eMs": {
+        "median": 32691.1741805,
+        "min": 32661.941139,
+        "max": 32720.407221999998
+      },
+      "excludedSetupGas": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "event": "Ship",
+      "caseCount": 2,
+      "cases": [
+        "ship_a",
+        "ship_b"
+      ],
+      "receiptGasUsed": {
+        "median": 2050816,
+        "min": 2050744,
+        "max": 2050888
+      },
+      "calldataBytes": {
+        "median": 7940,
+        "min": 7940,
+        "max": 7940
+      },
+      "submitToReceiptMs": {
+        "median": 31.684312,
+        "min": 26.690333,
+        "max": 36.678291
+      },
+      "buildMs": {
+        "median": 0.039765,
+        "min": 0.039765,
+        "max": 0.039765
+      },
+      "witnessMs": {
+        "median": 0.1835205,
+        "min": 0.182209,
+        "max": 0.184832
+      },
+      "proveMs": {
+        "median": 79260.13047949999,
+        "min": 76688.872792,
+        "max": 81831.388167
+      },
+      "encodeMs": {
+        "median": 0.061062500000000006,
+        "min": 0.057167,
+        "max": 0.064958
+      },
+      "e2eMs": {
+        "median": 79292.0991395,
+        "min": 76725.832847,
+        "max": 81858.365432
+      },
+      "excludedSetupGas": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "event": "Merge",
+      "caseCount": 1,
+      "cases": [
+        "merge_a"
+      ],
+      "receiptGasUsed": {
+        "median": 2471327,
+        "min": 2471327,
+        "max": 2471327
+      },
+      "calldataBytes": {
+        "median": 9700,
+        "min": 9700,
+        "max": 9700
+      },
+      "submitToReceiptMs": {
+        "median": 36.735334,
+        "min": 36.735334,
+        "max": 36.735334
+      },
+      "buildMs": {
+        "median": 0.039765,
+        "min": 0.039765,
+        "max": 0.039765
+      },
+      "witnessMs": {
+        "median": 0.224042,
+        "min": 0.224042,
+        "max": 0.224042
+      },
+      "proveMs": {
+        "median": 98314.764207,
+        "min": 98314.764207,
+        "max": 98314.764207
+      },
+      "encodeMs": {
+        "median": 0.051625,
+        "min": 0.051625,
+        "max": 0.051625
+      },
+      "e2eMs": {
+        "median": 98351.81497299999,
+        "min": 98351.81497299999,
+        "max": 98351.81497299999
+      },
+      "excludedSetupGas": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "event": "Split",
+      "caseCount": 1,
+      "cases": [
+        "split_a"
+      ],
+      "receiptGasUsed": {
+        "median": 2553386,
+        "min": 2553386,
+        "max": 2553386
+      },
+      "calldataBytes": {
+        "median": 9764,
+        "min": 9764,
+        "max": 9764
+      },
+      "submitToReceiptMs": {
+        "median": 36.508584,
+        "min": 36.508584,
+        "max": 36.508584
+      },
+      "buildMs": {
+        "median": 0.039765,
+        "min": 0.039765,
+        "max": 0.039765
+      },
+      "witnessMs": {
+        "median": 0.240125,
+        "min": 0.240125,
+        "max": 0.240125
+      },
+      "proveMs": {
+        "median": 98313.2085,
+        "min": 98313.2085,
+        "max": 98313.2085
+      },
+      "encodeMs": {
+        "median": 0.053291,
+        "min": 0.053291,
+        "max": 0.053291
+      },
+      "e2eMs": {
+        "median": 98350.050265,
+        "min": 98350.050265,
+        "max": 98350.050265
+      },
+      "excludedSetupGas": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "event": "Process",
+      "caseCount": 1,
+      "cases": [
+        "process_product"
+      ],
+      "receiptGasUsed": {
+        "median": 2471238,
+        "min": 2471238,
+        "max": 2471238
+      },
+      "calldataBytes": {
+        "median": 9700,
+        "min": 9700,
+        "max": 9700
+      },
+      "submitToReceiptMs": {
+        "median": 25.361625,
+        "min": 25.361625,
+        "max": 25.361625
+      },
+      "buildMs": {
+        "median": 0.039765,
+        "min": 0.039765,
+        "max": 0.039765
+      },
+      "witnessMs": {
+        "median": 0.256665,
+        "min": 0.256665,
+        "max": 0.256665
+      },
+      "proveMs": {
+        "median": 98497.433668,
+        "min": 98497.433668,
+        "max": 98497.433668
+      },
+      "encodeMs": {
+        "median": 0.055042,
+        "min": 0.055042,
+        "max": 0.055042
+      },
+      "e2eMs": {
+        "median": 98523.14676500001,
+        "min": 98523.14676500001,
+        "max": 98523.14676500001
+      },
+      "excludedSetupGas": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "event": "Exit",
+      "caseCount": 1,
+      "cases": [
+        "exit_product"
+      ],
+      "receiptGasUsed": {
+        "median": 911768,
+        "min": 911768,
+        "max": 911768
+      },
+      "calldataBytes": {
+        "median": 3332,
+        "min": 3332,
+        "max": 3332
+      },
+      "submitToReceiptMs": {
+        "median": 14.223917,
+        "min": 14.223917,
+        "max": 14.223917
+      },
+      "buildMs": {
+        "median": 0.039765,
+        "min": 0.039765,
+        "max": 0.039765
+      },
+      "witnessMs": {
+        "median": 0.060625,
+        "min": 0.060625,
+        "max": 0.060625
+      },
+      "proveMs": {
+        "median": 32941.777083,
+        "min": 32941.777083,
+        "max": 32941.777083
+      },
+      "encodeMs": {
+        "median": 0.047833,
+        "min": 0.047833,
+        "max": 0.047833
+      },
+      "e2eMs": {
+        "median": 32956.149223,
+        "min": 32956.149223,
+        "max": 32956.149223
+      },
+      "excludedSetupGas": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  ],
+  "runs": 1,
+  "scenario": "canonical",
+  "threadMode": "MT"
+}

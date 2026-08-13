@@ -1,0 +1,7 @@
+sahai_event,zkdpp_closest_relation,sahai_cases,zkdpp_cases,sahai_gas_median,zkdpp_gas_median,sahai_over_zkdpp_ratio,semantics_boundary
+Entry,entry,2,4,809029.000000,1498540.000000,0.539878,가장 가까운 기능 대응이며 commitment와 공개 입력은 서로 다름
+Ship,transfer,2,7,1917717.000000,2673540.000000,0.717295,Sahai Ship을 zkDPP Transfer에 대응하며 소유권 및 hidden-state semantics는 다름
+Merge,merge,1,1,2308199.000000,1561882.000000,1.477832,두 input을 한 output으로 결합하지만 predicate와 provenance 표현은 다름
+Split,split,1,1,2390246.000000,2352560.000000,1.016019,한 input을 두 output으로 나누지만 output commitment semantics는 다름
+Process,process,1,3,2308110.000000,2403091.000000,0.960475,두 input을 제품 output으로 바꾸지만 relation predicate 구성은 다름
+Exit,exit,1,2,857814.000000,401760.000000,2.135140,terminal 처리의 가장 가까운 대응이며 Sahai는 terminal output document를 생성함

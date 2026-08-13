@@ -19,7 +19,7 @@
 | M14. Profile 확장 | 완료 | State 0--3, Process arity 1--3의 34 configuration |
 | M15. Benchmark | 완료 | 34개 profile의 constraints, time, size와 allocation 재측정 |
 | M16. Anvil Receipt Gas | 완료 | 배포 10건과 Event 25건을 독립 Prague Anvil transaction으로 측정 |
-| M17. Azeroth형 E2E | 완료 | live proof부터 receipt까지 clean-chain 5회 median/min/max 측정 |
+| M17. Azeroth형 E2E | 완료 (historical) | 기존 live proof부터 receipt까지 clean-chain 5회 측정; 이후 재현은 1회 정책 적용 |
 
 ## 결과 위치
 
@@ -36,4 +36,5 @@
 
 `totalAllocatedBytes`는 peak memory가 아니라 profile 실행 중 Go runtime의 누적 allocation
 증가량이다. 34개 circuit profile 시간은 single smoke run이다. Anvil E2E만 clean chain
-5회의 median과 min/max를 기록하며, artifact loading은 E2E 밖에서 별도로 측정한다.
+기존 5회 측정은 historical artifact로 보존한다. 이후 실행은 1회이며 median/min/max 필드는
+schema 호환을 위해 동일한 단일 측정값을 기록한다. Artifact loading은 E2E 밖에서 별도로 측정한다.

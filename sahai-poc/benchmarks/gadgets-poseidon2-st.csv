@@ -1,0 +1,5 @@
+hash_profile,thread_mode,gadget,constraints,public_inputs,proof_bytes,ccs_bytes,proving_key_bytes,verifying_key_bytes,srs_bytes,witness_ms,prove_ms,native_verify_ms
+poseidon2,ST,merklepath,6582,5,1056,109276,835728,49144,883832,0.073000,953.758666,3.556833
+poseidon2,ST,eq,2231,2,1056,38505,442512,49144,490616,0.022792,517.579084,3.549584
+poseidon2,ST,add,3347,3,1056,50154,442512,49144,490616,0.032125,556.759875,3.566500
+poseidon2,ST,and,2582,3,1056,43203,442512,49144,490616,0.030250,543.489125,3.577875

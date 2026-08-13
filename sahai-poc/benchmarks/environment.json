@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2026-08-12T20:48:43.927856Z",
+  "gitCommit": "57b18cc96193643391fa2c5899a26bb63f88d2a4",
+  "gitDirty": true,
+  "goVersion": "go1.25.7",
+  "goos": "darwin",
+  "goarch": "arm64",
+  "osVersion": "26.3",
+  "cpu": "Apple M1 Pro",
+  "cpuCores": 10,
+  "ramBytes": "34359738368",
+  "proofSystem": "PLONK-KZG/BLS12-381",
+  "gnark": "v0.15.0",
+  "gnarkCrypto": "v0.20.1",
+  "foundry": "1.7.1",
+  "solidity": "0.8.30",
+  "evmRevision": "Prague",
+  "besu": "26.7.1",
+  "besuImage": "hyperledger/besu@sha256:5c319f8f5f3449438c03ea7fa2c9bf24b866dc55ac98d802bb41ad793e740587",
+  "hashProfiles": [
+    "poseidon2",
+    "sha256"
+  ],
+  "files": [
+    {
+      "path": "go.sum",
+      "sha256": "50cda42bd863e40554fd81df96a838eadc591b243ad69b40853b12303dc690e6"
+    },
+    {
+      "path": "config/events.json",
+      "sha256": "2d02ab5856b50f4a52511331560fdc2cdff8b4adc957730e35594cfdcc1fbe95"
+    },
+    {
+      "path": "config/paper-benchmarks.json",
+      "sha256": "4ef2ef892481a8f264f1b2bcc6a2303aabc26d96082917a869929cd9e2fef0cb"
+    },
+    {
+      "path": "testdata/hash-golden-vectors.json",
+      "sha256": "1e02dc1b176c4721552d6a69ce791da27810951ad6f0fe3fc56e797755e83c62"
+    },
+    {
+      "path": "circuits/gadgets/circuits.go",
+      "sha256": "d9c26533b441b84b4065e25606b0295b52fec3ab275f12bd6b8a3eee52e7ace7"
+    },
+    {
+      "path": "internal/events/fixtures.go",
+      "sha256": "2c6bd815088648e2652a270e1010c0726bd4608d725c91360431bf8229151946"
+    },
+    {
+      "path": "internal/document/hash.go",
+      "sha256": "ab80a747875565bfd67de4e8969a2ccf8015592fa0cdd6e2d13e163dcd635d66"
+    },
+    {
+      "path": "contracts/src/SahaiLedger.sol",
+      "sha256": "d4685da5d199cbba78a8986050da3792e235f252d21758bc4cd518ba097e7d72"
+    },
+    {
+      "path": "contracts/src/BenchmarkSahaiLedger.sol",
+      "sha256": "a0f60eef8a1f54f10e9ef38f1a4bb974d673956b3fe660573bb0233925f01272"
+    },
+    {
+      "path": "besu/qbftConfigFile.json",
+      "sha256": "3c459ff04799ad4588f4f0d2eee780a17bf12eedd755acd2f7c02a794fc956d2"
+    },
+    {
+      "path": "docker-compose.yml",
+      "sha256": "200da3f06b8fd842997396affb59fba1f0748858c0da1b643088344bc02ae4a9"
+    }
+  ]
+}

@@ -37,7 +37,8 @@
   \item \path{testdata/scenario/canonical.json}: POC에서 실행한 공급망 시나리오
   \item \path{benchmarks/summary.csv}: State 길이와 Process 입출력 크기에 따른 circuit 성능
   \item \path{benchmarks/anvil-transaction-gas.json}: 실제 Anvil transaction gas와 calldata
-  \item \path{benchmarks/anvil-e2e-time.json}: live proof를 포함한 5회 E2E 시간
+  \item \path{benchmarks/anvil-e2e-time.json}: live proof를 포함한 E2E 시간. 본 보고서의 기존
+        표는 historical 5회 측정이며, 이후 재현 실행은 1회 정책을 사용한다.
 \end{itemize}
 
 원시 JSON의 commitment, nullifier와 Merkle root 숫자를 다시 나열하는 것이 목적이 아니다.
@@ -262,7 +263,8 @@ $M_{\max}=N_{\max}=a$를 뜻한다. 예를 들어 3-to-3은 circuit이 input과 
 최대 입출력 크기가 증가하면 input commitment의 opening과 membership, nullifier, output commitment와
 allocation relation이 함께 추가되므로 constraint 수가 거의 선형으로 증가한다. Prove 시간은
 단일 smoke run의 참고값이므로 constraint 증가에 정확히 비례하거나 대표 성능으로 해석하지 않는다.
-반복 측정한 시간 지표는 4.2의 clean Anvil 5회 E2E 결과를 사용한다.
+본 보고서에서 기존에 반복 측정한 시간 지표는 4.2의 historical clean Anvil 5회 E2E 결과를
+사용한다. 이후 재현 실행은 1회만 수행한다.
 
 \section{On-chain gas 결과}
 
@@ -304,7 +306,7 @@ $\MT/\rvMT$ depth-32 초기화를 포함한다.
 median이다. Process는 canonical 최대 입출력 크기인 3-to-3을 실행한 22번 transaction만
 사용한다. 한 번만 실행된 Event도 해당 transaction의 측정값을 그대로 사용한다. Gas는
 고정 proof를 제출한 Anvil transaction의 \texttt{gasUsed}, E2E ms는 live proof 생성부터
-receipt 수신까지 clean Anvil 5회 측정의 median이다.
+receipt 수신까지 수행한 기존 historical clean Anvil 5회 측정의 median이다.
 
 \begin{center}
   \begin{tabular}{@{}l@{\hspace{25mm}}l@{\hspace{25mm}}l@{}}
@@ -371,7 +373,7 @@ Transfer는 $\MT$와 $\rvMT$를 함께 갱신한다. 개별 transaction의 차�
 \subsection{Transaction별 Gas 및 E2E 시간}
 
 Gas는 고정 proof를 사용한 Anvil transaction의 \texttt{gasUsed}다. E2E ms는 live proof를
-생성한 clean Anvil 5회의 median이며, 마지막 열은 동일한 5회의 min--max다.
+생성한 기존 historical clean Anvil 5회의 median이며, 마지막 열은 동일한 5회의 min--max다.
 
   {\small
     \begin{longtable}{@{}p{0.08\textwidth}p{0.17\textwidth}p{0.19\textwidth}p{0.18\textwidth}p{0.26\textwidth}@{}}
@@ -477,7 +479,8 @@ input/output Material 관계가 공개될 수 있고, 유효한 Recipe를 등록
   \item \textbf{E2E 시간은 proof 생성이 지배한다.}
         Foil Process 두 건의 E2E median은 841.452ms와 839.126ms였고, Cell Process는
         전체 E2E 846.296ms였다.
-        E2E는 clean Anvil 5회 median과 min/max를 함께 기록했다.
+        기존 E2E 결과는 historical clean Anvil 5회 median과 min/max를 함께 기록했다.
+        이후 재현 실행은 1회만 수행하며 세 통계 필드에는 동일한 값이 기록된다.
 \end{enumerate}
 
 \section{재현 방법}
@@ -489,8 +492,8 @@ make setup
 make test-contract
 make benchmark
 make benchmark-anvil-gas ANVIL_PORT=18545
-make benchmark-anvil-e2e RUNS=5 ANVIL_PORT=18545
-make benchmark-anvil RUNS=5 ANVIL_PORT=18545
+make benchmark-anvil-e2e ANVIL_PORT=18545
+make benchmark-anvil ANVIL_PORT=18545
 \end{verbatim}
 
 \texttt{make benchmark}는 34개 profile의 Go compile/setup/prove/verify 결과와 Solidity

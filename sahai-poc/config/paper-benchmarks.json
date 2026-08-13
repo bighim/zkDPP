@@ -1,0 +1,29 @@
+{
+  "source": "Sahai et al. 2020, Tables II-V",
+  "tableII": [
+    {"operation": "GenPrime", "parameters": "B=500", "timeMs": 15},
+    {"operation": "VerifyPrime", "parameters": "B=500", "timeMs": 0.32},
+    {"operation": "UpdateAcc", "parameters": "RSA-1024", "timeMs": 0.25},
+    {"operation": "CombineAcc", "parameters": "|S|=100", "timeMs": 25},
+    {"operation": "VerifyAcc", "parameters": "m=2", "timeMs": 1.05}
+  ],
+  "tableIII": [
+    {"gadget": "MerklePath", "proveSTMs": 16000, "proveMTMs": 5200, "verifySTMs": 35, "verifyMTMs": 48},
+    {"gadget": "G-Add", "proveSTMs": 4950, "proveMTMs": 1600, "verifySTMs": 35, "verifyMTMs": 48},
+    {"gadget": "G-Eq", "proveSTMs": 3200, "proveMTMs": 1000, "verifySTMs": 35, "verifyMTMs": 48}
+  ],
+  "tableIV": [
+    {"setSize": 100, "proveMs": 39, "verifyMs": 0.54},
+    {"setSize": 250, "proveMs": 108, "verifyMs": 0.54},
+    {"setSize": 500, "proveMs": 156, "verifyMs": 0.54},
+    {"setSize": 1000, "proveMs": 308, "verifyMs": 0.54}
+  ],
+  "tableV": [
+    {"event": "Entry", "proofs": 2, "sizeBytes": 640, "timeSTSeconds": 21, "timeMTSeconds": 6.2},
+    {"event": "Ship", "proofs": 5, "sizeBytes": 1216, "timeSTSeconds": 41.6, "timeMTSeconds": 13.4},
+    {"event": "Merge", "proofs": 6, "sizeBytes": 1404, "timeSTSeconds": 59.4, "timeMTSeconds": 19.2},
+    {"event": "Split", "proofs": 6, "sizeBytes": 1600, "timeSTSeconds": 59.4, "timeMTSeconds": 19.2},
+    {"event": "Process", "proofs": 6, "sizeBytes": 1404, "timeSTSeconds": 59.4, "timeMTSeconds": 19.2, "note": "paper states identical to Merge and omits row"},
+    {"event": "Exit", "proofs": 2, "sizeBytes": 640, "timeSTSeconds": 21.2, "timeMTSeconds": 6.3}
+  ]
+}

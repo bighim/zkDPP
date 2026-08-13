@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-08-12T19:05:51.087826Z",
+  "rpc": "http://127.0.0.1:19545",
+  "ledger": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+  "allowedUnregisteredAccount": "0x2B5AD5c4795c026514f8317c7a215E218DcCD6cF",
+  "participantBefore": false,
+  "roleRejectedTransactionHash": "0xec69a0a55bca6ea22c3b14b38aafbaa9014a5418218de028475828cdf586ab57",
+  "roleRejectedReceiptStatus": 0,
+  "outsideAllowlistAccount": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf",
+  "outsideTransactionRejected": true,
+  "outsideRejectionText": "Sender account not authorized to send transactions",
+  "passed": true
+}

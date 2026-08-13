@@ -1,0 +1,126 @@
+{
+  "generatedAt": "2026-08-12T15:18:30Z",
+  "hashProfile": "poseidon2",
+  "results": [
+    {
+      "hashProfile": "poseidon2",
+      "gadget": "merklepath",
+      "curve": "BLS12-381",
+      "proofSystem": "PLONK-KZG",
+      "hash": "poseidon2",
+      "constraints": 6582,
+      "publicInputs": 5,
+      "compileMs": 4.899375,
+      "setupMs": 313.316458,
+      "proveMs": 150.51175,
+      "verifyMs": 2.866625,
+      "proofBytes": 1056,
+      "artifactBytes": {
+        "PlonkVerifier.sol": 49855,
+        "ccs.bin": 109276,
+        "proving.key": 835728,
+        "srs-canonical.bin": 441988,
+        "srs-lagrange.bin": 441844,
+        "verifying.key": 49144
+      },
+      "artifactSha256": {
+        "PlonkVerifier.sol": "1e1ddb6a87e8b691f84297dbbf8e59a556730f7c2f5a0d996064fdac5b8bfb4b",
+        "ccs.bin": "eaeb1ce695d0deed33ed4721c26a72a7e0f12f27a99ed3a9b4a923b64e4e8133",
+        "proving.key": "c8f9023d4300744b77455b1c02070b3abedeb9f92d945bc89f77da2618847418",
+        "srs-canonical.bin": "67275c2792eb6ff5eb5911a538d4465534d792b46854c703e9cb661f6cccdd74",
+        "srs-lagrange.bin": "3e9b421d9f8722464398fbd982dfedd5fa33469fb066f5e2264b450148a3e398",
+        "verifying.key": "0e6c10eb165c3edfdc04291874f5cd136ca883a5facbe86d57e556966a985eab"
+      }
+    },
+    {
+      "hashProfile": "poseidon2",
+      "gadget": "eq",
+      "curve": "BLS12-381",
+      "proofSystem": "PLONK-KZG",
+      "hash": "poseidon2",
+      "constraints": 2231,
+      "publicInputs": 2,
+      "compileMs": 1.119625,
+      "setupMs": 166.01225,
+      "proveMs": 79.342959,
+      "verifyMs": 2.58525,
+      "proofBytes": 1056,
+      "artifactBytes": {
+        "PlonkVerifier.sol": 49842,
+        "ccs.bin": 38505,
+        "proving.key": 442512,
+        "srs-canonical.bin": 245380,
+        "srs-lagrange.bin": 245236,
+        "verifying.key": 49144
+      },
+      "artifactSha256": {
+        "PlonkVerifier.sol": "3c9e2985896a7ba77bd177f5ec430922626dce20129aba9d45ce3204ecee7935",
+        "ccs.bin": "a475fbbae960213256e1ce1c0ca58ff12eb0b9ee75216a9c2704fc4e2ac05129",
+        "proving.key": "16b74a20cad45562709b565b1cf42ec2698d36c90b04061872f7ac12c79366be",
+        "srs-canonical.bin": "d79655fd149cd670e1a9645b199c628c4b333cf38e8bb7025b285ff5094ce5e2",
+        "srs-lagrange.bin": "38e3954331bbbc96a39658375285f87670e60a67e96fbbf0713c486cfc2925b2",
+        "verifying.key": "3cba04cce034f590e82793e1d9133ed5bfa5eb46db14e01975a6a371630fdf47"
+      }
+    },
+    {
+      "hashProfile": "poseidon2",
+      "gadget": "add",
+      "curve": "BLS12-381",
+      "proofSystem": "PLONK-KZG",
+      "hash": "poseidon2",
+      "constraints": 3347,
+      "publicInputs": 3,
+      "compileMs": 1.789542,
+      "setupMs": 32.504125,
+      "proveMs": 84.278667,
+      "verifyMs": 2.70425,
+      "proofBytes": 1056,
+      "artifactBytes": {
+        "PlonkVerifier.sol": 49844,
+        "ccs.bin": 50154,
+        "proving.key": 442512,
+        "srs-canonical.bin": 245380,
+        "srs-lagrange.bin": 245236,
+        "verifying.key": 49144
+      },
+      "artifactSha256": {
+        "PlonkVerifier.sol": "819428200c8e920017623a0bc0f6c9fb72e0bbb6412f15c24e44a0c18eaf8260",
+        "ccs.bin": "d40ca058fa80405d731e8c0874a1cac34002b1d1a587c921dc27a8a134d6c81f",
+        "proving.key": "b06403f5250d002dcf26b77643ced9a8608abe555e6342132e673a5ae63d55dc",
+        "srs-canonical.bin": "d79655fd149cd670e1a9645b199c628c4b333cf38e8bb7025b285ff5094ce5e2",
+        "srs-lagrange.bin": "38e3954331bbbc96a39658375285f87670e60a67e96fbbf0713c486cfc2925b2",
+        "verifying.key": "f3fa5cad80b783772bbd0909e92b8291607ff1a609121409e8bbfe02eb881bec"
+      }
+    },
+    {
+      "hashProfile": "poseidon2",
+      "gadget": "and",
+      "curve": "BLS12-381",
+      "proofSystem": "PLONK-KZG",
+      "hash": "poseidon2",
+      "constraints": 2582,
+      "publicInputs": 3,
+      "compileMs": 1.257541,
+      "setupMs": 32.693959,
+      "proveMs": 86.2115,
+      "verifyMs": 2.685916,
+      "proofBytes": 1056,
+      "artifactBytes": {
+        "PlonkVerifier.sol": 49846,
+        "ccs.bin": 43203,
+        "proving.key": 442512,
+        "srs-canonical.bin": 245380,
+        "srs-lagrange.bin": 245236,
+        "verifying.key": 49144
+      },
+      "artifactSha256": {
+        "PlonkVerifier.sol": "8925efa1c8e2a4d73470d60e45b8f0699e17086d7133f7155868f378581c6bb7",
+        "ccs.bin": "850e0e814ba06aeab7f99ff407239440f0f58475f5524c4f1c86f027d4f8106f",
+        "proving.key": "9f0cabe2dffd1d0109cb6cf074255708c7f3f38860922a27c0cbfc5b5be0862d",
+        "srs-canonical.bin": "d79655fd149cd670e1a9645b199c628c4b333cf38e8bb7025b285ff5094ce5e2",
+        "srs-lagrange.bin": "38e3954331bbbc96a39658375285f87670e60a67e96fbbf0713c486cfc2925b2",
+        "verifying.key": "44457fd36b4864e7d84e18dd48177142120973c8cb488e3592e8ad41039841cf"
+      }
+    }
+  ]
+}

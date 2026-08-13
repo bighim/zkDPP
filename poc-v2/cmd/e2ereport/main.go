@@ -49,6 +49,9 @@ type runResult struct {
 	Run           int             `json:"run"`
 	GeneratedAt   string          `json:"generatedAt"`
 	Measurement   string          `json:"measurementType"`
+	Backend       string          `json:"backend"`
+	RPC           string          `json:"rpc"`
+	ChainID       uint64          `json:"chainId"`
 	Machine       machineMetadata `json:"machine"`
 	Contract      string          `json:"contract"`
 	ArtifactLoads []loadResult    `json:"artifactLoads"`
@@ -89,7 +92,8 @@ type softwareMetadata struct {
 	GnarkCrypto string `json:"gnarkCrypto"`
 	GoEthereum  string `json:"goEthereum"`
 	Foundry     string `json:"foundry"`
-	Anvil       string `json:"anvil"`
+	Anvil       string `json:"anvil,omitempty"`
+	Besu        string `json:"besu,omitempty"`
 	Solidity    string `json:"solidity"`
 	ProofSystem string `json:"proofSystem"`
 	Curve       string `json:"curve"`
@@ -105,6 +109,7 @@ type chainMetadata struct {
 
 type report struct {
 	GeneratedAt         string           `json:"generatedAt"`
+	Backend             string           `json:"backend"`
 	MeasurementType     string           `json:"measurementType"`
 	MeasurementBoundary string           `json:"measurementBoundary"`
 	Runs                int              `json:"runs"`
@@ -119,7 +124,7 @@ type report struct {
 
 func main() {
 	input := flag.String("input", "benchmarks/e2e-runs/run-*.json", "input glob")
-	expectedRuns := flag.Int("runs", 5, "expected run count")
+	expectedRuns := flag.Int("runs", 1, "expected run count")
 	outJSON := flag.String("out-json", "benchmarks/anvil-e2e-time.json", "output JSON")
 	outCSV := flag.String("out-csv", "benchmarks/anvil-e2e-time.csv", "output CSV")
 	flag.Parse()
@@ -153,13 +158,34 @@ func run(input string, expectedRuns int, outJSON, outCSV string) error {
 		runs = append(runs, item)
 	}
 	sort.Slice(runs, func(i, j int) bool { return runs[i].Run < runs[j].Run })
+	backend := runs[0].Backend
+	if backend == "" {
+		backend = "anvil"
+	}
+	chainID := runs[0].ChainID
+	if chainID == 0 {
+		chainID = 31337
+	}
+	for _, item := range runs[1:] {
+		itemBackend := item.Backend
+		if itemBackend == "" {
+			itemBackend = "anvil"
+		}
+		itemChainID := item.ChainID
+		if itemChainID == 0 {
+			itemChainID = 31337
+		}
+		if itemBackend != backend || itemChainID != chainID {
+			return fmt.Errorf("run backend or chain ID mismatch")
+		}
+	}
 	if err := validateShape(runs); err != nil {
 		return err
 	}
 
 	result := report{
-		GeneratedAt: time.Now().UTC().Format(time.RFC3339), MeasurementType: "live-proof-anvil-e2e",
-		MeasurementBoundary: "witness construction start through successful Anvil transaction receipt; compile, setup, deployment, and artifact loading excluded",
+		GeneratedAt: time.Now().UTC().Format(time.RFC3339), Backend: backend, MeasurementType: "live-proof-evm-e2e",
+		MeasurementBoundary: "witness construction start through successful EVM transaction receipt; compile, setup, deployment, and artifact loading excluded",
 		Runs:                len(runs), Representative: "median", Machine: runs[0].Machine,
 		Software: softwareMetadata{
 			Gnark: "v0.15.0", GnarkCrypto: "v0.20.1", GoEthereum: "v1.17.4",
@@ -167,10 +193,14 @@ func run(input string, expectedRuns int, outJSON, outCSV string) error {
 			ProofSystem: "PLONK-KZG", Curve: "BLS12-381",
 		},
 		Chain: chainMetadata{
-			ChainID: 31337, Hardfork: "prague", GenesisTimestamp: 60000,
+			ChainID: chainID, Hardfork: "prague", GenesisTimestamp: 60000,
 			BlockGasLimit: 30000000, TransactionGasLimit: 29000000,
 		},
 		RawRuns: runs,
+	}
+	if backend == "besu" {
+		result.Software.Anvil = ""
+		result.Software.Besu = "v26.7.1"
 	}
 	for loadIndex, load := range runs[0].ArtifactLoads {
 		values := make([]float64, len(runs))

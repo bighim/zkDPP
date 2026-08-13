@@ -24,7 +24,7 @@
 ## Anvil 결과
 
 - `anvil-transaction-gas.json/csv`: 고정 proof를 이용한 배포 10건과 Event 25건의 receipt gas
-- `anvil-e2e-time.json/csv`: live proof clean-chain 5회 결과와 median/min/max
+- `anvil-e2e-time.json/csv`: live proof clean-chain 1회 결과와 median/min/max
 - `e2e-runs/run-*.json`: 각 반복의 원시 시간, transaction hash, gas와 calldata 크기
 
 논문용 transaction gas는 `anvil-transaction-gas.json`의 fixed-proof receipt를 사용한다.
@@ -34,7 +34,8 @@ gas는 보조값이다.
 ## 주의
 
 Profile 시간 결과는 Apple M1 Pro 10-core, 32 GB, macOS 26.3에서 수행한 single smoke run이다.
-Anvil E2E 시간만 clean chain 5회 median과 min/max를 사용한다.
+Anvil E2E 시간은 clean chain 1회를 사용한다. median/min/max 필드는 schema 호환을 위해
+유지하며 동일한 단일 측정값을 담는다.
 SRS는 process-local cache를 사용할 수 있으므로 `setup_ms`는 production setup 성능이나
 독립 반복 평균으로 해석하면 안 된다. 비교에는 constraints, key/SRS 크기, proof 크기와
 Anvil receipt gas를 함께 사용해야 한다.

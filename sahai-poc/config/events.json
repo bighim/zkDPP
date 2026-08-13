@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "merkle": {
+    "attributes": 32,
+    "attributeBits": 128,
+    "attributesPerLeaf": 4,
+    "leaves": 8,
+    "siblings": 3,
+    "levelsIncludingLeaf": 4,
+    "profiles": ["poseidon2", "sha256"]
+  },
+  "events": [
+    {"name":"Entry","inputs":0,"outputs":1,"terminalOutput":false,"proofs":{"merklePath":1,"eq":1,"add":0,"and":0}},
+    {"name":"Ship","inputs":1,"outputs":1,"terminalOutput":false,"proofs":{"merklePath":2,"eq":3,"add":0,"and":0}},
+    {"name":"Merge","inputs":2,"outputs":1,"terminalOutput":false,"proofs":{"merklePath":3,"eq":2,"add":1,"and":0}},
+    {"name":"Split","inputs":1,"outputs":2,"terminalOutput":false,"proofs":{"merklePath":3,"eq":2,"add":1,"and":0}},
+    {"name":"Process","inputs":2,"outputs":1,"terminalOutput":false,"proofs":{"merklePath":3,"eq":2,"add":1,"and":0}},
+    {"name":"Exit","inputs":1,"outputs":1,"terminalOutput":true,"proofs":{"merklePath":1,"eq":1,"add":0,"and":0}}
+  ]
+}

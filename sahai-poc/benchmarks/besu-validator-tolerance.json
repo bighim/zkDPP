@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2026-08-12T18:48:19.129852Z",
+  "stoppedValidator": "validator4",
+  "blockBefore": 32,
+  "blockAfter": 33,
+  "peerCount": 3,
+  "validators": [
+    "0x1de5ccf758179ceaffc1553ae953b647663a894e",
+    "0x417abca2f1f8a0254b793a478781ad60c256e5cd",
+    "0xaa3543a147cbeb75b642ec31638d6a600b2a1655",
+    "0xf842e4bed7019caa5c888e12ee7f36a18890914c"
+  ],
+  "transactionHash": "0x08e2030e5f81fccd88119905a5437a34eb675721b8f7299fc51e7f92f7a4a3af",
+  "receiptBlock": 33,
+  "submitToReceiptMs": 3019.347,
+  "passed": true
+}

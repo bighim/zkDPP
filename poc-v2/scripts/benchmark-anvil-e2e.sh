@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-RUNS="${RUNS:-5}"
+RUNS="${RUNS:-1}"
 ANVIL_PORT="${ANVIL_PORT:-8545}"
 RPC_INTERNAL="http://anvil:8545"
 RPC_HOST="http://127.0.0.1:${ANVIL_PORT}"
@@ -54,7 +54,11 @@ for run in $(seq 1 "$RUNS"); do
   GOTOOLCHAIN=go1.25.7 \
   go run ./cmd/e2erun \
     -root "$ROOT_DIR" \
+    -backend anvil \
     -rpc "$RPC_HOST" \
+    -chain-id 31337 \
+    -receipt-timeout 30s \
+    -poll-interval 10ms \
     -broadcast contracts/broadcast/DeployCanonical.s.sol/31337/run-latest.json \
     -run "$run" \
     -out "benchmarks/e2e-runs/run-$(printf '%02d' "$run").json"
