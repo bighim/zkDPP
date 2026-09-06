@@ -1,0 +1,796 @@
+schemaVersion: 1
+
+protocol:
+  name: zkDPP
+  version: poc-v1-m9
+  status: final-poc
+  mainContract: ZkDPPClaimLedger
+  treeDepth: 32
+  epochSeconds: 600
+  field: BLS12-381 scalar field
+  proofSystem: PLONK
+  backend: Anvil
+  pathsRelativeTo: repositoryRoot
+  sourceSpecification: milestones/M9-final-integration.md
+  result: milestones/M9-final-integration-result.md
+
+identifiers:
+  eventKinds:
+    ENTRY: 0
+    TRANSFER: 1
+    PROCEED: 2
+    RECALL: 3
+    MERGE: 4
+    SPLIT: 5
+    PROCESS: 6
+    EXIT: 7
+    ISSUE: 8
+  objectTypes:
+    NOTE: 1
+    VOUCHER: 2
+    DPP: 3
+  statuses:
+    ACTIVE: 0
+    FROZEN: 1
+    REVOKED: 2
+  assetRoles:
+    ELIGIBLE: 0
+    WASTE: 1
+
+hashProfiles:
+  documentHash:
+    input: [ProductName, LotID]
+    encoding: NFC normalized UTF-8 fields with uint32 big-endian byte-length prefixes
+    hash: BLS12-381 hash-to-field
+  circuitRelations:
+    hash: Poseidon2 Merkle-Damgard over BLS12-381 scalar field elements
+    domainFirst: true
+    domains:
+      note: "zkDPP:Note:v1"
+      owner: "zkDPP:Owner:v1"
+      noteNullifier: "zkDPP:Nullifier:v1"
+      voucher: "zkDPP:Voucher:v1"
+      voucherNullifier: "zkDPP:VoucherNullifier:v1"
+      dpp: "zkDPP:DPP:v1"
+      policyRef: "zkDPP:PolicyRef:v1"
+      scopeRef: "zkDPP:ScopeRef:v1"
+      auditKey: "zkDPP:AuditKey:v1"
+      auditMask: "zkDPP:AuditMask:v1"
+      auditContext: "zkDPP:AuditContext:v1"
+  merkleNode:
+    hash: Poseidon2 two-input compression
+  externalChecksums:
+    hash: SHA-256
+    appliesTo: [artifacts, canonical optimized VK encoding]
+
+objects:
+  State:
+    purpose: 공급망 물품의 질량과 Sustainability attribution을 표현합니다.
+    fields:
+      - { name: q_mass, type: uint64, unit: "kg * 1e9" }
+      - { name: a_rec, type: uint64, unit: "kg * 1e9" }
+      - { name: e, type: uint64, unit: "kgCO2e * 1e9" }
+    invariants:
+      - "a_rec <= q_mass"
+      - "WASTE이면 a_rec = 0"
+      - "WASTE이면 e = 0"
+
+  Note:
+    purpose: 공급망 안에 있는 물품의 현재 private 상태입니다.
+    privateFields:
+      - DocumentHash
+      - AssetRole
+      - q_mass
+      - a_rec
+      - e
+      - address
+      - opening
+    publicIdentifier: cm
+    spendValue: nf
+    commitment: "H(NoteTag, DocumentHash, AssetRole, q_mass, a_rec, e, address, opening)"
+    ownerAddress: "H(OwnerTag, sk_owner)"
+    ownerAddressType: ZK owner address; not an EVM account
+    nullifier: "H(NullifierTag, sk_owner, cm)"
+    membership: noteTree
+
+  Voucher:
+    purpose: Transfer 뒤 Proceed 또는 Recall을 기다리는 private 전달 상태입니다.
+    privateFields:
+      - DocumentHash
+      - AssetRole
+      - q_mass
+      - a_rec
+      - e
+      - senderAddress
+      - receiverAddress
+      - deadlineEpoch
+      - opening
+    publicIdentifier: rv
+    spendValue: rvnf
+    commitment: "H(VoucherTag, DocumentHash, AssetRole, q_mass, a_rec, e, senderAddress, receiverAddress, deadlineEpoch, opening)"
+    nullifier: "H(VoucherNullifierTag, opening, rv)"
+    addressType: senderAddress and receiverAddress are ZK owner addresses
+    openingKnowledge: shared by Sender and Receiver
+    openingDeliveryProtocolImplemented: false
+    membership: voucherTree
+
+  DPP:
+    purpose: Exit가 확정한 완제품 또는 종료 물품의 public commitment입니다.
+    privateFields:
+      - DocumentHash
+      - AssetRole
+      - q_mass
+      - a_rec
+      - e
+      - dppOpening
+    publicIdentifier: dppCommitment
+    spendValue: null
+    commitment: "H(DPPTag, DocumentHash, AssetRole, q_mass, a_rec, e, dppOpening)"
+    openingPurpose: commitment hiding and randomization; not an ownership credential
+    ownerAuthorizationCheckedByIssue: false
+    membership: null
+
+  Claim:
+    purpose: 특정 DPP가 특정 Issue Policy version을 만족한다는 등록 기록입니다.
+    publicIdentifier:
+      - dppCommitment
+      - issuePolicyRef
+    spendValue: null
+    membership: null
+    uniqueness: 동일한 dppCommitment와 issuePolicyRef 조합은 한 번만 등록합니다.
+
+protocolRules:
+  entry:
+    requiredAssetRole: ELIGIBLE
+    qMassMustBePositive: true
+  transferAllocation:
+    selectedBySender: q_voucher
+    mass: "0 < q_voucher <= q_input; q_change = q_input - q_voucher"
+    attribution: "for x in {a_rec,e}: x_change=floor(x_input*q_change/q_input); x_voucher=x_input-x_change"
+    zeroChangeAllowed: true
+  splitAllocation:
+    mass: "q_1 + q_2 = q_input"
+    attribution: "for x in {a_rec,e}: x_2=floor(x_input*q_2/q_input); x_1=x_input-x_2"
+    atMostOneZeroOutputAllowed: true
+    outputDocumentHashBoundToInput: false
+  merge:
+    requiredSameOwner: true
+    requiredSameAssetRole: true
+    productProfileChecked: false
+    outputDocumentHashBoundToInputs: false
+  processPolicy:
+    inputArity: 3
+    outputArity: 2
+    denominator: 1000000000
+    lossRate: 62500000
+    carbonIntensity: 93750000
+    wasteMassRate: 100000000
+    inputRoles: [ELIGIBLE, ELIGIBLE, ELIGIBLE]
+    outputRoles: [ELIGIBLE, WASTE]
+    attribution:
+      eligible: all a_rec and all post-process e
+      waste: "a_rec=0; e=0"
+    outputDocumentHashBoundToInputs: false
+  deadline:
+    currentEpoch: "floor(block.timestamp / 600)"
+    transfer: "deadlineEpoch = transferEpoch + deltaEpoch"
+    recall: "currentEpoch < deadlineEpoch"
+    proceedChecksDeadline: false
+  issuePolicies:
+    denominator: 1000000000
+    comparisonProductBits: 94
+    standardV1:
+      minRecycledRate: 100000000
+      maxCarbonIntensity: 1000000000
+    strictV2:
+      minRecycledRate: 110000000
+      maxCarbonIntensity: 970000000
+    requiredAssetRole: ELIGIBLE
+    claimKey: [dppCommitment, issuePolicyRef]
+
+actors:
+  SystemAdmin:
+    identity: EVM account
+    responsibilities:
+      - Contract 배포
+      - EntryIssuer 등록
+      - Policy Authority 등록
+  EntryIssuer:
+    identity: 등록된 EVM account
+    responsibilities:
+      - entry 함수 호출
+    doesNotMean:
+      - Note 소유권
+    m9ScenarioAssumption: EntryIssuer EVM account와 Note 소유 Participant를 같은 업무상 참여자로 배치합니다.
+    contractEnforcement: Contract는 EntryIssuer EVM account와 ZK owner address의 동일인 관계를 검증하지 않습니다.
+    futureSeparation: EntryIssuer와 Participant를 분리한 승인 절차는 현재 구현하지 않았습니다.
+  Participant:
+    identity: Circuit이 sk_owner에서 계산하는 ZK address
+    responsibilities:
+      - private 객체 보관
+      - Event proof 생성
+    notes:
+      - Factory는 Process를 수행하는 Participant의 업무상 이름입니다.
+      - Contract는 공급망 Event의 msg.sender와 Circuit이 검증한 ZK owner를 비교하지 않습니다.
+  PolicyAuthority:
+    identity: authorityId에 등록된 EVM account
+    responsibilities:
+      - Policy family와 version 예약
+      - verifier와 vkHash 등록
+      - Process Grant 관리
+      - Policy disable
+  StatusAuthority:
+    identity: constructor에서 고정한 EVM account
+    responsibilities:
+      - Note와 Voucher nullifier 상태 변경
+      - Claim 상태 변경
+  Committee:
+    identity: 2-of-3 local key shares
+    responsibilities:
+      - 검증된 AuditRecord의 partial decryption
+    onchainRegistered: false
+  Auditor:
+    identity: off-chain POC program
+    responsibilities:
+      - partial decryption 결합
+      - backward tracing
+      - forward tracing
+    onchainRegistered: false
+
+onchainState:
+  immutables:
+    admin:
+      type: address
+      initializedBy: constructor msg.sender
+    statusAuthority:
+      type: address
+      initializedBy: constructor argument
+    fieldHasher:
+      type: address
+      initializedBy: constructor argument
+    fixedEventVerifiers:
+      constructorInput: "address[7]"
+      storedAs: 7 individual immutable verifier addresses
+      order: [Entry, Transfer, Proceed, Recall, Merge, Split, Exit]
+
+  trees:
+    noteTree:
+      type: append-only Merkle tree
+      depth: 32
+      leaf: cm
+      storageFields: [acceptedRoots, nodes, zeroes, leafCount, currentRoot]
+    voucherTree:
+      type: append-only Merkle tree
+      depth: 32
+      leaf: rv
+      storageFields: [acceptedRoots, nodes, zeroes, leafCount, currentRoot]
+
+  mappings:
+    entryIssuers:
+      shape: "address -> bool"
+      default: false
+      purpose: entry 함수 호출 허용 여부
+    commitments:
+      shape: "cm -> bool"
+      default: false
+      purpose: Note output 중복 방지
+    voucherCommitments:
+      shape: "rv -> bool"
+      default: false
+      purpose: Voucher output 중복 방지
+    producerOf:
+      shape: "objectType -> rawId -> auditRecordId"
+      default: 0
+      purpose: Note·Voucher·DPP 생성 기록 조회
+    noteSpentIn:
+      shape: "nf -> auditRecordId"
+      default: 0
+      purpose: Note 중복 소비 방지와 소비 기록 조회
+    voucherSpentIn:
+      shape: "rvnf -> auditRecordId"
+      default: 0
+      purpose: Voucher 중복 해결 방지와 소비 기록 조회
+    noteStatusByNf:
+      shape: "nf -> status"
+      default: ACTIVE
+      purpose: Note Frozen·Revoked 집행
+      doesNotProveObjectExistence: true
+    voucherStatusByNf:
+      shape: "rvnf -> status"
+      default: ACTIVE
+      purpose: Voucher Frozen·Revoked 집행
+      doesNotProveObjectExistence: true
+    auditRecords:
+      shape: "auditRecordId -> AuditRecord"
+      firstId: 1
+      fields:
+        - eventKind
+        - policyRef
+        - outputRefs
+        - r1X
+        - r1Y
+        - encryptedParents
+        - encryptedOutputNfs
+    authorityIdOf:
+      shape: "EVM account -> authorityId"
+      default: 0
+    policyAuthorities:
+      shape: "authorityId -> {account, enabled}"
+    nextPolicyId:
+      shape: "authorityId -> next policyId"
+    nextPolicyVersion:
+      shape: "authorityId -> policyId -> next version"
+    policyFamilies:
+      shape: "authorityId -> policyId -> {eventKind, exists}"
+    policyReservations:
+      shape: "policyRef -> reservation"
+    policyRecords:
+      shape: "policyRef -> PolicyRecord"
+      fields: [authorityId, policyId, version, eventKind, inputArity, outputArity, vkHash, verifierRef, enabled]
+      trustBoundary: Contract는 vkHash와 verifierRef가 같은 VK를 나타내는지 다시 계산하지 않습니다.
+    policyGrants:
+      shape: "policyRef -> policyScopeRef -> bool"
+      appliesTo: PROCESS
+    claimRecordOf:
+      shape: "dppCommitment -> issuePolicyRef -> auditRecordId"
+      default: 0
+    claimStatus:
+      shape: "dppCommitment -> issuePolicyRef -> status"
+      default: ACTIVE
+      validOnlyWhen: "claimRecordOf[dppCommitment][issuePolicyRef] != 0"
+
+  counters:
+    nextAuditRecordId:
+      type: uint256
+      initialValue: 1
+      purpose: 다음 AuditRecord ID
+    nextAuthorityId:
+      type: uint64
+      initialValue: 1
+      purpose: 다음 Policy Authority ID
+
+circuits:
+  audit-entry:
+    class: fixed-event
+    eventKind: 0
+    publicInputs: [cm, R1X, R1Y, encryptedOutputNf]
+    constraints: 19020
+    domainSize: 32768
+    verifierSelection: constructor index 0
+    implementation: features/audit_entry
+  audit-transfer:
+    class: fixed-event
+    eventKind: 1
+    publicInputs: [noteRoot, nf, rvNew, cmChange, transferEpoch, deltaEpoch, R1X, R1Y, encryptedParentCM, encryptedVoucherRvnf, encryptedChangeNf]
+    constraints: 53836
+    domainSize: 65536
+    verifierSelection: constructor index 1
+    implementation: features/audit_transfer
+  audit-proceed:
+    class: fixed-event
+    eventKind: 2
+    publicInputs: [voucherRoot, rvnf, cmReceiver, R1X, R1Y, encryptedParentRV, encryptedReceiverNf]
+    constraints: 39766
+    domainSize: 65536
+    verifierSelection: constructor index 2
+    implementation: features/audit_proceed
+  audit-recall:
+    class: fixed-event
+    eventKind: 3
+    publicInputs: [voucherRoot, rvnf, cmReturn, currentEpoch, R1X, R1Y, encryptedParentRV, encryptedReturnNf]
+    constraints: 43375
+    domainSize: 65536
+    verifierSelection: constructor index 3
+    implementation: features/audit_recall
+  audit-merge:
+    class: fixed-event
+    eventKind: 4
+    publicInputs: [noteRoot, nf1, nf2, cmOut, R1X, R1Y, encryptedParentCM1, encryptedParentCM2, encryptedOutputNf]
+    constraints: 57551
+    domainSize: 65536
+    verifierSelection: constructor index 4
+    implementation: features/audit_merge
+  audit-split:
+    class: fixed-event
+    eventKind: 5
+    publicInputs: [noteRoot, nf, cmOut1, cmOut2, R1X, R1Y, encryptedParentCM, encryptedOutputNf1, encryptedOutputNf2]
+    constraints: 52246
+    domainSize: 65536
+    verifierSelection: constructor index 5
+    implementation: features/audit_split
+  audit-process-3-2:
+    class: policy
+    eventKind: 6
+    policyRef: "28214682306399520877540590262283382947947851881744831041576928221649276506151"
+    publicInputs: [policyRef, policyScopeRef, noteRoot, nf1, nf2, nf3, cmEligible, cmWaste, R1X, R1Y, encryptedParentCM1, encryptedParentCM2, encryptedParentCM3, encryptedEligibleNf, encryptedWasteNf]
+    constraints: 93578
+    domainSize: 131072
+    verifierSelection: policyRecords[policyRef].verifierRef
+    implementation: features/audit_process_3_2
+  exit-dpp:
+    class: fixed-event
+    eventKind: 7
+    publicInputs: [noteRoot, nf, dppCommitment, R1X, R1Y, encryptedParentCM]
+    constraints: 36930
+    domainSize: 65536
+    verifierSelection: constructor index 6
+    implementation: features/m8_exit_dpp
+  issue-standard-v1:
+    class: policy
+    eventKind: 8
+    policyRef: "48171159695584168537697131178142263334080679070263402497592061853725047582717"
+    publicInputs: [issuePolicyRef, dppCommitment]
+    constraints: 12490
+    domainSize: 16384
+    verifierSelection: policyRecords[issuePolicyRef].verifierRef
+    implementation: features/issue_claim
+  issue-strict-v2:
+    class: policy
+    eventKind: 8
+    policyRef: "19738800690651415622100539100852334852090225788152065187252135156088629995656"
+    publicInputs: [issuePolicyRef, dppCommitment]
+    constraints: 12490
+    domainSize: 16384
+    verifierSelection: policyRecords[issuePolicyRef].verifierRef
+    implementation: features/issue_claim
+
+operations:
+  Entry:
+    eventKind: 0
+    transition: "empty -> Note"
+    contractFunction: "entry(proof, cm, auditCipher)"
+    callerAuthorization: entryIssuers[msg.sender] must be true
+    circuit: audit-entry
+    privateWitness: [Note, sk_owner, audit randomness]
+    stateReads: [entryIssuers, commitments]
+    stateWrites: [commitments, noteTree, producerOf, auditRecords, nextAuditRecordId]
+    auditPlaintext:
+      parents: []
+      outputSpendValues: [output nf]
+    eventLogs: [NoteAppended, AuditRecorded]
+
+  Transfer:
+    eventKind: 1
+    transition: "Note -> Voucher + Change Note"
+    contractFunction: "transfer(proof, noteRoot, nf, rvNew, cmChange, transferEpoch, deltaEpoch, auditCipher)"
+    callerAuthorization: none
+    circuit: audit-transfer
+    privateWitness:
+      - input Note and cm
+      - sk_owner
+      - Note index and Merkle path
+      - receiverAddress
+      - Voucher and Change Note
+      - allocation remainders
+      - deadlineEpoch
+      - audit randomness
+    stateReads: [noteTree.acceptedRoots, noteSpentIn, noteStatusByNf, commitments, voucherCommitments]
+    derivedRuntimeValues: ["currentEpoch = block.timestamp / 600"]
+    stateWrites: [noteSpentIn, commitments, voucherCommitments, noteTree, voucherTree, producerOf, auditRecords, nextAuditRecordId]
+    auditPlaintext:
+      parents: [input cm]
+      outputSpendValues: [Voucher rvnf, Change Note nf]
+    eventLogs: [VoucherAppended, NoteAppended, AuditRecorded]
+
+  Proceed:
+    eventKind: 2
+    transition: "Voucher -> Receiver Note"
+    contractFunction: "proceed(proof, voucherRoot, rvnf, cmReceiver, auditCipher)"
+    callerAuthorization: none
+    circuit: audit-proceed
+    privateWitness: [Voucher and rv, receiver sk_owner, Voucher index and path, Receiver Note, audit randomness]
+    stateReads: [voucherTree.acceptedRoots, voucherSpentIn, voucherStatusByNf, commitments]
+    stateWrites: [voucherSpentIn, commitments, noteTree, producerOf, auditRecords, nextAuditRecordId]
+    auditPlaintext:
+      parents: [input rv]
+      outputSpendValues: [Receiver Note nf]
+    eventLogs: [NoteAppended, AuditRecorded]
+
+  Recall:
+    eventKind: 3
+    transition: "Voucher -> Sender Return Note"
+    contractFunction: "recall(proof, voucherRoot, rvnf, cmReturn, currentEpoch, auditCipher)"
+    callerAuthorization: none
+    circuit: audit-recall
+    privateWitness: [Voucher and rv, sender sk_owner, Voucher index and path, Return Note, deadlineEpoch, audit randomness]
+    stateReads: [voucherTree.acceptedRoots, voucherSpentIn, voucherStatusByNf, commitments]
+    derivedRuntimeValues: ["currentEpoch = block.timestamp / 600"]
+    stateWrites: [voucherSpentIn, commitments, noteTree, producerOf, auditRecords, nextAuditRecordId]
+    auditPlaintext:
+      parents: [input rv]
+      outputSpendValues: [Return Note nf]
+    eventLogs: [NoteAppended, AuditRecorded]
+
+  Merge:
+    eventKind: 4
+    transition: "Note + Note -> Note"
+    contractFunction: "merge(proof, noteRoot, nf1, nf2, cmOut, auditCipher)"
+    callerAuthorization: none
+    circuit: audit-merge
+    privateWitness: [input Notes and cms, common sk_owner, two Note indices and paths, output Note, audit randomness]
+    stateReads: [noteTree.acceptedRoots, noteSpentIn, noteStatusByNf, commitments]
+    stateWrites: [noteSpentIn, commitments, noteTree, producerOf, auditRecords, nextAuditRecordId]
+    auditPlaintext:
+      parents: [input cm 1, input cm 2]
+      outputSpendValues: [output nf]
+    eventLogs: [NoteAppended, AuditRecorded]
+
+  Split:
+    eventKind: 5
+    transition: "Note -> Note + Note"
+    contractFunction: "split(proof, noteRoot, nf, cmOut1, cmOut2, auditCipher)"
+    callerAuthorization: none
+    circuit: audit-split
+    privateWitness: [input Note and cm, sk_owner, Note index and path, two output Notes, allocation remainders, audit randomness]
+    stateReads: [noteTree.acceptedRoots, noteSpentIn, noteStatusByNf, commitments]
+    stateWrites: [noteSpentIn, commitments, noteTree, producerOf, auditRecords, nextAuditRecordId]
+    auditPlaintext:
+      parents: [input cm]
+      outputSpendValues: [output nf 1, output nf 2]
+    eventLogs: [NoteAppended, AuditRecorded]
+
+  Process:
+    eventKind: 6
+    transition: "Note + Note + Note -> ELIGIBLE Note + WASTE Note"
+    contractFunction: "process(proof, policyRef, policyScopeRef, noteRoot, nfs[3], cms[2], auditCipher)"
+    callerAuthorization: none
+    zkOwnerAuthorization: Circuit이 sk_owner와 policyRef에서 policyScopeRef를 계산하고 Contract가 PolicyGrant를 확인합니다.
+    circuit: audit-process-3-2
+    privateWitness:
+      - three input Notes and cms
+      - common sk_owner
+      - three Note indices and paths
+      - intermediate and output State
+      - loss, carbon and allocation remainders
+      - two output Notes
+      - audit randomness
+    stateReads: [policyRecords, policyGrants, noteTree.acceptedRoots, noteSpentIn, noteStatusByNf, commitments]
+    stateWrites: [noteSpentIn, commitments, noteTree, producerOf, auditRecords, nextAuditRecordId]
+    auditPlaintext:
+      parents: [input cm 1, input cm 2, input cm 3]
+      outputSpendValues: [ELIGIBLE output nf, WASTE output nf]
+    eventLogs: [NoteAppended, AuditRecorded]
+
+  Exit:
+    eventKind: 7
+    transition: "Note -> DPP"
+    contractFunction: "exit(proof, noteRoot, nf, dppCommitment, auditCipher)"
+    callerAuthorization: none
+    circuit: exit-dpp
+    privateWitness: [input Note and cm, sk_owner, Note index and path, DPP private data, audit randomness]
+    stateReads: [noteTree.acceptedRoots, noteSpentIn, noteStatusByNf, producerOf]
+    stateWrites: [noteSpentIn, producerOf, auditRecords, nextAuditRecordId]
+    auditPlaintext:
+      parents: [input cm]
+      outputSpendValues: []
+    eventLogs: [AuditRecorded, NoteExited, DPPFinalized]
+
+  Issue:
+    eventKind: 8
+    transition: "DPP commitment는 변경하지 않고 claimRecordOf mapping에 Claim 한 건 추가"
+    contractFunction: "issue(proof, issuePolicyRef, dppCommitment)"
+    callerAuthorization: none
+    policyGrantUsed: false
+    circuits: [issue-standard-v1, issue-strict-v2]
+    privateWitness: [DPP private data]
+    stateReads: [producerOf, auditRecords, policyRecords, claimRecordOf]
+    stateWrites: [claimRecordOf, auditRecords, nextAuditRecordId]
+    auditPlaintext:
+      parents: []
+      outputSpendValues: []
+    eventLogs: [AuditRecorded, ClaimIssued]
+
+administrativeOperations:
+  setEntryIssuer:
+    signature: "setEntryIssuer(account, allowed)"
+    caller: SystemAdmin
+    behavior: allowed=true로 허용하고 allowed=false로 해제합니다.
+    writes: [entryIssuers]
+  registerPolicyAuthority:
+    signature: "registerPolicyAuthority(account) -> authorityId"
+    caller: SystemAdmin
+    writes: [authorityIdOf, policyAuthorities, nextAuthorityId, nextPolicyId]
+  reservePolicy:
+    signature: "reservePolicy(eventKind) -> policyRef"
+    caller: registered PolicyAuthority
+    allowedEventKinds: [PROCESS, ISSUE]
+    writes: [nextPolicyId, nextPolicyVersion, policyFamilies, policyReservations]
+  reservePolicyVersion:
+    signature: "reservePolicyVersion(policyId) -> policyRef"
+    caller: owner PolicyAuthority
+    precondition: 직전 version이 PolicyRecord로 등록되어 있어야 합니다.
+    writes: [nextPolicyVersion, policyReservations]
+  registerPolicy:
+    signature: "registerPolicy(policyRef, inputArity, outputArity, vkHash, verifierRef)"
+    caller: reservation owner PolicyAuthority
+    writes: [policyRecords]
+  setPolicyGrant:
+    signature: "setPolicyGrant(policyRef, policyScopeRef, allowed)"
+    caller: PolicyRecord owner Authority
+    appliesTo: PROCESS only
+    writes: [policyGrants]
+  disablePolicy:
+    signature: "disablePolicy(policyRef)"
+    caller: PolicyRecord owner Authority
+    transition: "enabled -> disabled"
+    reversible: false
+    retroactive: false
+    writes: [policyRecords.enabled]
+  setStatus:
+    signature: "setStatus(objectType, spendValue, newStatus)"
+    caller: StatusAuthority
+    objectTypes: [NOTE, VOUCHER]
+    writes: [noteStatusByNf, voucherStatusByNf]
+  setClaimStatus:
+    signature: "setClaimStatus(dppCommitment, issuePolicyRef, newStatus)"
+    caller: StatusAuthority
+    writes: [claimStatus]
+
+queries:
+  objectAndAudit:
+    - noteNullifiers(nf)
+    - voucherNullifiers(rvnf)
+    - getAuditRecord(auditRecordId)
+    - "producerOf(objectType, rawId)"
+    - "noteSpentIn(nf)"
+    - "voucherSpentIn(rvnf)"
+  claims:
+    - "verifyClaim(dppCommitment, issuePolicyRef)"
+    - "claimRecordOf(dppCommitment, issuePolicyRef)"
+    - "claimStatus(dppCommitment, issuePolicyRef)"
+  trees:
+    - currentNoteRoot()
+    - currentVoucherRoot()
+    - acceptedNoteRoot(root)
+    - acceptedVoucherRoot(root)
+    - noteLeafCount()
+    - voucherLeafCount()
+    - noteLeaf(index)
+    - voucherLeaf(index)
+    - getNotePath(index)
+    - getVoucherPath(index)
+  policy:
+    - "computePolicyRef(eventKind, authorityId, policyId, version)"
+    - "policyRecords(policyRef)"
+    - "policyGrants(policyRef, policyScopeRef)"
+
+audit:
+  encryption:
+    profile: zkDPP-audit-dh-field-v1
+    construction: 2-of-3 Threshold Diffie-Hellman recovery with Poseidon2 Field masking
+    isOriginalTDH2: false
+    threshold: 2-of-3
+    curve: Jubjub
+    hash: Poseidon2
+    authenticatedTDH2Ciphertext: false
+    maliciousCommitteeResponseProof: false
+    trustBoundary: Contract와 Circuit이 검증해 저장한 원본만 정직한 위원들이 복호화한다고 가정합니다.
+    keyNames:
+      PK:
+        name: Committee public key
+        visibility: public and fixed as Circuit constant
+      K:
+        name: Field masking key
+        visibility: private derived value; not a public key and not stored
+    auxiliaryValues:
+      L:
+        name: Audit Context
+        provenance: M6-B1 POC 구현 과정에서 AI가 추가 binding을 위해 자동 제안했습니다.
+        requiredForEncryptionCorrectness: false
+        requiredByOriginalZkDPPOrTDH2: false
+        valueForCurrentFixedEventShapes: low
+        simplificationCandidate: true
+        currentPurpose: EventKind와 public input을 key derivation에 추가로 binding합니다.
+        currentImplementation: 현재 Circuit·PK·VK·proof에 포함됩니다.
+      n:
+        name: plaintext Field length
+        provenance: M6-B1 POC 구현 과정에서 AI가 평문 길이 binding을 위해 자동 제안했습니다.
+        requiredForEncryptionCorrectness: false
+        requiredByOriginalZkDPPOrTDH2: false
+        redundantForCurrentFixedEventShapes: true
+        simplificationCandidate: true
+        currentImplementation: 현재 Circuit·PK·VK·proof에 포함됩니다.
+    ciphertext:
+      - R1X
+      - R1Y
+      - encryptedParents
+      - encryptedOutputNfs
+    relationship:
+      - "R1 = rG"
+      - "Z = rPK"
+      - "K = H(AuditKeyTag, Z_X, Z_Y, L, n)"
+      - "mask_j = H(AuditMaskTag, K, j)"
+      - "C_j = M_j + mask_j mod p"
+    arithmeticDomains:
+      p: BLS12-381 scalar field and Circuit Field modulus for M_j, C_j, K, and masks
+      q: Jubjub prime-order subgroup order for x, x_i, r, and Lagrange coefficients
+  indexes:
+    producer: producerOf[objectType][rawId]
+    noteConsumer: noteSpentIn[nf]
+    voucherConsumer: voucherSpentIn[rvnf]
+  cache: one audit run in memory only
+  snapshot: block number and block hash
+
+status:
+  allowedTransitions:
+    - "ACTIVE -> FROZEN"
+    - "FROZEN -> ACTIVE"
+    - "FROZEN -> REVOKED"
+  terminal: REVOKED
+  noteKey: nf
+  voucherKey: rvnf
+  claimKey: [dppCommitment, issuePolicyRef]
+  statusTreeUsed: false
+  trustBoundary: Status Authority가 감사로 찾은 올바른 소비값을 제출한다고 가정합니다.
+
+deployment:
+  universalSRS:
+    type: local unsafe development SRS
+    canonicalPoints: 131075
+    maxDomainSize: 131072
+    productionCeremony: false
+  domains:
+    16384: [issue-standard-v1, issue-strict-v2]
+    32768: [audit-entry]
+    65536: [audit-transfer, audit-proceed, audit-recall, audit-merge, audit-split, exit-dpp]
+    131072: [audit-process-3-2]
+  verifiers:
+    fixedEvents: 7
+    policies: 3
+    total: 10
+  routerContract: false
+
+finalScenario:
+  inputs:
+    - { name: Aluminum A, owner: actor-1, state: [60, 10, 40] }
+    - { name: Aluminum B, owner: actor-1, state: [60, 10, 50] }
+    - { name: Cathode, owner: actor-3, state: [100, 10, 70] }
+    - { name: Anode, owner: actor-3, state: [100, 0, 70] }
+  steps:
+    - Entry four raw materials
+    - Freeze and unfreeze first Aluminum A Voucher
+    - Recall Aluminum A and transfer it again
+    - Proceed four materials to Factory
+    - Merge Aluminum A and Aluminum B
+    - Freeze and unfreeze one Process input nf
+    - Process three Notes into ELIGIBLE and WASTE
+    - Split ELIGIBLE output into Product 1 and Product 2
+    - Exit Product 1 and WASTE into DPP commitments
+    - Issue Standard and Strict Claims for Product 1
+    - Reject Issue for WASTE DPP
+    - Update Claim statuses
+    - Run backward and forward audits
+  processAggregate: [320, 30, 230]
+  processEligibleOutput: [270, 30, 260]
+  processWasteOutput: [30, 0, 0]
+  finalState:
+    noteLeaves: 19
+    voucherLeaves: 5
+    auditRecords: 21
+    product1StandardClaim: ACTIVE
+    product1StrictClaim: REVOKED
+    product2: unspent ACTIVE Note
+    wasteDPPClaims: 0
+
+implementation:
+  contract: contracts/src/final/ZkDPPClaimLedger.sol
+  finalRuntime: internal/m9run
+  finalFixture: internal/m9case
+  audit: internal/m9audit
+  universalSRS: internal/finalsrs
+  publicInputManifest: artifacts/final/verifiers/public-input-manifest.json
+  circuitResults: output/m9-circuit.json
+  anvilResults: output/m9-anvil.json
+  auditResults: output/m9-audit.json
+  resultDocument: milestones/M9-final-integration-result.md
+
+limitations:
+  - ProductProfile을 검증하지 않습니다.
+  - 운송 탄소를 계산하지 않습니다.
+  - EVM caller와 ZK owner를 binding하지 않습니다.
+  - DPP ownership transfer를 구현하지 않습니다.
+  - DPP Tree와 Claim Tree를 만들지 않습니다.
+  - DKG와 key rotation을 구현하지 않습니다.
+  - 위원회와 Auditor가 정직하다고 가정합니다.
+  - Production Ceremony를 수행하지 않았습니다.
+  - Besu와 별도 Router를 사용하지 않습니다.
