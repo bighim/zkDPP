@@ -1,0 +1,19 @@
+{
+  "GeneratedAt": "2026-09-01T13:31:39Z",
+  "Algorithm": "SHA-256",
+  "Files": {
+    "contracts/src/generated/Poseidon2BLS12381.sol": "a3524992d63819979526afbb95ce7e622b6a082e190dc6aa678459086c691ea5",
+    "contracts/src/generated/entry/PlonkVerifier.sol": "f43fdf5df5fc651f4e43e3abfbf2d1e46703a8e1d579e672da0af4d2d573545b",
+    "contracts/src/generated/private-spend/PlonkVerifier.sol": "1ca5328cdead44d4cce628c3e8a2851aef8202b69f6a5c6897918aa594e96090",
+    "contracts/src/generated/proceed/PlonkVerifier.sol": "c2fbdf89f1cb87fda0cc7ce1c6885b06d3880def54e698cbeed66ca51d94e603",
+    "contracts/src/generated/recall/PlonkVerifier.sol": "f9de2f54a35b7e14983900277350de6ecc82c7acc493ea27905e9ee7d64dbf71",
+    "contracts/src/generated/transfer/PlonkVerifier.sol": "35654a419994c175f7ebcaa849f9df65596feb980c20101248cc8ffc7f62f24d",
+    "contracts/test/fixtures/m3-proofs.json": "efe6b8df79a17345a2bde2875bc2fc52a2e3e330a6f2aea2be58edb67640cea3"
+  },
+  "priorOutputs": {
+    "output/m1-core.json": "6d644e4f2e317ecfc282cfb13003ec62c56c5da296720d5e2b7d9cb3f3f0815e",
+    "output/m2-anvil-e2e.json": "dc7723b61b4b3e4f0579f8386bc5a2f90ae059c5fb8a92c1185dfda08358bb6f",
+    "output/m2-anvil-gas.json": "2797748fc096f4d6df90e77da79118624ce2baa9433b917963cd1e1d65b74083",
+    "output/m2-circuit.json": "e9547f70db1c26f5bf9e7a2b0e2ec49c760f31fd7ec0e5a7637b1a1d12bff68a"
+  }
+}

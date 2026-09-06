@@ -1,0 +1,150 @@
+{
+  "generatedAt": "2026-08-27T13:49:04Z",
+  "mode": "gas",
+  "runCount": 1,
+  "chainId": 31337,
+  "rpc": "http://127.0.0.1:18545",
+  "goVersion": "go1.25.7",
+  "transactions": [
+    {
+      "kind": "deployment",
+      "name": "poseidon2",
+      "actor": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "transactionHash": "0x1831701fc2875c226571b02de89f060ad0276bd2f9150f29fbc7bdd84a70c429",
+      "contractAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "blockNumber": 1,
+      "receiptGasUsed": 2282769,
+      "calldataBytes": 10335,
+      "txPrepareMillis": 13.2,
+      "submitReceiptMillis": 4.202
+    },
+    {
+      "kind": "deployment",
+      "name": "entry-verifier",
+      "actor": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "transactionHash": "0xb44a8a905eb16ef3fa95c1806e14eaeaca4283a68e6c9ad2be6c440cba0aa5f2",
+      "contractAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "blockNumber": 2,
+      "receiptGasUsed": 1601844,
+      "calldataBytes": 7189,
+      "txPrepareMillis": 3.344,
+      "submitReceiptMillis": 1.4
+    },
+    {
+      "kind": "deployment",
+      "name": "private-spend-verifier",
+      "actor": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "transactionHash": "0x821342120842eab8e1534d4c370454ee37f155986e4d81e97bf6a4e0d9c382cf",
+      "contractAddress": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "blockNumber": 3,
+      "receiptGasUsed": 1601592,
+      "calldataBytes": 7188,
+      "txPrepareMillis": 2.448,
+      "submitReceiptMillis": 1.871
+    },
+    {
+      "kind": "deployment",
+      "name": "entry-exit-ledger",
+      "actor": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "transactionHash": "0xa7cce6c28eb648e0a6e5a50099dc0a6393f01f319aeb2c275f15893a12461f4b",
+      "contractAddress": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "blockNumber": 4,
+      "receiptGasUsed": 2115680,
+      "calldataBytes": 3250,
+      "txPrepareMillis": 73.451,
+      "submitReceiptMillis": 54.352
+    },
+    {
+      "kind": "authorization",
+      "name": "set-entry-issuer",
+      "case": "account-1",
+      "actor": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "transactionHash": "0x88436148d4d66119bcc785e6efeee26bb89fc2ba03c9eb70b7fcfa0c50405582",
+      "blockNumber": 5,
+      "receiptGasUsed": 45490,
+      "calldataBytes": 68,
+      "txPrepareMillis": 1.736,
+      "submitReceiptMillis": 2.035
+    },
+    {
+      "kind": "authorization",
+      "name": "set-entry-issuer",
+      "case": "account-2",
+      "actor": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "transactionHash": "0x2163a2345bf1b72cf2ec3fd82880c812b3e136ff1db87121f368caa5d1dba39b",
+      "blockNumber": 6,
+      "receiptGasUsed": 45478,
+      "calldataBytes": 68,
+      "txPrepareMillis": 1.675,
+      "submitReceiptMillis": 1.17
+    },
+    {
+      "kind": "authorization",
+      "name": "set-entry-issuer",
+      "case": "account-3",
+      "actor": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "transactionHash": "0xdaa1922f85ad83006235df3e4d8bcf698eb032818d1a8580846d7349b713332b",
+      "blockNumber": 7,
+      "receiptGasUsed": 45490,
+      "calldataBytes": 68,
+      "txPrepareMillis": 1.426,
+      "submitReceiptMillis": 1.086
+    },
+    {
+      "kind": "event",
+      "name": "entry",
+      "case": "raw-material-a",
+      "actor": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+      "transactionHash": "0x7ad0bd00d02539880b823437f9f00f82bfbc12b9f927e947ea3ba88c81af71e5",
+      "blockNumber": 8,
+      "receiptGasUsed": 2053300,
+      "calldataBytes": 1156,
+      "txPrepareMillis": 167.884,
+      "submitReceiptMillis": 57.31
+    },
+    {
+      "kind": "event",
+      "name": "entry",
+      "case": "raw-material-b",
+      "actor": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+      "transactionHash": "0x290e2652385cd9d493729ba05ae01986e7dc9dffca84833bbe84d132a49e0b02",
+      "blockNumber": 9,
+      "receiptGasUsed": 1486891,
+      "calldataBytes": 1156,
+      "txPrepareMillis": 155.413,
+      "submitReceiptMillis": 53.887
+    },
+    {
+      "kind": "event",
+      "name": "entry",
+      "case": "raw-material-c",
+      "actor": "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
+      "transactionHash": "0xfdc7f4f9c55ced00f4f5a8add78a8f67bf72c40ebe276c1a0424f1f78e127264",
+      "blockNumber": 10,
+      "receiptGasUsed": 1503979,
+      "calldataBytes": 1156,
+      "txPrepareMillis": 153.578,
+      "submitReceiptMillis": 54.129
+    },
+    {
+      "kind": "event",
+      "name": "exit",
+      "case": "raw-material-a",
+      "actor": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+      "transactionHash": "0x44b6dc94e8fc8521b3e8f8d13a2241b1ab5bcd7e5b62b42987c7783589edddb2",
+      "blockNumber": 11,
+      "receiptGasUsed": 398717,
+      "calldataBytes": 1188,
+      "txPrepareMillis": 80.256,
+      "submitReceiptMillis": 55.72
+    }
+  ],
+  "finalState": {
+    "leafCount": 3,
+    "currentRoot": "27310619042372409441618610515066013424818538131279529547598089767333327467030",
+    "expectedRoot": "27310619042372409441618610515066013424818538131279529547598089767333327467030",
+    "exitNullifier": "51949863764725920374043432793935172343593391721888746855866445006147245909584",
+    "nullifierSpent": true,
+    "pathMatches": true
+  }
+}

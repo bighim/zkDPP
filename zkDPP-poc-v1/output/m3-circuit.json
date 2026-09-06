@@ -1,0 +1,71 @@
+{
+  "generatedAt": "2026-09-01T13:31:39Z",
+  "runCount": 1,
+  "Curve": "BLS12-381",
+  "ProofSystem": "PLONK-KZG",
+  "Results": [
+    {
+      "feature": "transfer",
+      "Constraints": 35388,
+      "PublicInputs": 6,
+      "CompileMillis": 16,
+      "SRSMillis": 1479,
+      "PlonkSetupMillis": 279,
+      "SetupMillis": 1758,
+      "WitnessMillis": 0.063,
+      "ProveMillis": 866.076,
+      "VerifyMillis": 2.729,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactFileBytes": {
+        "ccs.bin": 641630,
+        "proving.key": 6340752,
+        "srs-canonical.bin": 3194500,
+        "srs-lagrange.bin": 3194356,
+        "verifying.key": 49144
+      }
+    },
+    {
+      "feature": "proceed",
+      "Constraints": 22821,
+      "PublicInputs": 3,
+      "CompileMillis": 9,
+      "SRSMillis": 814,
+      "PlonkSetupMillis": 156,
+      "SetupMillis": 970,
+      "WitnessMillis": 0.039,
+      "ProveMillis": 463.241,
+      "VerifyMillis": 2.675,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactFileBytes": {
+        "ccs.bin": 480656,
+        "proving.key": 3195024,
+        "srs-canonical.bin": 1621636,
+        "srs-lagrange.bin": 1621492,
+        "verifying.key": 49144
+      }
+    },
+    {
+      "feature": "recall",
+      "Constraints": 26129,
+      "PublicInputs": 4,
+      "CompileMillis": 10,
+      "SRSMillis": 0,
+      "PlonkSetupMillis": 167,
+      "SetupMillis": 167,
+      "WitnessMillis": 0.041,
+      "ProveMillis": 466.87,
+      "VerifyMillis": 2.735,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactFileBytes": {
+        "ccs.bin": 526517,
+        "proving.key": 3195024,
+        "srs-canonical.bin": 1621636,
+        "srs-lagrange.bin": 1621492,
+        "verifying.key": 49144
+      }
+    }
+  ]
+}

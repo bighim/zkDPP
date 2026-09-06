@@ -1,0 +1,89 @@
+{
+  "RunCount": 1,
+  "Attempt": 1,
+  "PublicKeyChecksum": "9dc3358b3d1cae70379447a6e2ac1a82d9771420c7812b556f084ef36d8b073b",
+  "Results": [
+    {
+      "Relation": "exit-dpp",
+      "Constraints": 36930,
+      "PublicInputs": 6,
+      "CompileMillis": 19,
+      "SRSMillis": 1523,
+      "PlonkSetupMillis": 292,
+      "EncryptMillis": 0.127334,
+      "WitnessMillis": 0.111458,
+      "ProveMillis": 866.843167,
+      "VerifyMillis": 2.704209,
+      "ProveAllocatedBytes": 326185960,
+      "HeapBefore": 15341192,
+      "HeapAfter": 116113976,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactBytes": {
+        "ccs.bin": 660559,
+        "proving.key": 6340752,
+        "srs-canonical.bin": 3194500,
+        "srs-lagrange.bin": 3194356,
+        "verifying.key": 49144
+      }
+    },
+    {
+      "Relation": "issue-standard-v1",
+      "Constraints": 12490,
+      "PublicInputs": 2,
+      "CompileMillis": 5,
+      "SRSMillis": 450,
+      "PlonkSetupMillis": 92,
+      "EncryptMillis": 0,
+      "WitnessMillis": 0.040042,
+      "ProveMillis": 265.054667,
+      "VerifyMillis": 2.688333,
+      "ProveAllocatedBytes": 31629432,
+      "HeapBefore": 4703920,
+      "HeapAfter": 26927920,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactBytes": {
+        "ccs.bin": 174426,
+        "proving.key": 1622160,
+        "srs-canonical.bin": 835204,
+        "srs-lagrange.bin": 835060,
+        "verifying.key": 49144
+      },
+      "OptimizedVKBytes": 1216,
+      "VKHash": "08bd6cdcb97699228269295c117d7217881ae0b7877648425d626f66b3232e79"
+    },
+    {
+      "Relation": "issue-strict-v2",
+      "Constraints": 12490,
+      "PublicInputs": 2,
+      "CompileMillis": 5,
+      "SRSMillis": 0,
+      "PlonkSetupMillis": 92,
+      "EncryptMillis": 0,
+      "WitnessMillis": 0.0295,
+      "ProveMillis": 263.045,
+      "VerifyMillis": 2.690375,
+      "ProveAllocatedBytes": 31632432,
+      "HeapBefore": 4697608,
+      "HeapAfter": 26934872,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactBytes": {
+        "ccs.bin": 174490,
+        "proving.key": 1622160,
+        "srs-canonical.bin": 835204,
+        "srs-lagrange.bin": 835060,
+        "verifying.key": 49144
+      },
+      "OptimizedVKBytes": 1216,
+      "VKHash": "76d9ff40f18a2ed208bdf7d77c533511e50a48b15a83ef9eba8575f4f22a2b67"
+    }
+  ],
+  "TotalProofCalls": {
+    "exit-dpp": 2,
+    "issue-standard-v1": 1,
+    "issue-strict-v2": 1
+  },
+  "ProofReloadVerified": true
+}

@@ -1,0 +1,85 @@
+{
+  "RunCount": 1,
+  "Attempt": 2,
+  "Environment": {
+    "GoVersion": "go1.25.7",
+    "GOOS": "darwin",
+    "GOARCH": "arm64",
+    "CPU": "Apple M1 Pro",
+    "NumCPU": 10,
+    "RequestedThreads": 8,
+    "GOMAXPROCS": 8,
+    "Modules": {
+      "github.com/consensys/gnark": "v0.15.0",
+      "github.com/consensys/gnark-crypto": "v0.20.1",
+      "github.com/ethereum/go-ethereum": "v1.17.4"
+    },
+    "ProofSystem": "PLONK-KZG",
+    "ProofCurve": "BLS12-381",
+    "EncryptionCurve": "Jubjub",
+    "Hash": "Poseidon2-Merkle-Damgard",
+    "Profile": "zkDPP-audit-dh-field-v1"
+  },
+  "PublicKeyChecksum": "9dc3358b3d1cae70379447a6e2ac1a82d9771420c7812b556f084ef36d8b073b",
+  "FoundryImage": "ghcr.io/foundry-rs/foundry:v1.7.1",
+  "ImageID": "sha256:8347b728d5d393dac1c018691b36f506d23b9dcd78341d40ea0fcb11c3a19cdd",
+  "ClientVersion": "anvil/v1.7.1",
+  "RPC": "http://127.0.0.1:18545",
+  "Hardfork": "prague",
+  "Scope": "Diagnostic Process verification/storage, not Main Ledger Event gas. SSTORE opcode sum is separate from total transaction delta.",
+  "ChainID": 31337,
+  "BlockGasLimit": 30000000,
+  "Transactions": [
+    {
+      "Name": "verifier-deployment",
+      "Hash": "0x22da4656729df75a64a8ae10ce3ab38c983e054c71a9c2faec01f9a469343e4a",
+      "ContractAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "BlockNumber": 1,
+      "GasUsed": 1602696,
+      "CalldataBytes": 7193,
+      "PrepareMillis": 2.908542,
+      "SubmitReceiptMillis": 1.31175
+    },
+    {
+      "Name": "store-deployment",
+      "Hash": "0x57c563ebc6d3a2d6023645d55031c7e712e2e6bc8a17896c64ea18f3a8110ef9",
+      "ContractAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "BlockNumber": 2,
+      "GasUsed": 347845,
+      "CalldataBytes": 1446,
+      "PrepareMillis": 1.50475,
+      "SubmitReceiptMillis": 1.132875
+    },
+    {
+      "Name": "verify-only",
+      "Hash": "0xdeded828f5a97d396a9f17fe8c7a6ed58fc271ff628afab69adf8323c055daba",
+      "ContractAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "BlockNumber": 3,
+      "GasUsed": 397249,
+      "CalldataBytes": 1604,
+      "PrepareMillis": 72.276167,
+      "SubmitReceiptMillis": 55.759
+    },
+    {
+      "Name": "verify-and-store",
+      "Hash": "0x70e34ce6903ad757ec87c9c412f8573f99d734dd32e2a0d9de2a37b598361f4b",
+      "ContractAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "BlockNumber": 4,
+      "GasUsed": 736120,
+      "CalldataBytes": 1604,
+      "PrepareMillis": 82.692334,
+      "SubmitReceiptMillis": 55.311375
+    }
+  ],
+  "IncrementalRecordGas": 338871,
+  "SSTORECount": 16,
+  "SSTOREOpcodeGas": 334400,
+  "StoredFieldCount": 15,
+  "LogicalRecordBytes": 480,
+  "CiphertextBytes": 224,
+  "RecordID": 1,
+  "NextRecordID": 2,
+  "VerifyOnlyUnchanged": true,
+  "CommitteeFetchedOriginal": true,
+  "RecoveredMessageMatches": true
+}

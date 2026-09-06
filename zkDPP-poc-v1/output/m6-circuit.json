@@ -1,0 +1,176 @@
+{
+  "generatedAt": "2026-09-02T13:06:02Z",
+  "runCount": 1,
+  "Curve": "BLS12-381",
+  "ProofSystem": "PLONK-KZG",
+  "Results": [
+    {
+      "feature": "status-update",
+      "Constraints": 19682,
+      "PublicInputs": 6,
+      "CompileMillis": 14,
+      "SRSMillis": 721,
+      "PlonkSetupMillis": 140,
+      "SetupMillis": 861,
+      "WitnessMillis": 0.043,
+      "ProveMillis": 418.104,
+      "VerifyMillis": 2.647,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactFileBytes": {
+        "ccs.bin": 373024,
+        "proving.key": 3195024,
+        "srs-canonical.bin": 1621636,
+        "srs-lagrange.bin": 1621492,
+        "verifying.key": 49144
+      }
+    },
+    {
+      "feature": "status-private-spend",
+      "Constraints": 26230,
+      "PublicInputs": 3,
+      "CompileMillis": 10,
+      "SRSMillis": 0,
+      "PlonkSetupMillis": 150,
+      "SetupMillis": 150,
+      "WitnessMillis": 0.041,
+      "ProveMillis": 446.632,
+      "VerifyMillis": 2.622,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactFileBytes": {
+        "ccs.bin": 519241,
+        "proving.key": 3195024,
+        "srs-canonical.bin": 1621636,
+        "srs-lagrange.bin": 1621492,
+        "verifying.key": 49144
+      }
+    },
+    {
+      "feature": "status-transfer",
+      "Constraints": 45211,
+      "PublicInputs": 7,
+      "CompileMillis": 18,
+      "SRSMillis": 1388,
+      "PlonkSetupMillis": 259,
+      "SetupMillis": 1647,
+      "WitnessMillis": 0.067,
+      "ProveMillis": 775.573,
+      "VerifyMillis": 2.604,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactFileBytes": {
+        "ccs.bin": 786469,
+        "proving.key": 6340752,
+        "srs-canonical.bin": 3194500,
+        "srs-lagrange.bin": 3194356,
+        "verifying.key": 49144
+      }
+    },
+    {
+      "feature": "status-proceed",
+      "Constraints": 32644,
+      "PublicInputs": 4,
+      "CompileMillis": 13,
+      "SRSMillis": 0,
+      "PlonkSetupMillis": 224,
+      "SetupMillis": 224,
+      "WitnessMillis": 0.058,
+      "ProveMillis": 474.542,
+      "VerifyMillis": 2.7,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactFileBytes": {
+        "ccs.bin": 625833,
+        "proving.key": 3195024,
+        "srs-canonical.bin": 1621636,
+        "srs-lagrange.bin": 1621492,
+        "verifying.key": 49144
+      }
+    },
+    {
+      "feature": "status-recall",
+      "Constraints": 35952,
+      "PublicInputs": 5,
+      "CompileMillis": 16,
+      "SRSMillis": 0,
+      "PlonkSetupMillis": 256,
+      "SetupMillis": 256,
+      "WitnessMillis": 0.046,
+      "ProveMillis": 774.872,
+      "VerifyMillis": 2.626,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactFileBytes": {
+        "ccs.bin": 671116,
+        "proving.key": 6340752,
+        "srs-canonical.bin": 3194500,
+        "srs-lagrange.bin": 3194356,
+        "verifying.key": 49144
+      }
+    },
+    {
+      "feature": "status-merge",
+      "Constraints": 57850,
+      "PublicInputs": 5,
+      "CompileMillis": 25,
+      "SRSMillis": 0,
+      "PlonkSetupMillis": 273,
+      "SetupMillis": 273,
+      "WitnessMillis": 0.071,
+      "ProveMillis": 807.267,
+      "VerifyMillis": 2.711,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactFileBytes": {
+        "ccs.bin": 945807,
+        "proving.key": 6340752,
+        "srs-canonical.bin": 3194500,
+        "srs-lagrange.bin": 3194356,
+        "verifying.key": 49144
+      }
+    },
+    {
+      "feature": "status-split",
+      "Constraints": 44223,
+      "PublicInputs": 5,
+      "CompileMillis": 18,
+      "SRSMillis": 0,
+      "PlonkSetupMillis": 263,
+      "SetupMillis": 263,
+      "WitnessMillis": 0.067,
+      "ProveMillis": 804.541,
+      "VerifyMillis": 2.76,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactFileBytes": {
+        "ccs.bin": 774087,
+        "proving.key": 6340752,
+        "srs-canonical.bin": 3194500,
+        "srs-lagrange.bin": 3194356,
+        "verifying.key": 49144
+      }
+    },
+    {
+      "feature": "status-process",
+      "Constraints": 98591,
+      "PublicInputs": 9,
+      "CompileMillis": 39,
+      "SRSMillis": 2735,
+      "PlonkSetupMillis": 484,
+      "SetupMillis": 3219,
+      "WitnessMillis": 0.114,
+      "ProveMillis": 1552.113,
+      "VerifyMillis": 2.597,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactFileBytes": {
+        "ccs.bin": 1508715,
+        "proving.key": 12632208,
+        "srs-canonical.bin": 6340228,
+        "srs-lagrange.bin": 6340084,
+        "verifying.key": 49144
+      }
+    }
+  ]
+}

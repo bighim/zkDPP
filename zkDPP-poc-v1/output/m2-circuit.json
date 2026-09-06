@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-08-27T13:43:57Z",
+  "runCount": 1,
+  "curve": "BLS12-381",
+  "proofSystem": "PLONK-KZG",
+  "results": [
+    {
+      "feature": "entry",
+      "constraints": 5680,
+      "publicInputs": 1,
+      "compileMillis": 6,
+      "setupMillis": 285,
+      "witnessMillis": 0.386,
+      "proveMillis": 131.62,
+      "verifyMillis": 2.653,
+      "binaryProofBytes": 664,
+      "solidityProofBytes": 1056,
+      "artifactFileBytes": {
+        "ccs.bin": 107409,
+        "proving.key": 835728,
+        "srs-canonical.bin": 441988,
+        "srs-lagrange.bin": 441844,
+        "verifying.key": 49144
+      }
+    },
+    {
+      "feature": "private-spend",
+      "reusedFrom": "M1",
+      "constraints": 16407,
+      "publicInputs": 2,
+      "compileMillis": 8,
+      "setupMillis": 855,
+      "witnessMillis": 0.934,
+      "proveMillis": 433.439,
+      "verifyMillis": 2.571,
+      "binaryProofBytes": 664,
+      "solidityProofBytes": 1056,
+      "artifactFileBytes": {
+        "ccs.bin": 383539,
+        "proving.key": 3195024,
+        "srs-canonical.bin": 1621636,
+        "srs-lagrange.bin": 1621492,
+        "verifying.key": 49144
+      }
+    }
+  ]
+}

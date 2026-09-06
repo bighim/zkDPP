@@ -1,0 +1,79 @@
+{
+  "RunCount": 1,
+  "Attempt": 1,
+  "Environment": {
+    "GoVersion": "go1.25.7",
+    "GOOS": "darwin",
+    "GOARCH": "arm64",
+    "CPU": "arm64",
+    "NumCPU": 10,
+    "RequestedThreads": 8,
+    "GOMAXPROCS": 8,
+    "Modules": {
+      "github.com/consensys/gnark": "v0.15.0",
+      "github.com/consensys/gnark-crypto": "v0.20.1"
+    },
+    "ProofSystem": "PLONK-KZG",
+    "ProofCurve": "BLS12-381",
+    "EncryptionCurve": "Jubjub",
+    "Hash": "Poseidon2-Merkle-Damgard",
+    "Profile": "zkDPP-audit-dh-field-v1"
+  },
+  "PublicKeyChecksum": "9dc3358b3d1cae70379447a6e2ac1a82d9771420c7812b556f084ef36d8b073b",
+  "CommitteeSetupMillis": 0.31975,
+  "ProofReloadVerified": true,
+  "Results": [
+    {
+      "Feature": "audit-encryption",
+      "Constraints": 14535,
+      "PublicInputs": 8,
+      "MembershipPaths": 0,
+      "TreeDepth": 0,
+      "CompileMillis": 13,
+      "SRSMillis": 454,
+      "PlonkSetupMillis": 98,
+      "EncryptMillis": 0.660584,
+      "WitnessMillis": 0.079834,
+      "ProveMillis": 613.959167,
+      "VerifyMillis": 3.340958,
+      "ProveAllocatedBytes": 32262232,
+      "HeapBefore": 4495928,
+      "HeapAfter": 23827320,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactFileBytes": {
+        "ccs.bin": 197389,
+        "proving.key": 1622160,
+        "srs-canonical.bin": 835204,
+        "srs-lagrange.bin": 835060,
+        "verifying.key": 49144
+      }
+    },
+    {
+      "Feature": "audit-process-3-2",
+      "Constraints": 93578,
+      "PublicInputs": 15,
+      "MembershipPaths": 3,
+      "TreeDepth": 32,
+      "CompileMillis": 40,
+      "SRSMillis": 3023,
+      "PlonkSetupMillis": 554,
+      "EncryptMillis": 0.660584,
+      "WitnessMillis": 0.171584,
+      "ProveMillis": 1750.162,
+      "VerifyMillis": 2.747542,
+      "ProveAllocatedBytes": 592563608,
+      "HeapBefore": 30728400,
+      "HeapAfter": 174850488,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "ArtifactFileBytes": {
+        "ccs.bin": 1429295,
+        "proving.key": 12632208,
+        "srs-canonical.bin": 6340228,
+        "srs-lagrange.bin": 6340084,
+        "verifying.key": 49144
+      }
+    }
+  ]
+}

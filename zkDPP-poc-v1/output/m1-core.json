@@ -1,0 +1,55 @@
+{
+  "generatedAt": "2026-08-27T10:37:11Z",
+  "runCount": 1,
+  "curve": "BLS12-381",
+  "proofSystem": "PLONK-KZG",
+  "hash": "Poseidon2-Merkle-Damgard",
+  "treeDepth": 32,
+  "environment": {
+    "goos": "darwin",
+    "goarch": "arm64",
+    "goVersion": "go1.25.7",
+    "gnark": "v0.15.0",
+    "gnarkCrypto": "v0.20.1",
+    "numCPU": 10,
+    "gomaxprocs": 10
+  },
+  "results": [
+    {
+      "feature": "note-commitment",
+      "constraints": 5678,
+      "publicInputs": 1,
+      "compileMillis": 3,
+      "setupMillis": 279,
+      "witnessMillis": 0,
+      "proveMillis": 136,
+      "verifyMillis": 2,
+      "proofBytes": 664,
+      "artifactFileBytes": {
+        "ccs.bin": 107370,
+        "proving.key": 835728,
+        "srs-canonical.bin": 441988,
+        "srs-lagrange.bin": 441844,
+        "verifying.key": 49144
+      }
+    },
+    {
+      "feature": "private-spend",
+      "constraints": 16407,
+      "publicInputs": 2,
+      "compileMillis": 8,
+      "setupMillis": 855,
+      "witnessMillis": 0,
+      "proveMillis": 407,
+      "verifyMillis": 2,
+      "proofBytes": 664,
+      "artifactFileBytes": {
+        "ccs.bin": 383539,
+        "proving.key": 3195024,
+        "srs-canonical.bin": 1621636,
+        "srs-lagrange.bin": 1621492,
+        "verifying.key": 49144
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "generatedAt": "2026-08-27T13:43:57Z",
+  "algorithm": "SHA-256",
+  "files": {
+    "contracts/src/generated/Poseidon2BLS12381.sol": "a3524992d63819979526afbb95ce7e622b6a082e190dc6aa678459086c691ea5",
+    "contracts/src/generated/entry/PlonkVerifier.sol": "f43fdf5df5fc651f4e43e3abfbf2d1e46703a8e1d579e672da0af4d2d573545b",
+    "contracts/src/generated/private-spend/PlonkVerifier.sol": "1ca5328cdead44d4cce628c3e8a2851aef8202b69f6a5c6897918aa594e96090",
+    "contracts/test/fixtures/m2-proofs.json": "fa945c82c7e3d54015045429ab034bc1f5244097b2851458c34104a65d559508"
+  },
+  "m1OutputChecksum": "6d644e4f2e317ecfc282cfb13003ec62c56c5da296720d5e2b7d9cb3f3f0815e"
+}

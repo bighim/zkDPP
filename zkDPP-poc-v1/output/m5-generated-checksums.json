@@ -1,0 +1,17 @@
+{
+  "GeneratedAt": "2026-09-02T08:50:44Z",
+  "Algorithm": "SHA-256",
+  "Files": {
+    "artifacts/development/m5/process-policy-3-2/optimized-vk.json": "1c3c87740c15e3751e1216b3c6c937e21f584ff4f70c878a059538d8de9d633f",
+    "contracts/src/generated/process-policy-3-2/PlonkVerifier.sol": "6a6e1f3d92995272a64dbc2ad4ffd6235fb7cbff31192ee832b59f3f1c4bd893",
+    "contracts/test/fixtures/m5-proofs.json": "0b96730a6fa37262607cdb96d69d4aa9a5cf050581164df5bf0602c523cc8bec"
+  },
+  "PriorOutputs": {
+    "output/m1-core.json": "6d644e4f2e317ecfc282cfb13003ec62c56c5da296720d5e2b7d9cb3f3f0815e",
+    "output/m2-circuit.json": "e9547f70db1c26f5bf9e7a2b0e2ec49c760f31fd7ec0e5a7637b1a1d12bff68a",
+    "output/m3-circuit.json": "f7ce1bc2824e97ddf6cf3b3226d9aeeffb9f1ad6c8cb2b4dc9dc1f8476d3b202",
+    "output/m4-anvil-e2e.json": "169f1be9c4802d295c9ec207e0b3232cda4391a25b4d59187b101b182f3b203d",
+    "output/m4-anvil-gas.json": "416bb420a1c547a3d6684363768434028ae888a5323ec61b4f5bbdf7ec8585ed",
+    "output/m4-circuit.json": "54c89e4c9b26c09e2f9f24a960ee3d80d7c659dfd22340163a639207a9cf4ca8"
+  }
+}

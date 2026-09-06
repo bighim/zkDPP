@@ -1,0 +1,33 @@
+{
+  "GeneratedAt": "2026-09-02T08:50:44Z",
+  "RunCount": 1,
+  "Curve": "BLS12-381",
+  "ProofSystem": "PLONK-KZG",
+  "Results": [
+    {
+      "Feature": "process-policy-3-2",
+      "Constraints": 69122,
+      "PublicInputs": 8,
+      "CompileMillis": 46,
+      "SRSMillis": 3091,
+      "PlonkSetupMillis": 497,
+      "SetupMillis": 3588,
+      "WitnessMillis": 0.104,
+      "ProveMillis": 1843.182,
+      "VerifyMillis": 2.646,
+      "BinaryProofBytes": 664,
+      "SolidityProofBytes": 1056,
+      "SerializedVKBytes": 49144,
+      "OptimizedVKWords": 38,
+      "OptimizedVKBytes": 1216,
+      "VKHash": "4010319a62c7c2baa4af4e800ae863a196954b3ab911c94ac2f0bbe8f530cb82",
+      "ArtifactFileBytes": {
+        "ccs.bin": 1096152,
+        "proving.key": 12632208,
+        "srs-canonical.bin": 6340228,
+        "srs-lagrange.bin": 6340084,
+        "verifying.key": 49144
+      }
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "RunCount": 1,
+  "Attempt": 1,
+  "Environment": {
+    "GoVersion": "go1.25.7",
+    "GOOS": "darwin",
+    "GOARCH": "arm64",
+    "CPU": "arm64",
+    "NumCPU": 10,
+    "RequestedThreads": 8,
+    "GOMAXPROCS": 8,
+    "Modules": {
+      "github.com/consensys/gnark": "v0.15.0",
+      "github.com/consensys/gnark-crypto": "v0.20.1",
+      "github.com/ethereum/go-ethereum": "v1.17.4"
+    },
+    "ProofSystem": "PLONK-KZG",
+    "ProofCurve": "BLS12-381",
+    "EncryptionCurve": "Jubjub",
+    "Hash": "Poseidon2-Merkle-Damgard",
+    "Profile": "zkDPP-audit-dh-field-v1"
+  },
+  "PublicKeyChecksum": "9dc3358b3d1cae70379447a6e2ac1a82d9771420c7812b556f084ef36d8b073b",
+  "Scope": "Offline native core throughput. Setup/encryption/file loading/network/graph traversal excluded. Total includes plaintext equality checks; phase timings include normal input validation.",
+  "Results": [
+    {
+      "Ciphertexts": 1,
+      "FieldsPerCiphertext": 5,
+      "PartialResponses": 2,
+      "RunCount": 1,
+      "Member1Millis": 0.237,
+      "Member2Millis": 0.22975,
+      "CombineAndDecryptMillis": 0.786792,
+      "TotalMillis": 1.253958,
+      "AllocatedBytes": 6672,
+      "HeapBefore": 495112,
+      "HeapAfter": 501784,
+      "UniqueR1": true,
+      "RecoveredAll": true,
+      "CiphertextDigest": "3ac105d7f6dc414166bf9868d3be619c9260d19ca2f62a80365650a1f5e4021c"
+    },
+    {
+      "Ciphertexts": 10,
+      "FieldsPerCiphertext": 5,
+      "PartialResponses": 20,
+      "RunCount": 1,
+      "Member1Millis": 1.927749,
+      "Member2Millis": 1.886542,
+      "CombineAndDecryptMillis": 6.427207,
+      "TotalMillis": 10.244208,
+      "AllocatedBytes": 54928,
+      "HeapBefore": 494760,
+      "HeapAfter": 549688,
+      "UniqueR1": true,
+      "RecoveredAll": true,
+      "CiphertextDigest": "dd630997b2b6ccbb2d1fd47364eaa6471e76cd656101d494f8e5c30f5bb0f399"
+    },
+    {
+      "Ciphertexts": 100,
+      "FieldsPerCiphertext": 5,
+      "PartialResponses": 200,
+      "RunCount": 1,
+      "Member1Millis": 12.810626,
+      "Member2Millis": 12.518457,
+      "CombineAndDecryptMillis": 42.717916,
+      "TotalMillis": 68.070125,
+      "AllocatedBytes": 537312,
+      "HeapBefore": 517976,
+      "HeapAfter": 1055288,
+      "UniqueR1": true,
+      "RecoveredAll": true,
+      "CiphertextDigest": "13c1fa6b28089e56c269fd3e20a852d18846b3c72dc07db5d510ac092999d8b0"
+    },
+    {
+      "Ciphertexts": 1000,
+      "FieldsPerCiphertext": 5,
+      "PartialResponses": 2000,
+      "RunCount": 1,
+      "Member1Millis": 128.734035,
+      "Member2Millis": 125.936696,
+      "CombineAndDecryptMillis": 428.566485,
+      "TotalMillis": 683.41525,
+      "AllocatedBytes": 5362472,
+      "HeapBefore": 740256,
+      "HeapAfter": 2872440,
+      "UniqueR1": true,
+      "RecoveredAll": true,
+      "CiphertextDigest": "6d1c460a4c2f15d1c07c93c71d8405d8e954e3d09d3fd344a7efabe9ec16d349"
+    }
+  ]
+}
