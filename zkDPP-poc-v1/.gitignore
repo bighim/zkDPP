@@ -1,0 +1,12 @@
+.cache/
+.codex-build/
+artifacts/
+docs/visual/
+contracts/cache/
+contracts/out/
+contracts/broadcast/
+contracts/src/generated/
+contracts/test/fixtures/
+*.test
+*.prof
+*.log

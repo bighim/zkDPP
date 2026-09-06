@@ -1,0 +1,4 @@
+# M9 final Anvil integration; do not change other Compose projects.
+services:
+  anvil:
+    command: ["anvil", "--host", "0.0.0.0", "--hardfork", "prague", "--chain-id", "31337", "--timestamp", "60000", "--gas-limit", "30000000", "--steps-tracing"]

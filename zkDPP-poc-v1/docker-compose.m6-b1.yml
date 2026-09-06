@@ -1,0 +1,16 @@
+# B1 진단 전용: SSTORE opcode 비용을 읽기 위한 step trace입니다.
+services:
+  anvil:
+    command:
+      - anvil
+      - --host
+      - 0.0.0.0
+      - --hardfork
+      - prague
+      - --chain-id
+      - "31337"
+      - --timestamp
+      - "60000"
+      - --gas-limit
+      - "30000000"
+      - --steps-tracing
