@@ -1,0 +1,15 @@
+.cache/
+.codex-build/
+artifacts/
+docs/visual/
+contracts/cache/
+contracts/out/
+contracts/broadcast/
+contracts/src/generated/
+contracts/test/fixtures/
+contracts/m1/cache/
+contracts/m1/out/
+artifacts/development/m1/key-package/*.share.json
+*.test
+*.prof
+*.log

@@ -1,0 +1,32 @@
+services:
+  anvil:
+    image: ${FOUNDRY_IMAGE:-ghcr.io/foundry-rs/foundry:v1.7.1}
+    platform: linux/arm64
+    entrypoint: [""]
+    command:
+      - anvil
+      - --host
+      - 0.0.0.0
+      - --hardfork
+      - prague
+      - --chain-id
+      - "31337"
+      - --timestamp
+      - "60000"
+      - --gas-limit
+      - "30000000"
+    ports:
+      - "${ANVIL_PORT:-18545}:8545"
+    healthcheck:
+      test: ["CMD", "cast", "block-number", "--rpc-url", "http://127.0.0.1:8545"]
+      interval: 1s
+      timeout: 2s
+      retries: 30
+
+  foundry:
+    image: ${FOUNDRY_IMAGE:-ghcr.io/foundry-rs/foundry:v1.7.1}
+    platform: linux/arm64
+    working_dir: /workspace/contracts
+    volumes:
+      - .:/workspace
+    entrypoint: [""]
