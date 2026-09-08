@@ -1,0 +1,150 @@
+{
+  "checkpoint": {
+    "blockHash": "0x900",
+    "blockNumber": 900
+  },
+  "decryptions": 3,
+  "freezeTransactions": 3,
+  "outcome": "COMPLETE_AT_CHECKPOINT",
+  "postSnapshotFallback": false,
+  "profile": "zkDPP-v2-M1",
+  "rpcEndToEnd": {
+    "backend": "Anvil JSON-RPC",
+    "checkpoint": {
+      "blockNumber": 10,
+      "blockHash": "0x43d723d16d97ccef2b094bcc68b3c1859283ae6da357fafc3901a4a503927d4d"
+    },
+    "decryptions": 3,
+    "freezeTransactions": [
+      {
+        "hash": "0x443fcb0d226718387b68c509b17de2d1bcb6794114c79c8392d34ea0c0dba977",
+        "blockNumber": 8,
+        "gasUsed": 49074,
+        "calldataBytes": 100
+      },
+      {
+        "hash": "0x6a74385b61194e50a82063be66c8287284489518d099367ffab926a26ab84f45",
+        "blockNumber": 9,
+        "gasUsed": 49074,
+        "calldataBytes": 100
+      },
+      {
+        "hash": "0xcf155daf7a0e2f0e5d48601cdaac444f0f0c69ea38d6cacf7b010e69fa875c4b",
+        "blockNumber": 10,
+        "gasUsed": 49074,
+        "calldataBytes": 100
+      }
+    ],
+    "ledger": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+    "outcome": "COMPLETE_AT_CHECKPOINT",
+    "setupTransactions": [
+      {
+        "Name": "mock-verifier",
+        "Hash": "0x47c6d98534dc628e145f579532e3cc31e6713a0e43ece4e61a9e7f3191c79f92",
+        "ContractAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "From": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+        "BlockNumber": 1,
+        "GasUsed": 152078,
+        "CalldataBytes": 391,
+        "PrepareMillis": 3.338583,
+        "SubmitReceiptMillis": 2.502291,
+        "SSTORECount": 0,
+        "SSTOREOpcodeGas": 0
+      },
+      {
+        "Name": "field-hasher",
+        "Hash": "0xa1648e1f9712de480ce88d45152fff688ce937af57c97d2432f16a35fe92bd5d",
+        "ContractAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+        "From": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+        "BlockNumber": 2,
+        "GasUsed": 100527,
+        "CalldataBytes": 242,
+        "PrepareMillis": 1.048167,
+        "SubmitReceiptMillis": 1.684459,
+        "SSTORECount": 0,
+        "SSTOREOpcodeGas": 0
+      },
+      {
+        "Name": "v2-ledger",
+        "Hash": "0x1026ee6a421b929a0e87084c69361db183db32bd81ed60a3142f755634103af9",
+        "ContractAddress": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+        "From": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+        "BlockNumber": 3,
+        "GasUsed": 6309250,
+        "CalldataBytes": 21896,
+        "PrepareMillis": 14.539834,
+        "SubmitReceiptMillis": 14.2575,
+        "SSTORECount": 0,
+        "SSTOREOpcodeGas": 0
+      },
+      {
+        "Name": "setEntryIssuer",
+        "Hash": "0xf322893d13d7a83f93b109554e11ed0f8e9ad3fcd407390af3e50c21b16ec62e",
+        "ContractAddress": "0x0000000000000000000000000000000000000000",
+        "From": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+        "BlockNumber": 4,
+        "GasUsed": 45612,
+        "CalldataBytes": 68,
+        "PrepareMillis": 0.8925,
+        "SubmitReceiptMillis": 1.67775,
+        "SSTORECount": 0,
+        "SSTOREOpcodeGas": 0
+      },
+      {
+        "Name": "entry",
+        "Hash": "0x106c3d94ecda162dbef2b36395794c277e4b72fdaeb880bd050c35c8563c0f3e",
+        "ContractAddress": "0x0000000000000000000000000000000000000000",
+        "From": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+        "BlockNumber": 5,
+        "GasUsed": 1215639,
+        "CalldataBytes": 388,
+        "PrepareMillis": 8.288125,
+        "SubmitReceiptMillis": 13.161334,
+        "SSTORECount": 0,
+        "SSTOREOpcodeGas": 0
+      },
+      {
+        "Name": "split",
+        "Hash": "0x056126bea16d3560b2c3059384aa4e8e0929fd1343446ee3fa766dc52adbd93a",
+        "ContractAddress": "0x0000000000000000000000000000000000000000",
+        "From": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+        "BlockNumber": 6,
+        "GasUsed": 978936,
+        "CalldataBytes": 548,
+        "PrepareMillis": 11.87775,
+        "SubmitReceiptMillis": 13.160709,
+        "SSTORECount": 0,
+        "SSTOREOpcodeGas": 0
+      },
+      {
+        "Name": "split",
+        "Hash": "0x6d70d9e4997bbe6108385cfe7190e3722540a124dd324eb69ed57d12638a78ee",
+        "ContractAddress": "0x0000000000000000000000000000000000000000",
+        "From": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+        "BlockNumber": 7,
+        "GasUsed": 1002797,
+        "CalldataBytes": 548,
+        "PrepareMillis": 11.733625,
+        "SubmitReceiptMillis": 14.797708,
+        "SSTORECount": 0,
+        "SSTOREOpcodeGas": 0
+      }
+    ],
+    "snapshot": {
+      "blockNumber": 7,
+      "blockHash": "0xc628eac647d969fbc472be4063ff58e70f7791946fa5d9edbe84ff82805080a7"
+    },
+    "targetCount": 3,
+    "totalMillis": 61.67725,
+    "uniqueRecords": 3,
+    "visitedObjects": 5
+  },
+  "snapshot": {
+    "blockHash": "0x900",
+    "blockNumber": 900
+  },
+  "targetCount": 3,
+  "totalMillis": 0.787416,
+  "uniqueRecords": 3,
+  "visitedObjects": 5
+}

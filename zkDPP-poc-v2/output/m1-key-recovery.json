@@ -1,0 +1,50 @@
+{
+  "decryptionWorkloads": [
+    {
+      "ciphertexts": 1,
+      "fieldsPerRecord": 5,
+      "millis": 0.17925,
+      "plaintextMatched": true
+    },
+    {
+      "ciphertexts": 10,
+      "fieldsPerRecord": 5,
+      "millis": 2.5685,
+      "plaintextMatched": true
+    },
+    {
+      "ciphertexts": 100,
+      "fieldsPerRecord": 5,
+      "millis": 20.112625,
+      "plaintextMatched": true
+    },
+    {
+      "ciphertexts": 1000,
+      "fieldsPerRecord": 5,
+      "millis": 169.051459,
+      "plaintextMatched": true
+    }
+  ],
+  "masterKeyPersisted": false,
+  "measurements": [
+    {
+      "case": "members-1-2",
+      "millis": 0.186083,
+      "verified": true
+    },
+    {
+      "case": "members-1-3",
+      "millis": 0.180291,
+      "verified": true
+    },
+    {
+      "case": "members-2-3",
+      "millis": 0.179292,
+      "verified": true
+    }
+  ],
+  "members": 3,
+  "profile": "zkDPP-v2-M1",
+  "setupAndFileIOExcluded": true,
+  "threshold": 2
+}

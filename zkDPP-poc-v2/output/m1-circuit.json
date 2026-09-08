@@ -1,0 +1,293 @@
+{
+  "profile": "zkDPP-v2-M1",
+  "curve": "BLS12-381/Jubjub",
+  "proofSystem": "PLONK-KZG",
+  "universalSRSChecksum": "b23a2863cf851f1c6604bfe78b8c09c398f5871850deefff43cb4dc6a096d66b",
+  "universalPoints": 131075,
+  "maxDomain": 131072,
+  "relations": [
+    {
+      "name": "entry",
+      "publicInputs": 4,
+      "constraints": 18117,
+      "domainSize": 32768,
+      "canonicalPoints": 32771,
+      "publicNames": [
+        "cm",
+        "R1X",
+        "R1Y",
+        "encryptedOutputNf"
+      ],
+      "compileMillis": 13.5635,
+      "setupMillis": 146.150125,
+      "proveMillis": 529.53875,
+      "verifyMillis": 2.696459,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "ffbf8f3d746f57c9a01c85fb2d10799f0bfce6b7b2c0a19b28b2117e94e3748a",
+        "proving.key": "31e4a97cf581121f8e9212974f558ed512d4c8fe735fa1ff5bd34917457a4721",
+        "verifying.key": "c4f4d239fb9ff07fac9b7db5b94a34e14136b56521a88e4703d1ffa8ab5c9f34"
+      }
+    },
+    {
+      "name": "transfer",
+      "publicInputs": 10,
+      "constraints": 49627,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "noteRoot",
+        "nf",
+        "rvNew",
+        "cmChange",
+        "D",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM",
+        "encryptedVoucherRvnf",
+        "encryptedChangeNf"
+      ],
+      "compileMillis": 28.063084,
+      "setupMillis": 297.391334,
+      "proveMillis": 869.743,
+      "verifyMillis": 2.995042,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "4fe9ab9dffed05b279cda980b01490dbed60727f9372148fe85ecda0eba02b3e",
+        "proving.key": "6a7c3ce795bbe9df7e17bd7fc1ccb9a2ae35e5c8218288cf475a46ee51e63810",
+        "verifying.key": "fc01138c8d01c6056da1c43b578237ec71de016bf5ce0f8efb4e3d7dbd8cd725"
+      }
+    },
+    {
+      "name": "proceed",
+      "publicInputs": 7,
+      "constraints": 38563,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "voucherRoot",
+        "rvnf",
+        "cmReceiver",
+        "R1X",
+        "R1Y",
+        "encryptedParentRV",
+        "encryptedReceiverNf"
+      ],
+      "compileMillis": 18.591375,
+      "setupMillis": 286.32275,
+      "proveMillis": 872.915041,
+      "verifyMillis": 2.674375,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "335fbbf8069121be751f62a6ded60ed82fdcea17e1dc4096fe4f0e2569dbdf2f",
+        "proving.key": "4f60db6ae90bcfc705ae6f706cd6265942ec9797b4d188684f611c26a658b4f6",
+        "verifying.key": "d0dafd3c1112a4d29f1a45a4678ba633afa9e6f2207d5ffc466752fddf3fb7d2"
+      }
+    },
+    {
+      "name": "recall",
+      "publicInputs": 8,
+      "constraints": 35987,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "voucherRoot",
+        "rvnf",
+        "cmReturn",
+        "D",
+        "R1X",
+        "R1Y",
+        "encryptedParentRV",
+        "encryptedReturnNf"
+      ],
+      "compileMillis": 16.814625,
+      "setupMillis": 275.497458,
+      "proveMillis": 840.694542,
+      "verifyMillis": 2.623583,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "45ad04a1d021495702f947e3968c1ce726f8d14a717e2fff1b3c7953d090b029",
+        "proving.key": "556f31f7576b850e3d4f91d81ce834abbd0e232191a2118c8346f3b08f581081",
+        "verifying.key": "bf83737eb89ba3eb0eeef7d7a1b4fbd1059501011777fdbb7315b402cadf5bec"
+      }
+    },
+    {
+      "name": "merge",
+      "publicInputs": 9,
+      "constraints": 55749,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "noteRoot",
+        "nf1",
+        "nf2",
+        "cmOut",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM1",
+        "encryptedParentCM2",
+        "encryptedOutputNf"
+      ],
+      "compileMillis": 25.299667,
+      "setupMillis": 296.9975,
+      "proveMillis": 861.111125,
+      "verifyMillis": 2.586708,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "fad1ad3bc49bd2487f8202b7c907db60fed3101abd4c8578b754aaf0644d7103",
+        "proving.key": "302ff0a0ff244029c2b073da5349757e65ddc542155026a98c2abf45f414606d",
+        "verifying.key": "38cad51042812f5cad8183d9d3c398a1386461475ac3e3f305aeb893ab604ad6"
+      }
+    },
+    {
+      "name": "split",
+      "publicInputs": 9,
+      "constraints": 50455,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "noteRoot",
+        "nf",
+        "cmOut1",
+        "cmOut2",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM",
+        "encryptedOutputNf1",
+        "encryptedOutputNf2"
+      ],
+      "compileMillis": 22.556334,
+      "setupMillis": 287.681834,
+      "proveMillis": 871.498333,
+      "verifyMillis": 2.629292,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "3afd78a3231131f3c27eb20f7fb1ab9c010c4cbce1fbb5e774cdc7a628c189fe",
+        "proving.key": "a0bed7d64b837b0f25c7a6219ccd3dc5718a4cb9066c222dce21c6a12abdc00b",
+        "verifying.key": "c9315c70a73f826a27ed5d8e01971ca25cf94ca2090cdfdc5f59aad6942efec6"
+      }
+    },
+    {
+      "name": "process",
+      "publicInputs": 15,
+      "constraints": 90568,
+      "domainSize": 131072,
+      "canonicalPoints": 131075,
+      "publicNames": [
+        "policyRef",
+        "policyScopeRef",
+        "noteRoot",
+        "nf1",
+        "nf2",
+        "nf3",
+        "cmEligible",
+        "cmWaste",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM1",
+        "encryptedParentCM2",
+        "encryptedParentCM3",
+        "encryptedEligibleNf",
+        "encryptedWasteNf"
+      ],
+      "compileMillis": 41.658583,
+      "setupMillis": 539.082292,
+      "proveMillis": 1649.802292,
+      "verifyMillis": 2.664791,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "b1edf2fe0875d19ba01c853f1a3b9756950131cc91bd74b5d62c2d83af901ede",
+        "proving.key": "e62e45fb490154548a5abe98aba0a33b445a1061c3711e0fe7221a8ae6a75a25",
+        "verifying.key": "c12d926222f41e5411d7aae60b3961e18396e4487864831c18081f29f14cb145"
+      }
+    },
+    {
+      "name": "exit",
+      "publicInputs": 5,
+      "constraints": 30043,
+      "domainSize": 32768,
+      "canonicalPoints": 32771,
+      "publicNames": [
+        "noteRoot",
+        "nf",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM"
+      ],
+      "compileMillis": 13.774958,
+      "setupMillis": 162.765417,
+      "proveMillis": 490.381666,
+      "verifyMillis": 2.610084,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "18fc33c148c4844c9c0eab7694c20d0f27d0a7c2649a753ea8626d70b7f01403",
+        "proving.key": "1d547769750b8dd42307d2f1a328dc2c53ae86cab956b5a6112083c09be8317d",
+        "verifying.key": "c0d5f49cf997e204a8076912781e452ff2074702777da16b58f10f01b7c97e06"
+      }
+    },
+    {
+      "name": "issue-standard-v1",
+      "publicInputs": 7,
+      "constraints": 35957,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "issuePolicyRef",
+        "noteRoot",
+        "nf",
+        "h",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM"
+      ],
+      "compileMillis": 15.750625,
+      "setupMillis": 276.459167,
+      "proveMillis": 835.227,
+      "verifyMillis": 2.607958,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "8ed0727c2a2dcafdea58bedeedb4af258ecacbc920825a2b79abb3bd1a0b5ab9",
+        "proving.key": "c01dceb247146609213875c930a1bc618c59c46100581233e66b582ab6a8ab99",
+        "verifying.key": "38f28b505f7c57c4efff67f0be32d8d74dc3f4ea520f5e760cf99637dc14ca33"
+      }
+    },
+    {
+      "name": "issue-strict-v2",
+      "publicInputs": 7,
+      "constraints": 35957,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "issuePolicyRef",
+        "noteRoot",
+        "nf",
+        "h",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM"
+      ],
+      "compileMillis": 16.272333,
+      "setupMillis": 274.386958,
+      "proveMillis": 833.701625,
+      "verifyMillis": 2.803125,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "0c699793850a90a1ef89df8d521ebb2c7e9df9266fe9190a6246ef99f1c4b5bf",
+        "proving.key": "4479011285008dd9075950be8e193fc3d1875fa2778ff8b709ae765b05f848c6",
+        "verifying.key": "750b31e91a8e66f6f4c7772fa6385dd3dc724f277f63310ea5df03c7b3d76889"
+      }
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "reason": "Issue representatives initially reused one Note",
+      "status": "superseded"
+    },
+    {
+      "attempt": 2,
+      "reason": "Standard and Strict use distinct Product Notes",
+      "status": "final"
+    }
+  ]
+}

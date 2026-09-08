@@ -1,0 +1,32 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "result": "Docker daemon unavailable"
+    },
+    {
+      "attempt": 2,
+      "result": "completed after Docker Desktop start"
+    }
+  ],
+  "environment": {
+    "blockGasLimit": 30000000,
+    "chainId": 31337,
+    "composeProject": "zkdpp-v2-m1",
+    "evm": "Prague",
+    "rpcPort": 18546
+  },
+  "executed": true,
+  "measurements": {
+    "entryIssuerRegistrationGas": 45612,
+    "entryRealProofAndAuditRecordGas": 1561818,
+    "entryVerifierDeploymentGas": 1601640,
+    "entryVerifierVerifyGas": 372058,
+    "entryWithAuditRecordGas": 1214511,
+    "ledgerDeploymentGas": 6309250,
+    "ledgerRuntimeBytes": 20585,
+    "noteFreezeGas": 49074
+  },
+  "profile": "zkDPP-v2-M1",
+  "scope": "representative M1 deployment, standalone and Ledger-routed real Entry PLONK verification, and state-write transactions; unexecuted Event gas was not extrapolated"
+}
