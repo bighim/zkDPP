@@ -8,15 +8,15 @@ import (
 )
 
 const (
-	NoteTagString                    = "zkDPP:Note:v1"
-	OwnerTagString                   = "zkDPP:Owner:v1"
-	NullifierTagString               = "zkDPP:Nullifier:v1"
-	VoucherTagString                 = "zkDPP:Voucher:v1"
-	VoucherNFTagString               = "zkDPP:VoucherNullifier:v1"
-	PolicyRefTagString               = "zkDPP:PolicyRef:v1"
-	ScopeRefTagString                = "zkDPP:ScopeRef:v1"
-	VoucherResolutionSecretTagString = "zkDPP:VoucherResolutionSecret:v1"
-	IssueTagString                   = "zkDPP:Issue:v1"
+	NoteTagString                    = "zkDPP:Note:v2"
+	OwnerTagString                   = "zkDPP:Owner:v2"
+	NullifierTagString               = "zkDPP:Nullifier:v2"
+	VoucherTagString                 = "zkDPP:Voucher:v2"
+	VoucherNFTagString               = "zkDPP:VoucherNullifier:v2"
+	PolicyRefTagString               = "zkDPP:PolicyRef:v2"
+	ScopeRefTagString                = "zkDPP:ScopeRef:v2"
+	VoucherResolutionSecretTagString = "zkDPP:VoucherResolutionSecret:v2"
+	IssueTagString                   = "zkDPP:Issue:v2"
 )
 
 func Element(value uint64) fr.Element {

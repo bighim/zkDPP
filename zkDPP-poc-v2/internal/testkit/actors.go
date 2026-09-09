@@ -53,7 +53,8 @@ func LoadActors(path string) ([]Actor, error) {
 	if err := ensureEOF(decoder); err != nil {
 		return nil, err
 	}
-	if raw.Profile != ActorProfile || raw.Purpose != ActorPurpose || raw.Curve != ActorCurve || raw.Hash != ActorHash || raw.OwnerTag != zkhash.OwnerTagString {
+	legacy := raw.Profile == ActorProfile && raw.OwnerTag == "zkDPP:Owner:v1"
+	if (!legacy && (raw.Profile != "zkDPP-fixed-actors-v2" || raw.OwnerTag != zkhash.OwnerTagString)) || raw.Purpose != ActorPurpose || raw.Curve != ActorCurve || raw.Hash != ActorHash {
 		return nil, fmt.Errorf("actor fixture profile metadata mismatch")
 	}
 	if len(raw.Actors) == 0 {
@@ -82,10 +83,14 @@ func LoadActors(path string) ([]Actor, error) {
 		}
 		secrets[skKey], addresses[addressKey] = true, true
 		derived := owner.Address(sk)
+		if legacy {
+			derived = zkhash.Hash(zkhash.MustHashToField("zkDPP:Owner:v1"), sk)
+		}
 		if !derived.Equal(&address) {
 			return nil, fmt.Errorf("actor %q address does not match skOwner", item.ID)
 		}
-		out[i] = Actor{ID: item.ID, SKOwner: sk, Address: address}
+		// Old test identities are checked against their original profile before migration.
+		out[i] = Actor{ID: item.ID, SKOwner: sk, Address: owner.Address(sk)}
 	}
 	return out, nil
 }

@@ -1,16 +1,20 @@
 GO ?= go
 GO_ENV = GOCACHE=$(CURDIR)/.cache/go-build GOTOOLCHAIN=go1.25.7
 
+.PHONY: setup-m1-hotfix evaluate-m1-hotfix test-contract-m1-hotfix benchmark-m1-hotfix-key-recovery benchmark-m1-hotfix-decrypt benchmark-m1-hotfix-anvil benchmark-m1-hotfix-audit benchmark-m1-hotfix finalize-m1-hotfix check-m1-hotfix
+
 .PHONY: test-go setup-m1 evaluate-m1 setup-m2 test-contract-m2 benchmark-m2-gas benchmark-m2-e2e benchmark-m2 setup-m3 test-contract-m3 benchmark-m3-gas benchmark-m3-e2e benchmark-m3 setup-m4 test-contract-m4 benchmark-m4-gas benchmark-m4-e2e benchmark-m4 setup-m5 test-contract-m5 benchmark-m5-gas benchmark-m5-e2e benchmark-m5-verifier-ablation benchmark-m5 setup-m6 test-contract-m6 benchmark-m6-gas benchmark-m6-e2e benchmark-m6
 
 test-go:
 	$(GO_ENV) $(GO) test ./...
 
 setup-m1:
-	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/setup_m1_v2
+	@echo 'M1 baseline is preserved at 8560fd3; use setup-m1-hotfix.'
+	@exit 1
 
 evaluate-m1:
-	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/evaluate_m1_v2
+	@echo 'M1 baseline is preserved at 8560fd3; use evaluate-m1-hotfix.'
+	@exit 1
 
 .PHONY: test-contract-m1 benchmark-m1-key-recovery benchmark-m1-decrypt benchmark-m1-anvil benchmark-m1-audit benchmark-m1 check-m1
 
@@ -27,15 +31,34 @@ benchmark-m1-anvil:
 	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/benchmark_m1_v2 -mode anvil
 
 benchmark-m1-audit:
-	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/benchmark_m1_v2 -mode audit
-	ANVIL_PORT=18546 FOUNDRY_IMAGE=ghcr.io/foundry-rs/foundry:v1.7.1 docker compose -p zkdpp-v2-m1 up -d anvil
-	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/benchmark_m1_rpc
-	ANVIL_PORT=18546 FOUNDRY_IMAGE=ghcr.io/foundry-rs/foundry:v1.7.1 docker compose -p zkdpp-v2-m1 down
+	@echo 'Use benchmark-m1-hotfix-audit; existing M1 measurements are preserved.'
+	@exit 1
 
 benchmark-m1: benchmark-m1-key-recovery benchmark-m1-decrypt benchmark-m1-anvil benchmark-m1-audit
 
 check-m1:
-	$(GO_ENV) $(GO) run ./cmd/benchmark_m1_v2 -mode checks
+	$(GO_ENV) $(GO) run ./cmd/m1_hotfix -mode check
+
+setup-m1-hotfix:
+	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/m1_hotfix -mode setup
+evaluate-m1-hotfix:
+	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/m1_hotfix -mode evaluate
+test-contract-m1-hotfix:
+	docker compose -f docker-compose.hotfix.yml -p zkdpp-v2-m1-hotfix run --rm foundry test -vv
+benchmark-m1-hotfix-key-recovery:
+	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/m1_hotfix -mode key-recovery
+benchmark-m1-hotfix-decrypt: benchmark-m1-hotfix-key-recovery
+benchmark-m1-hotfix-anvil:
+	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/m1_hotfix -mode anvil
+benchmark-m1-hotfix-audit:
+	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/m1_hotfix -mode audit
+benchmark-m1-hotfix: benchmark-m1-hotfix-key-recovery
+	$(MAKE) benchmark-m1-hotfix-anvil
+	$(MAKE) benchmark-m1-hotfix-audit
+finalize-m1-hotfix:
+	$(GO_ENV) $(GO) run ./cmd/m1_hotfix -mode finalize
+check-m1-hotfix:
+	$(GO_ENV) $(GO) run ./cmd/m1_hotfix -mode check
 
 setup-m2:
 	$(GO_ENV) $(GO) run ./cmd/setup_m2

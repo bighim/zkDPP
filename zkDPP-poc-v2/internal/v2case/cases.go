@@ -57,7 +57,7 @@ func KeyFixture() (auditcrypto.ExternalKeyPackage, [3]auditcrypto.Share, error) 
 	g := auditcrypto.Generator()
 	var point auditcrypto.Point
 	point.ScalarMultiplication(&g, x)
-	pkg, err := auditcrypto.PackageFromShares("zkdpp-v2-m1-fixture", auditcrypto.PublicKey{Point: point}, shares)
+	pkg, err := auditcrypto.PackageFromShares("zkdpp-v2-m1-hotfix-fixture", auditcrypto.PublicKey{Point: point}, shares)
 	x.SetInt64(0)
 	a.SetInt64(0)
 	return pkg, shares, err
@@ -68,7 +68,7 @@ func Build(root string) (*Suite, error) {
 	if err != nil {
 		return nil, err
 	}
-	actors, err := testkit.LoadActors(filepath.Join(root, "testdata/common/actors-v1.json"))
+	actors, err := testkit.LoadActors(filepath.Join(root, "testdata/common/actors-v2.json"))
 	if err != nil {
 		return nil, err
 	}

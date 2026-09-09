@@ -100,6 +100,8 @@ func cipher(ct auditcrypto.Ciphertext, parents int) auditCipherABI {
 }
 
 func main() {
+	fmt.Fprintln(os.Stderr,"M1 historical audit results are immutable; use cmd/m1_hotfix -mode audit")
+	os.Exit(1)
 	if err := run("."); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

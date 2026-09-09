@@ -9,6 +9,8 @@ contracts/src/generated/
 contracts/test/fixtures/
 contracts/m1/cache/
 contracts/m1/out/
+contracts/hotfix/out/
+contracts/hotfix/cache/
 artifacts/development/m1/key-package/*.share.json
 *.test
 *.prof

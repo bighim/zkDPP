@@ -60,6 +60,12 @@ type compiled struct {
 }
 
 func Setup(root string) (CircuitResult, error) {
+	if _, e := os.Stat(filepath.Join(root, "artifacts/development/m1-hotfix/srs/universal-canonical.bin")); e == nil {
+		return CircuitResult{}, fmt.Errorf("Hotfix SRS exists; refusing replacement")
+	}
+	if _, e := os.Stat(filepath.Join(root, "output/m1-hotfix-circuit.json")); e == nil {
+		return CircuitResult{}, fmt.Errorf("Hotfix setup already exists")
+	}
 	suite, err := v2case.Build(root)
 	if err != nil {
 		return CircuitResult{}, err
@@ -67,7 +73,7 @@ func Setup(root string) (CircuitResult, error) {
 	if err = suite.Validate(); err != nil {
 		return CircuitResult{}, err
 	}
-	keyDir := filepath.Join(root, "artifacts/development/m1/key-package")
+	keyDir := filepath.Join(root, "artifacts/development/m1-hotfix/key-package")
 	if err = os.MkdirAll(keyDir, 0700); err != nil {
 		return CircuitResult{}, err
 	}
@@ -117,7 +123,7 @@ func Setup(root string) (CircuitResult, error) {
 	if err != nil {
 		return CircuitResult{}, err
 	}
-	srsDir := filepath.Join(root, "artifacts/development/m1/srs")
+	srsDir := filepath.Join(root, "artifacts/development/m1-hotfix/srs")
 	if err = os.MkdirAll(srsDir, 0755); err != nil {
 		return CircuitResult{}, err
 	}
@@ -144,8 +150,7 @@ func Setup(root string) (CircuitResult, error) {
 			return CircuitResult{}, e
 		}
 	}
-	result := CircuitResult{Profile: "zkDPP-v2-M1", Curve: "BLS12-381/Jubjub", ProofSystem: "PLONK-KZG", UniversalSRSChecksum: canonicalHash, UniversalPoints: maxCanonical, MaxDomain: maxDomain}
-	result.Attempts = []map[string]any{{"attempt": 1, "status": "superseded", "reason": "Issue representatives initially reused one Note"}, {"attempt": 2, "status": "final", "reason": "Standard and Strict use distinct Product Notes"}}
+	result := CircuitResult{Profile: "zkDPP-v2-M1-HF", Curve: "BLS12-381/Jubjub", ProofSystem: "PLONK-KZG", UniversalSRSChecksum: canonicalHash, UniversalPoints: maxCanonical, MaxDomain: maxDomain}
 	for _, c := range cs {
 		start := time.Now()
 		pk, vk, e := plonk.Setup(c.ccs, canonicalSRS, lagranges[c.domain])
@@ -153,7 +158,7 @@ func Setup(root string) (CircuitResult, error) {
 			return result, e
 		}
 		setupMS := millis(time.Since(start))
-		dir := filepath.Join(root, "artifacts/development/m1", c.item.Name)
+		dir := filepath.Join(root, "artifacts/development/m1-hotfix/circuits", c.item.Name)
 		if e = os.MkdirAll(dir, 0755); e != nil {
 			return result, e
 		}
@@ -168,15 +173,18 @@ func Setup(root string) (CircuitResult, error) {
 				return result, e
 			}
 		}
-		if e = artifact.ExportSolidity(filepath.Join(root, "contracts/src/generated/v2-m1", c.item.Name, "PlonkVerifier.sol"), vk); e != nil {
+		if e = artifact.ExportSolidity(filepath.Join(root, "contracts/src/generated/v2-m1-hotfix", c.item.Name, "PlonkVerifier.sol"), vk); e != nil {
 			return result, e
 		}
 		result.Relations = append(result.Relations, RelationResult{Name: c.item.Name, PublicInputs: len(c.item.PublicNames), Constraints: c.ccs.GetNbConstraints(), DomainSize: c.domain, CanonicalPoints: c.canonical, PublicNames: c.item.PublicNames, CompileMillis: c.compileMS, SetupMillis: setupMS, Files: files})
+		if e = artifact.WriteJSON(filepath.Join(dir, "manifest.json"), result.Relations[len(result.Relations)-1]); e != nil {
+			return result, e
+		}
 	}
 	if err = artifact.WriteJSON(filepath.Join(srsDir, "manifest.json"), map[string]any{"profile": result.Profile, "developmentOnly": true, "externalDKGAssumed": true, "points": maxCanonical, "maxDomain": maxDomain, "checksum": canonicalHash}); err != nil {
 		return result, err
 	}
-	return result, artifact.WriteJSON(filepath.Join(root, "output/m1-circuit.json"), result)
+	return result, artifact.WriteJSON(filepath.Join(root, "output/m1-hotfix-circuit.json"), result)
 }
 
 type FixedProof struct {
@@ -190,21 +198,31 @@ type Fixture struct {
 }
 
 func Evaluate(root string) (CircuitResult, error) {
+	if _, e := os.Stat(filepath.Join(root, "contracts/test/fixtures/v2-m1-hotfix-proofs.json")); e == nil {
+		return CircuitResult{}, fmt.Errorf("Hotfix evaluation already exists")
+	}
 	suite, err := v2case.Build(root)
 	if err != nil {
 		return CircuitResult{}, err
 	}
 	var result CircuitResult
-	if err = readJSON(filepath.Join(root, "output/m1-circuit.json"), &result); err != nil {
+	if err = readJSON(filepath.Join(root, "output/m1-hotfix-circuit.json"), &result); err != nil {
 		return result, err
 	}
-	fixture := Fixture{Profile: "zkDPP-v2-M1", PublicKeyX: auditcrypto.EncodeField(suite.Package.PublicKey.Point.X), PublicKeyY: auditcrypto.EncodeField(suite.Package.PublicKey.Point.Y)}
+	fixture := Fixture{Profile: "zkDPP-v2-M1-HF", PublicKeyX: auditcrypto.EncodeField(suite.Package.PublicKey.Point.X), PublicKeyY: auditcrypto.EncodeField(suite.Package.PublicKey.Point.Y)}
 	for i, item := range suite.Cases {
-		dir := filepath.Join(root, "artifacts/development/m1", item.Name)
+		dir := filepath.Join(root, "artifacts/development/m1-hotfix/circuits", item.Name)
 		ccs := plonk.NewCS(ecc.BLS12_381)
 		pk := plonk.NewProvingKey(ecc.BLS12_381)
 		vk := plonk.NewVerifyingKey(ecc.BLS12_381)
 		for name, target := range map[string]io.ReaderFrom{"ccs.bin": ccs, "proving.key": pk, "verifying.key": vk} {
+			got, e := artifact.Checksum(filepath.Join(dir, name))
+			if e != nil {
+				return result, e
+			}
+			if got != result.Relations[i].Files[name] {
+				return result, fmt.Errorf("artifact checksum mismatch %s", name)
+			}
 			if err = read(filepath.Join(dir, name), target); err != nil {
 				return result, err
 			}
@@ -247,10 +265,10 @@ func Evaluate(root string) (CircuitResult, error) {
 		}
 		fixture.Proofs = append(fixture.Proofs, fixed)
 	}
-	if err = artifact.WriteJSON(filepath.Join(root, "contracts/test/fixtures/v2-m1-proofs.json"), fixture); err != nil {
+	if err = artifact.WriteJSON(filepath.Join(root, "contracts/test/fixtures/v2-m1-hotfix-proofs.json"), fixture); err != nil {
 		return result, err
 	}
-	return result, artifact.WriteJSON(filepath.Join(root, "output/m1-circuit.json"), result)
+	return result, artifact.WriteJSON(filepath.Join(root, "output/m1-hotfix-circuit.json"), result)
 }
 
 func write(path string, v io.WriterTo) error {

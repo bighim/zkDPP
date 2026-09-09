@@ -18,6 +18,8 @@ type DPP struct {
 }
 
 type Source interface {
+	CheckSnapshot(context.Context, v2audit.Snapshot) error
+	CheckIssuePolicy(context.Context, fr.Element, v2audit.Snapshot) error
 	ClaimRegistered(context.Context, fr.Element, v2audit.Snapshot) (bool, error)
 	Producer(context.Context, v2audit.Ref, v2audit.Snapshot) (uint64, error)
 	Record(context.Context, uint64, v2audit.Snapshot) (v2audit.Record, error)
@@ -26,6 +28,9 @@ type Source interface {
 // Verify proves only that the disclosed DPP fields recompute a registered
 // terminal Claim. Product data remains outside Contract storage.
 func Verify(ctx context.Context, source Source, snapshot v2audit.Snapshot, dpp DPP) error {
+	if e := source.CheckSnapshot(ctx, snapshot); e != nil {
+		return e
+	}
 	documentHash, err := document.Hash(document.DocumentInfo{ProductName: dpp.ProductName, LotID: dpp.LotID, Unit: dpp.Unit})
 	if err != nil {
 		return err
@@ -55,5 +60,8 @@ func Verify(ctx context.Context, source Source, snapshot v2audit.Snapshot, dpp D
 	if record.EventKind != v2audit.Issue || !record.PolicyRef.Equal(&dpp.Claim.IssuePolicyRef) || len(record.OutputRefs) != 1 || record.OutputRefs[0].ObjectType != v2audit.Claim || !record.OutputRefs[0].RawID.Equal(&h) {
 		return fmt.Errorf("Issue AuditRecord mismatch")
 	}
-	return nil
+	if e := source.CheckIssuePolicy(ctx, dpp.Claim.IssuePolicyRef, snapshot); e != nil {
+		return e
+	}
+	return source.CheckSnapshot(ctx, snapshot)
 }

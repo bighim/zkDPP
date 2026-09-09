@@ -16,6 +16,9 @@ type source struct {
 	record    v2audit.Record
 }
 
+func (s source) CheckSnapshot(context.Context, v2audit.Snapshot) error                { return nil }
+func (s source) CheckIssuePolicy(context.Context, fr.Element, v2audit.Snapshot) error { return nil }
+
 func (s source) ClaimRegistered(context.Context, fr.Element, v2audit.Snapshot) (bool, error) {
 	return true, nil
 }

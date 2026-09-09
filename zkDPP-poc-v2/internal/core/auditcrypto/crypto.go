@@ -13,11 +13,11 @@ import (
 	ed "github.com/consensys/gnark-crypto/ecc/bls12-381/twistededwards"
 )
 
-const Profile = "zkDPP-audit-dh-field-v1"
+const Profile = "zkDPP-audit-dh-field-v2"
 
 var (
-	AuditKeyTag     = zkhash.MustHashToField("zkDPP:AuditKey:v1")
-	AuditMaskTag    = zkhash.MustHashToField("zkDPP:AuditMask:v1")
+	AuditKeyTag     = zkhash.MustHashToField("zkDPP:AuditKey:v2")
+	AuditMaskTag    = zkhash.MustHashToField("zkDPP:AuditMask:v2")
 	AuditContextTag = zkhash.MustHashToField("zkDPP:AuditContext:v1")
 )
 

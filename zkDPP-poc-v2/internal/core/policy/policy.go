@@ -62,6 +62,7 @@ func Apply(inputs [InputArity]note.State) (Result, error) {
 	result.Remainders.WasteMass = rem
 	result.Waste = note.State{QMass: wasteMass}
 	result.Eligible = note.State{QMass: result.Intermediate.QMass - wasteMass, ARec: result.Intermediate.ARec, E: result.Intermediate.E}
+	if result.Eligible.QMass==0{return Result{},fmt.Errorf("Process requires positive ELIGIBLE mass")}
 	if err := note.ValidateState(result.Eligible, note.AssetRoleEligible); err != nil {
 		return Result{}, err
 	}

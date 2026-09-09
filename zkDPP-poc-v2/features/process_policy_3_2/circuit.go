@@ -82,6 +82,7 @@ func (c *Circuit) Define(api frontend.API) error {
 	api.AssertIsEqual(c.Outputs[1].ARec, 0)
 	api.AssertIsEqual(c.Outputs[1].E, 0)
 	api.AssertIsEqual(c.Outputs[0].QMass, api.Sub(intermediateQ, c.Outputs[1].QMass))
+	api.AssertIsDifferent(c.Outputs[0].QMass,0)
 	api.AssertIsEqual(c.Outputs[0].ARec, totA)
 	api.AssertIsEqual(c.Outputs[0].E, intermediateE)
 	for i := 0; i < 2; i++ {
