@@ -35,7 +35,7 @@ M2·M3을 시작할 때는 `milestones/FUTURE-MILESTONE-CONTEXT.md`를 먼저 �
 5. Future Context
 6. `../Conversation History`와 `../zkDPP-poc-v1`
 
-현재는 구현 전이므로 M1 명세가 승인되기 전까지 `ARCHITECTURE.md`와 `REUSE.md`의 예정사항을 구현 완료 사실로 해석하지 않습니다.
+현재 활성 구현 기준은 M1-HF입니다. M1 자체 명세와 충돌하는 Domain·Issue 문자열 처리·감사 결과 조건은 승인된 M1-HF 명세를 따릅니다. 과거 M1 source는 commit `8560fd3`, Raw·Result·Artifact는 기존 경로로 보존합니다.
 
 ## v1 보존 원칙
 
