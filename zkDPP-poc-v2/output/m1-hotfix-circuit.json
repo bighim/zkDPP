@@ -1,0 +1,281 @@
+{
+  "profile": "zkDPP-v2-M1-HF",
+  "curve": "BLS12-381/Jubjub",
+  "proofSystem": "PLONK-KZG",
+  "universalSRSChecksum": "cf7a130290c65d4335106e9f39580f40e0504623b9cda77f72274d8efbac8ae6",
+  "universalPoints": 131075,
+  "maxDomain": 131072,
+  "relations": [
+    {
+      "name": "entry",
+      "publicInputs": 4,
+      "constraints": 18117,
+      "domainSize": 32768,
+      "canonicalPoints": 32771,
+      "publicNames": [
+        "cm",
+        "R1X",
+        "R1Y",
+        "encryptedOutputNf"
+      ],
+      "compileMillis": 10.402,
+      "setupMillis": 183.673667,
+      "proveMillis": 458.357667,
+      "verifyMillis": 2.702958,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "9b640bf41c0647adc6ae5c9b52b7ec357d30794c406f368314c6edfa0d138e90",
+        "proving.key": "028ce0e5571efeed4c2ae72513f81baa1d078a090a209f98668957a46bf19246",
+        "verifying.key": "e3e991401667e285aa2d2dc2f5f133815d098a12420bc15f1f724de21b14850c"
+      }
+    },
+    {
+      "name": "transfer",
+      "publicInputs": 10,
+      "constraints": 49627,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "noteRoot",
+        "nf",
+        "rvNew",
+        "cmChange",
+        "D",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM",
+        "encryptedVoucherRvnf",
+        "encryptedChangeNf"
+      ],
+      "compileMillis": 25.916625,
+      "setupMillis": 278.233583,
+      "proveMillis": 873.853333,
+      "verifyMillis": 2.633708,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "76cc2c4bbedb83bd5f1545c862e129a5076eda75991fa9af9bc5894835e6a38d",
+        "proving.key": "f04f64b4327c4b7190dfbed7ecab09675b79d5346a4a8b678599dfeb4d0105b7",
+        "verifying.key": "1812566b4f63e0e603a81bc2321d246cff3e146047294e3c6f71d067b0618026"
+      }
+    },
+    {
+      "name": "proceed",
+      "publicInputs": 7,
+      "constraints": 38563,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "voucherRoot",
+        "rvnf",
+        "cmReceiver",
+        "R1X",
+        "R1Y",
+        "encryptedParentRV",
+        "encryptedReceiverNf"
+      ],
+      "compileMillis": 19.576083,
+      "setupMillis": 285.155959,
+      "proveMillis": 908.281,
+      "verifyMillis": 2.779,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "d39e6e00315e6e955246c8997df186d1f2483961d5da23081f0186f9525be826",
+        "proving.key": "c198a074bf922a57b7501760b3cd9abe4e3b55536c73e801a143b33c395cb119",
+        "verifying.key": "f958916083fd5d900e983bb9699e9e7b95cbdcfa706faee0d968761be11c2a1f"
+      }
+    },
+    {
+      "name": "recall",
+      "publicInputs": 8,
+      "constraints": 35987,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "voucherRoot",
+        "rvnf",
+        "cmReturn",
+        "D",
+        "R1X",
+        "R1Y",
+        "encryptedParentRV",
+        "encryptedReturnNf"
+      ],
+      "compileMillis": 17.541333,
+      "setupMillis": 320.414875,
+      "proveMillis": 852.568333,
+      "verifyMillis": 2.5865,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "aeb41f869423decc224dce3e24374b5ea9a5e3998cebfd663fc3a937c4f444b4",
+        "proving.key": "39b62d8ac70234e0e3eafaf35f32c03f4774f29e17ccf48a7164eafa938da78e",
+        "verifying.key": "cc1241e58645f6699dd99e00ef3b8c74a22d71442969c5854f45c26318932e19"
+      }
+    },
+    {
+      "name": "merge",
+      "publicInputs": 9,
+      "constraints": 55749,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "noteRoot",
+        "nf1",
+        "nf2",
+        "cmOut",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM1",
+        "encryptedParentCM2",
+        "encryptedOutputNf"
+      ],
+      "compileMillis": 27.519041,
+      "setupMillis": 427.906792,
+      "proveMillis": 883.412,
+      "verifyMillis": 2.649125,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "7701aed9416107929f1c9c623cc5e90e6c032321472fca63bc4e4fcbe10d8c42",
+        "proving.key": "845c568a237aeb2869280c40c7360f4473922480e855c355d242c387424f57c7",
+        "verifying.key": "0e4650d6a16033d3e2e7cbb49829cba4f76955089a45305e681c3fd5b108c777"
+      }
+    },
+    {
+      "name": "split",
+      "publicInputs": 9,
+      "constraints": 50455,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "noteRoot",
+        "nf",
+        "cmOut1",
+        "cmOut2",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM",
+        "encryptedOutputNf1",
+        "encryptedOutputNf2"
+      ],
+      "compileMillis": 23.928584,
+      "setupMillis": 343.406875,
+      "proveMillis": 881.060667,
+      "verifyMillis": 2.645333,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "7a51b2dd37d62533f77b90a3a3f6debdb80fd8f598a7c22e83f54f7cef54716d",
+        "proving.key": "59b9934b256cef4804d80ba634336ab1a72618fb846907c5b0a7107e8423e638",
+        "verifying.key": "59f165d45cd62565f88431edac7ba037ecb4497e8b4c05262bd310e855246228"
+      }
+    },
+    {
+      "name": "process",
+      "publicInputs": 15,
+      "constraints": 90569,
+      "domainSize": 131072,
+      "canonicalPoints": 131075,
+      "publicNames": [
+        "policyRef",
+        "policyScopeRef",
+        "noteRoot",
+        "nf1",
+        "nf2",
+        "nf3",
+        "cmEligible",
+        "cmWaste",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM1",
+        "encryptedParentCM2",
+        "encryptedParentCM3",
+        "encryptedEligibleNf",
+        "encryptedWasteNf"
+      ],
+      "compileMillis": 42.650625,
+      "setupMillis": 615.195125,
+      "proveMillis": 1682.495791,
+      "verifyMillis": 2.667417,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "cc9004f2917c171110675c0fa4f82ffbf1d4aadec47364e62965c8258ba8ffd3",
+        "proving.key": "5f280e873c6888fbb289e96132a241bdca24dfbb13bd6242bd4e5ea3d013b0a0",
+        "verifying.key": "0d441a3972b709c2d8ffa459fafd2cca6e83abaab7f3e45387f25e989e782919"
+      }
+    },
+    {
+      "name": "exit",
+      "publicInputs": 5,
+      "constraints": 30043,
+      "domainSize": 32768,
+      "canonicalPoints": 32771,
+      "publicNames": [
+        "noteRoot",
+        "nf",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM"
+      ],
+      "compileMillis": 13.759167,
+      "setupMillis": 190.618708,
+      "proveMillis": 492.17275,
+      "verifyMillis": 2.691292,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "7b0ea3651bec30d478799e2d3bf98d2c8d238500f76d99e2ec7e48197a00d184",
+        "proving.key": "f69f76f39db282071ce5f5299bb7fddbfeb81728ceb4f33473b40a04400154d6",
+        "verifying.key": "529c0132758e196344f944513f668e256cd9a8bb7a8a6394e476e111c7815e47"
+      }
+    },
+    {
+      "name": "issue-standard-v1",
+      "publicInputs": 7,
+      "constraints": 35957,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "issuePolicyRef",
+        "noteRoot",
+        "nf",
+        "h",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM"
+      ],
+      "compileMillis": 16.430167,
+      "setupMillis": 282.785,
+      "proveMillis": 841.6515,
+      "verifyMillis": 2.6,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "ec423b7bbe9a06f823924bf40c6818838933e28bef2630a99b6946c1ea38ffe5",
+        "proving.key": "8648c16d498cac85eadbd529a4ca53c2567fc6040056dcda4bee56a6e230861e",
+        "verifying.key": "c5eb5af9a6c3fabe094e043ae588db7f872041e9e861cdf331836ff53e036068"
+      }
+    },
+    {
+      "name": "issue-strict-v2",
+      "publicInputs": 7,
+      "constraints": 35957,
+      "domainSize": 65536,
+      "canonicalPoints": 65539,
+      "publicNames": [
+        "issuePolicyRef",
+        "noteRoot",
+        "nf",
+        "h",
+        "R1X",
+        "R1Y",
+        "encryptedParentCM"
+      ],
+      "compileMillis": 16.713,
+      "setupMillis": 341.522458,
+      "proveMillis": 836.245834,
+      "verifyMillis": 2.733125,
+      "proofBytes": 664,
+      "files": {
+        "ccs.bin": "5027f795c22d5a41cbab8d3c071348d3e85ade7f298c5d7a08e4398939b2da2f",
+        "proving.key": "ea491249e5096a6259418376f5bec9214a9a2b4ff9ea2420c21f5eda3e1e42cc",
+        "verifying.key": "1f4e216c4fec24970b7c5fcb447c5347fc8991fb6c4b30535405b003f8b8179b"
+      }
+    }
+  ]
+}

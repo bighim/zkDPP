@@ -4,6 +4,8 @@ zkDPP-poc-v2는 완료된 `zkDPP-poc-v1` M9을 보존하면서, Master Key 기�
 
 M1은 **완료** 상태입니다. 10개 Event Circuit, Master Key 복구, v2 Ledger, 외부 DPP Claim 검증과 AuditAndFreeze POC를 구현했으며 실제 결과는 [M1 Result](milestones/M1-master-key-audit-result.md)에 정리했습니다.
 
+현재 실행 기준은 [M1-HF](milestones/M1-HF-spec-conformance.md)입니다. 모든 Event의 실제 proof와 Snapshot RPC 감사·동결을 연결한 결과는 [Hotfix Result](milestones/M1-HF-spec-conformance-result.md)에 있습니다. 기존 M1은 당시 구현 기록으로 보존합니다.
+
 ## 무엇을 읽나요?
 
 | 목적 | 문서 |
@@ -13,6 +15,7 @@ M1은 **완료** 상태입니다. 10개 Event Circuit, Master Key 복구, v2 Led
 | M1 구현 기준 | [`M1-master-key-audit.md`](milestones/M1-master-key-audit.md) |
 | M1 구현 순서 | [`M1-IMPLEMENTATION-PLAN.md`](milestones/M1-IMPLEMENTATION-PLAN.md) |
 | M1 실제 결과 | [`M1-master-key-audit-result.md`](milestones/M1-master-key-audit-result.md) |
+| M1 Hotfix 구현 기준 | [`M1-HF-spec-conformance.md`](milestones/M1-HF-spec-conformance.md) |
 | M2·M3 후속 결정 | [`FUTURE-MILESTONE-CONTEXT.md`](milestones/FUTURE-MILESTONE-CONTEXT.md) |
 | 설계·구현 경계 | [`ARCHITECTURE.md`](ARCHITECTURE.md) |
 | v1 재사용 예정 범위 | [`REUSE.md`](REUSE.md) |
@@ -42,11 +45,12 @@ M1은 실제 DKG, Audit Key Rotation과 post-snapshot 경합 자손 추적을 �
 ## 재현 명령
 
 - `make test-go`
-- `make test-contract-m1`
-- `make setup-m1`
-- `make evaluate-m1`
-- `make benchmark-m1`
-- `make check-m1`
+- `make setup-m1-hotfix`
+- `make evaluate-m1-hotfix`
+- `make test-contract-m1-hotfix`
+- `make benchmark-m1-hotfix`
+- `make finalize-m1-hotfix`
+- `make check-m1-hotfix`
 
 SRS·PK/VK·proof·위원 share는 개발용 생성물이며 Git 대상에서 제외됩니다.
 
@@ -54,6 +58,6 @@ SRS·PK/VK·proof·위원 share는 개발용 생성물이며 Git 대상에서 �
 
 - `../zkDPP-poc-v1`의 M1~M9 코드·문서·Raw 결과·Artifact 의미
 - `../Conversation History`의 원본 대화와 동료 전달 문서
-- v1의 Note·Voucher commitment, Owner·Policy·Audit Domain과 PolicyRef
+- 과거 v1·M1의 결과와 생성물. Hotfix 실행은 `v2` Domain을 사용하고 PolicyRef의 입력 순서는 유지합니다.
 
 v2 구현은 새 폴더에서만 진행하며 v1 source를 직접 import하지 않습니다.

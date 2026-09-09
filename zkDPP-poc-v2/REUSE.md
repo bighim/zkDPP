@@ -31,4 +31,4 @@ M1 Result를 기준으로 아래 항목은 **실제 재사용 또는 변경 검�
 - `internal/v2dpp`: 외부 DPP의 DocumentInfo·DPPClaim과 온체인 terminal Claim을 Snapshot에서 대조하는 client 경계
 - `internal/v2run`: 하나의 development universal SRS에서 10개 PLONK relation을 Setup·재로딩·검증하는 경로
 
-구현 뒤에는 실제 코드·test·Raw Result 링크를 추가해 재사용 경계를 확정합니다.
+Hotfix의 실제 재사용·수정 결과는 [M1-HF Result](milestones/M1-HF-spec-conformance-result.md)에서 확인합니다. `internal/v2audit`의 canonical Snapshot RPC·terminal-aware 양방향 추적, `internal/hotfix`의 실제 Anvil runner·읽기 전용 checker를 검증했습니다.

@@ -1,0 +1,61 @@
+{
+  "decrypt": [
+    {
+      "allFieldsMatched": true,
+      "allocatedBytes": 2720,
+      "fields": 5,
+      "millis": 0.196208,
+      "records": 1
+    },
+    {
+      "allFieldsMatched": true,
+      "allocatedBytes": 27120,
+      "fields": 5,
+      "millis": 1.806167,
+      "records": 10
+    },
+    {
+      "allFieldsMatched": true,
+      "allocatedBytes": 271200,
+      "fields": 5,
+      "millis": 19.856708,
+      "records": 100
+    },
+    {
+      "allFieldsMatched": true,
+      "allocatedBytes": 2712000,
+      "fields": 5,
+      "millis": 170.144042,
+      "records": 1000
+    }
+  ],
+  "packageChecksum": "fc197f52ced0138ba4baf22d36be785ce4b533c46226beec19ea39aa644a6607",
+  "profile": "zkDPP-audit-dh-field-v2",
+  "recovery": [
+    {
+      "members": [
+        1,
+        2
+      ],
+      "millis": 0.097916,
+      "publicKeyMatched": true
+    },
+    {
+      "members": [
+        1,
+        3
+      ],
+      "millis": 0.094583,
+      "publicKeyMatched": true
+    },
+    {
+      "members": [
+        2,
+        3
+      ],
+      "millis": 0.0935,
+      "publicKeyMatched": true
+    }
+  ],
+  "runCount": 1
+}

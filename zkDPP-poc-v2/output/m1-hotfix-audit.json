@@ -1,0 +1,3750 @@
+{
+  "Mode": "audit",
+  "MockVerifiers": false,
+  "ChainID": 31337,
+  "Transactions": [
+    {
+      "Name": "deploy-Poseidon2BLS12381",
+      "Hash": "0x2674429e5b0c13ff6542c45f4a70fee0042ea853a6d6134b747df312f943fc97",
+      "BlockHash": "0xa5f014dbd106dd6340dde51beea494a12cc992b52ceea4f1c91ac428ffc77f81",
+      "ContractAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "Block": 1,
+      "Gas": 2282769,
+      "Status": 1,
+      "CalldataBytes": 10335,
+      "Millis": 6.270083,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFEntry",
+      "Hash": "0xbf3815d38109ec3c561e68dc5fa2ffc528460ba0c7cecedf890b8b3295e25cec",
+      "BlockHash": "0xda74823e491682fe7413d11cacc3cd5cc7c0ed673efa65557488c7080c5bc286",
+      "ContractAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "Block": 2,
+      "Gas": 1602288,
+      "Status": 1,
+      "CalldataBytes": 7191,
+      "Millis": 3.791791,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFTransfer",
+      "Hash": "0x570abd8c0b2fb0bd8829ef785c356e38690ec8ea5343d21e573098ff9ec0e0de",
+      "BlockHash": "0x40cd34feb3e1bc4228a23074aaaa812a896f37191c8f1317f6c5923dbf4dfc72",
+      "ContractAddress": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "Block": 3,
+      "Gas": 1602600,
+      "Status": 1,
+      "CalldataBytes": 7193,
+      "Millis": 5.210334,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFProceed",
+      "Hash": "0x8239d8044116a79bb762dca33785ab61f310b9be3fc5b11b65836ab3e18c58de",
+      "BlockHash": "0x9021e92ac9e8837079e64d99f950f1d1bc956045870bbb0fb49715e899622ca0",
+      "ContractAddress": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "Block": 4,
+      "Gas": 1602576,
+      "Status": 1,
+      "CalldataBytes": 7193,
+      "Millis": 5.63325,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFRecall",
+      "Hash": "0x7f74c41e2b2b6dec90f00462291f9ba213d55a95ce9abb55afa179503080c24d",
+      "BlockHash": "0xd8051cb552b0ff9cdfbc35fd24fd2897cf5aa1cd7f762ca9ba432654225c21db",
+      "ContractAddress": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+      "Block": 5,
+      "Gas": 1602192,
+      "Status": 1,
+      "CalldataBytes": 7191,
+      "Millis": 3.66025,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFMerge",
+      "Hash": "0x1709d409a570b043a477dc3e4cb4d906f45e20ae0b3961f16416ccc1db8264d1",
+      "BlockHash": "0x52979d436e1d699544dc62d7ad944722062f9600a0f3370d06f5f4e5cd28356a",
+      "ContractAddress": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+      "Block": 6,
+      "Gas": 1602192,
+      "Status": 1,
+      "CalldataBytes": 7191,
+      "Millis": 3.686292,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFSplit",
+      "Hash": "0xbfa5ea2006b8cb07b21cc8891ec072e7f455edfe18ba4a196161f91957cde5d0",
+      "BlockHash": "0xbc6541bf3573a35fd621832385c9de6242b90d5f593418cf829d6dee4a5db215",
+      "ContractAddress": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+      "Block": 7,
+      "Gas": 1602648,
+      "Status": 1,
+      "CalldataBytes": 7193,
+      "Millis": 4.760084,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFExit",
+      "Hash": "0xdc9e5cd71a7dfbc9fe4d9de5f4578c9efd853fa4804586009509e85a34458e8a",
+      "BlockHash": "0x2aeed905d2286f171065b5ca889f248af4dbc75dc924e0c1c32e2c11de18b89d",
+      "ContractAddress": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+      "Block": 8,
+      "Gas": 1602204,
+      "Status": 1,
+      "CalldataBytes": 7191,
+      "Millis": 3.797458,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFProcess",
+      "Hash": "0x5a4692e2b818916e838e47129587e10f1dde1442a7da0d25e4186dec97533a54",
+      "BlockHash": "0xbd660a473eb992e640ffc2e941d60cd0049e4ef6de12c7cbdd0809b956ea3740",
+      "ContractAddress": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
+      "Block": 9,
+      "Gas": 1602636,
+      "Status": 1,
+      "CalldataBytes": 7193,
+      "Millis": 3.465083,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFStandard",
+      "Hash": "0xf8c58cce5e34bff031a6ba751b9c2d0548c167e0e9836a464e766100d9bda74b",
+      "BlockHash": "0x65514f3e1bff1698f7bf65b727365ceab5a2796e56c28682f9946f73d72b2a6f",
+      "ContractAddress": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
+      "Block": 10,
+      "Gas": 1602576,
+      "Status": 1,
+      "CalldataBytes": 7193,
+      "Millis": 3.342542,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFStrict",
+      "Hash": "0xa0df9c2c50c3a9cf4bcc8f3d783b39cdfb26146b74e7387878abd4b401bacd97",
+      "BlockHash": "0x06ccac14378400d7f2fcd97ebacf6c50b16f3ef7990e89bf131c95e570b53dcb",
+      "ContractAddress": "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
+      "Block": 11,
+      "Gas": 1602192,
+      "Status": 1,
+      "CalldataBytes": 7191,
+      "Millis": 3.524791,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-ZkDPPV2Ledger",
+      "Hash": "0x81b2b44c05a93fd46192b28a3a650bd324ea8bf868137938cc5b1ab863dbb585",
+      "BlockHash": "0xf6b7bed409d57ef7d785ba2febf741df3dafce65630c28a0c3a9d352394ce330",
+      "ContractAddress": "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e",
+      "Block": 12,
+      "Gas": 7718222,
+      "Status": 1,
+      "CalldataBytes": 21896,
+      "Millis": 1505.089416,
+      "SSTORECount": 77,
+      "SSTOREGas": 1680700
+    },
+    {
+      "Name": "setEntryIssuer",
+      "Hash": "0xc2d115e1e4ba12149da48c8f6cb53b7b111819b641049ab33020d5ff77e3ae48",
+      "BlockHash": "0x1022f319493054318d6e0c135bef5244337d2f7f7395a6b3754a54fc5b2a50ef",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 13,
+      "Gas": 45612,
+      "Status": 1,
+      "CalldataBytes": 68,
+      "Millis": 3.139625,
+      "SSTORECount": 1,
+      "SSTOREGas": 20000
+    },
+    {
+      "Name": "registerPolicyAuthority",
+      "Hash": "0x3b23c155395336dbe51b739e10d7ba151464603397e63f2450dfe475a852ae33",
+      "BlockHash": "0x6844d8e2382c1ef9f86e44b0c3b3142e248c29bce7dc60355e255aa8f58708df",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 14,
+      "Gas": 96433,
+      "Status": 1,
+      "CalldataBytes": 36,
+      "Millis": 5.2275,
+      "SSTORECount": 4,
+      "SSTOREGas": 62900
+    },
+    {
+      "Name": "reservePolicy",
+      "Hash": "0x82a315b6b8cb86d6a1ee4fe4eb73512bda6c0ca9468fa1f5c15364dbbb6ceae1",
+      "BlockHash": "0xe4606dd0369e36a3d856fccf818aad580e737c02aafae46c4237c3c930d1cfba",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 15,
+      "Gas": 217586,
+      "Status": 1,
+      "CalldataBytes": 36,
+      "Millis": 127.467958,
+      "SSTORECount": 8,
+      "SSTOREGas": 63300
+    },
+    {
+      "Name": "registerPolicy",
+      "Hash": "0xfb62657dede833ce30fb857617e4b8278d14510791a16604b720780572c1c4e2",
+      "BlockHash": "0xee50bbed3c0c6a2e67e2afeefb5469ecd4a531dc2b1c302e54217a84ece7e5c3",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 16,
+      "Gas": 103770,
+      "Status": 1,
+      "CalldataBytes": 164,
+      "Millis": 15.262167,
+      "SSTORECount": 7,
+      "SSTOREGas": 62500
+    },
+    {
+      "Name": "reservePolicy",
+      "Hash": "0x8256ba170bd94d0c3e81529e3c1bc834c0b2969ebc44d33d080217d9833472d9",
+      "BlockHash": "0xace3aefe22b093ba99c9cd6d9077e3553d010208ad1fe02e708c1c98907d3873",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 17,
+      "Gas": 217612,
+      "Status": 1,
+      "CalldataBytes": 36,
+      "Millis": 128.908708,
+      "SSTORECount": 8,
+      "SSTOREGas": 63300
+    },
+    {
+      "Name": "registerPolicy",
+      "Hash": "0xc34ed7ba04d5594f54a676bedb63f032a96544a61a1c5a41b69394d70e6676fd",
+      "BlockHash": "0x5f814cf4788fa36e38e4ebab30678e7c7365431b181edd6a3d9441fef73894d7",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 18,
+      "Gas": 103736,
+      "Status": 1,
+      "CalldataBytes": 164,
+      "Millis": 17.706166,
+      "SSTORECount": 7,
+      "SSTOREGas": 62500
+    },
+    {
+      "Name": "reservePolicyVersion",
+      "Hash": "0xefb26afb876fe4c1913c6fe5e854a855b181040fec522eae9c843fd6ef1db443",
+      "BlockHash": "0x3a27d5fa6aae5e09183c1d7913e472331bee9ccedb2afd6df3a8bc88aebf04a0",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 19,
+      "Gas": 289786,
+      "Status": 1,
+      "CalldataBytes": 36,
+      "Millis": 256.595333,
+      "SSTORECount": 5,
+      "SSTOREGas": 23200
+    },
+    {
+      "Name": "registerPolicy",
+      "Hash": "0x89d3b95b7afe42591050c42aa9984380710cd20a6b22b77c6d87160f2e2dc19e",
+      "BlockHash": "0xfd4f67576aeda500609d56989a047fa48c311bfd0d387988395b53fbcfb57f27",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 20,
+      "Gas": 103748,
+      "Status": 1,
+      "CalldataBytes": 164,
+      "Millis": 24.798125,
+      "SSTORECount": 7,
+      "SSTOREGas": 62500
+    },
+    {
+      "Name": "entry-00",
+      "Hash": "0x02b03d693763a351180b2baad206f6b4eb457a8cbfd3b6a84aea1cb00976bbf8",
+      "BlockHash": "0x804a9868ef7be304615ed42e7ace0e18558dcff3729d74e5b82d9c3925b804b2",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 21,
+      "Gas": 2258762,
+      "Status": 1,
+      "CalldataBytes": 1412,
+      "Millis": 922.967917,
+      "SSTORECount": 49,
+      "SSTOREGas": 970100
+    },
+    {
+      "Name": "entry-01",
+      "Hash": "0x4714962136b4f0fc6ad422d73b3f797b5b2ec056faa6b512c104c3c7cc7fe4b0",
+      "BlockHash": "0x5ccee5db30414b3566c4976c55d8f166cebd7afd2626250d55f110f4f70d149c",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 22,
+      "Gas": 1692299,
+      "Status": 1,
+      "CalldataBytes": 1412,
+      "Millis": 945.400125,
+      "SSTORECount": 49,
+      "SSTOREGas": 405800
+    },
+    {
+      "Name": "entry-02",
+      "Hash": "0x2b3554b74e29fc03af89fd9f5d9c0d58d5466ce4f0fa3547e779ff64cf101bca",
+      "BlockHash": "0x849611fb6877afa878ef8159b185fc93e1f23074fb628da1f30c65207c9f1162",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 23,
+      "Gas": 1709483,
+      "Status": 1,
+      "CalldataBytes": 1412,
+      "Millis": 933.478083,
+      "SSTORECount": 49,
+      "SSTOREGas": 422900
+    },
+    {
+      "Name": "entry-03",
+      "Hash": "0x09f9585bd7396b5d765110982d85aafe1009cb476e7572051ee6a1b4f786689d",
+      "BlockHash": "0xf9a5bd099423e91174e597ce91afd96bec7ad52eefc5e8e6005649bf8fbe6ebe",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 24,
+      "Gas": 1690184,
+      "Status": 1,
+      "CalldataBytes": 1412,
+      "Millis": 951.896666,
+      "SSTORECount": 49,
+      "SSTOREGas": 405800
+    },
+    {
+      "Name": "transfer-04",
+      "Hash": "0xbfea96219512fd22092844503bb9944174b01c2fd6e0ec666730988e11b72043",
+      "BlockHash": "0xa489f6b76f2086f83a85fc20df67619a3da47e2f637512988a1a8a65733c5280",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 25,
+      "Gas": 3594530,
+      "Status": 1,
+      "CalldataBytes": 1604,
+      "Millis": 1721.34575,
+      "SSTORECount": 93,
+      "SSTOREGas": 1402600
+    },
+    {
+      "Name": "recall-05",
+      "Hash": "0x7b1b7ff3823eda71c10b20499ece8b631f2010dac4a8323246d3d606c1a46313",
+      "BlockHash": "0x25883b9da3098a3112a37b56a4e70a483afd4fc0918b87fad2d4825c731bc766",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 26,
+      "Gas": 1785185,
+      "Status": 1,
+      "CalldataBytes": 1540,
+      "Millis": 1032.3115,
+      "SSTORECount": 51,
+      "SSTOREGas": 487700
+    },
+    {
+      "Name": "transfer-06",
+      "Hash": "0x82133704608c7e06e0abed70bb6a744d67c1b936bafc9391b9de1ba0e2a86457",
+      "BlockHash": "0x960aefc309531229ad32480d3de90e1d44c1152eec65354fbe10e1d361912ab0",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 27,
+      "Gas": 3008852,
+      "Status": 1,
+      "CalldataBytes": 1604,
+      "Millis": 1772.356125,
+      "SSTORECount": 93,
+      "SSTOREGas": 821200
+    },
+    {
+      "Name": "proceed-07",
+      "Hash": "0xb911514df47d915635ecee1c951f4096ab85512ebd193c11216c5858f4da57b3",
+      "BlockHash": "0xc545da722a150e41bdd6c1ad27348d2b4fda61c920c0f31eea71369e0b7552ee",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 28,
+      "Gas": 1782008,
+      "Status": 1,
+      "CalldataBytes": 1508,
+      "Millis": 976.439125,
+      "SSTORECount": 51,
+      "SSTOREGas": 487700
+    },
+    {
+      "Name": "transfer-08",
+      "Hash": "0xd84fdc09188d72f0bac9aa409e6dcb9b1969f4cfbd1675af161932928759351c",
+      "BlockHash": "0xba4ddda29bee7473201f1d3bda82fcc70dae1409524a87363871af9f22fdf8b4",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 29,
+      "Gas": 3062327,
+      "Status": 1,
+      "CalldataBytes": 1604,
+      "Millis": 1789.710792,
+      "SSTORECount": 93,
+      "SSTOREGas": 872500
+    },
+    {
+      "Name": "proceed-09",
+      "Hash": "0xc641c1b5ee15bf8a6443a4c4909858c868ccc5b436917faa8dfb5ce08cd7ea74",
+      "BlockHash": "0x85f71d480c832081d35cc8520645c16ca061bdc080b16746ad0f6699ec4080db",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 30,
+      "Gas": 1784195,
+      "Status": 1,
+      "CalldataBytes": 1508,
+      "Millis": 1017.799083,
+      "SSTORECount": 51,
+      "SSTOREGas": 487700
+    },
+    {
+      "Name": "transfer-10",
+      "Hash": "0x843f9d8706937f0060246a7852e6a4eb144bec0c6599973e780d6cadde7a90c8",
+      "BlockHash": "0x5297d3a7739ee0b9c8d0b1bba97a6859c426259913b3e7158d2a19bb598047be",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 31,
+      "Gas": 3006725,
+      "Status": 1,
+      "CalldataBytes": 1604,
+      "Millis": 1827.750291,
+      "SSTORECount": 93,
+      "SSTOREGas": 821200
+    },
+    {
+      "Name": "proceed-11",
+      "Hash": "0x55c86eb739634694aec38e1d1c7fe127bb3dee66df387c6b377dbb1e6841b5be",
+      "BlockHash": "0xf9b5b33c683c7c7ed96ae2741c08f8633cea1d4b06e687ef6a6e7dd117d1b758",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 32,
+      "Gas": 1782032,
+      "Status": 1,
+      "CalldataBytes": 1508,
+      "Millis": 1021.780834,
+      "SSTORECount": 51,
+      "SSTOREGas": 487700
+    },
+    {
+      "Name": "transfer-12",
+      "Hash": "0xf9391dc91aecc9909776e068d9ba5d72b592f59d66d59f693917212876eaa0ce",
+      "BlockHash": "0x661db8b571242b4701311b6bb17a0b6d773e4949ce4cc34eccf517864da7bc73",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 33,
+      "Gas": 3060224,
+      "Status": 1,
+      "CalldataBytes": 1604,
+      "Millis": 1757.546125,
+      "SSTORECount": 93,
+      "SSTOREGas": 872500
+    },
+    {
+      "Name": "proceed-13",
+      "Hash": "0xbaa9cfd8dda23b80448bd27f50a9ccdc9128351d7efe8a1d5173b9154607d73b",
+      "BlockHash": "0x21f5d691eedc351404bdb468e77ffd023d062494f631bbc7ffe54febabb9d4c8",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 34,
+      "Gas": 1781984,
+      "Status": 1,
+      "CalldataBytes": 1508,
+      "Millis": 1139.027708,
+      "SSTORECount": 51,
+      "SSTOREGas": 487700
+    },
+    {
+      "Name": "merge-14",
+      "Hash": "0x2e8e43c0158fad057f22f64141af00ee3baca6a3b25ff9684464707973cbb807",
+      "BlockHash": "0xa9c7aaacbf9599cf1815f6940a1a52abe52f759c7de031a26fb967ca034a9668",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 35,
+      "Gas": 1849988,
+      "Status": 1,
+      "CalldataBytes": 1572,
+      "Millis": 1041.173375,
+      "SSTORECount": 53,
+      "SSTOREGas": 546900
+    },
+    {
+      "Name": "setPolicyGrant",
+      "Hash": "0x311c6f4c35df8d61aaec37ecf0ede697910c3528dc6f162d48ee11260b08d061",
+      "BlockHash": "0x78b3da7f5893419d1cc7716d7a93955c47e6252d292b3fad5809cb635f1f297a",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 36,
+      "Gas": 58651,
+      "Status": 1,
+      "CalldataBytes": 100,
+      "Millis": 52.45175,
+      "SSTORECount": 1,
+      "SSTOREGas": 20000
+    },
+    {
+      "Name": "process-15",
+      "Hash": "0x80161831dd7cf0370ffc893dddd1fc9a36e08339c9484bc8f1225b9b64d80838",
+      "BlockHash": "0x64385805c66390de1f1cc3fffba22cf130356aaa3e58dd8ab7aa84797332ae45",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 37,
+      "Gas": 2930363,
+      "Status": 1,
+      "CalldataBytes": 1764,
+      "Millis": 1893.225667,
+      "SSTORECount": 97,
+      "SSTOREGas": 829600
+    },
+    {
+      "Name": "split-16",
+      "Hash": "0x0855ad4005f147eb5e956c6197e5aa2a1c9bd6cdfe7aeac63ea4bbfd8142438f",
+      "BlockHash": "0x9dcf3a8afaa5fba8fae919a1bca9d0b63a9d47a87b2132519143e8faa751b016",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 38,
+      "Gas": 2722091,
+      "Status": 1,
+      "CalldataBytes": 1572,
+      "Millis": 1813.080459,
+      "SSTORECount": 93,
+      "SSTOREGas": 659500
+    },
+    {
+      "Name": "issue-standard-v1-17",
+      "Hash": "0xd82a0e94ab2b48090e3098c8c18ad948ad3f3b10d2f518a9b67720294a04d875",
+      "BlockHash": "0xc301546fb1fcb783c459d3c53a2f497022c916c18fee23518cbefb673b1fc266",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 39,
+      "Gas": 678701,
+      "Status": 1,
+      "CalldataBytes": 1508,
+      "Millis": 252.955833,
+      "SSTORECount": 14,
+      "SSTOREGas": 255600
+    },
+    {
+      "Name": "issue-strict-v2-18",
+      "Hash": "0x877aeb68b68eed955d0ab027f396e5feff49d2a8904c85108757991be5987469",
+      "BlockHash": "0xcedf31846305b692aa0ef2c5412e093c85e423dcba7b68007028485a2b61d035",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 40,
+      "Gas": 678689,
+      "Status": 1,
+      "CalldataBytes": 1508,
+      "Millis": 148.475916,
+      "SSTORECount": 14,
+      "SSTOREGas": 255600
+    },
+    {
+      "Name": "exit-19",
+      "Hash": "0x401b0ac3f4d06895b0d566bab89af6a796ccab8b5831ed3c3ea4e1e8254f156d",
+      "BlockHash": "0x6ff98479173944057c9325000980c78df96258241b2a0d517a471593304aaced",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 41,
+      "Gas": 534300,
+      "Status": 1,
+      "CalldataBytes": 1444,
+      "Millis": 134.920209,
+      "SSTORECount": 9,
+      "SSTOREGas": 131500
+    },
+    {
+      "Name": "deploy-Poseidon2BLS12381",
+      "Hash": "0x3a78090d62ff4218949f93542d38d1bc4608e2ae4618d168d9268e8da28eada7",
+      "BlockHash": "0xb46acf88b5693b386cb1e0d070142a23d580d43534e1719e48cf3b3927b01ff0",
+      "ContractAddress": "0x4826533B4897376654Bb4d4AD88B7faFD0C98528",
+      "Block": 42,
+      "Gas": 2282769,
+      "Status": 1,
+      "CalldataBytes": 10335,
+      "Millis": 8.469,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFEntry",
+      "Hash": "0xe6fde5652439f72940db608e44d3ed218cafb16aee15c33f80f357fe08634bf5",
+      "BlockHash": "0xb37e0bca7b0c0f004f282b9517239b819027ba4581cc854267419b34fb6a24b8",
+      "ContractAddress": "0x99bbA657f2BbC93c02D617f8bA121cB8Fc104Acf",
+      "Block": 43,
+      "Gas": 1602288,
+      "Status": 1,
+      "CalldataBytes": 7191,
+      "Millis": 15.900042,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFTransfer",
+      "Hash": "0x3ba8a602540d3cbc0e357b76725848b3aa8bdfcc695cfa4b816c719c0aff43cf",
+      "BlockHash": "0xbc6c81cf627415b76a20afe120693fc10851e1ad87ef9b7edd989304eaff28d6",
+      "ContractAddress": "0x0E801D84Fa97b50751Dbf25036d067dCf18858bF",
+      "Block": 44,
+      "Gas": 1602600,
+      "Status": 1,
+      "CalldataBytes": 7193,
+      "Millis": 18.343875,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFProceed",
+      "Hash": "0x5e55be86ac3315abeb13ce412f267362b5abe02c3e4af6fb538b16ecb73a26ce",
+      "BlockHash": "0x89eb0c63da8a4f61cdb3bd666e9b9f5607f09ddc1dd53c226cf6acb1c6ccf01b",
+      "ContractAddress": "0x8f86403A4DE0BB5791fa46B8e795C547942fE4Cf",
+      "Block": 45,
+      "Gas": 1602576,
+      "Status": 1,
+      "CalldataBytes": 7193,
+      "Millis": 22.580875,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFRecall",
+      "Hash": "0x8c914ae9440ac11d07c8363596456bcaed68d5bae32f78321e91063821ed7c70",
+      "BlockHash": "0xaa2a1ce5138b3f9157d7d27e1de9ea65dfb88b6f2265c5fdceb7d514ff334c7c",
+      "ContractAddress": "0x9d4454B023096f34B160D6B654540c56A1F81688",
+      "Block": 46,
+      "Gas": 1602192,
+      "Status": 1,
+      "CalldataBytes": 7191,
+      "Millis": 21.792917,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFMerge",
+      "Hash": "0x59f5da489bf03251cfe8b80229b169c772861797f358118835ebb3a3171ffb84",
+      "BlockHash": "0xbd8a321994cbfe49fd4c23e46629309fc9c0b25ba6b738de4b0e5e3eff96ded3",
+      "ContractAddress": "0x5eb3Bc0a489C5A8288765d2336659EbCA68FCd00",
+      "Block": 47,
+      "Gas": 1602192,
+      "Status": 1,
+      "CalldataBytes": 7191,
+      "Millis": 17.122458,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFSplit",
+      "Hash": "0xab3df6f0075146370d7acbca98f6b30ce2e65860bfee74744aa3657d1a822f12",
+      "BlockHash": "0xd30af5eddb2657007925946b81dace5909806b10d62f88e9e37c80a66821553b",
+      "ContractAddress": "0x36C02dA8a0983159322a80FFE9F24b1acfF8B570",
+      "Block": 48,
+      "Gas": 1602648,
+      "Status": 1,
+      "CalldataBytes": 7193,
+      "Millis": 16.822167,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFExit",
+      "Hash": "0x150cfe53b21c6176902c7ce0247391949c6427e4d4d598b01a2cadfa9bbe46e7",
+      "BlockHash": "0xf916bcf6e7e5e231ae1db176f1a9e0c8cbabc6c7ab2274cd60ea28d2b05c3cef",
+      "ContractAddress": "0x809d550fca64d94Bd9F66E60752A544199cfAC3D",
+      "Block": 49,
+      "Gas": 1602204,
+      "Status": 1,
+      "CalldataBytes": 7191,
+      "Millis": 16.053791,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFProcess",
+      "Hash": "0xd89c151fe27c17c0819de3b5544b3604ca3c971c84db1dde7c412e2307ab2fc5",
+      "BlockHash": "0x1cec646a141ee5771222701befc9a983a091f697bcc015f45f9473668305bb17",
+      "ContractAddress": "0x4c5859f0F772848b2D91F1D83E2Fe57935348029",
+      "Block": 50,
+      "Gas": 1602636,
+      "Status": 1,
+      "CalldataBytes": 7193,
+      "Millis": 19.225875,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFStandard",
+      "Hash": "0x26d73025293da151f0c4c561289f941521c60826ccdb3310d9aa2678faf70baa",
+      "BlockHash": "0x0e7305f2ee3499d2a1c9cac662fbafff167f140a46330e1079be8815cb707ff7",
+      "ContractAddress": "0x1291Be112d480055DaFd8a610b7d1e203891C274",
+      "Block": 51,
+      "Gas": 1602576,
+      "Status": 1,
+      "CalldataBytes": 7193,
+      "Millis": 16.194917,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-HFStrict",
+      "Hash": "0xc38c746c923806735992cbb6996f5b7d8e3cb5546928829d2bc4711a617eb8ca",
+      "BlockHash": "0x727ea2acad57773b095f32993481f5fe3ca840456e8cda8e66618170e8b19c57",
+      "ContractAddress": "0x5f3f1dBD7B74C6B46e8c44f98792A1dAf8d69154",
+      "Block": 52,
+      "Gas": 1602192,
+      "Status": 1,
+      "CalldataBytes": 7191,
+      "Millis": 17.173958,
+      "SSTORECount": 0,
+      "SSTOREGas": 0
+    },
+    {
+      "Name": "deploy-ZkDPPV2Ledger",
+      "Hash": "0xadcd8b610807ff4b97d1e981e30aca994fe667b355e7eaac9ebb06906e8fa49a",
+      "BlockHash": "0xecaac0c4485bf3fda4f0f40a05306eaf56a7b3d0f20ac56e112633f818efcce7",
+      "ContractAddress": "0xb7278A61aa25c888815aFC32Ad3cC52fF24fE575",
+      "Block": 53,
+      "Gas": 7718222,
+      "Status": 1,
+      "CalldataBytes": 21896,
+      "Millis": 1749.402083,
+      "SSTORECount": 77,
+      "SSTOREGas": 1680700
+    },
+    {
+      "Name": "setEntryIssuer",
+      "Hash": "0xdae3f242bf3b0aa555efe1d6e6e04d6815101866b8cacd69adea0f0c2a7a678c",
+      "BlockHash": "0xc4c62d57398367a7cc46fe281957db43866151d39a3ca4b6ce18535ab5a2ec4a",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 54,
+      "Gas": 45612,
+      "Status": 1,
+      "CalldataBytes": 68,
+      "Millis": 38.022417,
+      "SSTORECount": 1,
+      "SSTOREGas": 20000
+    },
+    {
+      "Name": "registerPolicyAuthority",
+      "Hash": "0x3729a77b4efd4a1ffac2d2cf9c9c78cd8bb7355635712637909872e1bd9aee9c",
+      "BlockHash": "0xe2511c9f06207589606974f3ee4068af840a22eab31e9539946170e1d0a631ab",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 55,
+      "Gas": 96433,
+      "Status": 1,
+      "CalldataBytes": 36,
+      "Millis": 16.6445,
+      "SSTORECount": 4,
+      "SSTOREGas": 62900
+    },
+    {
+      "Name": "reservePolicy",
+      "Hash": "0x850252e5708b8016b724814576828bb8628e0c0a973c4dbb07eef6c172938d3d",
+      "BlockHash": "0x748297b191b278109d671bf67ae3620993667a19ca0652d58b9546f79d2e3735",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 56,
+      "Gas": 217586,
+      "Status": 1,
+      "CalldataBytes": 36,
+      "Millis": 192.541416,
+      "SSTORECount": 8,
+      "SSTOREGas": 63300
+    },
+    {
+      "Name": "registerPolicy",
+      "Hash": "0x9162ebf8886d424ddcdf485fa2529ff7b2d87b8ebcf0a73d0f7cea89f0b138d6",
+      "BlockHash": "0x63d07c91b92f31f01f397afdb06dd47a3fa7ca19964bc127db463ba2e1c913b6",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 57,
+      "Gas": 103770,
+      "Status": 1,
+      "CalldataBytes": 164,
+      "Millis": 32.122792,
+      "SSTORECount": 7,
+      "SSTOREGas": 62500
+    },
+    {
+      "Name": "reservePolicy",
+      "Hash": "0x562329ef87ae37969940cbbfa3e578fbb63d3ed939c9db28f31768859eefeca6",
+      "BlockHash": "0x62ef9b62399cc349b478c6f3bcd8bd5c206b8d7943e4573db4da8627d420f49b",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 58,
+      "Gas": 217612,
+      "Status": 1,
+      "CalldataBytes": 36,
+      "Millis": 195.347042,
+      "SSTORECount": 8,
+      "SSTOREGas": 63300
+    },
+    {
+      "Name": "registerPolicy",
+      "Hash": "0x3faca0bd03b232dd8921e9b7fb02935f668dc622c177dd085bfd5086acd3d160",
+      "BlockHash": "0xaf7c9ce8b0dd393062f0b3562dbbf9c4815ab2035d0f207e4f96bfce1b9c31d6",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 59,
+      "Gas": 103724,
+      "Status": 1,
+      "CalldataBytes": 164,
+      "Millis": 31.942917,
+      "SSTORECount": 7,
+      "SSTOREGas": 62500
+    },
+    {
+      "Name": "reservePolicyVersion",
+      "Hash": "0xf0127e61ccab3a689205ce7fd42ab8bd9c9e56d06f83b4cdf5b0bf953dac820c",
+      "BlockHash": "0xd9a3f3e2901eeb645cf74883e9a0009fd05dfc4ed2368e3fbda67b03c5a5d940",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 60,
+      "Gas": 289786,
+      "Status": 1,
+      "CalldataBytes": 36,
+      "Millis": 340.672292,
+      "SSTORECount": 5,
+      "SSTOREGas": 23200
+    },
+    {
+      "Name": "registerPolicy",
+      "Hash": "0x170d665790c347d46f7731f378df30472f163c7d5fa6439e7584855842ad9766",
+      "BlockHash": "0xa92b41a1e6992188ca0264a36969a7d15f2605749134ec6d28dc11a2ed910ab5",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 61,
+      "Gas": 103748,
+      "Status": 1,
+      "CalldataBytes": 164,
+      "Millis": 34.774958,
+      "SSTORECount": 7,
+      "SSTOREGas": 62500
+    },
+    {
+      "Name": "entry-00",
+      "Hash": "0x269e8b6ecd1d7326107dd8ed12ab64c135ec5a965bf3d108a87c4847ae0a9ad8",
+      "BlockHash": "0x650d0cca4f533da241e1fb236db66b57d5c5e6c104883777309938fe646f979d",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 62,
+      "Gas": 2258798,
+      "Status": 1,
+      "CalldataBytes": 1412,
+      "Millis": 1036.063041,
+      "SSTORECount": 49,
+      "SSTOREGas": 970100
+    },
+    {
+      "Name": "split-01",
+      "Hash": "0xc76c08a38d77af35160c38c74af4acb5e9847a485ea785cc98b1c81226672412",
+      "BlockHash": "0xcf84aca3711c3d52af8c40748b34c02ce5ecb4dd6fba741e21153c6beeca91d5",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 63,
+      "Gas": 2724237,
+      "Status": 1,
+      "CalldataBytes": 1572,
+      "Millis": 1827.640625,
+      "SSTORECount": 93,
+      "SSTOREGas": 659500
+    },
+    {
+      "Name": "split-02",
+      "Hash": "0xa7c88fd0fd18d76c109889b75a013c901c4055ccccddad4618471fdf9156ac6b",
+      "BlockHash": "0xc2e2ac0a376ad0d8420e2ddbc5cfc7a15a4a9de8b87860b57457a39c7accbbd9",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 64,
+      "Gas": 2748194,
+      "Status": 1,
+      "CalldataBytes": 1572,
+      "Millis": 1968.818708,
+      "SSTORECount": 93,
+      "SSTOREGas": 681500
+    },
+    {
+      "Name": "freeze",
+      "Hash": "0xc252b11ddb9de8efce1c3b0bcb735f2b5ad02be3839219721abe9431e5db5e75",
+      "BlockHash": "0x048168f915879edd29150a0854be844dc954e4aa003bc18c834a759c12f1c5b6",
+      "ContractAddress": "",
+      "Block": 65,
+      "Gas": 49434,
+      "Status": 1,
+      "CalldataBytes": 100,
+      "Millis": 0,
+      "SSTORECount": 1,
+      "SSTOREGas": 20000
+    },
+    {
+      "Name": "freeze",
+      "Hash": "0x3feef0485e12f06fafe92e5961acba6c44f102eaff8a1e0e9dc901c262b6f0a7",
+      "BlockHash": "0x6b4c714cf5c6d7c90668e890909de2c075988eaef8ecdb0789f3151fa129fb4c",
+      "ContractAddress": "",
+      "Block": 66,
+      "Gas": 49434,
+      "Status": 1,
+      "CalldataBytes": 100,
+      "Millis": 0,
+      "SSTORECount": 1,
+      "SSTOREGas": 20000
+    },
+    {
+      "Name": "freeze",
+      "Hash": "0x47cfe047056a4512a0c821bae24c76723857f04d56f5f416f5f66ef11c9597ff",
+      "BlockHash": "0xe0a17f3a260507b7bf7da2ee09a973340b72c0f42c707487e97dc74bb534f7be",
+      "ContractAddress": "",
+      "Block": 67,
+      "Gas": 49434,
+      "Status": 1,
+      "CalldataBytes": 100,
+      "Millis": 0,
+      "SSTORECount": 1,
+      "SSTOREGas": 20000
+    },
+    {
+      "Name": "setStatus",
+      "Hash": "0xe8db862ac28fce06138b5248ad1574cd79204be886f56089d63105cebbfb3f1e",
+      "BlockHash": "0x6afe604ee88f88f6d8bc932b1eeac8f7476c41ecd62766a14c2c904f60385e21",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 68,
+      "Gas": 32414,
+      "Status": 1,
+      "CalldataBytes": 100,
+      "Millis": 17.895166,
+      "SSTORECount": 1,
+      "SSTOREGas": 2900
+    },
+    {
+      "Name": "setStatus",
+      "Hash": "0x903928bad71f2a525521bd0a6f720a5b3394a3657e61037ba1afc29ab47a4d93",
+      "BlockHash": "0x6b2f5c8b5b4fce6045b6cbdf9c1c7596149d3a4b865f46ce72b6b10507cb9c5b",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 69,
+      "Gas": 27577,
+      "Status": 1,
+      "CalldataBytes": 100,
+      "Millis": 18.165375,
+      "SSTORECount": 1,
+      "SSTOREGas": 2900
+    },
+    {
+      "Name": "setStatus",
+      "Hash": "0x23c11493c140674ab5110a8b5cb4b1fc3c6ef68c5ff20c9ce501cae7e2ee12a3",
+      "BlockHash": "0x999b4b6775d3b472814dea2341738332f5b40172177881c96221e95b7fd96d88",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 70,
+      "Gas": 27577,
+      "Status": 1,
+      "CalldataBytes": 100,
+      "Millis": 16.306833,
+      "SSTORECount": 1,
+      "SSTOREGas": 2900
+    },
+    {
+      "Name": "exit-03",
+      "Hash": "0xcd97fd315efed3b7d3c7a5c096ec64e5829fe515c52f5b16ee6f66230545e689",
+      "BlockHash": "0x57c678565c9de1f0161574418aae802a4518389ae64fd292412fdf465d81d18f",
+      "ContractAddress": "0x0000000000000000000000000000000000000000",
+      "Block": 71,
+      "Gas": 534360,
+      "Status": 1,
+      "CalldataBytes": 1444,
+      "Millis": 130.383833,
+      "SSTORECount": 9,
+      "SSTOREGas": 131500
+    }
+  ],
+  "Deployments": [
+    {
+      "Name": "Poseidon2BLS12381",
+      "Address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "CodeHash": "0x5fd2cbfb30eabd3bbaeee367a8358617af160ddba45581f933a63469aafcc73f",
+      "RuntimeBytes": 10309,
+      "ArtifactHash": "c101d9c0e0850a2dd1a8bacfc5eb1b319457ddbe73d41122ae3f70e34737a678"
+    },
+    {
+      "Name": "HFEntry",
+      "Address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "CodeHash": "0xae4074ce2f25e2b830016a0765e09cbdfdb4e9c12e3cb695e13b136f1b98b129",
+      "RuntimeBytes": 7165,
+      "ArtifactHash": "2d2c3315892c0df3a526ca8ed66c142419d78e82a7d7191ba5f0b5e47bd80aca"
+    },
+    {
+      "Name": "HFTransfer",
+      "Address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "CodeHash": "0x17194d534d53faecfba67414923eb0cfdfdef89d978e92d095736a1de4ddc150",
+      "RuntimeBytes": 7167,
+      "ArtifactHash": "1620a4d4d2531ad3189ccc32844a96ab893f521cc1068578eb70f84e767cbe3d"
+    },
+    {
+      "Name": "HFProceed",
+      "Address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "CodeHash": "0xe55f48fa93306429bdfe8054388ae0cc60af4b360b4a4f922bbad95d489d2167",
+      "RuntimeBytes": 7167,
+      "ArtifactHash": "25df3b9c58872d01b4af4ae81b758e73ea5de9670151839097863198281120e2"
+    },
+    {
+      "Name": "HFRecall",
+      "Address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+      "CodeHash": "0xdce06098cc15dba2819e8bb8cd35f7a655cc2ea2945c295a389854b9ea9a481c",
+      "RuntimeBytes": 7165,
+      "ArtifactHash": "e7abc015d9d38096811d64109c23abd71139c255840709acf98435c598541364"
+    },
+    {
+      "Name": "HFMerge",
+      "Address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+      "CodeHash": "0x6b5ee4eb824a570b3719c2ef5d4776dc57550824b6516f34e48b4c6cb4916ea5",
+      "RuntimeBytes": 7165,
+      "ArtifactHash": "65b32de76c3c165e90983f1a00536de15716702343b852b9e58380c388cf2aec"
+    },
+    {
+      "Name": "HFSplit",
+      "Address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+      "CodeHash": "0x91a4df939f1cd5eabd05d9deeb98ecb68011860c6163e6751bf17a20fd20447a",
+      "RuntimeBytes": 7167,
+      "ArtifactHash": "69ba8c24053c26faa4812ef854a632e4b07fd7b57e58b8071b5d05200b9944fa"
+    },
+    {
+      "Name": "HFExit",
+      "Address": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+      "CodeHash": "0xd6e8f7f790268bb0a955de736594a8fe31ed98caa60841077d1c83cc88ca35a5",
+      "RuntimeBytes": 7165,
+      "ArtifactHash": "5c8570e7d2473d0738215638514c2e03c06bbb445de6edf99749910ac76d815a"
+    },
+    {
+      "Name": "HFProcess",
+      "Address": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
+      "CodeHash": "0x2acd42a9a5f0d0a11aceefaeb3ac3858112eff5a77239a93495275e8d16ed5ea",
+      "RuntimeBytes": 7167,
+      "ArtifactHash": "e5e40a547f9cf166d24d88bc78bbfeefd761eea2ee54116a135f5c4859d8d325"
+    },
+    {
+      "Name": "HFStandard",
+      "Address": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
+      "CodeHash": "0x6ea0d635d92cca0adbcfced1550b13f315c15a58faf20eb3ade876b4c83aa91b",
+      "RuntimeBytes": 7167,
+      "ArtifactHash": "81215fddd075255bc42bbd28a0481b2fd3c1fd320cdde90a0831eba59c053724"
+    },
+    {
+      "Name": "HFStrict",
+      "Address": "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
+      "CodeHash": "0xa90812a23e5cbc5d1b0ecb26015c406b031d952c6c271fe680160f3985d6f899",
+      "RuntimeBytes": 7165,
+      "ArtifactHash": "e367922ef594a3db50a41a529956611082ad8afddfacd273850b86231c35ccc8"
+    },
+    {
+      "Name": "ZkDPPV2Ledger",
+      "Address": "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e",
+      "CodeHash": "0xb648cedc219de2027d6dde720f8014ffb0eaeb48480318b91b1052e673c39269",
+      "RuntimeBytes": 20585,
+      "ArtifactHash": "7377656b9813c6b15259ed9704a89214e7f5e8e7e50f5296a3a7454fb42f3656"
+    },
+    {
+      "Name": "Poseidon2BLS12381",
+      "Address": "0x4826533B4897376654Bb4d4AD88B7faFD0C98528",
+      "CodeHash": "0x5fd2cbfb30eabd3bbaeee367a8358617af160ddba45581f933a63469aafcc73f",
+      "RuntimeBytes": 10309,
+      "ArtifactHash": "c101d9c0e0850a2dd1a8bacfc5eb1b319457ddbe73d41122ae3f70e34737a678"
+    },
+    {
+      "Name": "HFEntry",
+      "Address": "0x99bbA657f2BbC93c02D617f8bA121cB8Fc104Acf",
+      "CodeHash": "0xae4074ce2f25e2b830016a0765e09cbdfdb4e9c12e3cb695e13b136f1b98b129",
+      "RuntimeBytes": 7165,
+      "ArtifactHash": "2d2c3315892c0df3a526ca8ed66c142419d78e82a7d7191ba5f0b5e47bd80aca"
+    },
+    {
+      "Name": "HFTransfer",
+      "Address": "0x0E801D84Fa97b50751Dbf25036d067dCf18858bF",
+      "CodeHash": "0x17194d534d53faecfba67414923eb0cfdfdef89d978e92d095736a1de4ddc150",
+      "RuntimeBytes": 7167,
+      "ArtifactHash": "1620a4d4d2531ad3189ccc32844a96ab893f521cc1068578eb70f84e767cbe3d"
+    },
+    {
+      "Name": "HFProceed",
+      "Address": "0x8f86403A4DE0BB5791fa46B8e795C547942fE4Cf",
+      "CodeHash": "0xe55f48fa93306429bdfe8054388ae0cc60af4b360b4a4f922bbad95d489d2167",
+      "RuntimeBytes": 7167,
+      "ArtifactHash": "25df3b9c58872d01b4af4ae81b758e73ea5de9670151839097863198281120e2"
+    },
+    {
+      "Name": "HFRecall",
+      "Address": "0x9d4454B023096f34B160D6B654540c56A1F81688",
+      "CodeHash": "0xdce06098cc15dba2819e8bb8cd35f7a655cc2ea2945c295a389854b9ea9a481c",
+      "RuntimeBytes": 7165,
+      "ArtifactHash": "e7abc015d9d38096811d64109c23abd71139c255840709acf98435c598541364"
+    },
+    {
+      "Name": "HFMerge",
+      "Address": "0x5eb3Bc0a489C5A8288765d2336659EbCA68FCd00",
+      "CodeHash": "0x6b5ee4eb824a570b3719c2ef5d4776dc57550824b6516f34e48b4c6cb4916ea5",
+      "RuntimeBytes": 7165,
+      "ArtifactHash": "65b32de76c3c165e90983f1a00536de15716702343b852b9e58380c388cf2aec"
+    },
+    {
+      "Name": "HFSplit",
+      "Address": "0x36C02dA8a0983159322a80FFE9F24b1acfF8B570",
+      "CodeHash": "0x91a4df939f1cd5eabd05d9deeb98ecb68011860c6163e6751bf17a20fd20447a",
+      "RuntimeBytes": 7167,
+      "ArtifactHash": "69ba8c24053c26faa4812ef854a632e4b07fd7b57e58b8071b5d05200b9944fa"
+    },
+    {
+      "Name": "HFExit",
+      "Address": "0x809d550fca64d94Bd9F66E60752A544199cfAC3D",
+      "CodeHash": "0xd6e8f7f790268bb0a955de736594a8fe31ed98caa60841077d1c83cc88ca35a5",
+      "RuntimeBytes": 7165,
+      "ArtifactHash": "5c8570e7d2473d0738215638514c2e03c06bbb445de6edf99749910ac76d815a"
+    },
+    {
+      "Name": "HFProcess",
+      "Address": "0x4c5859f0F772848b2D91F1D83E2Fe57935348029",
+      "CodeHash": "0x2acd42a9a5f0d0a11aceefaeb3ac3858112eff5a77239a93495275e8d16ed5ea",
+      "RuntimeBytes": 7167,
+      "ArtifactHash": "e5e40a547f9cf166d24d88bc78bbfeefd761eea2ee54116a135f5c4859d8d325"
+    },
+    {
+      "Name": "HFStandard",
+      "Address": "0x1291Be112d480055DaFd8a610b7d1e203891C274",
+      "CodeHash": "0x6ea0d635d92cca0adbcfced1550b13f315c15a58faf20eb3ade876b4c83aa91b",
+      "RuntimeBytes": 7167,
+      "ArtifactHash": "81215fddd075255bc42bbd28a0481b2fd3c1fd320cdde90a0831eba59c053724"
+    },
+    {
+      "Name": "HFStrict",
+      "Address": "0x5f3f1dBD7B74C6B46e8c44f98792A1dAf8d69154",
+      "CodeHash": "0xa90812a23e5cbc5d1b0ecb26015c406b031d952c6c271fe680160f3985d6f899",
+      "RuntimeBytes": 7165,
+      "ArtifactHash": "e367922ef594a3db50a41a529956611082ad8afddfacd273850b86231c35ccc8"
+    },
+    {
+      "Name": "ZkDPPV2Ledger",
+      "Address": "0xb7278A61aa25c888815aFC32Ad3cC52fF24fE575",
+      "CodeHash": "0x5ed240bc7e891b9e9353bc4b2196df3d8ec8132bf31737b840804672eb874d0e",
+      "RuntimeBytes": 20585,
+      "ArtifactHash": "7377656b9813c6b15259ed9704a89214e7f5e8e7e50f5296a3a7454fb42f3656"
+    }
+  ],
+  "Groups": [
+    {
+      "events": 20,
+      "name": "lifecycle",
+      "rootsAndRecordsMatched": true
+    },
+    {
+      "events": 3,
+      "name": "audit",
+      "rootsAndRecordsMatched": true
+    }
+  ],
+  "Audits": [
+    {
+      "direction": "forward",
+      "group": "lifecycle",
+      "millis": 4731.625667,
+      "rpcCalls": 184,
+      "trace": {
+        "Frontier": [
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "6437340491989101916441109604744955208463198663243797907763939906442866865488"
+            },
+            "SpendValue": [
+              5,
+              5,
+              195,
+              90,
+              113,
+              174,
+              221,
+              249,
+              226,
+              184,
+              202,
+              63,
+              106,
+              245,
+              69,
+              136,
+              109,
+              125,
+              206,
+              114,
+              136,
+              152,
+              215,
+              114,
+              183,
+              110,
+              93,
+              55,
+              67,
+              195,
+              45,
+              2
+            ]
+          },
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "28915719350115997581986535343646322975767001677153647749560090721212954208985"
+            },
+            "SpendValue": [
+              28,
+              192,
+              145,
+              222,
+              36,
+              29,
+              37,
+              247,
+              15,
+              85,
+              103,
+              27,
+              84,
+              211,
+              213,
+              97,
+              111,
+              49,
+              132,
+              169,
+              2,
+              187,
+              253,
+              138,
+              74,
+              77,
+              87,
+              235,
+              48,
+              51,
+              248,
+              109
+            ]
+          }
+        ],
+        "Claims": [
+          {
+            "ObjectType": 3,
+            "RawID": "51651827762730052736338910536564310154534588991844605453044550473326383973442"
+          },
+          {
+            "ObjectType": 3,
+            "RawID": "6786595610995652282959040241281641113523571525120864710736156474657958467578"
+          }
+        ],
+        "Exits": [
+          {
+            "ObjectType": 1,
+            "RawID": "8397975880329100917656411103240473391415068811294418502749086386006125362615"
+          }
+        ],
+        "Graph": [
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "22754366953986036458199146507477435520161790738903711527795060458582131837322"
+            },
+            "Child": {
+              "ObjectType": 2,
+              "RawID": "36978642016532573529827764248092990319681738487760622501428568146044749776053"
+            },
+            "RecordID": 5
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "22754366953986036458199146507477435520161790738903711527795060458582131837322"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "6437340491989101916441109604744955208463198663243797907763939906442866865488"
+            },
+            "RecordID": 5
+          },
+          {
+            "Parent": {
+              "ObjectType": 2,
+              "RawID": "36978642016532573529827764248092990319681738487760622501428568146044749776053"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "17723079133517760997207854605309152204881522420796722540559388680881743139177"
+            },
+            "RecordID": 6
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "17723079133517760997207854605309152204881522420796722540559388680881743139177"
+            },
+            "Child": {
+              "ObjectType": 2,
+              "RawID": "31953290260628865940331063062062328046325901248684844770920369463323554536983"
+            },
+            "RecordID": 7
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "17723079133517760997207854605309152204881522420796722540559388680881743139177"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "28915719350115997581986535343646322975767001677153647749560090721212954208985"
+            },
+            "RecordID": 7
+          },
+          {
+            "Parent": {
+              "ObjectType": 2,
+              "RawID": "31953290260628865940331063062062328046325901248684844770920369463323554536983"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "7522456153879816405175974894634766235180847160050895163422022966553726536928"
+            },
+            "RecordID": 8
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "7522456153879816405175974894634766235180847160050895163422022966553726536928"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "17802628059651171157543676398608424001429334962174944009739254680405207546246"
+            },
+            "RecordID": 15
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "17802628059651171157543676398608424001429334962174944009739254680405207546246"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "7862473844515100407401917144499501015824486866480619526654526960482565095564"
+            },
+            "RecordID": 16
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "17802628059651171157543676398608424001429334962174944009739254680405207546246"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "8397975880329100917656411103240473391415068811294418502749086386006125362615"
+            },
+            "RecordID": 16
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "7862473844515100407401917144499501015824486866480619526654526960482565095564"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "40634572486128430558733330451379525183711964328846242242192397989790533303676"
+            },
+            "RecordID": 17
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "7862473844515100407401917144499501015824486866480619526654526960482565095564"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "16019649410981864807021719370119831718357493535908244556939031532112589137094"
+            },
+            "RecordID": 17
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "40634572486128430558733330451379525183711964328846242242192397989790533303676"
+            },
+            "Child": {
+              "ObjectType": 3,
+              "RawID": "51651827762730052736338910536564310154534588991844605453044550473326383973442"
+            },
+            "RecordID": 18
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "16019649410981864807021719370119831718357493535908244556939031532112589137094"
+            },
+            "Child": {
+              "ObjectType": 3,
+              "RawID": "6786595610995652282959040241281641113523571525120864710736156474657958467578"
+            },
+            "RecordID": 19
+          }
+        ],
+        "Metrics": {
+          "VisitedObjects": 14,
+          "UniqueRecords": 11,
+          "Decryptions": 11,
+          "FreezeTransactions": 0,
+          "SnapshotChecks": 2
+        },
+        "Objects": [
+          {
+            "ObjectType": 1,
+            "RawID": "22754366953986036458199146507477435520161790738903711527795060458582131837322"
+          },
+          {
+            "ObjectType": 2,
+            "RawID": "36978642016532573529827764248092990319681738487760622501428568146044749776053"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "6437340491989101916441109604744955208463198663243797907763939906442866865488"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "17723079133517760997207854605309152204881522420796722540559388680881743139177"
+          },
+          {
+            "ObjectType": 2,
+            "RawID": "31953290260628865940331063062062328046325901248684844770920369463323554536983"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "28915719350115997581986535343646322975767001677153647749560090721212954208985"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "7522456153879816405175974894634766235180847160050895163422022966553726536928"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "17802628059651171157543676398608424001429334962174944009739254680405207546246"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "7862473844515100407401917144499501015824486866480619526654526960482565095564"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "8397975880329100917656411103240473391415068811294418502749086386006125362615"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "40634572486128430558733330451379525183711964328846242242192397989790533303676"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "16019649410981864807021719370119831718357493535908244556939031532112589137094"
+          },
+          {
+            "ObjectType": 3,
+            "RawID": "51651827762730052736338910536564310154534588991844605453044550473326383973442"
+          },
+          {
+            "ObjectType": 3,
+            "RawID": "6786595610995652282959040241281641113523571525120864710736156474657958467578"
+          }
+        ],
+        "Entries": null,
+        "RecordIDs": [
+          1,
+          5,
+          6,
+          7,
+          8,
+          15,
+          16,
+          17,
+          20,
+          18,
+          19
+        ]
+      }
+    },
+    {
+      "direction": "backward",
+      "group": "lifecycle",
+      "millis": 4116.410375,
+      "rpcCalls": 148,
+      "trace": {
+        "Frontier": null,
+        "Claims": null,
+        "Exits": null,
+        "Graph": [
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "40634572486128430558733330451379525183711964328846242242192397989790533303676"
+            },
+            "Child": {
+              "ObjectType": 3,
+              "RawID": "51651827762730052736338910536564310154534588991844605453044550473326383973442"
+            },
+            "RecordID": 18
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "7862473844515100407401917144499501015824486866480619526654526960482565095564"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "40634572486128430558733330451379525183711964328846242242192397989790533303676"
+            },
+            "RecordID": 17
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "7862473844515100407401917144499501015824486866480619526654526960482565095564"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "16019649410981864807021719370119831718357493535908244556939031532112589137094"
+            },
+            "RecordID": 17
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "17802628059651171157543676398608424001429334962174944009739254680405207546246"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "7862473844515100407401917144499501015824486866480619526654526960482565095564"
+            },
+            "RecordID": 16
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "17802628059651171157543676398608424001429334962174944009739254680405207546246"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "8397975880329100917656411103240473391415068811294418502749086386006125362615"
+            },
+            "RecordID": 16
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "29063450511114256404439561630768836248603995643775135687435491211506335110044"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "7862473844515100407401917144499501015824486866480619526654526960482565095564"
+            },
+            "RecordID": 16
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "29063450511114256404439561630768836248603995643775135687435491211506335110044"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "8397975880329100917656411103240473391415068811294418502749086386006125362615"
+            },
+            "RecordID": 16
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "23256045148073352578155234203619276714090615606756545550977012277287411541569"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "7862473844515100407401917144499501015824486866480619526654526960482565095564"
+            },
+            "RecordID": 16
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "23256045148073352578155234203619276714090615606756545550977012277287411541569"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "8397975880329100917656411103240473391415068811294418502749086386006125362615"
+            },
+            "RecordID": 16
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "7522456153879816405175974894634766235180847160050895163422022966553726536928"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "17802628059651171157543676398608424001429334962174944009739254680405207546246"
+            },
+            "RecordID": 15
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "8345761679604762839369527410729926954212863530782126172539207181448998378597"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "17802628059651171157543676398608424001429334962174944009739254680405207546246"
+            },
+            "RecordID": 15
+          },
+          {
+            "Parent": {
+              "ObjectType": 2,
+              "RawID": "17361713739898567000845927003992338888208285782142940288068983439634919890748"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "29063450511114256404439561630768836248603995643775135687435491211506335110044"
+            },
+            "RecordID": 12
+          },
+          {
+            "Parent": {
+              "ObjectType": 2,
+              "RawID": "47341629262514044285423655381352859947724182287002929694320111544666745503474"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "23256045148073352578155234203619276714090615606756545550977012277287411541569"
+            },
+            "RecordID": 14
+          },
+          {
+            "Parent": {
+              "ObjectType": 2,
+              "RawID": "31953290260628865940331063062062328046325901248684844770920369463323554536983"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "7522456153879816405175974894634766235180847160050895163422022966553726536928"
+            },
+            "RecordID": 8
+          },
+          {
+            "Parent": {
+              "ObjectType": 2,
+              "RawID": "45458009301846670349622609911009474353803979207423089353639004242917431929604"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "8345761679604762839369527410729926954212863530782126172539207181448998378597"
+            },
+            "RecordID": 10
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "26307820488310591041909337451610131037936223969319519085740177737435853325386"
+            },
+            "Child": {
+              "ObjectType": 2,
+              "RawID": "17361713739898567000845927003992338888208285782142940288068983439634919890748"
+            },
+            "RecordID": 11
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "26307820488310591041909337451610131037936223969319519085740177737435853325386"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "45366534485609778053843590305537411624714330237727955725203223969459606442908"
+            },
+            "RecordID": 11
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "45013821784382062269302914544573610113489727005389108098768531221900600800660"
+            },
+            "Child": {
+              "ObjectType": 2,
+              "RawID": "47341629262514044285423655381352859947724182287002929694320111544666745503474"
+            },
+            "RecordID": 13
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "45013821784382062269302914544573610113489727005389108098768531221900600800660"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "14666069511410860166703741478114432246578648005036612364975009737336893832519"
+            },
+            "RecordID": 13
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "17723079133517760997207854605309152204881522420796722540559388680881743139177"
+            },
+            "Child": {
+              "ObjectType": 2,
+              "RawID": "31953290260628865940331063062062328046325901248684844770920369463323554536983"
+            },
+            "RecordID": 7
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "17723079133517760997207854605309152204881522420796722540559388680881743139177"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "28915719350115997581986535343646322975767001677153647749560090721212954208985"
+            },
+            "RecordID": 7
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "32759436818581497962633671569563388869376986318895838558378333704543348242116"
+            },
+            "Child": {
+              "ObjectType": 2,
+              "RawID": "45458009301846670349622609911009474353803979207423089353639004242917431929604"
+            },
+            "RecordID": 9
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "32759436818581497962633671569563388869376986318895838558378333704543348242116"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "45814017868167607813979041797525898201682965616014086967101281759519792061165"
+            },
+            "RecordID": 9
+          },
+          {
+            "Parent": {
+              "ObjectType": 2,
+              "RawID": "36978642016532573529827764248092990319681738487760622501428568146044749776053"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "17723079133517760997207854605309152204881522420796722540559388680881743139177"
+            },
+            "RecordID": 6
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "22754366953986036458199146507477435520161790738903711527795060458582131837322"
+            },
+            "Child": {
+              "ObjectType": 2,
+              "RawID": "36978642016532573529827764248092990319681738487760622501428568146044749776053"
+            },
+            "RecordID": 5
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "22754366953986036458199146507477435520161790738903711527795060458582131837322"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "6437340491989101916441109604744955208463198663243797907763939906442866865488"
+            },
+            "RecordID": 5
+          }
+        ],
+        "Metrics": {
+          "VisitedObjects": 18,
+          "UniqueRecords": 18,
+          "Decryptions": 14,
+          "FreezeTransactions": 0,
+          "SnapshotChecks": 0
+        },
+        "Objects": [
+          {
+            "ObjectType": 3,
+            "RawID": "51651827762730052736338910536564310154534588991844605453044550473326383973442"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "40634572486128430558733330451379525183711964328846242242192397989790533303676"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "7862473844515100407401917144499501015824486866480619526654526960482565095564"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "17802628059651171157543676398608424001429334962174944009739254680405207546246"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "29063450511114256404439561630768836248603995643775135687435491211506335110044"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "23256045148073352578155234203619276714090615606756545550977012277287411541569"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "7522456153879816405175974894634766235180847160050895163422022966553726536928"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "8345761679604762839369527410729926954212863530782126172539207181448998378597"
+          },
+          {
+            "ObjectType": 2,
+            "RawID": "17361713739898567000845927003992338888208285782142940288068983439634919890748"
+          },
+          {
+            "ObjectType": 2,
+            "RawID": "47341629262514044285423655381352859947724182287002929694320111544666745503474"
+          },
+          {
+            "ObjectType": 2,
+            "RawID": "31953290260628865940331063062062328046325901248684844770920369463323554536983"
+          },
+          {
+            "ObjectType": 2,
+            "RawID": "45458009301846670349622609911009474353803979207423089353639004242917431929604"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "26307820488310591041909337451610131037936223969319519085740177737435853325386"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "45013821784382062269302914544573610113489727005389108098768531221900600800660"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "17723079133517760997207854605309152204881522420796722540559388680881743139177"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "32759436818581497962633671569563388869376986318895838558378333704543348242116"
+          },
+          {
+            "ObjectType": 2,
+            "RawID": "36978642016532573529827764248092990319681738487760622501428568146044749776053"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "22754366953986036458199146507477435520161790738903711527795060458582131837322"
+          }
+        ],
+        "Entries": [
+          {
+            "ObjectType": 1,
+            "RawID": "26307820488310591041909337451610131037936223969319519085740177737435853325386"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "45013821784382062269302914544573610113489727005389108098768531221900600800660"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "32759436818581497962633671569563388869376986318895838558378333704543348242116"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "22754366953986036458199146507477435520161790738903711527795060458582131837322"
+          }
+        ],
+        "RecordIDs": [
+          18,
+          17,
+          16,
+          15,
+          12,
+          14,
+          8,
+          10,
+          11,
+          13,
+          7,
+          9,
+          3,
+          4,
+          6,
+          2,
+          5,
+          1
+        ]
+      }
+    },
+    {
+      "direction": "forward",
+      "group": "audit",
+      "millis": 1837.614541,
+      "rpcCalls": 58,
+      "trace": {
+        "Frontier": [
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+            },
+            "SpendValue": [
+              109,
+              187,
+              218,
+              58,
+              61,
+              193,
+              47,
+              235,
+              95,
+              81,
+              204,
+              218,
+              182,
+              10,
+              35,
+              65,
+              123,
+              14,
+              8,
+              188,
+              126,
+              232,
+              49,
+              100,
+              237,
+              15,
+              68,
+              21,
+              178,
+              86,
+              91,
+              93
+            ]
+          },
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+            },
+            "SpendValue": [
+              9,
+              247,
+              71,
+              4,
+              188,
+              40,
+              120,
+              184,
+              224,
+              182,
+              67,
+              146,
+              173,
+              63,
+              3,
+              223,
+              58,
+              145,
+              93,
+              197,
+              50,
+              67,
+              204,
+              161,
+              196,
+              236,
+              133,
+              93,
+              78,
+              164,
+              148,
+              27
+            ]
+          },
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+            },
+            "SpendValue": [
+              52,
+              225,
+              22,
+              97,
+              231,
+              39,
+              182,
+              65,
+              42,
+              207,
+              123,
+              48,
+              54,
+              63,
+              112,
+              113,
+              178,
+              122,
+              227,
+              128,
+              82,
+              169,
+              185,
+              174,
+              250,
+              221,
+              10,
+              195,
+              187,
+              40,
+              236,
+              129
+            ]
+          }
+        ],
+        "Claims": null,
+        "Exits": null,
+        "Graph": [
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "42188846927712198687992970597442083162631469728349140490295784247422816088438"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+            },
+            "RecordID": 2
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "42188846927712198687992970597442083162631469728349140490295784247422816088438"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+            },
+            "RecordID": 2
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+            },
+            "RecordID": 3
+          },
+          {
+            "Parent": {
+              "ObjectType": 1,
+              "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+            },
+            "Child": {
+              "ObjectType": 1,
+              "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+            },
+            "RecordID": 3
+          }
+        ],
+        "Metrics": {
+          "VisitedObjects": 5,
+          "UniqueRecords": 3,
+          "Decryptions": 3,
+          "FreezeTransactions": 0,
+          "SnapshotChecks": 2
+        },
+        "Objects": [
+          {
+            "ObjectType": 1,
+            "RawID": "42188846927712198687992970597442083162631469728349140490295784247422816088438"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+          },
+          {
+            "ObjectType": 1,
+            "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+          }
+        ],
+        "Entries": null,
+        "RecordIDs": [
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "group": "audit",
+      "millis": 2357.225583,
+      "result": {
+        "Outcome": "COMPLETE_AT_CHECKPOINT",
+        "Snapshot": {
+          "blockNumber": 64,
+          "blockHash": "0xc2e2ac0a376ad0d8420e2ddbc5cfc7a15a4a9de8b87860b57457a39c7accbbd9"
+        },
+        "Checkpoint": {
+          "blockNumber": 67,
+          "blockHash": "0xe0a17f3a260507b7bf7da2ee09a973340b72c0f42c707487e97dc74bb534f7be"
+        },
+        "Targets": [
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+            },
+            "SpendValue": [
+              109,
+              187,
+              218,
+              58,
+              61,
+              193,
+              47,
+              235,
+              95,
+              81,
+              204,
+              218,
+              182,
+              10,
+              35,
+              65,
+              123,
+              14,
+              8,
+              188,
+              126,
+              232,
+              49,
+              100,
+              237,
+              15,
+              68,
+              21,
+              178,
+              86,
+              91,
+              93
+            ]
+          },
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+            },
+            "SpendValue": [
+              9,
+              247,
+              71,
+              4,
+              188,
+              40,
+              120,
+              184,
+              224,
+              182,
+              67,
+              146,
+              173,
+              63,
+              3,
+              223,
+              58,
+              145,
+              93,
+              197,
+              50,
+              67,
+              204,
+              161,
+              196,
+              236,
+              133,
+              93,
+              78,
+              164,
+              148,
+              27
+            ]
+          },
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+            },
+            "SpendValue": [
+              52,
+              225,
+              22,
+              97,
+              231,
+              39,
+              182,
+              65,
+              42,
+              207,
+              123,
+              48,
+              54,
+              63,
+              112,
+              113,
+              178,
+              122,
+              227,
+              128,
+              82,
+              169,
+              185,
+              174,
+              250,
+              221,
+              10,
+              195,
+              187,
+              40,
+              236,
+              129
+            ]
+          }
+        ],
+        "Metrics": {
+          "VisitedObjects": 5,
+          "UniqueRecords": 3,
+          "Decryptions": 3,
+          "FreezeTransactions": 3,
+          "SnapshotChecks": 2
+        },
+        "TargetResults": [
+          {
+            "Target": {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+              },
+              "SpendValue": [
+                109,
+                187,
+                218,
+                58,
+                61,
+                193,
+                47,
+                235,
+                95,
+                81,
+                204,
+                218,
+                182,
+                10,
+                35,
+                65,
+                123,
+                14,
+                8,
+                188,
+                126,
+                232,
+                49,
+                100,
+                237,
+                15,
+                68,
+                21,
+                178,
+                86,
+                91,
+                93
+              ]
+            },
+            "Observation": {
+              "blockNumber": 64,
+              "blockHash": "0xc2e2ac0a376ad0d8420e2ddbc5cfc7a15a4a9de8b87860b57457a39c7accbbd9"
+            },
+            "InitialStatus": 0,
+            "FinalStatus": 1,
+            "InitialSpent": false,
+            "FinalSpent": false,
+            "Attempted": true,
+            "Confirmed": true,
+            "Blocked": true,
+            "Error": "",
+            "ObservationError": "",
+            "SubmissionError": "",
+            "FinalError": "",
+            "Transaction": {
+              "hash": "0xc252b11ddb9de8efce1c3b0bcb735f2b5ad02be3839219721abe9431e5db5e75",
+              "blockNumber": 65,
+              "gasUsed": 49434,
+              "calldataBytes": 100,
+              "blockHash": "0x048168f915879edd29150a0854be844dc954e4aa003bc18c834a759c12f1c5b6",
+              "state": "CONFIRMED"
+            }
+          },
+          {
+            "Target": {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+              },
+              "SpendValue": [
+                9,
+                247,
+                71,
+                4,
+                188,
+                40,
+                120,
+                184,
+                224,
+                182,
+                67,
+                146,
+                173,
+                63,
+                3,
+                223,
+                58,
+                145,
+                93,
+                197,
+                50,
+                67,
+                204,
+                161,
+                196,
+                236,
+                133,
+                93,
+                78,
+                164,
+                148,
+                27
+              ]
+            },
+            "Observation": {
+              "blockNumber": 65,
+              "blockHash": "0x048168f915879edd29150a0854be844dc954e4aa003bc18c834a759c12f1c5b6"
+            },
+            "InitialStatus": 0,
+            "FinalStatus": 1,
+            "InitialSpent": false,
+            "FinalSpent": false,
+            "Attempted": true,
+            "Confirmed": true,
+            "Blocked": true,
+            "Error": "",
+            "ObservationError": "",
+            "SubmissionError": "",
+            "FinalError": "",
+            "Transaction": {
+              "hash": "0x3feef0485e12f06fafe92e5961acba6c44f102eaff8a1e0e9dc901c262b6f0a7",
+              "blockNumber": 66,
+              "gasUsed": 49434,
+              "calldataBytes": 100,
+              "blockHash": "0x6b4c714cf5c6d7c90668e890909de2c075988eaef8ecdb0789f3151fa129fb4c",
+              "state": "CONFIRMED"
+            }
+          },
+          {
+            "Target": {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+              },
+              "SpendValue": [
+                52,
+                225,
+                22,
+                97,
+                231,
+                39,
+                182,
+                65,
+                42,
+                207,
+                123,
+                48,
+                54,
+                63,
+                112,
+                113,
+                178,
+                122,
+                227,
+                128,
+                82,
+                169,
+                185,
+                174,
+                250,
+                221,
+                10,
+                195,
+                187,
+                40,
+                236,
+                129
+              ]
+            },
+            "Observation": {
+              "blockNumber": 66,
+              "blockHash": "0x6b4c714cf5c6d7c90668e890909de2c075988eaef8ecdb0789f3151fa129fb4c"
+            },
+            "InitialStatus": 0,
+            "FinalStatus": 1,
+            "InitialSpent": false,
+            "FinalSpent": false,
+            "Attempted": true,
+            "Confirmed": true,
+            "Blocked": true,
+            "Error": "",
+            "ObservationError": "",
+            "SubmissionError": "",
+            "FinalError": "",
+            "Transaction": {
+              "hash": "0x47cfe047056a4512a0c821bae24c76723857f04d56f5f416f5f66ef11c9597ff",
+              "blockNumber": 67,
+              "gasUsed": 49434,
+              "calldataBytes": 100,
+              "blockHash": "0xe0a17f3a260507b7bf7da2ee09a973340b72c0f42c707487e97dc74bb534f7be",
+              "state": "CONFIRMED"
+            }
+          }
+        ],
+        "Trace": {
+          "Frontier": [
+            {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+              },
+              "SpendValue": [
+                109,
+                187,
+                218,
+                58,
+                61,
+                193,
+                47,
+                235,
+                95,
+                81,
+                204,
+                218,
+                182,
+                10,
+                35,
+                65,
+                123,
+                14,
+                8,
+                188,
+                126,
+                232,
+                49,
+                100,
+                237,
+                15,
+                68,
+                21,
+                178,
+                86,
+                91,
+                93
+              ]
+            },
+            {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+              },
+              "SpendValue": [
+                9,
+                247,
+                71,
+                4,
+                188,
+                40,
+                120,
+                184,
+                224,
+                182,
+                67,
+                146,
+                173,
+                63,
+                3,
+                223,
+                58,
+                145,
+                93,
+                197,
+                50,
+                67,
+                204,
+                161,
+                196,
+                236,
+                133,
+                93,
+                78,
+                164,
+                148,
+                27
+              ]
+            },
+            {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+              },
+              "SpendValue": [
+                52,
+                225,
+                22,
+                97,
+                231,
+                39,
+                182,
+                65,
+                42,
+                207,
+                123,
+                48,
+                54,
+                63,
+                112,
+                113,
+                178,
+                122,
+                227,
+                128,
+                82,
+                169,
+                185,
+                174,
+                250,
+                221,
+                10,
+                195,
+                187,
+                40,
+                236,
+                129
+              ]
+            }
+          ],
+          "Claims": null,
+          "Exits": null,
+          "Graph": [
+            {
+              "Parent": {
+                "ObjectType": 1,
+                "RawID": "42188846927712198687992970597442083162631469728349140490295784247422816088438"
+              },
+              "Child": {
+                "ObjectType": 1,
+                "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+              },
+              "RecordID": 2
+            },
+            {
+              "Parent": {
+                "ObjectType": 1,
+                "RawID": "42188846927712198687992970597442083162631469728349140490295784247422816088438"
+              },
+              "Child": {
+                "ObjectType": 1,
+                "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+              },
+              "RecordID": 2
+            },
+            {
+              "Parent": {
+                "ObjectType": 1,
+                "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+              },
+              "Child": {
+                "ObjectType": 1,
+                "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+              },
+              "RecordID": 3
+            },
+            {
+              "Parent": {
+                "ObjectType": 1,
+                "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+              },
+              "Child": {
+                "ObjectType": 1,
+                "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+              },
+              "RecordID": 3
+            }
+          ],
+          "Metrics": {
+            "VisitedObjects": 5,
+            "UniqueRecords": 3,
+            "Decryptions": 3,
+            "FreezeTransactions": 0,
+            "SnapshotChecks": 2
+          },
+          "Objects": [
+            {
+              "ObjectType": 1,
+              "RawID": "42188846927712198687992970597442083162631469728349140490295784247422816088438"
+            },
+            {
+              "ObjectType": 1,
+              "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+            },
+            {
+              "ObjectType": 1,
+              "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+            },
+            {
+              "ObjectType": 1,
+              "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+            },
+            {
+              "ObjectType": 1,
+              "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+            }
+          ],
+          "Entries": null,
+          "RecordIDs": [
+            1,
+            2,
+            3
+          ]
+        }
+      },
+      "rpcCalls": 115,
+      "transactions": [
+        {
+          "hash": "0xc252b11ddb9de8efce1c3b0bcb735f2b5ad02be3839219721abe9431e5db5e75",
+          "blockNumber": 65,
+          "gasUsed": 49434,
+          "calldataBytes": 100,
+          "blockHash": "0x048168f915879edd29150a0854be844dc954e4aa003bc18c834a759c12f1c5b6",
+          "state": "CONFIRMED"
+        },
+        {
+          "hash": "0x3feef0485e12f06fafe92e5961acba6c44f102eaff8a1e0e9dc901c262b6f0a7",
+          "blockNumber": 66,
+          "gasUsed": 49434,
+          "calldataBytes": 100,
+          "blockHash": "0x6b4c714cf5c6d7c90668e890909de2c075988eaef8ecdb0789f3151fa129fb4c",
+          "state": "CONFIRMED"
+        },
+        {
+          "hash": "0x47cfe047056a4512a0c821bae24c76723857f04d56f5f416f5f66ef11c9597ff",
+          "blockNumber": 67,
+          "gasUsed": 49434,
+          "calldataBytes": 100,
+          "blockHash": "0xe0a17f3a260507b7bf7da2ee09a973340b72c0f42c707487e97dc74bb534f7be",
+          "state": "CONFIRMED"
+        }
+      ]
+    },
+    {
+      "group": "frozen-revoked",
+      "result": {
+        "Outcome": "COMPLETE_AT_CHECKPOINT",
+        "Snapshot": {
+          "blockNumber": 68,
+          "blockHash": "0x6afe604ee88f88f6d8bc932b1eeac8f7476c41ecd62766a14c2c904f60385e21"
+        },
+        "Checkpoint": {
+          "blockNumber": 68,
+          "blockHash": "0x6afe604ee88f88f6d8bc932b1eeac8f7476c41ecd62766a14c2c904f60385e21"
+        },
+        "Targets": [
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+            },
+            "SpendValue": [
+              109,
+              187,
+              218,
+              58,
+              61,
+              193,
+              47,
+              235,
+              95,
+              81,
+              204,
+              218,
+              182,
+              10,
+              35,
+              65,
+              123,
+              14,
+              8,
+              188,
+              126,
+              232,
+              49,
+              100,
+              237,
+              15,
+              68,
+              21,
+              178,
+              86,
+              91,
+              93
+            ]
+          },
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+            },
+            "SpendValue": [
+              9,
+              247,
+              71,
+              4,
+              188,
+              40,
+              120,
+              184,
+              224,
+              182,
+              67,
+              146,
+              173,
+              63,
+              3,
+              223,
+              58,
+              145,
+              93,
+              197,
+              50,
+              67,
+              204,
+              161,
+              196,
+              236,
+              133,
+              93,
+              78,
+              164,
+              148,
+              27
+            ]
+          },
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+            },
+            "SpendValue": [
+              52,
+              225,
+              22,
+              97,
+              231,
+              39,
+              182,
+              65,
+              42,
+              207,
+              123,
+              48,
+              54,
+              63,
+              112,
+              113,
+              178,
+              122,
+              227,
+              128,
+              82,
+              169,
+              185,
+              174,
+              250,
+              221,
+              10,
+              195,
+              187,
+              40,
+              236,
+              129
+            ]
+          }
+        ],
+        "Metrics": {
+          "VisitedObjects": 5,
+          "UniqueRecords": 3,
+          "Decryptions": 3,
+          "FreezeTransactions": 0,
+          "SnapshotChecks": 2
+        },
+        "TargetResults": [
+          {
+            "Target": {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+              },
+              "SpendValue": [
+                109,
+                187,
+                218,
+                58,
+                61,
+                193,
+                47,
+                235,
+                95,
+                81,
+                204,
+                218,
+                182,
+                10,
+                35,
+                65,
+                123,
+                14,
+                8,
+                188,
+                126,
+                232,
+                49,
+                100,
+                237,
+                15,
+                68,
+                21,
+                178,
+                86,
+                91,
+                93
+              ]
+            },
+            "Observation": {
+              "blockNumber": 68,
+              "blockHash": "0x6afe604ee88f88f6d8bc932b1eeac8f7476c41ecd62766a14c2c904f60385e21"
+            },
+            "InitialStatus": 1,
+            "FinalStatus": 1,
+            "InitialSpent": false,
+            "FinalSpent": false,
+            "Attempted": false,
+            "Confirmed": false,
+            "Blocked": true,
+            "Error": "",
+            "ObservationError": "",
+            "SubmissionError": "",
+            "FinalError": "",
+            "Transaction": null
+          },
+          {
+            "Target": {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+              },
+              "SpendValue": [
+                9,
+                247,
+                71,
+                4,
+                188,
+                40,
+                120,
+                184,
+                224,
+                182,
+                67,
+                146,
+                173,
+                63,
+                3,
+                223,
+                58,
+                145,
+                93,
+                197,
+                50,
+                67,
+                204,
+                161,
+                196,
+                236,
+                133,
+                93,
+                78,
+                164,
+                148,
+                27
+              ]
+            },
+            "Observation": {
+              "blockNumber": 68,
+              "blockHash": "0x6afe604ee88f88f6d8bc932b1eeac8f7476c41ecd62766a14c2c904f60385e21"
+            },
+            "InitialStatus": 1,
+            "FinalStatus": 1,
+            "InitialSpent": false,
+            "FinalSpent": false,
+            "Attempted": false,
+            "Confirmed": false,
+            "Blocked": true,
+            "Error": "",
+            "ObservationError": "",
+            "SubmissionError": "",
+            "FinalError": "",
+            "Transaction": null
+          },
+          {
+            "Target": {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+              },
+              "SpendValue": [
+                52,
+                225,
+                22,
+                97,
+                231,
+                39,
+                182,
+                65,
+                42,
+                207,
+                123,
+                48,
+                54,
+                63,
+                112,
+                113,
+                178,
+                122,
+                227,
+                128,
+                82,
+                169,
+                185,
+                174,
+                250,
+                221,
+                10,
+                195,
+                187,
+                40,
+                236,
+                129
+              ]
+            },
+            "Observation": {
+              "blockNumber": 68,
+              "blockHash": "0x6afe604ee88f88f6d8bc932b1eeac8f7476c41ecd62766a14c2c904f60385e21"
+            },
+            "InitialStatus": 2,
+            "FinalStatus": 2,
+            "InitialSpent": false,
+            "FinalSpent": false,
+            "Attempted": false,
+            "Confirmed": false,
+            "Blocked": true,
+            "Error": "",
+            "ObservationError": "",
+            "SubmissionError": "",
+            "FinalError": "",
+            "Transaction": null
+          }
+        ],
+        "Trace": {
+          "Frontier": [
+            {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+              },
+              "SpendValue": [
+                109,
+                187,
+                218,
+                58,
+                61,
+                193,
+                47,
+                235,
+                95,
+                81,
+                204,
+                218,
+                182,
+                10,
+                35,
+                65,
+                123,
+                14,
+                8,
+                188,
+                126,
+                232,
+                49,
+                100,
+                237,
+                15,
+                68,
+                21,
+                178,
+                86,
+                91,
+                93
+              ]
+            },
+            {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+              },
+              "SpendValue": [
+                9,
+                247,
+                71,
+                4,
+                188,
+                40,
+                120,
+                184,
+                224,
+                182,
+                67,
+                146,
+                173,
+                63,
+                3,
+                223,
+                58,
+                145,
+                93,
+                197,
+                50,
+                67,
+                204,
+                161,
+                196,
+                236,
+                133,
+                93,
+                78,
+                164,
+                148,
+                27
+              ]
+            },
+            {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+              },
+              "SpendValue": [
+                52,
+                225,
+                22,
+                97,
+                231,
+                39,
+                182,
+                65,
+                42,
+                207,
+                123,
+                48,
+                54,
+                63,
+                112,
+                113,
+                178,
+                122,
+                227,
+                128,
+                82,
+                169,
+                185,
+                174,
+                250,
+                221,
+                10,
+                195,
+                187,
+                40,
+                236,
+                129
+              ]
+            }
+          ],
+          "Claims": null,
+          "Exits": null,
+          "Graph": [
+            {
+              "Parent": {
+                "ObjectType": 1,
+                "RawID": "42188846927712198687992970597442083162631469728349140490295784247422816088438"
+              },
+              "Child": {
+                "ObjectType": 1,
+                "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+              },
+              "RecordID": 2
+            },
+            {
+              "Parent": {
+                "ObjectType": 1,
+                "RawID": "42188846927712198687992970597442083162631469728349140490295784247422816088438"
+              },
+              "Child": {
+                "ObjectType": 1,
+                "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+              },
+              "RecordID": 2
+            },
+            {
+              "Parent": {
+                "ObjectType": 1,
+                "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+              },
+              "Child": {
+                "ObjectType": 1,
+                "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+              },
+              "RecordID": 3
+            },
+            {
+              "Parent": {
+                "ObjectType": 1,
+                "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+              },
+              "Child": {
+                "ObjectType": 1,
+                "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+              },
+              "RecordID": 3
+            }
+          ],
+          "Metrics": {
+            "VisitedObjects": 5,
+            "UniqueRecords": 3,
+            "Decryptions": 3,
+            "FreezeTransactions": 0,
+            "SnapshotChecks": 2
+          },
+          "Objects": [
+            {
+              "ObjectType": 1,
+              "RawID": "42188846927712198687992970597442083162631469728349140490295784247422816088438"
+            },
+            {
+              "ObjectType": 1,
+              "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+            },
+            {
+              "ObjectType": 1,
+              "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+            },
+            {
+              "ObjectType": 1,
+              "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+            },
+            {
+              "ObjectType": 1,
+              "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+            }
+          ],
+          "Entries": null,
+          "RecordIDs": [
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "group": "post-snapshot-race",
+      "result": {
+        "Outcome": "INCOMPLETE",
+        "Snapshot": {
+          "blockNumber": 70,
+          "blockHash": "0x999b4b6775d3b472814dea2341738332f5b40172177881c96221e95b7fd96d88"
+        },
+        "Checkpoint": {
+          "blockNumber": 72,
+          "blockHash": "0x61cdf6a261973eb21095df8158f9a944b617ae1774ad22ea1d37ac2ff6c4fdac"
+        },
+        "Targets": [
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+            },
+            "SpendValue": [
+              109,
+              187,
+              218,
+              58,
+              61,
+              193,
+              47,
+              235,
+              95,
+              81,
+              204,
+              218,
+              182,
+              10,
+              35,
+              65,
+              123,
+              14,
+              8,
+              188,
+              126,
+              232,
+              49,
+              100,
+              237,
+              15,
+              68,
+              21,
+              178,
+              86,
+              91,
+              93
+            ]
+          },
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+            },
+            "SpendValue": [
+              9,
+              247,
+              71,
+              4,
+              188,
+              40,
+              120,
+              184,
+              224,
+              182,
+              67,
+              146,
+              173,
+              63,
+              3,
+              223,
+              58,
+              145,
+              93,
+              197,
+              50,
+              67,
+              204,
+              161,
+              196,
+              236,
+              133,
+              93,
+              78,
+              164,
+              148,
+              27
+            ]
+          },
+          {
+            "Ref": {
+              "ObjectType": 1,
+              "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+            },
+            "SpendValue": [
+              52,
+              225,
+              22,
+              97,
+              231,
+              39,
+              182,
+              65,
+              42,
+              207,
+              123,
+              48,
+              54,
+              63,
+              112,
+              113,
+              178,
+              122,
+              227,
+              128,
+              82,
+              169,
+              185,
+              174,
+              250,
+              221,
+              10,
+              195,
+              187,
+              40,
+              236,
+              129
+            ]
+          }
+        ],
+        "Metrics": {
+          "VisitedObjects": 5,
+          "UniqueRecords": 3,
+          "Decryptions": 3,
+          "FreezeTransactions": 1,
+          "SnapshotChecks": 2
+        },
+        "TargetResults": [
+          {
+            "Target": {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+              },
+              "SpendValue": [
+                109,
+                187,
+                218,
+                58,
+                61,
+                193,
+                47,
+                235,
+                95,
+                81,
+                204,
+                218,
+                182,
+                10,
+                35,
+                65,
+                123,
+                14,
+                8,
+                188,
+                126,
+                232,
+                49,
+                100,
+                237,
+                15,
+                68,
+                21,
+                178,
+                86,
+                91,
+                93
+              ]
+            },
+            "Observation": {
+              "blockNumber": 71,
+              "blockHash": "0x57c678565c9de1f0161574418aae802a4518389ae64fd292412fdf465d81d18f"
+            },
+            "InitialStatus": 0,
+            "FinalStatus": 0,
+            "InitialSpent": true,
+            "FinalSpent": true,
+            "Attempted": false,
+            "Confirmed": false,
+            "Blocked": false,
+            "Error": "",
+            "ObservationError": "",
+            "SubmissionError": "",
+            "FinalError": "",
+            "Transaction": null
+          },
+          {
+            "Target": {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+              },
+              "SpendValue": [
+                9,
+                247,
+                71,
+                4,
+                188,
+                40,
+                120,
+                184,
+                224,
+                182,
+                67,
+                146,
+                173,
+                63,
+                3,
+                223,
+                58,
+                145,
+                93,
+                197,
+                50,
+                67,
+                204,
+                161,
+                196,
+                236,
+                133,
+                93,
+                78,
+                164,
+                148,
+                27
+              ]
+            },
+            "Observation": {
+              "blockNumber": 71,
+              "blockHash": "0x57c678565c9de1f0161574418aae802a4518389ae64fd292412fdf465d81d18f"
+            },
+            "InitialStatus": 0,
+            "FinalStatus": 1,
+            "InitialSpent": false,
+            "FinalSpent": false,
+            "Attempted": true,
+            "Confirmed": true,
+            "Blocked": true,
+            "Error": "",
+            "ObservationError": "",
+            "SubmissionError": "",
+            "FinalError": "",
+            "Transaction": {
+              "hash": "0x00ca208e047a91f67d66b2fe2d51a00be187b3d0568dde1d7dad5923a46cc0d9",
+              "blockNumber": 72,
+              "gasUsed": 49434,
+              "calldataBytes": 100,
+              "blockHash": "0x61cdf6a261973eb21095df8158f9a944b617ae1774ad22ea1d37ac2ff6c4fdac",
+              "state": "CONFIRMED"
+            }
+          },
+          {
+            "Target": {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+              },
+              "SpendValue": [
+                52,
+                225,
+                22,
+                97,
+                231,
+                39,
+                182,
+                65,
+                42,
+                207,
+                123,
+                48,
+                54,
+                63,
+                112,
+                113,
+                178,
+                122,
+                227,
+                128,
+                82,
+                169,
+                185,
+                174,
+                250,
+                221,
+                10,
+                195,
+                187,
+                40,
+                236,
+                129
+              ]
+            },
+            "Observation": {
+              "blockNumber": 72,
+              "blockHash": "0x61cdf6a261973eb21095df8158f9a944b617ae1774ad22ea1d37ac2ff6c4fdac"
+            },
+            "InitialStatus": 2,
+            "FinalStatus": 2,
+            "InitialSpent": false,
+            "FinalSpent": false,
+            "Attempted": false,
+            "Confirmed": false,
+            "Blocked": true,
+            "Error": "",
+            "ObservationError": "",
+            "SubmissionError": "",
+            "FinalError": "",
+            "Transaction": null
+          }
+        ],
+        "Trace": {
+          "Frontier": [
+            {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+              },
+              "SpendValue": [
+                109,
+                187,
+                218,
+                58,
+                61,
+                193,
+                47,
+                235,
+                95,
+                81,
+                204,
+                218,
+                182,
+                10,
+                35,
+                65,
+                123,
+                14,
+                8,
+                188,
+                126,
+                232,
+                49,
+                100,
+                237,
+                15,
+                68,
+                21,
+                178,
+                86,
+                91,
+                93
+              ]
+            },
+            {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+              },
+              "SpendValue": [
+                9,
+                247,
+                71,
+                4,
+                188,
+                40,
+                120,
+                184,
+                224,
+                182,
+                67,
+                146,
+                173,
+                63,
+                3,
+                223,
+                58,
+                145,
+                93,
+                197,
+                50,
+                67,
+                204,
+                161,
+                196,
+                236,
+                133,
+                93,
+                78,
+                164,
+                148,
+                27
+              ]
+            },
+            {
+              "Ref": {
+                "ObjectType": 1,
+                "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+              },
+              "SpendValue": [
+                52,
+                225,
+                22,
+                97,
+                231,
+                39,
+                182,
+                65,
+                42,
+                207,
+                123,
+                48,
+                54,
+                63,
+                112,
+                113,
+                178,
+                122,
+                227,
+                128,
+                82,
+                169,
+                185,
+                174,
+                250,
+                221,
+                10,
+                195,
+                187,
+                40,
+                236,
+                129
+              ]
+            }
+          ],
+          "Claims": null,
+          "Exits": null,
+          "Graph": [
+            {
+              "Parent": {
+                "ObjectType": 1,
+                "RawID": "42188846927712198687992970597442083162631469728349140490295784247422816088438"
+              },
+              "Child": {
+                "ObjectType": 1,
+                "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+              },
+              "RecordID": 2
+            },
+            {
+              "Parent": {
+                "ObjectType": 1,
+                "RawID": "42188846927712198687992970597442083162631469728349140490295784247422816088438"
+              },
+              "Child": {
+                "ObjectType": 1,
+                "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+              },
+              "RecordID": 2
+            },
+            {
+              "Parent": {
+                "ObjectType": 1,
+                "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+              },
+              "Child": {
+                "ObjectType": 1,
+                "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+              },
+              "RecordID": 3
+            },
+            {
+              "Parent": {
+                "ObjectType": 1,
+                "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+              },
+              "Child": {
+                "ObjectType": 1,
+                "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+              },
+              "RecordID": 3
+            }
+          ],
+          "Metrics": {
+            "VisitedObjects": 5,
+            "UniqueRecords": 3,
+            "Decryptions": 3,
+            "FreezeTransactions": 0,
+            "SnapshotChecks": 2
+          },
+          "Objects": [
+            {
+              "ObjectType": 1,
+              "RawID": "42188846927712198687992970597442083162631469728349140490295784247422816088438"
+            },
+            {
+              "ObjectType": 1,
+              "RawID": "2102693384747506476214753343571554916044917271309685310676549467806084642256"
+            },
+            {
+              "ObjectType": 1,
+              "RawID": "11913754474248164919832248756144861500296677553094023259498990041246790465665"
+            },
+            {
+              "ObjectType": 1,
+              "RawID": "32208161328079571967909767732497230288915652684370456388970684629262991596326"
+            },
+            {
+              "ObjectType": 1,
+              "RawID": "52426680925234636725279568837735888293072852530601221463279454616052613422648"
+            }
+          ],
+          "Entries": null,
+          "RecordIDs": [
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "group": "wrong-chain",
+      "result": {
+        "Outcome": "TRACE_FAILED",
+        "Snapshot": {
+          "blockNumber": 70,
+          "blockHash": "0x999b4b6775d3b472814dea2341738332f5b40172177881c96221e95b7fd96d88"
+        },
+        "Checkpoint": {
+          "blockNumber": 0,
+          "blockHash": ""
+        },
+        "Targets": null,
+        "Metrics": {
+          "VisitedObjects": 0,
+          "UniqueRecords": 0,
+          "Decryptions": 0,
+          "FreezeTransactions": 0,
+          "SnapshotChecks": 0
+        },
+        "Reason": "chain identity mismatch",
+        "TargetResults": null,
+        "Trace": {
+          "Frontier": null,
+          "Claims": null,
+          "Exits": null,
+          "Graph": null,
+          "Metrics": {
+            "VisitedObjects": 0,
+            "UniqueRecords": 0,
+            "Decryptions": 0,
+            "FreezeTransactions": 0,
+            "SnapshotChecks": 0
+          },
+          "Objects": null,
+          "Entries": null,
+          "RecordIDs": null
+        }
+      }
+    }
+  ],
+  "FixtureHash": "2461dec56f3a25760246c1d449ae7330d8eb2e226d5e2c41dbe6f1c219d6c6ba"
+}

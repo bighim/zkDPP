@@ -1,6 +1,6 @@
 # zkDPP-poc-v2 Architecture
 
-현재 v2 M1은 구현을 완료했습니다. 이 문서는 **M1에서 검증한 invariant와 v1 보존 원칙**을 기록합니다.
+현재 실행 기준은 M1-HF입니다. 이 문서는 **Hotfix에서 검증한 동작과 v1·M1 보존 원칙**을 기록합니다.
 
 ## 전체 구조
 
@@ -47,6 +47,12 @@ Status Authority = Auditor
 - 운영용 장기 실행 server와 영구 cache는 M1 stable invariant가 아닙니다.
 
 ## 후속 변경 경계
+
+M1-HF에서 활성 Domain 11개는 `v2`이며 PolicyRef tuple은 그대로 유지합니다. Process의 ELIGIBLE output 질량은 반드시 양수입니다. Issue는 Note의 DocumentHash로 Claim을 만들고 문자열 공개·대조는 외부 DPP RPC verifier가 담당합니다.
+
+Forward는 Claim·Exit를 정상 종단으로 보존하며 Backward는 Claim에서 원자재 Entry까지 복원합니다. RPC는 chain·Ledger code hash를 검사하고 canonical block hash로 상태를 조회하며 transaction·receipt·AuditRecord를 대조합니다. 동결 결과는 target별로 남기고 미소비 Frozen·Revoked 모두를 차단 상태로 인정합니다.
+
+Hotfix 통합은 generated verifier 10개와 실제 Poseidon2를 사용합니다. 과거 M1 결과는 수정하지 않으며 Hotfix checksum은 finalize로 고정한 뒤 읽기 전용 check로 검증합니다.
 
 - M2는 고정 share fixture를 Jubjub DKG output으로 교체합니다.
 - M3은 M1의 Circuit 상수 public key를 key ID·registry 기반으로 변경하며 Circuit·Artifact 재생성을 허용합니다.
