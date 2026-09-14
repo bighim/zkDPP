@@ -226,3 +226,19 @@ benchmark-m9: benchmark-m9-setup benchmark-m9-anvil benchmark-m9-audit
 
 check-m9:
 	$(GO_ENV) $(GO) run ./cmd/benchmark_m9 -mode checks
+
+.PHONY: prepare-experiments setup-experiments benchmark-experiments benchmark-experiment check-experiments report-experiments test-contract-experiments
+prepare-experiments:
+	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/experiments -mode prepare
+setup-experiments:
+	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/experiments -mode setup
+benchmark-experiment:
+	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/experiments -mode run -experiment $(EXP)
+benchmark-experiments:
+	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/experiments -mode all
+check-experiments:
+	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/experiments -mode check
+report-experiments:
+	$(GO_ENV) GOMAXPROCS=8 $(GO) run ./cmd/experiments -mode report
+test-contract-experiments:
+	docker compose -f docker-compose.experiments.yml -p zkdpp-experiments run --rm foundry test -vv

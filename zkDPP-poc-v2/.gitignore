@@ -15,3 +15,8 @@ artifacts/development/m1/key-package/*.share.json
 *.test
 *.prof
 *.log
+
+# Paper experiments: generated build products and real-proof fixtures.
+contracts/experiments/out/
+contracts/experiments/cache/
+contracts/experiments/test/fixtures/
