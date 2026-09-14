@@ -1,0 +1,46 @@
+{
+  "go": {
+    "command": "GOTOOLCHAIN=go1.25.7 go test -count=1 ./...",
+    "exitCode": 0,
+    "scope": "all v2 packages including legacy and experimental packages",
+    "testCacheDisabled": true,
+    "fullSuiteSuccessfulExecutions": 2,
+    "finalRecheckAfterMeasurements": true
+  },
+  "experimentalFoundry": {
+    "command": "docker compose -f docker-compose.experiments.yml -p zkdpp-experiments run --rm foundry test -vv",
+    "exitCode": 0,
+    "passed": 6,
+    "failed": 0,
+    "realProofs": true,
+    "successfulExecutions": 2,
+    "finalRecheckAfterMeasurements": true,
+    "note": "Test functions replay multiple transactions; Anvil separately enforces the per-transaction 30M limit."
+  },
+  "hotfixRegression": {
+    "command": "docker compose -f docker-compose.hotfix.yml -p zkdpp-v2-m1-hotfix run --rm foundry test -vv",
+    "exitCode": 0,
+    "passed": 7,
+    "failed": 0
+  },
+  "preservationCheck": {
+    "command": "go run ./cmd/experiments -mode baseline-check",
+    "exitCode": 0
+  },
+  "auditNodeFailure": {
+    "experiment": 4,
+    "attempt": 1,
+    "dockerEvent": "oom",
+    "exitCode": 137,
+    "memoryBytes": 8218034176,
+    "remediation": "Audit-only node without step tracing; clean node per graph; incremental immutable progress rows.",
+    "completedExperimentsRetained": [1, 2, 3]
+  },
+  "developmentCorrections": [
+    "Initial Docker and local HTTP test access required sandbox escalation.",
+    "Experimental Foundry import paths were corrected before successful compilation.",
+    "Initial setup profile JSON encoded a field as Montgomery limbs; loader now accepts that archived encoding and emits canonical field strings.",
+    "Development Go compile issues (RandomScalar reader argument, unused import, share array-to-slice conversion) were corrected before measurements.",
+    "Route diagnostics were moved after the final receipt and immutable-record caching was scoped to one audit execution before formal measurements."
+  ]
+}

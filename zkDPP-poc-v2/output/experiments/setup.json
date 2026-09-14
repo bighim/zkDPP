@@ -1,0 +1,1296 @@
+{
+  "Relations": [
+    {
+      "Profile": {
+        "Name": "entry-plain",
+        "Kind": 0,
+        "M": 0,
+        "N": 1,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "cm"
+      ],
+      "Constraints": 5980,
+      "Domain": 8192,
+      "CompileMS": 3.878584,
+      "SetupMS": 62.164958,
+      "Files": {
+        "ccs.bin": "93973464c2cb45e47e2bf87acd31d0ed23f84731aa87f696fa41a91fd590c4ca",
+        "proving.key": "742122959b205e58498771ba772d1572d8102205bb110f2783f4e3aa5fb95d97",
+        "verifier": "c0805e2abdf01df74c9be1a6d58090b2d68399974ab4afb55c51e5f3d1ef3d73",
+        "verifying.key": "c9307a2e1c8a2f9241cd5118e6c423b9c0ba1a0c8f3d972b1f59c48f80fbcabb"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "transfer-plain",
+        "Kind": 1,
+        "M": 1,
+        "N": 2,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf",
+        "rvNew",
+        "cmChange",
+        "D"
+      ],
+      "Constraints": 35645,
+      "Domain": 65536,
+      "CompileMS": 16.387875,
+      "SetupMS": 302.528959,
+      "Files": {
+        "ccs.bin": "f1b69bf81f2d743fa2b06313b02217eb4e3a28dc53c60e4fb32ec4c7d022cd55",
+        "proving.key": "69a18a2d54ce4a1ae7ac55060d0214c82e1470ad1dfe28c1b448c21fbfbac7a8",
+        "verifier": "0ff6b568ec8e5fe03365d0d18fc964f96af30267c0edb338567a851fa3394a73",
+        "verifying.key": "5a00ef0c8cfe8075c0c557c9a7f9cc52ec2ea86414e56b2131fbf3c556a601d2"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "proceed-plain",
+        "Kind": 2,
+        "M": 1,
+        "N": 1,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "voucherRoot",
+        "rvnf",
+        "cmReceiver"
+      ],
+      "Constraints": 23123,
+      "Domain": 32768,
+      "CompileMS": 11.198042,
+      "SetupMS": 182.690542,
+      "Files": {
+        "ccs.bin": "283c9a4a8c2db48c4e78004469428544f69d31356b431b4fef029281cb61adf1",
+        "proving.key": "cf712af2b8f3f800045e9a7a5ff4e09de7ac76b151d3fe818af823c5d0a42fa2",
+        "verifier": "9864dfe2c7fbb59ed44ff498b0e2892b0a84b65b3d7c283cfec462fc0d1a97a5",
+        "verifying.key": "138bc5574e8e3548c0c66c8753881b79c53186d558aa89cf035e0c4adf175372"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "recall-plain",
+        "Kind": 3,
+        "M": 1,
+        "N": 1,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "voucherRoot",
+        "rvnf",
+        "cmReturn",
+        "D"
+      ],
+      "Constraints": 23252,
+      "Domain": 32768,
+      "CompileMS": 10.9885,
+      "SetupMS": 176.859791,
+      "Files": {
+        "ccs.bin": "57ae060fccee159916eea1fc2b9a19f4600c6f235258562af9b2d39292d27290",
+        "proving.key": "a6f7cc52a97fb37f28cd1088f6101254eff4d3cac28b6d7647063d7d8403ee2a",
+        "verifier": "c3bca6c9684d5afc2083c7bed39d4f7ba56bc9de796164cffee97183f6e211d7",
+        "verifying.key": "05a95f1b6c22fd56745efd6fe9cd9a9a757860f2231ba3733bc9fe4f3dbc9c2d"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "merge-plain",
+        "Kind": 4,
+        "M": 2,
+        "N": 1,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf1",
+        "nf2",
+        "cmOut"
+      ],
+      "Constraints": 38208,
+      "Domain": 65536,
+      "CompileMS": 17.121,
+      "SetupMS": 309.223875,
+      "Files": {
+        "ccs.bin": "b05142f677bb4215c08a7c67406e57910399391fda89b5f928757b694faa92b4",
+        "proving.key": "2f26f70bf1a1eccd2433222bafdd552959279f357680873356d6b89630543649",
+        "verifier": "1caa94ce4d6a77f3cfcc4ae25a31c1d335639d35388ed3712501afd67b755d5b",
+        "verifying.key": "6b360df6451c28fbbbb4b8b31e1a4f7d3a745d9f376663a363cf21e12c0fcf9f"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "split-plain",
+        "Kind": 5,
+        "M": 1,
+        "N": 2,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf",
+        "cmOut1",
+        "cmOut2"
+      ],
+      "Constraints": 34671,
+      "Domain": 65536,
+      "CompileMS": 16.328125,
+      "SetupMS": 294.069459,
+      "Files": {
+        "ccs.bin": "b2c722b9a06d43e60461b93b1cebe0b108b0e1dc44124ef69c1155849d49ca27",
+        "proving.key": "e95158a3b87263e92863630e10b196b7775c2781f9aae1d4dc2e299c3e3621a4",
+        "verifier": "c77665d4e2296e3147a2c4077e30293696c5008a00ad7b6ac589831ffa9a121c",
+        "verifying.key": "a125cbbe8908e3d6f28892a7a496123871752cc44829480ef4060aeed3f98f5b"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "process-2-1-plain",
+        "Kind": 6,
+        "M": 2,
+        "N": 1,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "both",
+        "PolicyRef": "32620182252045487390493011643371115828934453043500735634196733062123426812146"
+      },
+      "PublicNames": [
+        "policyRef",
+        "policyScopeRef",
+        "noteRoot",
+        "nf0",
+        "nf1",
+        "cm0"
+      ],
+      "Constraints": 42067,
+      "Domain": 65536,
+      "CompileMS": 19.317667,
+      "SetupMS": 309.204583,
+      "Files": {
+        "ccs.bin": "e3943faf3e6ab22591e907b932ded28bb297009e37f594911281852b53c35a34",
+        "proving.key": "77b38a7e1f13adc2f498c16a19d0b8ba469466d2470bb4ea18c2b280d1981e56",
+        "verifier": "171e1d5cf46b02f2e0210a3206a972167632751e043969a3fe484c57e9582137",
+        "verifying.key": "296e1dd515e8b5c1ec50dff3cfacd4fd8b2d35cd32ed4792d644b613ae39a09b"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "exit-plain",
+        "Kind": 7,
+        "M": 1,
+        "N": 0,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf"
+      ],
+      "Constraints": 16407,
+      "Domain": 32768,
+      "CompileMS": 7.722083,
+      "SetupMS": 169.653459,
+      "Files": {
+        "ccs.bin": "696832e1be122fa66b1943e36f067375af928783ef357a1c0f03fdc21ca640c2",
+        "proving.key": "8912eca3aa59bd93a0507d98d52f7afd519c211e886c109f973b5e92adba11ec",
+        "verifier": "fab8c2b61eca2955b2123a26009a72a38073e8a319b014cd5bab756e9a0d5f74",
+        "verifying.key": "7cddef8352b90f1842f89b7ff227325daddc84b277351e76bf759acdfe04d35d"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "issue-plain",
+        "Kind": 8,
+        "M": 1,
+        "N": 0,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "both",
+        "PolicyRef": "42277363846226554238785326309129957023241890085390593432319189206604545902086"
+      },
+      "PublicNames": [
+        "policyRef",
+        "noteRoot",
+        "nf",
+        "h"
+      ],
+      "Constraints": 24424,
+      "Domain": 32768,
+      "CompileMS": 11.043041,
+      "SetupMS": 187.210458,
+      "Files": {
+        "ccs.bin": "99470af8e50d8d6dec7f3938425a6172cbc82ab05abebce49eecae5adacb0767",
+        "proving.key": "0cbdd343b5929e457cc42151df91a45b1ea05dab6240df575fc4a415184f885b",
+        "verifier": "66b40ef96fd8db88156ee57d18aa270bd902d244afa6ea6b1970c13f0e678315",
+        "verifying.key": "ba0fb4f9e123cda567a90d768d05e81b09ee939c15362ab453260dc2b040265b"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "process-2-2-plain",
+        "Kind": 6,
+        "M": 2,
+        "N": 2,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "",
+        "PolicyRef": "51574242439939318085794301585412640647500076447148289684953303247216252421979"
+      },
+      "PublicNames": [
+        "policyRef",
+        "policyScopeRef",
+        "noteRoot",
+        "nf0",
+        "nf1",
+        "cm0",
+        "cm1"
+      ],
+      "Constraints": 54635,
+      "Domain": 65536,
+      "CompileMS": 25.386459,
+      "SetupMS": 320.782875,
+      "Files": {
+        "ccs.bin": "3e972f2adb3179864aebb60bf8c5e83b631ec7e82a08ea01ca17e95d02a0826c",
+        "proving.key": "d29999920f5b53d6f2a7d01085f6a536775cdd34620f7f39fc1618a9dbec1f8a",
+        "verifier": "5b0872f386f121c14963b9075badde415e5d019edb6c23d735301af09ceb443b",
+        "verifying.key": "2716459f20e279f0c868a3c337c26fc5477de08887c3bdb6795e9d6a86b95e70"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "process-3-2-plain",
+        "Kind": 6,
+        "M": 3,
+        "N": 2,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "",
+        "PolicyRef": "30984111185357127211343696955626025516375658994395275816905315750405150241928"
+      },
+      "PublicNames": [
+        "policyRef",
+        "policyScopeRef",
+        "noteRoot",
+        "nf0",
+        "nf1",
+        "nf2",
+        "cm0",
+        "cm1"
+      ],
+      "Constraints": 70749,
+      "Domain": 131072,
+      "CompileMS": 31.799917,
+      "SetupMS": 598.741834,
+      "Files": {
+        "ccs.bin": "db77186da4890b191c9a3d8ab1630069199afd7afea2114741fc377955991808",
+        "proving.key": "2d2784d53565774d4f52e8bfcfa44eb2a51a913530aefbedb18ca6f0944a4868",
+        "verifier": "99b4e72056398df0f0dbefb43fbaf3b94d4043329c1d6b33344e49d520debe6e",
+        "verifying.key": "3e982578d9d56f130b3afddf5d2f3aa9a49a05f3e97cfd64ef6b264031500b6b"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "process-3-3-plain",
+        "Kind": 6,
+        "M": 3,
+        "N": 3,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "",
+        "PolicyRef": "4977654454570319038488700564192594759404660963696907041811513293844733759215"
+      },
+      "PublicNames": [
+        "policyRef",
+        "policyScopeRef",
+        "noteRoot",
+        "nf0",
+        "nf1",
+        "nf2",
+        "cm0",
+        "cm1",
+        "cm2"
+      ],
+      "Constraints": 83319,
+      "Domain": 131072,
+      "CompileMS": 39.143334,
+      "SetupMS": 614.655833,
+      "Files": {
+        "ccs.bin": "e7941a745e2a6bafc1cf33a094936eed60b55ff31a822e299c070089f2c92d7a",
+        "proving.key": "eb4823bd936609fe1c2430984c53456c51f07f4761731b0af7b4251b880c4344",
+        "verifier": "18f1b77dce052329efb269151c679099ad6407a9c36ebb026ed8d4711a1a4630",
+        "verifying.key": "3c4cbc3b0e94ef49c8d0220f498a66b6c838fb9e2cec537ccff72a8e1864b4b1"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "process-4-3-plain",
+        "Kind": 6,
+        "M": 4,
+        "N": 3,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "",
+        "PolicyRef": "36894440558399080260853400156611619870251993164441606803256076961649661266570"
+      },
+      "PublicNames": [
+        "policyRef",
+        "policyScopeRef",
+        "noteRoot",
+        "nf0",
+        "nf1",
+        "nf2",
+        "nf3",
+        "cm0",
+        "cm1",
+        "cm2"
+      ],
+      "Constraints": 99435,
+      "Domain": 131072,
+      "CompileMS": 44.844709,
+      "SetupMS": 745.0045,
+      "Files": {
+        "ccs.bin": "0f160de380ad0b34def8581e069b0c7d5e2cc4bad1c040ba2308c1e07942335c",
+        "proving.key": "b670ceb6c82c28a9dd9a2b8aa6151debe2583ec73368f59ad62d7c37cd8c52f3",
+        "verifier": "386681e44c0b4b733bcf14a0d458c662a5c564586594ea05d2647d4db2727d55",
+        "verifying.key": "10030b1e4982bf3a0da11f6904361faeb061629a8e2159c7d31e73de08502693"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "entry-audit",
+        "Kind": 0,
+        "M": 0,
+        "N": 1,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "cm",
+        "R1X",
+        "R1Y",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 18115,
+      "Domain": 32768,
+      "CompileMS": 8.60975,
+      "SetupMS": 173.740291,
+      "Files": {
+        "ccs.bin": "cd724ebcffcc104229b49c10f1f4a26068d397bb86d7f21d880939997271c3f9",
+        "proving.key": "6ab4fdc17c3097c362ba33406988fafb18b101ce50f48d6900eae9f3935c0f5a",
+        "verifier": "9670f1a535ad42f8c5625b893e598288f13e96268a4ba211af09b4eef2b59ba2",
+        "verifying.key": "83b116558fc04e1060e0964b01cd80188fa7139152a95a9f0a7b7f4a303ba902"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "transfer-audit",
+        "Kind": 1,
+        "M": 1,
+        "N": 2,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf",
+        "rvNew",
+        "cmChange",
+        "D",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedOutputNf0",
+        "encryptedOutputNf1"
+      ],
+      "Constraints": 49883,
+      "Domain": 65536,
+      "CompileMS": 21.148334,
+      "SetupMS": 325.491417,
+      "Files": {
+        "ccs.bin": "c1c9140ebe4ec12c7dffb325d7716ec26d888fe61240e1cdbe50c00af41133ca",
+        "proving.key": "d976069b63ce8b30cd062088ef8862d326a7e3b9ccc3f1b43ee9f64f807797b7",
+        "verifier": "2dd60f96264eacd4fac0820c18b6c4737099df5d645dcf713d890b23067286d1",
+        "verifying.key": "eefa1ec3de394ac057a7f157ad11cd53daa4df09b4bda78bffd3a9353cc076f1"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "proceed-audit",
+        "Kind": 2,
+        "M": 1,
+        "N": 1,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "voucherRoot",
+        "rvnf",
+        "cmReceiver",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 35858,
+      "Domain": 65536,
+      "CompileMS": 16.456125,
+      "SetupMS": 321.042959,
+      "Files": {
+        "ccs.bin": "a8c20ca45ae623b7f2e28b4682489b01762204db81a89542dbeca69867d491d8",
+        "proving.key": "df04934709e01dc96cc34a21f1ce72d721252b78b18a0789c66bd524aa634fa0",
+        "verifier": "92ac6276b993a290c0e8ed06d43ec84ecd34c2fb536f24b4f584e1ba47cb414e",
+        "verifying.key": "da7efd84ead7da453578fd396556196f91b807d0d88079f12d01bf6a0ea5e2f2"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "recall-audit",
+        "Kind": 3,
+        "M": 1,
+        "N": 1,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "voucherRoot",
+        "rvnf",
+        "cmReturn",
+        "D",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 35987,
+      "Domain": 65536,
+      "CompileMS": 16.336709,
+      "SetupMS": 325.871458,
+      "Files": {
+        "ccs.bin": "078e7f3ee6fef7ad59f4db42e683d43d4ae48cda60aed2152d4172b77a4333ee",
+        "proving.key": "157eedef302d2a142b24f37c240b457e89377205bae484b45c2955a18a9ccb22",
+        "verifier": "24d3e9e7de460d6eeb66208022c9caa91f9c585ebbe1478acf04e9c9ffc3ab2a",
+        "verifying.key": "e5017f190cccf784662861c0361c06d36945de7cfe7e38b509b174bf5cabbd38"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "merge-audit",
+        "Kind": 4,
+        "M": 2,
+        "N": 1,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf1",
+        "nf2",
+        "cmOut",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedParent1",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 51543,
+      "Domain": 65536,
+      "CompileMS": 26.459041,
+      "SetupMS": 319.341292,
+      "Files": {
+        "ccs.bin": "1462eb192596a57550190cb9278dfe79e1e899c68511178bd02987d6704d8b87",
+        "proving.key": "5701f79dcb6ff563d3a7a99c758e0645a0ac228ebfa574d4eec5eb0dce9a9aa6",
+        "verifier": "e73e100622dadd26dc7ddf6ceac4aa764b2fae4d3055d15d278e2cb8df6040b6",
+        "verifying.key": "3bb3b12df7fa44f9bc7df53e45b2a08e1e585a52e6b7508eecbf13cba163ca40"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "split-audit",
+        "Kind": 5,
+        "M": 1,
+        "N": 2,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf",
+        "cmOut1",
+        "cmOut2",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedOutputNf0",
+        "encryptedOutputNf1"
+      ],
+      "Constraints": 48608,
+      "Domain": 65536,
+      "CompileMS": 22.037666,
+      "SetupMS": 325.48375,
+      "Files": {
+        "ccs.bin": "dbd26a6036f1c132be37727bca49d938a70b1ca03be915b9de2f09eb3c8a0347",
+        "proving.key": "1634a622af4e0510f0827bb5642c6b83866ba147e792eabf042c26cc91abd492",
+        "verifier": "1613019a90e0ab7c75bc33020cf89e6425979607ae23893c963a5b9fa0911b59",
+        "verifying.key": "14a96ff37ab8cca605ed69ac7e0719f7a1afd8063c70bbf434d4bdb9056a8e83"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "process-2-1-audit",
+        "Kind": 6,
+        "M": 2,
+        "N": 1,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "both",
+        "PolicyRef": "32620182252045487390493011643371115828934453043500735634196733062123426812146"
+      },
+      "PublicNames": [
+        "policyRef",
+        "policyScopeRef",
+        "noteRoot",
+        "nf0",
+        "nf1",
+        "cm0",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedParent1",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 55402,
+      "Domain": 65536,
+      "CompileMS": 25.538167,
+      "SetupMS": 332.296916,
+      "Files": {
+        "ccs.bin": "a2bb7dad26eff0e7861a20fd9ad340486fefea0eb3fea8e79190bcac02cdf7de",
+        "proving.key": "3e09f42a0b51168c849b3dca9a4d4cfb73c2a29a05601c849dbd68aa78206236",
+        "verifier": "be618f73b3aa527ba9b3103191c7df677be035c77d138b224372e4d1d7665531",
+        "verifying.key": "4a5f331a490a2ec727a53d10f7470be20bb99f978d519ca528e809ec9db683fd"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "exit-audit",
+        "Kind": 7,
+        "M": 1,
+        "N": 0,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "both",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf",
+        "R1X",
+        "R1Y",
+        "encryptedParent0"
+      ],
+      "Constraints": 27940,
+      "Domain": 32768,
+      "CompileMS": 12.412375,
+      "SetupMS": 183.720084,
+      "Files": {
+        "ccs.bin": "fbf4781f8d527173eb48da71ddd26f7c53e021db0523cbd7097b7159a7ce88fa",
+        "proving.key": "8ae5e6c3da7dc828fbbc375557a8462a6f63eebb7b15e8e503b652e10ad2ce04",
+        "verifier": "69f244807df762a60c7fba9d29cd911839554daca6558c2191551f67f0bffcef",
+        "verifying.key": "455e0df5553d4a130fe3f15e1dd8138a904de669a68f5af602c52740e37358d7"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "issue-audit",
+        "Kind": 8,
+        "M": 1,
+        "N": 0,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "both",
+        "PolicyRef": "42277363846226554238785326309129957023241890085390593432319189206604545902086"
+      },
+      "PublicNames": [
+        "policyRef",
+        "noteRoot",
+        "nf",
+        "h",
+        "R1X",
+        "R1Y",
+        "encryptedParent0"
+      ],
+      "Constraints": 35957,
+      "Domain": 65536,
+      "CompileMS": 16.842167,
+      "SetupMS": 300.6165,
+      "Files": {
+        "ccs.bin": "8314dad360bcaeddc4df773c68b8dfbf0ebd2ac27cfe892ad30c58dfb5977e4c",
+        "proving.key": "96b0d75d9c43c9206a172ec6a313a5f88ca4c4ac984c26823a77d6218ad2d377",
+        "verifier": "3081556709d4a117238e86a0f2b926fbdcb8adb4fc443af31ba08eb5e75fe214",
+        "verifying.key": "08eae66e9b14807e437911a8104cfc7749cf15523ab3f12e7bc77dca61cf52c5"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "process-2-2-audit",
+        "Kind": 6,
+        "M": 2,
+        "N": 2,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": "51574242439939318085794301585412640647500076447148289684953303247216252421979"
+      },
+      "PublicNames": [
+        "policyRef",
+        "policyScopeRef",
+        "noteRoot",
+        "nf0",
+        "nf1",
+        "cm0",
+        "cm1",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedParent1",
+        "encryptedOutputNf0",
+        "encryptedOutputNf1"
+      ],
+      "Constraints": 69172,
+      "Domain": 131072,
+      "CompileMS": 31.248292,
+      "SetupMS": 593.136459,
+      "Files": {
+        "ccs.bin": "747e75559d035f58a2f6461ae30be9d240fd275a9af7075e0c9ff5d90d6b1453",
+        "proving.key": "5ea6b274329b5fb15ee1508ad1e50ea92762613f687dcd1b7b51fa0fa9f67a27",
+        "verifier": "1ea47a458874b985259d1959be0c6cafe9db97dfb4ba7bafc7fdd9cc0883478f",
+        "verifying.key": "6a0db40162f278e3d868694cf0848e4d356733a5773e46c01073c04d879d3178"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "process-3-2-audit",
+        "Kind": 6,
+        "M": 3,
+        "N": 2,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": "30984111185357127211343696955626025516375658994395275816905315750405150241928"
+      },
+      "PublicNames": [
+        "policyRef",
+        "policyScopeRef",
+        "noteRoot",
+        "nf0",
+        "nf1",
+        "nf2",
+        "cm0",
+        "cm1",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedParent1",
+        "encryptedParent2",
+        "encryptedOutputNf0",
+        "encryptedOutputNf1"
+      ],
+      "Constraints": 85886,
+      "Domain": 131072,
+      "CompileMS": 39.44975,
+      "SetupMS": 607.900875,
+      "Files": {
+        "ccs.bin": "75092bc51af1ca38245a81e313f8a798759e82e50a737dd62732eebfc32067bb",
+        "proving.key": "29a02902af111e912ef6b1f1118ac988c51fd54e9b5a38e8c0fb6b0a7c4582ef",
+        "verifier": "37022f1b641bc86070e3791dde786f3c89c4958790419d415d95b7fa8b30b4f5",
+        "verifying.key": "ec16e33e3af82cea733431974c7b1fe75be51877270eec9d1906044f87d80750"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "process-3-3-audit",
+        "Kind": 6,
+        "M": 3,
+        "N": 3,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": "4977654454570319038488700564192594759404660963696907041811513293844733759215"
+      },
+      "PublicNames": [
+        "policyRef",
+        "policyScopeRef",
+        "noteRoot",
+        "nf0",
+        "nf1",
+        "nf2",
+        "cm0",
+        "cm1",
+        "cm2",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedParent1",
+        "encryptedParent2",
+        "encryptedOutputNf0",
+        "encryptedOutputNf1",
+        "encryptedOutputNf2"
+      ],
+      "Constraints": 99658,
+      "Domain": 131072,
+      "CompileMS": 46.580875,
+      "SetupMS": 611.448292,
+      "Files": {
+        "ccs.bin": "c5a778f0a2dbd06eb246f766f05903537e661c2a6f1e14471ce932fab8a0e3cd",
+        "proving.key": "603b5ac72f9be90aaf243fde822c1635a25ced1d9acc4ae7a6a53ecd16772895",
+        "verifier": "7aee895f86561b8a67941d75e3091ca9298bd997ec59169abf322c20ef92d9f4",
+        "verifying.key": "69d7907f2c9e75c648230190ed5b8d8eb41364dfb9b4090a3f9e29d44d59f560"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "process-4-3-audit",
+        "Kind": 6,
+        "M": 4,
+        "N": 3,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": "36894440558399080260853400156611619870251993164441606803256076961649661266570"
+      },
+      "PublicNames": [
+        "policyRef",
+        "policyScopeRef",
+        "noteRoot",
+        "nf0",
+        "nf1",
+        "nf2",
+        "nf3",
+        "cm0",
+        "cm1",
+        "cm2",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedParent1",
+        "encryptedParent2",
+        "encryptedParent3",
+        "encryptedOutputNf0",
+        "encryptedOutputNf1",
+        "encryptedOutputNf2"
+      ],
+      "Constraints": 116374,
+      "Domain": 131072,
+      "CompileMS": 51.400333,
+      "SetupMS": 689.8435,
+      "Files": {
+        "ccs.bin": "69c49f8bcaf1bc98d700f1c22b5a3c99ae2f1e07906e54903cd546e28d6e322a",
+        "proving.key": "0362d74b90f7b8eb38334bada81064fc74b57ec88ea1361a2ae3284539bc4597",
+        "verifier": "cc0f5afc19d34bb999ae38f77dabc5e8ea09d648f1afbc56e34b20b65cbc3045",
+        "verifying.key": "073ef4d12416a6447483cbbc839c8da8c1b57868e5e4df79e6217086d1e19cf4"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "direct-plain",
+        "Kind": 9,
+        "M": 1,
+        "N": 2,
+        "StateCount": 0,
+        "Audit": false,
+        "Condition": "",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf",
+        "cmReceiver",
+        "cmChange"
+      ],
+      "Constraints": 34785,
+      "Domain": 65536,
+      "CompileMS": 15.12325,
+      "SetupMS": 306.40225,
+      "Files": {
+        "ccs.bin": "429b19c2ff35fb7614cdf78acc2f6b1dce6f10d9d7c1f7229823c60bcbaf29d9",
+        "proving.key": "dcf005fdcfc9d8bc11dbfae256ee24b3122e77d880111d7e0757f49b120f7091",
+        "verifier": "897c3572212af53c72a97c24214268d6b884c32b757c8bcb5371ac24eb530e6b",
+        "verifying.key": "62656bc2f891cbe1b149d8c5cc8ddb4d0d7f921d26fd642080dad192f6cc498e"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "vector-entry-1",
+        "Kind": 10,
+        "M": 0,
+        "N": 1,
+        "StateCount": 1,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "cm",
+        "R1X",
+        "R1Y",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 13771,
+      "Domain": 16384,
+      "CompileMS": 6.2495,
+      "SetupMS": 107.601167,
+      "Files": {
+        "ccs.bin": "3494aed83861f23132139c57263a80a55950ca0440985e625599b58b133ddc8d",
+        "proving.key": "35a892fa9683d6e139488ab68951b8501cb7fd8d61a3c990cfe2cea9bad82168",
+        "verifier": "3a630ef5eb1499434ad1363097de090c0802574033ddc4c9d165e0121552b65f",
+        "verifying.key": "4f7a544d6676347c754fbe95d589e3e7076b6596a0142b137fdb93900ada574a"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "vector-merge-1",
+        "Kind": 11,
+        "M": 2,
+        "N": 1,
+        "StateCount": 1,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf1",
+        "nf2",
+        "cmOut",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedParent1",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 38499,
+      "Domain": 65536,
+      "CompileMS": 18.053875,
+      "SetupMS": 326.827458,
+      "Files": {
+        "ccs.bin": "982daa8477fa95b088c0fa36b15dc085655bc198c35ef33108ff5b74faca02d8",
+        "proving.key": "993f7989c10dcd5f2d0a31f699e9d1b783952ad24b428a40176c130fbc3106df",
+        "verifier": "4075eecd4fbda801c9cb66181a0e3c2f77681d78e819dba94d98ed35c8a2348c",
+        "verifying.key": "c8293425caac7e3f3055f44b979bf462377f2d70c2d52539f28c3fc099618060"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "vector-entry-2",
+        "Kind": 10,
+        "M": 0,
+        "N": 1,
+        "StateCount": 2,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "cm",
+        "R1X",
+        "R1Y",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 14200,
+      "Domain": 16384,
+      "CompileMS": 6.475916,
+      "SetupMS": 103.362625,
+      "Files": {
+        "ccs.bin": "761cce3cb6f33803ae411912bca8d63a39f6c664a977ffb33742d1ac47c1ec2e",
+        "proving.key": "af9b3ccf6c234bc7fa95679fba4a3a2c10404add3804a77f3939916f956a7495",
+        "verifier": "0d033a906730ad5f8dd12aae993da46b668e1ce44fff547dd9ccda6bdf917c2a",
+        "verifying.key": "7e3829bf9c3f2cacf46774cae1cdc9308ad7e7967159abc8dbadf4a6fb420720"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "vector-merge-2",
+        "Kind": 11,
+        "M": 2,
+        "N": 1,
+        "StateCount": 2,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf1",
+        "nf2",
+        "cmOut",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedParent1",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 39788,
+      "Domain": 65536,
+      "CompileMS": 18.362291,
+      "SetupMS": 308.53975,
+      "Files": {
+        "ccs.bin": "33b7e5fed73e38f7e194c35212eb17d7baf1871321451855393705465cd792ac",
+        "proving.key": "d3f1c801e8e5ddef8072e2f55f2f33d662d4c3384ec4f8261f44c396fc47adb5",
+        "verifier": "7838460869969728869c9441969c65804e2a6fafda7f88ced27148f1703b44c8",
+        "verifying.key": "10a318fe09980b899525738ac88f044801503dcf86b8219bd40634bdcad68c5f"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "vector-entry-3",
+        "Kind": 10,
+        "M": 0,
+        "N": 1,
+        "StateCount": 3,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "cm",
+        "R1X",
+        "R1Y",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 14629,
+      "Domain": 16384,
+      "CompileMS": 7.381833,
+      "SetupMS": 104.520375,
+      "Files": {
+        "ccs.bin": "a39119961915e015e4fae095c372dd1485345095e6f13de67e0ddca8bbd2a4dd",
+        "proving.key": "ddefcc910d1c1b8419d79b5183fe1c7bd9844dbef20aa51d47975a69d156d26a",
+        "verifier": "8adc400925dc4369d402353fac3b117fbf651dbbb3ef1510aef69b0135cff570",
+        "verifying.key": "fa2451ff65a7d22d19750ca1a1b22157de4a660c72264279b9253dd15a00e904"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "vector-merge-3",
+        "Kind": 11,
+        "M": 2,
+        "N": 1,
+        "StateCount": 3,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf1",
+        "nf2",
+        "cmOut",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedParent1",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 41077,
+      "Domain": 65536,
+      "CompileMS": 19.479459,
+      "SetupMS": 318.051584,
+      "Files": {
+        "ccs.bin": "64375fabedf0d45f34e47b49ae4166c54a83906bfd55e3c7a6cb4c36d9d1b6ff",
+        "proving.key": "dc711afcfefad68bc7efb77f2c6dded4fa0a3d3c2ff8270cb815c3dd7d570429",
+        "verifier": "67ff5f876a76c50da23237c24cc7cfcdfbb2023c6ee0607810fbf3b1ccca6b0e",
+        "verifying.key": "52c6d7c45555884972b9d0f6adf126ce2dd31068ab4a7f019ccaf1ab85df640b"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "vector-entry-4",
+        "Kind": 10,
+        "M": 0,
+        "N": 1,
+        "StateCount": 4,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "cm",
+        "R1X",
+        "R1Y",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 15058,
+      "Domain": 16384,
+      "CompileMS": 7.107584,
+      "SetupMS": 106.307792,
+      "Files": {
+        "ccs.bin": "784fb9cc4b8d0ff17868282b370f75926c75e29b8b9aac6b92d5c800189c784a",
+        "proving.key": "3ebf9e183c9cfb4032f24a527f3758b03ccadf6b0b72e4777b698d3bc7befd92",
+        "verifier": "c0d6ffd54d703f34d400638c22f216d7d24267f4318aae2e78d96d487330fae1",
+        "verifying.key": "755cf8750d9e537ff18d31e8168043696ab2c901d660787b09a618840001fde4"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "vector-merge-4",
+        "Kind": 11,
+        "M": 2,
+        "N": 1,
+        "StateCount": 4,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf1",
+        "nf2",
+        "cmOut",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedParent1",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 42366,
+      "Domain": 65536,
+      "CompileMS": 19.227416,
+      "SetupMS": 319.8645,
+      "Files": {
+        "ccs.bin": "281c7cfdcdf78c6451783163f9d083766ca1947e3feb6a7809dbefa472f6507b",
+        "proving.key": "3b0ea1eb6d3c2590c57690bcc01bab58eed3c979874036cb87029e76eff15e04",
+        "verifier": "4ac10ee38f11234e838178b5544c783c33e6266e3d71cb720523c9d0a8908119",
+        "verifying.key": "c9ad2ea6b2d8211e56fa8d4d16c4300afc104e0572318b2754d10b5a0befb87c"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "vector-entry-8",
+        "Kind": 10,
+        "M": 0,
+        "N": 1,
+        "StateCount": 8,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "cm",
+        "R1X",
+        "R1Y",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 16774,
+      "Domain": 32768,
+      "CompileMS": 7.537667,
+      "SetupMS": 162.797375,
+      "Files": {
+        "ccs.bin": "3626b65695210aeff77854b84315641505a1dd0fd119ba409e4e37a3db5f6c82",
+        "proving.key": "c7ec5eaaed112a4a7259c4eec2bd3b5c3291cd9559700de62e0f460848ad41a0",
+        "verifier": "82e40e711ed2c10a20ac7227c73731d1acd4484719318ff5221e016896eb2bbe",
+        "verifying.key": "9d6401d283990b8eb5c1bbad549e6352893d972f446d6b9377ade3922cc20edb"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "vector-merge-8",
+        "Kind": 11,
+        "M": 2,
+        "N": 1,
+        "StateCount": 8,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf1",
+        "nf2",
+        "cmOut",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedParent1",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 47522,
+      "Domain": 65536,
+      "CompileMS": 22.414084,
+      "SetupMS": 317.265083,
+      "Files": {
+        "ccs.bin": "a9985da8612a1d428ad13949169b511e92fa8dccdd95d8b121d919b1402b71e7",
+        "proving.key": "51fb904ff0c71d441ec1f4a3c248a1099c47eca43baf1c2be22e44d2fe91c71e",
+        "verifier": "0ce6aab7d4d2d41774df2de9ab5ca5d1c989309c250f0c4124909e5aa16421f9",
+        "verifying.key": "d0aac11131160a1ff453c80416583d461cfaa2cd7c6f4f2f972cb32b0c0bf31d"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "vector-entry-16",
+        "Kind": 10,
+        "M": 0,
+        "N": 1,
+        "StateCount": 16,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "cm",
+        "R1X",
+        "R1Y",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 20206,
+      "Domain": 32768,
+      "CompileMS": 10.634042,
+      "SetupMS": 171.821875,
+      "Files": {
+        "ccs.bin": "cf75334b968d8d0d3636684e977fdea0f9ca83808505ed8a9c7d2fd62c70629c",
+        "proving.key": "597a66c10dca30ddb3c57cfae7756e5fbfe3b5c91ab63632488af52e1ae20389",
+        "verifier": "e6d6a1ff6e9305a5926122bf7df61e396ab950140a8915fe46e80eeefa758a09",
+        "verifying.key": "dbed5ae0b7e0c92b2ae947fec87ae0f1b5c788838adc8b924726698bc0b61658"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "vector-merge-16",
+        "Kind": 11,
+        "M": 2,
+        "N": 1,
+        "StateCount": 16,
+        "Audit": true,
+        "Condition": "",
+        "PolicyRef": 0
+      },
+      "PublicNames": [
+        "noteRoot",
+        "nf1",
+        "nf2",
+        "cmOut",
+        "R1X",
+        "R1Y",
+        "encryptedParent0",
+        "encryptedParent1",
+        "encryptedOutputNf0"
+      ],
+      "Constraints": 57834,
+      "Domain": 65536,
+      "CompileMS": 27.036834,
+      "SetupMS": 344.935875,
+      "Files": {
+        "ccs.bin": "38be66361f0361a32be4df7d26e77d7c8f7d83924397aa897852bbc6d61dd1c7",
+        "proving.key": "2f102d5d0b8ae71a0d24c49914dd6a12844554fba7abfebf68c07fbca21af766",
+        "verifier": "b72baede2161aba3faca0e079109146a2e7c12bbc50621bde35f606aa2581732",
+        "verifying.key": "fd1014d94be2e06613da20f3def4b67b97a7190b052befb253879c49b7d92d86"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "issue-recycled-audit",
+        "Kind": 8,
+        "M": 1,
+        "N": 0,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "recycled",
+        "PolicyRef": "50169732439580897430138833588518603966072804402323126804576408537393418344410"
+      },
+      "PublicNames": [
+        "policyRef",
+        "noteRoot",
+        "nf",
+        "h",
+        "R1X",
+        "R1Y",
+        "encryptedParent0"
+      ],
+      "Constraints": 32402,
+      "Domain": 32768,
+      "CompileMS": 14.270417,
+      "SetupMS": 196.423541,
+      "Files": {
+        "ccs.bin": "bb734da42761d51621b881e276c38f78fc78571a98f0a03846ae70fd660daf10",
+        "proving.key": "b6b5f33975c24f7586c7fded3db1bc45ffec2421361d7dba206cbd96352fc7cc",
+        "verifier": "521034babe5ed11493011b6c98dbc0f6ebfcb9fdaf43bc6e7aa2a6a1a88d064e",
+        "verifying.key": "762762c8522dcd0952969c079476e35631dabf45125d2d997c105958ce344f89"
+      }
+    },
+    {
+      "Profile": {
+        "Name": "issue-carbon-audit",
+        "Kind": 8,
+        "M": 1,
+        "N": 0,
+        "StateCount": 0,
+        "Audit": true,
+        "Condition": "carbon",
+        "PolicyRef": "21260210905322132906507600424407778761196207266775334233943812447496690402188"
+      },
+      "PublicNames": [
+        "policyRef",
+        "noteRoot",
+        "nf",
+        "h",
+        "R1X",
+        "R1Y",
+        "encryptedParent0"
+      ],
+      "Constraints": 32402,
+      "Domain": 32768,
+      "CompileMS": 14.293333,
+      "SetupMS": 198.47675,
+      "Files": {
+        "ccs.bin": "6b038ddf03f201b542bceeb30c151e9bb33456ab61979788b32ab3ad4cf2baa9",
+        "proving.key": "8c25ee6e3c69686a23cf9b9c50ab20ae40c19c52b57b4d86b4f0b06aa59d0e93",
+        "verifier": "3fec3cd2aab9696472416858048feb408152baf842b7b7cf7ed341f153a2010d",
+        "verifying.key": "5b381dbc559db7064581c34d50971f9068ae3ad2c6df64895d7079c83aaf245e"
+      }
+    }
+  ],
+  "CanonicalPoints": 131075,
+  "CanonicalChecksum": "ee219045bec5687c419ed99461ef1ae7e5c897244ff805eb2f9816482f35b598",
+  "SRSMS": 1667.926584,
+  "LagrangeMS": {
+    "131072": 12838.101917,
+    "16384": 1325.882125,
+    "32768": 2944.403333,
+    "65536": 5973.096625,
+    "8192": 634.777958
+  },
+  "DevelopmentOnly": true
+}

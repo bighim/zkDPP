@@ -1,0 +1,1036 @@
+{
+  "boundary": "local validated cryptographic operation; fixture generation and final plaintext comparison excluded",
+  "experiment": 7,
+  "innerIterations": 1000,
+  "repetitions": 5,
+  "rows": [
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-3",
+      "Run": 0,
+      "Warmup": true,
+      "Ciphertexts": 1,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 123.474542,
+      "AllocatedBytes": 1928016,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-3",
+      "Run": 1,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 123.096459,
+      "AllocatedBytes": 1928000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-3",
+      "Run": 2,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 121.787917,
+      "AllocatedBytes": 1928000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-3",
+      "Run": 3,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 122.133417,
+      "AllocatedBytes": 1928016,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-3",
+      "Run": 4,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 122.223458,
+      "AllocatedBytes": 1928000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-3",
+      "Run": 5,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 120.948834,
+      "AllocatedBytes": 1928000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-10-fields-3",
+      "Run": 0,
+      "Warmup": true,
+      "Ciphertexts": 10,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 1382.530042,
+      "AllocatedBytes": 19280336,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-10-fields-3",
+      "Run": 1,
+      "Warmup": false,
+      "Ciphertexts": 10,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 1381.792666,
+      "AllocatedBytes": 19280432,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-10-fields-3",
+      "Run": 2,
+      "Warmup": false,
+      "Ciphertexts": 10,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 1384.3995,
+      "AllocatedBytes": 19280304,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-10-fields-3",
+      "Run": 3,
+      "Warmup": false,
+      "Ciphertexts": 10,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 1384.287708,
+      "AllocatedBytes": 19280352,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-10-fields-3",
+      "Run": 4,
+      "Warmup": false,
+      "Ciphertexts": 10,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 1383.12625,
+      "AllocatedBytes": 19280400,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-10-fields-3",
+      "Run": 5,
+      "Warmup": false,
+      "Ciphertexts": 10,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 1379.850417,
+      "AllocatedBytes": 19280320,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-100-fields-3",
+      "Run": 0,
+      "Warmup": true,
+      "Ciphertexts": 100,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 14103.639209,
+      "AllocatedBytes": 192803488,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-100-fields-3",
+      "Run": 1,
+      "Warmup": false,
+      "Ciphertexts": 100,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 14115.680208,
+      "AllocatedBytes": 192804144,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-100-fields-3",
+      "Run": 2,
+      "Warmup": false,
+      "Ciphertexts": 100,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 14117.267834,
+      "AllocatedBytes": 192804000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-100-fields-3",
+      "Run": 3,
+      "Warmup": false,
+      "Ciphertexts": 100,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 14109.961458,
+      "AllocatedBytes": 192803760,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-100-fields-3",
+      "Run": 4,
+      "Warmup": false,
+      "Ciphertexts": 100,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 14103.723458,
+      "AllocatedBytes": 192804608,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-100-fields-3",
+      "Run": 5,
+      "Warmup": false,
+      "Ciphertexts": 100,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 14102.98675,
+      "AllocatedBytes": 192804480,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1000-fields-3",
+      "Run": 0,
+      "Warmup": true,
+      "Ciphertexts": 1000,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 141433.261084,
+      "AllocatedBytes": 1928042336,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1000-fields-3",
+      "Run": 1,
+      "Warmup": false,
+      "Ciphertexts": 1000,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 141333.548458,
+      "AllocatedBytes": 1928044896,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1000-fields-3",
+      "Run": 2,
+      "Warmup": false,
+      "Ciphertexts": 1000,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 141134.057291,
+      "AllocatedBytes": 1928050416,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1000-fields-3",
+      "Run": 3,
+      "Warmup": false,
+      "Ciphertexts": 1000,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 141126.399875,
+      "AllocatedBytes": 1928052592,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1000-fields-3",
+      "Run": 4,
+      "Warmup": false,
+      "Ciphertexts": 1000,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 141239.664542,
+      "AllocatedBytes": 1928046704,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1000-fields-3",
+      "Run": 5,
+      "Warmup": false,
+      "Ciphertexts": 1000,
+      "Fields": 3,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 141332.135917,
+      "AllocatedBytes": 1928049952,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-1",
+      "Run": 0,
+      "Warmup": true,
+      "Ciphertexts": 1,
+      "Fields": 1,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 94.275083,
+      "AllocatedBytes": 1144000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-1",
+      "Run": 1,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 1,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 93.809334,
+      "AllocatedBytes": 1144000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-1",
+      "Run": 2,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 1,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 93.230375,
+      "AllocatedBytes": 1144000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-1",
+      "Run": 3,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 1,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 92.033708,
+      "AllocatedBytes": 1144000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-1",
+      "Run": 4,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 1,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 92.764917,
+      "AllocatedBytes": 1144016,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-1",
+      "Run": 5,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 1,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 92.90775,
+      "AllocatedBytes": 1144000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-2",
+      "Run": 0,
+      "Warmup": true,
+      "Ciphertexts": 1,
+      "Fields": 2,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 108.826083,
+      "AllocatedBytes": 1536000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-2",
+      "Run": 1,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 2,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 107.4935,
+      "AllocatedBytes": 1536000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-2",
+      "Run": 2,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 2,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 106.911583,
+      "AllocatedBytes": 1536000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-2",
+      "Run": 3,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 2,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 106.75325,
+      "AllocatedBytes": 1536000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-2",
+      "Run": 4,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 2,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 145.12425,
+      "AllocatedBytes": 1536016,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-2",
+      "Run": 5,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 2,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 109.108041,
+      "AllocatedBytes": 1536000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-5",
+      "Run": 0,
+      "Warmup": true,
+      "Ciphertexts": 1,
+      "Fields": 5,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 152.02225,
+      "AllocatedBytes": 2712000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-5",
+      "Run": 1,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 5,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 150.580458,
+      "AllocatedBytes": 2712000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-5",
+      "Run": 2,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 5,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 150.797959,
+      "AllocatedBytes": 2712016,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-5",
+      "Run": 3,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 5,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 150.283625,
+      "AllocatedBytes": 2712000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-5",
+      "Run": 4,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 5,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 149.627,
+      "AllocatedBytes": 2712000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-5",
+      "Run": 5,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 5,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 149.386666,
+      "AllocatedBytes": 2712000,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-10",
+      "Run": 0,
+      "Warmup": true,
+      "Ciphertexts": 1,
+      "Fields": 10,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 225.575958,
+      "AllocatedBytes": 4672016,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-10",
+      "Run": 1,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 10,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 223.983958,
+      "AllocatedBytes": 4672016,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-10",
+      "Run": 2,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 10,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 226.908375,
+      "AllocatedBytes": 4672112,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-10",
+      "Run": 3,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 10,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 223.767459,
+      "AllocatedBytes": 4672016,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-10",
+      "Run": 4,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 10,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 223.693209,
+      "AllocatedBytes": 4672016,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-10",
+      "Run": 5,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 10,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 223.120917,
+      "AllocatedBytes": 4672208,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-20",
+      "Run": 0,
+      "Warmup": true,
+      "Ciphertexts": 1,
+      "Fields": 20,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 370.790375,
+      "AllocatedBytes": 8592304,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-20",
+      "Run": 1,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 20,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 370.285959,
+      "AllocatedBytes": 8592208,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-20",
+      "Run": 2,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 20,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 370.132209,
+      "AllocatedBytes": 8592112,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-20",
+      "Run": 3,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 20,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 369.494167,
+      "AllocatedBytes": 8592128,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-20",
+      "Run": 4,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 20,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 369.967041,
+      "AllocatedBytes": 8592144,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    },
+    {
+      "Experiment": 7,
+      "Case": "ciphertexts-1-fields-20",
+      "Run": 5,
+      "Warmup": false,
+      "Ciphertexts": 1,
+      "Fields": 20,
+      "K": 0,
+      "N": 0,
+      "InnerIterations": 1000,
+      "TotalMS": 372.398125,
+      "AllocatedBytes": 8592128,
+      "Recovery": {
+        "ValidationMS": 0,
+        "InterpolationMS": 0,
+        "PublicCheckMS": 0
+      },
+      "Matched": true
+    }
+  ],
+  "status": "complete",
+  "warmups": 1
+}
