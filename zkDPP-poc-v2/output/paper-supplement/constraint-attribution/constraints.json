@@ -1,0 +1,100 @@
+[
+  {
+    "Name": "transfer-plain",
+    "Total": 35645,
+    "Groups": {
+      "Note commitment": 4214,
+      "Note nullifier": 602,
+      "Note validity / ranges": 7140,
+      "Voucher commitment": 2709,
+      "Voucher validity / ranges": 3698,
+      "input membership": 9825,
+      "other relations / compiler": 276,
+      "owner address": 301,
+      "state allocation: ratio": 6880
+    }
+  },
+  {
+    "Name": "proceed-plain",
+    "Total": 23123,
+    "Groups": {
+      "Note commitment": 2107,
+      "Note validity / ranges": 3570,
+      "Voucher commitment": 2709,
+      "Voucher nullifier": 903,
+      "Voucher validity / ranges": 3698,
+      "input membership": 9825,
+      "other relations / compiler": 10,
+      "owner address": 301
+    }
+  },
+  {
+    "Name": "recall-plain",
+    "Total": 23252,
+    "Groups": {
+      "Note commitment": 2107,
+      "Note validity / ranges": 3570,
+      "Voucher commitment": 2709,
+      "Voucher nullifier": 903,
+      "Voucher validity / ranges": 3698,
+      "input membership": 9825,
+      "other relations / compiler": 139,
+      "owner address": 301
+    }
+  },
+  {
+    "Name": "transfer-audit",
+    "Total": 49883,
+    "Groups": {
+      "Note commitment": 4214,
+      "Note nullifier": 1204,
+      "Note validity / ranges": 7140,
+      "Voucher commitment": 2709,
+      "Voucher nullifier": 903,
+      "Voucher validity / ranges": 3698,
+      "audit: key and masks": 2399,
+      "audit: range and ciphertext checks": 1723,
+      "audit: scalar multiplications": 8611,
+      "input membership": 9825,
+      "other relations / compiler": 276,
+      "owner address": 301,
+      "state allocation: ratio": 6880
+    }
+  },
+  {
+    "Name": "proceed-audit",
+    "Total": 35858,
+    "Groups": {
+      "Note commitment": 2107,
+      "Note nullifier": 602,
+      "Note validity / ranges": 3570,
+      "Voucher commitment": 2709,
+      "Voucher nullifier": 903,
+      "Voucher validity / ranges": 3698,
+      "audit: key and masks": 1801,
+      "audit: range and ciphertext checks": 1721,
+      "audit: scalar multiplications": 8611,
+      "input membership": 9825,
+      "other relations / compiler": 10,
+      "owner address": 301
+    }
+  },
+  {
+    "Name": "recall-audit",
+    "Total": 35987,
+    "Groups": {
+      "Note commitment": 2107,
+      "Note nullifier": 602,
+      "Note validity / ranges": 3570,
+      "Voucher commitment": 2709,
+      "Voucher nullifier": 903,
+      "Voucher validity / ranges": 3698,
+      "audit: key and masks": 1801,
+      "audit: range and ciphertext checks": 1721,
+      "audit: scalar multiplications": 8611,
+      "input membership": 9825,
+      "other relations / compiler": 139,
+      "owner address": 301
+    }
+  }
+]
