@@ -1,0 +1,10 @@
+{
+  "output/paper-supplement/transfer-gas-attribution/replay.json": "ce1d116815b4fbaa410875f32a099b4c43a6f53874bc235374aea28129ebb12f",
+  "output/paper-supplement/transfer-gas-attribution/calls.json": "624e6c887c8e929eca2c3f324b38c2f8b8e01a1f0f93e64bd9b5db097456a62d",
+  "output/paper-supplement/transfer-gas-attribution/root-opcodes.json": "1308391715fb703822e5be04eaedfcb9dde9590acd33744093fed6c082135a99",
+  "output/paper-supplement/transfer-gas-attribution/opcodes.json": "dcc35957cf9bc14bac9189afd8bcd1b756161db11283cd2f6034a5b943e8f082",
+  "output/paper-supplement/transfer-gas-attribution/breakdown.json": "6126571a2760eae04f73532b0efaecf627d15ecdc404208dc596f1053cbd25af",
+  "artifacts/development/experiments/proofs/1789116189266705000/exp1-lifecycle-03-0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6-000031.json": "4d26a8e605c5c32ddddded324cf21384b7578534bb4c3915eb8e46d1d8a40b89",
+  "contracts/src/experiments/ExperimentalAuditLedger.sol": "5c230737147dda4605894141408b341dc8d7a4b17ae433b96f1bc2440f01c824",
+  "contracts/experiments/out/ExperimentalAuditLedger.sol/ExperimentalAuditLedger.json": "4583f91ed0dc06f1af2a53147fce05849bbb1c8d7dd825a3d54d724ffe32f569"
+}

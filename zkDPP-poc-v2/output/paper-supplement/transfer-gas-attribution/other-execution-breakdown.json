@@ -1,0 +1,1091 @@
+{
+  "groups": {
+    "arithmetic_comparison_bitwise": {
+      "Gas": 11577,
+      "Count": 3859
+    },
+    "context": {
+      "Gas": 405,
+      "Count": 187
+    },
+    "control_flow": {
+      "Gas": 22648,
+      "Count": 3794
+    },
+    "event_logs": {
+      "Gas": 4774,
+      "Count": 3
+    },
+    "keccak256": {
+      "Gas": 6234,
+      "Count": 149
+    },
+    "memory_and_copy": {
+      "Gas": 3379,
+      "Count": 957
+    },
+    "stack_operations": {
+      "Gas": 34489,
+      "Count": 11798
+    },
+    "storage_reads": {
+      "Gas": 302700,
+      "Count": 147
+    }
+  },
+  "method": "Existing root trace only; excluded SSTORE and STATICCALL already attributed. Every SLOAD key classified; group totals reconcile to original 386206 Gas. These are opcode categories, not whole Solidity function costs.",
+  "observedReads": [
+    {
+      "gas": 2100,
+      "group": "accepted_input_root",
+      "slot": "0xfee9895000fb28dd048c414490edcd13a94a9a066ab9495b141feed7fe705f26"
+    },
+    {
+      "gas": 2100,
+      "group": "input_spent_check",
+      "slot": "0x165d3a326b837b03aa5b2f84e78891d8e6296e767dc3643f01af75d01df234da"
+    },
+    {
+      "gas": 2100,
+      "group": "input_status_check",
+      "slot": "0xc1de3fa08f7db0a52ae04418dfcec73138389453dd350b2299748a99d90f46b"
+    },
+    {
+      "gas": 2100,
+      "group": "verifier_address",
+      "slot": "0x1"
+    },
+    {
+      "gas": 2100,
+      "group": "output_duplicate_check",
+      "slot": "0x87518907219f353586b571b29b0e9d177238456e0e298e7f98e19f3446aa9156"
+    },
+    {
+      "gas": 2100,
+      "group": "output_duplicate_check",
+      "slot": "0x8d0a69a656c7b0ceb3747576fbf3ee2050e328471d04ef79d7d17aef3ea83855"
+    },
+    {
+      "gas": 2100,
+      "group": "audit_counter",
+      "slot": "0x5a"
+    },
+    {
+      "gas": 2100,
+      "group": "audit_record_heads",
+      "slot": "0x7693c76f96cbee3d0832e5f0137b0858f8bbe7d107d05cb7b9ee2ef246cbd534"
+    },
+    {
+      "gas": 2100,
+      "group": "audit_record_heads",
+      "slot": "0x7693c76f96cbee3d0832e5f0137b0858f8bbe7d107d05cb7b9ee2ef246cbd539"
+    },
+    {
+      "gas": 2100,
+      "group": "audit_record_heads",
+      "slot": "0x7693c76f96cbee3d0832e5f0137b0858f8bbe7d107d05cb7b9ee2ef246cbd53a"
+    },
+    {
+      "gas": 2100,
+      "group": "audit_record_heads",
+      "slot": "0x7693c76f96cbee3d0832e5f0137b0858f8bbe7d107d05cb7b9ee2ef246cbd536"
+    },
+    {
+      "gas": 2100,
+      "group": "audit_output_refs",
+      "slot": "0x1162d18bdf45059313a4e92bc0739209f038a08395f166c3da4915e449d8cc88"
+    },
+    {
+      "gas": 100,
+      "group": "output_duplicate_check",
+      "slot": "0x87518907219f353586b571b29b0e9d177238456e0e298e7f98e19f3446aa9156"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_metadata",
+      "slot": "0x4f"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x16204e0608323925a82cbc6c95484e450334ff2b05bfc1cb1bb3ad0309fe8614"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x2e"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x4931aa4edf52337fa80774c8b45f6be8ed5e153965abe28b0c5a0c21c0cd7c7d"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x2f"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xab273f8d84ea2cb348b069a25478176155a8e57a8c6d005325797d302cd68ed5"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x30"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xf35e32a638b9d4199fc5b386198d17184d221780270c8b7eda13ffc76ad5a117"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x31"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x26fd352f3adfea96b78597847552f136dc8bad093840e24e91ad0c7d2eae7cb8"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x32"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xf91c226005accb315deb311fd10cc27fc50b52eb5b49cadda4841381c3f86b8c"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x33"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x9b5280c8e442b2d142d7c3c8bbba3354b15c3a386a2d214f4a5a9e233f684b7d"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x34"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x430062078a77c65ab4e48667632ad97fa8303b9b779625c44a867d3ffcbadd4f"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x35"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x3bd5e043687992b4d92faa2ff5d6fd419a700f24fb06add26a7363d8963b745b"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x36"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x2557266906435853aa66dc9459172574f938d23386cc876200c019cfaa38b985"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x37"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xac4fbd9ac0bed71e467d3bbaae0909c8b82aa51acf7cbc968c66190a02fa4343"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x38"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x4b7b10e76a88171ee68cb6692d21cde5c8fbc66cf1cf6f46b5f7abad4409e8c5"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x39"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xf18a83bcf6dd7eadf35ea0df4c783a1563de771068b2c99a19f16493191a22d9"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x3a"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xa0e30e291f5ff8cc660b168b2ad2397feafdb25d9f816b36d161a4d5f5321747"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x3b"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x975ea3b3dba93f79db2803af85971f0553524d6d879d84404ecf42e6ee54904e"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x3c"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xf7c1e47dac1e112dac4ef433394a34b76cc9013877424332a0eb93fffba37318"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x3d"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xf32259983203a4f6d2a1b85a944027bedaaad0bff8d3232763ee0b3c4dcd75da"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x3e"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xfafdf06cf2c3ab33da219747d7902d39b85d0847568bc0f263119511991e7c0f"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x3f"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xee84f3a8bdbc47f777ca4c1f91d32be42cbac1ea771e5c28d9ce45c49fe03322"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x40"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xfc2cf80e6a8cae53cd43aae7647e726b914beea46952f5d78a579da86489551f"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x41"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x45ff0044ccf64a5a5dafbb2b11d6eb00528a80f33e689b16f143dc183843f5c9"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x42"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xef298c086401146d4ff31549f296f6312c75e24aa7e47613306f6af56bd46069"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x43"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x495f68f9dcdfc0931ac0de76ad1f3b75dc5e5e4dc0c5ae5a258164986e756394"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x44"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xade1cb218fd503f929252120c2c435332d549b3af5c53980eeee8c8aacb3a297"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x45"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x31351605911aaf31c05b095819d31bd6b5693f0bf9f826777a786278691db366"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x46"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x170d214f6f36236b9d79dd76c90f0d793b2607b27acc53679d68b4c7d14e1e0f"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x47"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xb4f80cd76603afa51aa46d0c190d0bebe4ad9a1c0203702fba91f33eae8ad881"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x48"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xc537ee6c480303b37c7e162a0cb830a257cf7cb342f42ddd1206580c41293ec4"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x49"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x989b21bd3f618055815a04613725cfade54e7a1c5ecdf97ea623aa51f30b7cb9"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x4a"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xa2f336f0b64c36f00eb69e4db2a59b180df22373f5caac79d85090ad12cafb14"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x4b"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xaa2e4aefbe0e8a3f17f0ef1a62898433725e8346722aad5b9b38d3974d216083"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x4c"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x3acd642f41c4abca13e6953c1b760d7f24daf271c41106e480dd1fea313ccc72"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x4d"
+    },
+    {
+      "gas": 2100,
+      "group": "accepted_output_roots",
+      "slot": "0x390b10c2b0865e3c9e3b0ce9ae678a899e9338b683bd49f3c6e015e32a1eb84d"
+    },
+    {
+      "gas": 100,
+      "group": "audit_record_heads",
+      "slot": "0x7693c76f96cbee3d0832e5f0137b0858f8bbe7d107d05cb7b9ee2ef246cbd536"
+    },
+    {
+      "gas": 2100,
+      "group": "audit_output_refs",
+      "slot": "0x1162d18bdf45059313a4e92bc0739209f038a08395f166c3da4915e449d8cc8a"
+    },
+    {
+      "gas": 100,
+      "group": "output_duplicate_check",
+      "slot": "0x8d0a69a656c7b0ceb3747576fbf3ee2050e328471d04ef79d7d17aef3ea83855"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_metadata",
+      "slot": "0x2a"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x3b76d82052da818df6e5d889edde66c49d830a0e3e322f335d49e35fe8c28329"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x9"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xed8897d2c605c79ff120a5476859febc11047a34b146295d729d218e4d59d600"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xd7565771f21764c2c786d9153001f8aec2ea73fbfacff8491ecf02a6858849f2"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0xb"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xd04d29004b8c938e4fdcc2a1a7c80a6a6ba6c81465eebaec79dec7fcf6ed7fa5"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0xc"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x2c450cd33359d6cbd726bfc5591ee5f617ec763839e7d141de7e793088d5c3"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0xd"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x5d5010c32edf0f181d8b57ac37737a93f29bbc7c1525c77540390cd4a7babba7"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0xe"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xbc4749d0847ab25a8ad9d370f6cc88852277df87c0ae4d34bc0aeb73b8962bef"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0xf"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xab87ce0fa536919fdd22f3018f0bb7f1e237774d672a85f0b1321f9effbbd55b"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x10"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x2be1adb2508d76c8465e83a07d5d84211f7973965a6e1e814ac998c006c2476a"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x11"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xe996d329064d37967d405600737b66c53bd14c99ad90f07b6a3b7c19beac0d9c"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x12"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x11f4ba4c41b4a0b34e4274bca5ad0117ae7bf2454b0f0ecda275ebd813ccae68"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x13"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x5460eabed31f090ad46130d35cee533bc20eb9a70338fddb9cc5c573f1c766f"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x14"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x67885fd09623d351aa9a2ddf5632f2dc11b28d2fbaaf41bbb3cbb54b694e88d7"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x15"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xa78fbe23ba4f230175b4524b489347633c4cff464e312952a3365c32594de05e"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x16"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x9d0018f14b8c74bd28d99580dfff274b9efd7857cd08983c4c18d805d4cb0bda"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x17"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x1c72a80d09bc24fb6c5c20317c613d317305b7afa5a26c1393fed66aeceac500"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x18"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xddfcb30f16970af3c2ca11538a9790050424f597e99b8fd290cad3cc14480157"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x19"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x92da497b5ce6eef851d337460283a9a78967d9e174f4ca2f0a9f9dac26913000"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x1a"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x94658ccc5d4d01a0fc73742665878fe1cac1cedf0e9c670693b74174e06e8c42"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x1b"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x40080a2105c44d17992830abf84a2eee15168bfc953ae24afd56d5381d32b701"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x1c"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xd5914fc2e4dde02c25809cd364375e8eebbfbf81622afe82ddecab631277ec3c"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x1d"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xe3fb41df2cd64422dc76b8b59d081fdbdd59b7f7d1fae60ca418ba7a9c1580ff"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x1e"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x34210cd053ccc57b89e8c9dfcbb74f70e7682a98c9820778f720a389c58f2323"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x1f"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xd1203baf5a857b687c5e3516cf9fe60f2f03efdc35268674956793ae236ab725"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x20"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xc0a0a1052e86fe2adf07f2b3f113cd0ba0253b51c09915c20bd290d64b0959a8"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x21"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x59dc52832db6bfbaced9b083cea34b75f6ca940f63c015a5ff7bebc65b05c9be"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x22"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x59e899aa2f7bc1365e998ae62677ea8624e7261385f1bbf82189b655e3b587d"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x23"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x67c7b623d08894662a80b2d62b2359114b69172cd083a38f4bea1a9a8dcc7eb8"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x24"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xdf6cae10d416b4d6f459eba806bebc4b85f190dfac647ab7cb4cd2638815444c"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x25"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0xe4c2e8be66af8dd2d277000f4f830a10546f8b14e45cd850b875c98ba0f0d2cd"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x26"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x9321edea6e3be4df59a344b401fab4f888b556fda1f954244cff9204bad624b8"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x27"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_sibling_nodes",
+      "slot": "0x6add646517a5b0f6793cd5891b7937d28a5b2981a5d88ebc7cd776088fea9041"
+    },
+    {
+      "gas": 2100,
+      "group": "tree_default_nodes",
+      "slot": "0x28"
+    },
+    {
+      "gas": 2100,
+      "group": "accepted_output_roots",
+      "slot": "0xb0dadfccba836a452ff37c4407e471b38c9f58de0513a0b8f288b66fc0c42b28"
+    }
+  ],
+  "opcodes": {
+    "ADD": {
+      "Gas": 3129,
+      "Count": 1043
+    },
+    "AND": {
+      "Gas": 720,
+      "Count": 240
+    },
+    "CALLDATACOPY": {
+      "Gas": 314,
+      "Count": 4
+    },
+    "CALLDATALOAD": {
+      "Gas": 99,
+      "Count": 33
+    },
+    "CALLDATASIZE": {
+      "Gas": 42,
+      "Count": 21
+    },
+    "CALLVALUE": {
+      "Gas": 2,
+      "Count": 1
+    },
+    "CODECOPY": {
+      "Gas": 78,
+      "Count": 13
+    },
+    "DUP1": {
+      "Gas": 1323,
+      "Count": 441
+    },
+    "DUP10": {
+      "Gas": 6,
+      "Count": 2
+    },
+    "DUP11": {
+      "Gas": 24,
+      "Count": 8
+    },
+    "DUP12": {
+      "Gas": 72,
+      "Count": 24
+    },
+    "DUP13": {
+      "Gas": 39,
+      "Count": 13
+    },
+    "DUP14": {
+      "Gas": 15,
+      "Count": 5
+    },
+    "DUP15": {
+      "Gas": 9,
+      "Count": 3
+    },
+    "DUP16": {
+      "Gas": 21,
+      "Count": 7
+    },
+    "DUP2": {
+      "Gas": 3210,
+      "Count": 1070
+    },
+    "DUP3": {
+      "Gas": 2937,
+      "Count": 979
+    },
+    "DUP4": {
+      "Gas": 603,
+      "Count": 201
+    },
+    "DUP5": {
+      "Gas": 318,
+      "Count": 106
+    },
+    "DUP6": {
+      "Gas": 462,
+      "Count": 154
+    },
+    "DUP7": {
+      "Gas": 81,
+      "Count": 27
+    },
+    "DUP8": {
+      "Gas": 72,
+      "Count": 24
+    },
+    "DUP9": {
+      "Gas": 75,
+      "Count": 25
+    },
+    "EQ": {
+      "Gas": 90,
+      "Count": 30
+    },
+    "GAS": {
+      "Gas": 130,
+      "Count": 65
+    },
+    "GT": {
+      "Gas": 1857,
+      "Count": 619
+    },
+    "ISZERO": {
+      "Gas": 957,
+      "Count": 319
+    },
+    "JUMP": {
+      "Gas": 8536,
+      "Count": 1067
+    },
+    "JUMPDEST": {
+      "Gas": 1462,
+      "Count": 1462
+    },
+    "JUMPI": {
+      "Gas": 12650,
+      "Count": 1265
+    },
+    "KECCAK256": {
+      "Gas": 6234,
+      "Count": 149
+    },
+    "LOG2": {
+      "Gas": 3274,
+      "Count": 2
+    },
+    "LOG3": {
+      "Gas": 1500,
+      "Count": 1
+    },
+    "LT": {
+      "Gas": 978,
+      "Count": 326
+    },
+    "MLOAD": {
+      "Gas": 942,
+      "Count": 314
+    },
+    "MSTORE": {
+      "Gas": 2045,
+      "Count": 626
+    },
+    "NOT": {
+      "Gas": 654,
+      "Count": 218
+    },
+    "NUMBER": {
+      "Gas": 2,
+      "Count": 1
+    },
+    "OR": {
+      "Gas": 240,
+      "Count": 80
+    },
+    "POP": {
+      "Gas": 540,
+      "Count": 270
+    },
+    "PUSH0": {
+      "Gas": 1270,
+      "Count": 635
+    },
+    "PUSH1": {
+      "Gas": 8421,
+      "Count": 2807
+    },
+    "PUSH2": {
+      "Gas": 7035,
+      "Count": 2345
+    },
+    "PUSH32": {
+      "Gas": 201,
+      "Count": 67
+    },
+    "PUSH4": {
+      "Gas": 228,
+      "Count": 76
+    },
+    "PUSH5": {
+      "Gas": 6,
+      "Count": 2
+    },
+    "RETURN": {
+      "Gas": 0,
+      "Count": 1
+    },
+    "RETURNDATASIZE": {
+      "Gas": 130,
+      "Count": 65
+    },
+    "SGT": {
+      "Gas": 21,
+      "Count": 7
+    },
+    "SHL": {
+      "Gas": 1212,
+      "Count": 404
+    },
+    "SHR": {
+      "Gas": 195,
+      "Count": 65
+    },
+    "SLOAD": {
+      "Gas": 302700,
+      "Count": 147
+    },
+    "SLT": {
+      "Gas": 225,
+      "Count": 75
+    },
+    "SUB": {
+      "Gas": 1107,
+      "Count": 369
+    },
+    "SWAP1": {
+      "Gas": 3240,
+      "Count": 1080
+    },
+    "SWAP10": {
+      "Gas": 9,
+      "Count": 3
+    },
+    "SWAP11": {
+      "Gas": 3,
+      "Count": 1
+    },
+    "SWAP2": {
+      "Gas": 2286,
+      "Count": 762
+    },
+    "SWAP3": {
+      "Gas": 1089,
+      "Count": 363
+    },
+    "SWAP4": {
+      "Gas": 516,
+      "Count": 172
+    },
+    "SWAP5": {
+      "Gas": 261,
+      "Count": 87
+    },
+    "SWAP6": {
+      "Gas": 30,
+      "Count": 10
+    },
+    "SWAP7": {
+      "Gas": 48,
+      "Count": 16
+    },
+    "SWAP8": {
+      "Gas": 24,
+      "Count": 8
+    },
+    "SWAP9": {
+      "Gas": 15,
+      "Count": 5
+    },
+    "XOR": {
+      "Gas": 192,
+      "Count": 64
+    }
+  },
+  "storageReads": {
+    "accepted_input_root": {
+      "Gas": 2100,
+      "Count": 1
+    },
+    "accepted_output_roots": {
+      "Gas": 4200,
+      "Count": 2
+    },
+    "audit_counter": {
+      "Gas": 2100,
+      "Count": 1
+    },
+    "audit_output_refs": {
+      "Gas": 4200,
+      "Count": 2
+    },
+    "audit_record_heads": {
+      "Gas": 8500,
+      "Count": 5
+    },
+    "input_spent_check": {
+      "Gas": 2100,
+      "Count": 1
+    },
+    "input_status_check": {
+      "Gas": 2100,
+      "Count": 1
+    },
+    "output_duplicate_check": {
+      "Gas": 4400,
+      "Count": 4
+    },
+    "tree_default_nodes": {
+      "Gas": 132300,
+      "Count": 63
+    },
+    "tree_metadata": {
+      "Gas": 4200,
+      "Count": 2
+    },
+    "tree_sibling_nodes": {
+      "Gas": 134400,
+      "Count": 64
+    },
+    "verifier_address": {
+      "Gas": 2100,
+      "Count": 1
+    }
+  },
+  "sum": 386206
+}

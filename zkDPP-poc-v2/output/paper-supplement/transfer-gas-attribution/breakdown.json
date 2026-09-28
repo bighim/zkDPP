@@ -1,0 +1,581 @@
+{
+  "counts": {
+    "audit_storage": 16,
+    "object_storage": 5,
+    "proof_call": 1,
+    "tree_hash_calls": 64,
+    "tree_storage": 72
+  },
+  "groups": {
+    "audit_storage": 279900,
+    "object_storage": 104200,
+    "other_execution": 386206,
+    "proof_call": 339592,
+    "transaction_intrinsic": 43712,
+    "tree_hash_calls": 1422404,
+    "tree_storage": 1001400
+  },
+  "notes": "Call gas includes caller CALL opcode overhead and all nested execution. Tree storage includes nodes, root history, root and leafCount. Audit storage includes record counter. Other execution includes ABI handling, checks, loops, reads and logs. Storage layout derived from exact Solidity declarations and checked against every observed SSTORE; no unmatched writes.",
+  "receiptGas": 3577414,
+  "sum": 3577414,
+  "writes": [
+    {
+      "gas": 2900,
+      "group": "audit_storage",
+      "pc": 18397,
+      "slot": "0x5a"
+    },
+    {
+      "gas": 20000,
+      "group": "object_storage",
+      "pc": 18488,
+      "slot": "0x165d3a326b837b03aa5b2f84e78891d8e6296e767dc3643f01af75d01df234da"
+    },
+    {
+      "gas": 20000,
+      "group": "audit_storage",
+      "pc": 18526,
+      "slot": "0x7693c76f96cbee3d0832e5f0137b0858f8bbe7d107d05cb7b9ee2ef246cbd534"
+    },
+    {
+      "gas": 2200,
+      "group": "audit_storage",
+      "pc": 18532,
+      "slot": "0x7693c76f96cbee3d0832e5f0137b0858f8bbe7d107d05cb7b9ee2ef246cbd535"
+    },
+    {
+      "gas": 22100,
+      "group": "audit_storage",
+      "pc": 18539,
+      "slot": "0x7693c76f96cbee3d0832e5f0137b0858f8bbe7d107d05cb7b9ee2ef246cbd537"
+    },
+    {
+      "gas": 22100,
+      "group": "audit_storage",
+      "pc": 18549,
+      "slot": "0x7693c76f96cbee3d0832e5f0137b0858f8bbe7d107d05cb7b9ee2ef246cbd538"
+    },
+    {
+      "gas": 20000,
+      "group": "audit_storage",
+      "pc": 18598,
+      "slot": "0x7693c76f96cbee3d0832e5f0137b0858f8bbe7d107d05cb7b9ee2ef246cbd539"
+    },
+    {
+      "gas": 22100,
+      "group": "audit_storage",
+      "pc": 19058,
+      "slot": "0x90bf88bc9ef7c2986ac665035c94580325274dc6ea2881852dec2aac45f8fee2"
+    },
+    {
+      "gas": 20000,
+      "group": "audit_storage",
+      "pc": 18677,
+      "slot": "0x7693c76f96cbee3d0832e5f0137b0858f8bbe7d107d05cb7b9ee2ef246cbd53a"
+    },
+    {
+      "gas": 22100,
+      "group": "audit_storage",
+      "pc": 18992,
+      "slot": "0x6d6f9f85ec87f6aa28206d98c6bce4994fedb20d18c5bf08d0a8624e6791b565"
+    },
+    {
+      "gas": 22100,
+      "group": "audit_storage",
+      "pc": 18992,
+      "slot": "0x6d6f9f85ec87f6aa28206d98c6bce4994fedb20d18c5bf08d0a8624e6791b566"
+    },
+    {
+      "gas": 20000,
+      "group": "audit_storage",
+      "pc": 18759,
+      "slot": "0x7693c76f96cbee3d0832e5f0137b0858f8bbe7d107d05cb7b9ee2ef246cbd536"
+    },
+    {
+      "gas": 20000,
+      "group": "audit_storage",
+      "pc": 18798,
+      "slot": "0x1162d18bdf45059313a4e92bc0739209f038a08395f166c3da4915e449d8cc88"
+    },
+    {
+      "gas": 22100,
+      "group": "audit_storage",
+      "pc": 18809,
+      "slot": "0x1162d18bdf45059313a4e92bc0739209f038a08395f166c3da4915e449d8cc89"
+    },
+    {
+      "gas": 22100,
+      "group": "object_storage",
+      "pc": 18833,
+      "slot": "0x3cde5ee668f7783dc683c32501903452d04c09d54144eef82fdaa315bc00effa"
+    },
+    {
+      "gas": 20000,
+      "group": "object_storage",
+      "pc": 18925,
+      "slot": "0x87518907219f353586b571b29b0e9d177238456e0e298e7f98e19f3446aa9156"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19624,
+      "slot": "0xb89ffc3ec4a4844fdf43b266e7fbfb2b989641d5ce2a2fd9762d76e3dfb677a6"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xa37307593c4ee70119033217184f6d74efb65464dcc88d0fea041cb123cd29f5"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xdbcadd7f308b114ceab7b686005138580775ec01bd89200966bd161966ff4acf"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xfcf1990eadf958085742f0de408fc273a0f95aa8983c3984e2ad9a8d0904f437"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xd8c1e5cce0ac95e30acc7fb4bc881149378ee9c2d720c208606562afe5eb6ca4"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x59bb8850908ee3cf74d5dd78410ec7e6cf16e97eeac36c6f28b770a34a884817"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x66a5cc3f479d02c73c5309bf00c91dd29eff3aa837c2fb1b32998b803be708dd"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x7b966310ed9aefeea5029e5d68c14c35200622326e5c8fb2b73cb643e584d243"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xd503a9354ffc9d604ee9bee30f2a84cdb6c7fdb21cceaa5ef9bebaf38200d4df"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x8142bf5331b8724d5f1992622fc6f43a7d1deaecf6d8a443b00d9daa767fc933"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xed9c7f264a62082656b2c0e493a0928073a23a6b47b9cb7826de958b932f7947"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xdf46c7d52c944c0bfc4f0acbc412bd5aef419445e7f5fbad2ac6fb05390e58bc"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x4cffd49cc460362961d83b693d487d2493eb0b52deac7732e3934127b8e0406a"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xe17cd896bb6a37ef420af81262677d970d89c9ebc796b109b6692523585259ed"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x9a60888212099359698eba7a9378dcc97ec44d517303d7701e43559371152e56"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xdc15fafcc9a23dbe0b4fff06130cbeefdbbd09e26d90d2c4e258b81a1cb094a8"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x70313db570d6b07b248edb0bba1c1a291b208b6aa4f42eb1720dc5ab1656e3da"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xaf7645bd0757aee952d1343e34474f3bbab853a0a18e71a179de047701ec5249"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x4d9e85e5c4c351c91da2a78e823562a83bb98fc770913799169e1463a23178c0"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xba42a6b1b1da265f97c31c56e6c7a206e2be6ea268da0ed30c8ad98c483130a4"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x5997a0a42570431e85a2d2aa891cbd7eb98a24f650633dc7a0bf05d54fa32ab4"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x8755e9affa2d5d301cd47ca6e3e2b8fabbd1e34eb5bee3b78d2370ddc4c05feb"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xebbc4b5c6380ba2a022e22c7b710d8a213b05d2f9d03a46416ca7054fb590722"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x9033afb307c842ac373729d007d807dee6a85faa30d2883343d73faf6c73210e"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xba8eb4d84382fb56e00cf05f12936fc251b6fd0af60c9fea1fc0fedc99c2736e"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x5fc7dd38124e3825d177bd44e6352d8f2764fcc845366d46ded1ad19decfa7c2"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xfc09cc445282a266a9d662ae1f50dac518ed5a04dc9bc3334a2ff89e11bea4fd"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xef2b283a656e8e0cad2c36906f298381640f4b72f8360ce71e184af875b521b4"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0xa953b00fe11b17c25d895b005b12b262a158aab2c879ab16fa828983144d4dc0"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x4d73f294a2cb7f5a471fde2e2c5652a46cf819d439af00ca2c7f02d5472b48b8"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x1d82e85504d8f49072f846129ecee69c763b08a82ee3d81cda62b57a7576d37b"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x4ac3b22e31fa68474eb1c8f858cd447cf1ee3eef7de8984178a7afa8f4fe0cd0"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 19903,
+      "slot": "0x6648a85983aca0407b603b260cacb25b5e5e8e5194522de3d8a800e71aa41bae"
+    },
+    {
+      "gas": 20000,
+      "group": "tree_storage",
+      "pc": 19688,
+      "slot": "0x4f"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 19692,
+      "slot": "0x50"
+    },
+    {
+      "gas": 20000,
+      "group": "tree_storage",
+      "pc": 19714,
+      "slot": "0x390b10c2b0865e3c9e3b0ce9ae678a899e9338b683bd49f3c6e015e32a1eb84d"
+    },
+    {
+      "gas": 100,
+      "group": "audit_storage",
+      "pc": 18759,
+      "slot": "0x7693c76f96cbee3d0832e5f0137b0858f8bbe7d107d05cb7b9ee2ef246cbd536"
+    },
+    {
+      "gas": 20000,
+      "group": "audit_storage",
+      "pc": 18798,
+      "slot": "0x1162d18bdf45059313a4e92bc0739209f038a08395f166c3da4915e449d8cc8a"
+    },
+    {
+      "gas": 22100,
+      "group": "audit_storage",
+      "pc": 18809,
+      "slot": "0x1162d18bdf45059313a4e92bc0739209f038a08395f166c3da4915e449d8cc8b"
+    },
+    {
+      "gas": 22100,
+      "group": "object_storage",
+      "pc": 18833,
+      "slot": "0x1f0b43795e858175ea5b15e475d1efdd5ef5ff5d6285c01c03fc3ae11d405c7e"
+    },
+    {
+      "gas": 20000,
+      "group": "object_storage",
+      "pc": 18872,
+      "slot": "0x8d0a69a656c7b0ceb3747576fbf3ee2050e328471d04ef79d7d17aef3ea83855"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 20167,
+      "slot": "0x107c19e469c4cf04c84fede2b607a1ce6090fbd564fd6977130af53d450469fd"
+    },
+    {
+      "gas": 22100,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0xbbdb967dfd72e610af1b13dd647b20685dd867887383a843a21b96ad3bfc21f3"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x915bc7af72808773524c76de16cad7c9d540665a7c7b4e604d24ead6feb3a7c4"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x2dff1023759218eee8d59121cb8f9acea96380a9cbf7f5a11e36346e529c3976"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x7009aebc2f2c8214ba78725c310fa083a77541140a1201ffc6ea1a634d28944a"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x52b34f5fefe89c843ca16115a3b4e506e2f0c624dfadb9bcd10d39fddd80e0a0"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x3f7204a5e8020330f8eb646cd0be569b985acd4d700fe36156daff481c3dbb91"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x879d39ffbda95547984b84ee5016241bd16d6e18deb0f887ed8ba8c24fa82f75"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0xaeb7c50cbfbecf47746d4271f988122635166c6dc02d6746f75e2c17f55f2487"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0xd5f92d72a9c0fc83f4e2d09eda965461e4328529b6217ad35f91b77d8f7fcd36"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x11d3674bad7f2314ca90478436f53df0e5be575afb2216a4d7e632e2d9eabe2d"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x692a458c6d610bf6b881dab5d8e753857222af2a40bcb958d1742f617d358f76"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x33dca5a2e3d020bf77fe89396b167c0dba1a6b83bb1bef701a9460ceb763ff28"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0xc8fe0cad9203cb1ada608c919777c07b1b5e54678c150d4cbaef4784dbdfc4b8"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x3defcf67ebd05c4ed59d73ae8a9b30f788a1d3b9070f1c2da2b68ca4f3c0f9b1"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x2e28f514068fc4a8b9e403fd6c790ac5548cc8b2cf34a70e07eaeed031cabbfc"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x4cb1af7966ca75a3ad3aa7ef8093928208b3899633909febffce6be4530ade5f"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x551c7c92b010a97ecf7e356e2a14be86f35955ecaabd1d9a14cce0da72625477"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0xfc47277801784bcdfb30a9631127d8b9d76b6843419608d543986ddac0c53749"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0xb3130b45be169c5b191165bd81316925a1c32955023a545b3d177ea4f50218fc"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x96227d6c19b6bc746c6b02fbee68924281ce5d4050b74f3217c7cb8f9db74aea"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0xc6b4815f15bb3563ce2b72e373aa91c921d3bb89c48b35661cfc62a0a8d36057"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x3e999f1fa74741d8d369ef96b6130f233a412d8fbec0f037e6f88569f26b317e"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0xe1a5391754db1d6296944be5922f35e451d2da1cc373741989aaf179d7f3da8d"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x4c7ac34e1cab5dd7f806a2bf46a899ab4ecb8ab3520675d9fe90e43f9b378aa"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x2010e0d58d60dbde7ce1de0a8beaf5758a2bed0bf44d4af41a6fba7e2e15fcc6"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x48cecfcc7a58592c9a031609be67bbc45ecffd51e78531d0c2ba739f99576a9"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x3d4691043262bb71b358bddc6f01f8c4de71fc1f1a1b51e3a78463b85cab661e"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x8fab3b3b6d3bf24f9b00213fe8dda2fb1e188fcd88f523fcb711ff1f6aed59e3"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x24cd397636bedc6cf9b490d0edd57c769c19b367fb7d5c2344ae1ddc7d21c144"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x625b35f5e76f098dd7c3a05b10e2e5e78a4a01228d60c3b143426cdf36d26455"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0xad67d757c34507f157cacfa2e3153e9f260a2244f30428821be7be64587ac55f"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20446,
+      "slot": "0x5eff886ea0ce6ca488a3d6e336d6c0f75f46d19b42c06ce5ee98e42c96d256c7"
+    },
+    {
+      "gas": 2900,
+      "group": "tree_storage",
+      "pc": 20231,
+      "slot": "0x2a"
+    },
+    {
+      "gas": 5000,
+      "group": "tree_storage",
+      "pc": 20235,
+      "slot": "0x2b"
+    },
+    {
+      "gas": 20000,
+      "group": "tree_storage",
+      "pc": 20257,
+      "slot": "0xb0dadfccba836a452ff37c4407e471b38c9f58de0513a0b8f288b66fc0c42b28"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "output/paper-supplement/transfer-gas-attribution-plain/replay.json": "0d041bad6525a8104d85573821afd5c43cb06b8f4969ecf3b3b25d40494da5fd",
+  "output/paper-supplement/transfer-gas-attribution-plain/calls.json": "2a8a5d896783af647afc8845696a14012b2729a27b8b128063ef9cc95502c5da",
+  "output/paper-supplement/transfer-gas-attribution-plain/opcodes.json": "a09d404fae126a3d59ebf045bea6828425d83dc48829c8aad08c53b608ab77ad",
+  "output/paper-supplement/transfer-gas-attribution-plain/root-opcodes.json": "7d7be32749af0f542b17b2d422966c6c3e78bac1cea1930c55d8068ffc289485",
+  "output/paper-supplement/transfer-gas-attribution-plain/comparison.json": "53ded3cc117ad445bf4946476aadb1797a3429dc5d264d694fcc4f60950980c9",
+  "artifacts/development/experiments/proofs/1789116474012539000/exp3-lifecycle-01-0x8A791620dd6260079BF849Dc5567aDC3F2FdC318-000015.json": "3c184277dd184a29053e37c37a5b57ad29a20645c85c5193c4e39fbc22621b4e",
+  "artifacts/development/experiments/proofs/1789116474012539000/exp3-lifecycle-02-0x8A791620dd6260079BF849Dc5567aDC3F2FdC318-000016.json": "d60f2e629425dfbb760d9789ed4c83e0397662fe32de03dc68d38a27ca11628d",
+  "artifacts/development/experiments/proofs/1789116474012539000/exp3-lifecycle-03-0x8A791620dd6260079BF849Dc5567aDC3F2FdC318-000017.json": "80585166ef07f454e2ea014ac317cd813095cf89491455f5e1c2a051825a3b79",
+  "contracts/src/experiments/ExperimentalNoAuditLedger.sol": "41924ba76116c2cae81efd00ce24331df95dfc1fb5ef762645e3682da7f23d26",
+  "contracts/experiments/out/ExperimentalNoAuditLedger.sol/ExperimentalNoAuditLedger.json": "f2fae378f551c81516ae4a87c92c2c3b936c3d68fb7fb197c677c0ae198e60bc",
+  "cmd/compare_transfer_gas/main.go": "ddab9d4f2804855c40802846ef2b5f8ddd22ca2e27be9b982bb134ec0f054613"
+}
