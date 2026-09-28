@@ -10,3 +10,7 @@
 
 poc-v2/contracts/src/generated/
 poc-v2/contracts/test/fixtures/
+
+# Local paper-feedback workspace and editor preferences.
+/paper-feedback/
+/.vscode/
