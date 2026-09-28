@@ -1,0 +1,18 @@
+services:
+  anvil:
+    image: ghcr.io/foundry-rs/foundry:v1.7.1
+    platform: linux/arm64
+    cpus: 2
+    mem_limit: 4g
+    entrypoint: [anvil]
+    command: [--host, "0.0.0.0", --hardfork, prague, --chain-id, "31337", --gas-limit, "30000000"]
+    ports: ["127.0.0.1:18549:8545"]
+  foundry:
+    image: ghcr.io/foundry-rs/foundry:v1.7.1
+    platform: linux/arm64
+    cpus: 8
+    mem_limit: 12g
+    working_dir: /workspace/contracts/shared-transfer
+    volumes: [".:/workspace"]
+    entrypoint: [forge]
+
