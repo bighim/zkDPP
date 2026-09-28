@@ -1,0 +1,35 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage{kotex}
+\usepackage[margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,graphicx,booktabs,tabularx}
+\usepackage{iftex}
+\ifXeTeX
+  \usepackage{unicode-math}
+  \setmathfont{latinmodern-math.otf}
+    \IfFontExistsTF{Nanum Myeongjo}{
+        \setmainhangulfont{Nanum Myeongjo}
+    }{
+        \setmainhangulfont[
+            Path=/System/Library/AssetsV2/com_apple_MobileAsset_Font8/4c932c71d74fc9e4c1bd9cbf270374b0b3ee7519.asset/AssetData/,
+            FontIndex=0,
+            BoldFont=NanumMyeongjo.ttc,
+            BoldFeatures={FontIndex=1}
+        ]{NanumMyeongjo.ttc}
+    }
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{7pt}
+\setlength{\emergencystretch}{3em}
+\begin{document}
+\begin{center}{\Large\bfseries zkDPP: 비공개 공급망 회계와\\승인된 이력 추적 및 사용 차단}\par\smallskip
+    {\small Abstract·Introduction 윤문본}
+\end{center}
+\input{00.Abstract.tex}
+\clearpage
+\input{01.Introduction.tex}
+\end{document}
