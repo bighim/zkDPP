@@ -1,0 +1,16 @@
+% !TEX root = main.tex
+\section*{원본 PDF에서 변경한 내용}
+\begin{enumerate}
+    \item \textbf{1.2 시나리오를 분리했다.} 표 3의 14 Event 기본 성능 경로와 Entry→Split→Split 감사 예시를 구분했다.
+    \item \textbf{기능 근거를 갱신했다.} 과거 M1 mock 실행 대신 M1-HF 실제 Proof·RPC 결과와 후속 실험 자료를 사용했다. 과거 7→10 블록을 새 실행의 64→67로 구분했다.
+    \item \textbf{반복 통계를 명시했다.} 기본 5회 median, 보충 공식 1회, 키 복구 1,000회 묶음 평균을 분리했다. 보충 실험의 하드웨어를 기본 실험에 소급하지 않았다.
+    \item \textbf{키 복구 표·그래프를 교체했다.} 전체 Committee 사전 검증을 제외한 새 k 측정을 사용했다. n 변화 그래프는 삭제하고 n=10 고정 조건은 남겼다.
+    \item \textbf{SharedSecret 비용을 추가했다.} 미제공으로 비워 둔 값을 실제 공식 1회의 2,724,242 Gas로 채웠다. 기존 nf와 다른 실험용 대안임을 명시했다.
+    \item \textbf{Process 조건을 확인했다.} 보존된 입력·출력에서 합계를 대조하고 실제 측정 조건을 설명했다. 두 기준 Gas 값은 서로 다른 실행이므로 그대로 유지했다.
+    \item \textbf{비용 분해 근거를 추가했다.} 이후 수행한 Transfer compile profile과 opcode trace를 별도 진단으로 설명했다.
+    \item \textbf{기존의 타당한 제한은 유지했다.} 경로 합산과 실측 E2E, 방문 수와 동결 수, 기본 키 복구와 두 키 구성, 외부 논문 비용 비교의 차이를 유지했다.
+\end{enumerate}
+\textbf{아직 남는 확인}\par
+논문 초안의 두 키 방식과 실제 구현의 대응, 기본 실험의 하드웨어·OS 출처, Process 기준 Gas 차이의 정확한 연산별 기여도는 별도 확인 대상이다.
+이번 작업에서 새 실험이나 외부 시스템 재실행은 하지 않았다. 원본 PDF는 수정하지 않았다.
+
