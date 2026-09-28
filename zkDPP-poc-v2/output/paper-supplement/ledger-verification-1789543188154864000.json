@@ -1,0 +1,18 @@
+{
+  "ExperimentalAuditLedger.sol": {
+    "buildJSONSHA256": "ecb74135cd4c59209e87ea08d8f334259c47eab74b5a5fc116fd63c33386969d",
+    "creationCodeKeccak": "0xc38025dc9ccd5e18d1b5e3eec1cb01c01f7fc1d7bc46ba7a888a79edf8fbe251",
+    "onlyChange": "registerPolicy accepts additional 3-to-1, 4-to-1, 2-to-3 Process arities; all other bytes identical",
+    "originalSHA256": "5c230737147dda4605894141408b341dc8d7a4b17ae433b96f1bc2440f01c824",
+    "runtimeCodeKeccak": "0xe876b1d19b7572e8535613242b9b7714fa292394137a7d2e3eeecefcc333400f",
+    "supplementSHA256": "cdca3df8b1231b870bc6dfcf9df3803cc432511c05f9974d9946b231f958c54b"
+  },
+  "ExperimentalNoAuditLedger.sol": {
+    "buildJSONSHA256": "90246e4d558fdab2659c031d5b392775247513428acf8a8a62369d50ccc87c07",
+    "creationCodeKeccak": "0xb9830864d9b3c590dd66b2830fea6a57c3348f4cda0353a337f9e1da1dad6b9a",
+    "onlyChange": "registerPolicy accepts additional 3-to-1, 4-to-1, 2-to-3 Process arities; all other bytes identical",
+    "originalSHA256": "41924ba76116c2cae81efd00ce24331df95dfc1fb5ef762645e3682da7f23d26",
+    "runtimeCodeKeccak": "0x9b7a3bd711030c9bea53c493626e8158e8a126958d6e891a7015aa64ff809078",
+    "supplementSHA256": "351fdafd0c5e5ac60081f0dc40f624230e53aa93439b6c03bce5078d8f9d29e7"
+  }
+}

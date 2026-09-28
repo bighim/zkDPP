@@ -97,6 +97,8 @@ type Engine struct {
 	Rows             []Measurement
 	Sequence         uint64
 	RunTag           string
+	ProofDir         string // Optional isolated output directory; empty preserves existing experiments.
+	ContractOutDir   string // Optional isolated Solidity build output.
 	LastReceipt      time.Time
 	DeferDiagnostics bool
 	Pending          []func() error
@@ -217,7 +219,11 @@ func (e *Engine) contract(source, name string) (abi.ABI, []byte, error) {
 		ABI      json.RawMessage
 		Bytecode struct{ Object string }
 	}
-	if er := readJSON(filepath.Join(e.Root, "contracts/experiments/out", source, name+".json"), &raw); er != nil {
+	outDir := e.ContractOutDir
+	if outDir == "" {
+		outDir = "contracts/experiments/out"
+	}
+	if er := readJSON(filepath.Join(e.Root, outDir, source, name+".json"), &raw); er != nil {
 		return abi.ABI{}, nil, er
 	}
 	a, er := abi.JSON(bytes.NewReader(raw.ABI))
@@ -496,7 +502,11 @@ func (e *Engine) Execute(w *World, op Operation, caseID string, run int, trace b
 	idx := len(e.Rows)
 	e.Rows = append(e.Rows, row)
 	e.Sequence++
-	path := filepath.Join(e.Root, ArtifactDir, "proofs", e.RunTag, fmt.Sprintf("%s-%s-%06d.json", caseID, e.Ledger.Hex(), e.Sequence))
+	proofDir := e.ProofDir
+	if proofDir == "" {
+		proofDir = ArtifactDir
+	}
+	path := filepath.Join(e.Root, proofDir, "proofs", e.RunTag, fmt.Sprintf("%s-%s-%06d.json", caseID, e.Ledger.Hex(), e.Sequence))
 	e.Rows[idx].ProofArtifact, _ = filepath.Rel(e.Root, path)
 	diagnostic := func() error {
 		t := time.Now()
