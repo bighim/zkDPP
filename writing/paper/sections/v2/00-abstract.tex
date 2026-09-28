@@ -1,0 +1,51 @@
+\begin{center}\textbf{요 약}\end{center}
+공급망에서는 원료를 나누거나 합치고 다른 기업에 넘기면서 제품을 만든다.
+원료의 질량, 재활용 관련 근거와 탄소 배출량도 이 과정을 따라
+제품에 배분된다. 그런데 생산이 진행된 뒤 원료의 증빙에 오류가
+발견될 수 있다. 이때는 그 원료의 근거를 이어받은 기록을 찾아
+더 이상 사용하지 못하게 해야 한다. 거래 연결을 숨기는 원장에서는
+공개 정보만으로 그 대상을 찾기 어렵다.
+본 논문은 이러한 검증과 사후 대응을 연결하는 zkDPP를 제안한다.
+참여자는 상세 수치와 거래 연결을 공개하지 않고도 각 거래가
+정해진 회계 규칙을 지켰음을 증명한다. 동시에 실제 입력과 다음
+사용을 식별할 정보를 암호화해 남긴다. 승인된 감사자는 이 정보를
+열어 이력을 따라가고, 아직 사용되지 않은 관련 기록 전체를 동결한다.
+전체 차단의 완료는 같은 원장 시점에서 모든 대상을 다시 확인한
+경우에만 보고한다. 명시한 암호·원장·권한 가정 아래 정상 실행의
+정확성, 잘못된 거래·추적·완료 보고를 거부하는 건전성과 제한된
+외부 관찰자에 대한 프라이버시를 증명한다. 기호 모델과 시제품의
+기능을 검사하고 아홉 거래의 비용 및 추적·동결 시간을 평가한다.
+측정 조건에서 감사 기능은 gas를 9.69--54.67\% 증가시켰다.
+이 결과는 이미 발급된 제품 주장의 취소나 물리적 회수를 보장하지
+않으며, 현행 설계 전체의 구현 적합성을 확립한 결과도 아니다.
+
+\begin{center}\textbf{ABSTRACT}\end{center}
+Supply chains split, combine, and transfer materials as products are made.
+Records of mass, recycled credit, and carbon are carried through these
+steps. If a material's supporting evidence is later found to be incorrect,
+a response may need to find the related records that remain available
+and prevent their further use. Public information alone cannot identify
+all such records when a ledger hides transaction links.
+This paper presents zkDPP, which connects private accounting with
+authorized tracing and use prevention. Participants prove that each
+transaction follows the accounting rules without revealing its detailed
+values or input links. Each transaction also encrypts its actual input
+references and the identifiers needed to recognize later use of its
+outputs. An authorized auditor decrypts this information, follows the
+history, and freezes the entire set of related unspent records.
+Completion is reported only after all targets are checked at one common
+ledger checkpoint. Under explicit cryptographic, ledger, and authority
+assumptions, we prove correctness, soundness against invalid transactions
+and false tracing or completion results, and privacy for a limited passive
+external observer. Symbolic checks and selected prototype executions
+support the evaluation, alongside costs for nine event types and tracing
+and freezing times. Audit data increased transaction gas by
+9.69--54.67\% under the measured conditions.
+The construction does not revoke issued product claims or enforce
+physical recall. The evaluation does not establish full implementation
+conformance to the current design.
+
+\smallskip
+\noindent\textbf{Keywords:} Digital product passport, Zero-knowledge proof,
+Provenance tracing, Supply-chain accounting, Authorized freezing
+\medskip

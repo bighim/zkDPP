@@ -1,0 +1,16 @@
+\begin{table*}[t]
+\centering\small
+\caption{Prototype functional checks and their evidence scope}
+\label{tab:eval-functional}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{35mm}YY@{}}
+\toprule
+Check & Observed result & Evidence scope \\ \midrule
+Branch tracing and freezing & $C,D,E$ recovered; 3 freeze transactions; checkpoint completion & Archived Anvil RPC run; test verifier \\
+Entire target set & 3 targets and 3 freeze calls; complete & Memory-backed test \\
+Trace failure & No freeze calls; trace failure & Failure-path test \\
+Consumption before freeze & Consumed target retained; incomplete & Failure-path test \\
+Valid circuit inputs & 10 representative relations satisfy constraints & Compilation, public-input and IsSolved tests \\
+\bottomrule
+\end{tabularx}
+\par\smallskip\begin{minipage}{\textwidth}\footnotesize Prototype commit 8560fd3; archived tests from 9 September 2026. A test verifier does not validate real proofs.\end{minipage}
+\end{table*}

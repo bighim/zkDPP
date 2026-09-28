@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering\small
+\caption{Per-event costs with audit data}
+\label{tab:eval-events}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lrrr@{}}
+\toprule
+Event & Constraints & Gas & E2E (ms) \\ \midrule
+Entry & 18,115 & 2,258,715 & 770.834 \\
+Transfer & 49,883 & 3,577,414 & 1,464.369 \\
+Proceed & 35,858 & 1,784,082 & 1,278.965 \\
+Recall & 35,987 & 1,785,084 & 1,250.315 \\
+Merge & 51,543 & 1,888,301 & 1,361.248 \\
+Split & 48,608 & 2,730,046 & 1,497.729 \\
+Process & 55,402 & 1,866,617 & 1,335.974 \\
+Exit & 27,940 & 534,277 & 674.484 \\
+Issue & 35,957 & 678,565 & 1,225.264 \\
+\bottomrule
+\end{tabular*}
+\par\smallskip\begin{minipage}{\columnwidth}\footnotesize Three accounting components; Process has 2 inputs and 1 output. E2E values are observations without independent-run dispersion. The Process baseline differs from Table~\ref{tab:eval-process}.\end{minipage}
+\end{table}

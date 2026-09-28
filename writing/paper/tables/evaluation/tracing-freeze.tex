@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering\small
+\caption{Time by visited records or freeze targets}
+\label{tab:eval-trace}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}rrrr@{}}
+\toprule
+$V$ or $F$ & Forward (s) & Backward (s) & Freeze (s) \\ \midrule
+10 & 0.067 & 0.068 & 0.220 \\
+100 & 0.681 & 0.554 & 2.448 \\
+1,000 & 9.760 & 8.102 & 60.540 \\
+\bottomrule
+\end{tabular*}
+\par\smallskip\begin{minipage}{\columnwidth}\footnotesize $V$: unique visited audit records; $F$: freeze targets. The two tasks are measured separately on the Split scenario.\end{minipage}
+\end{table}

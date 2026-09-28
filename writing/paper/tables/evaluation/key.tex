@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering\small
+\caption{Local key recovery after public-data validation}
+\label{tab:eval-key}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}rrr@{}}
+\toprule
+Committee $n$ & Selected $k$ & Mean (ms) \\ \midrule
+10 & 2 & 0.188 \\
+10 & 3 & 0.251 \\
+10 & 5 & 0.384 \\
+10 & 7 & 0.520 \\
+10 & 10 & 0.737 \\
+\bottomrule
+\end{tabular*}
+\par\smallskip\begin{minipage}{\columnwidth}\footnotesize One timed run per condition after warm-up, averaging 1,000 internal recoveries. Includes selected-share verification, interpolation and recovered-key public-key matching.\end{minipage}
+\end{table}

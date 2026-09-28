@@ -1,0 +1,82 @@
+% Korean manuscript: construction, literature-grounded positioning and conditional analysis.
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage{fontspec}
+\usepackage[a4paper,top=18mm,bottom=18mm,left=17mm,right=17mm,columnsep=7mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{array,booktabs,tabularx}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\setmainfont[AutoFakeSlant=0.15]{Apple SD Gothic Neo}
+\setsansfont[AutoFakeSlant=0.15]{Apple SD Gothic Neo}
+\newfontfamily\referencefont{Times New Roman}
+\XeTeXlinebreaklocale "ko"
+\XeTeXlinebreakskip=0pt plus 1pt
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\renewcommand{\tablename}{Table}
+\renewcommand{\figurename}{Fig.}
+\captionsetup{font=small,labelfont=bf,labelsep=period,skip=4pt}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.13}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\linespread{1.10}
+\raggedbottom
+% Keep evidence figures near their discussion in the two-column evaluation.
+\setcounter{topnumber}{4}
+\setcounter{dbltopnumber}{4}
+\setcounter{totalnumber}{6}
+\renewcommand{\topfraction}{.90}
+\renewcommand{\dbltopfraction}{.90}
+\renewcommand{\textfraction}{.08}
+\renewcommand{\floatpagefraction}{.80}
+\renewcommand{\dblfloatpagefraction}{.80}
+\newcommand{\eligible}{\textsf{ELIGIBLE}}
+\newcommand{\waste}{\textsf{WASTE}}
+\newcommand{\stActive}{\textsf{Active}}
+\newcommand{\stFrozen}{\textsf{Frozen}}
+\newcommand{\stRevoked}{\textsf{Revoked}}
+\newcommand{\spend}{\mathsf{spentIn}}
+\newcommand{\stat}{\mathsf{status}}
+\newcommand{\aid}{\mathit{aid}}
+\newcommand{\TE}{\mathsf{TE}}
+\newcommand{\B}{\mathsf{Blocked}}
+\newcommand{\Alg}[1]{\textsf{#1}}
+\title{\textbf{zkDPP: 비공개 공급망 회계와\\승인된 이력 추적 및 사용 차단}\\[0.5em]
+\large zkDPP: Private supply-chain accounting,\\authorized provenance tracing, and use prevention}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\vspace{-2.8em}
+\input{sections/v2/00-abstract}
+\input{sections/v2/00-introduction}
+\input{sections/v2/01-related-work}
+\input{sections/v2/02-system-model}
+\input{sections/v2/03-private-accounting}
+\input{sections/v2/06-audit-containment}
+\input{sections/v2/07-security-analysis}
+\input{sections/v2/09-evaluation}
+\input{sections/v2/08-scope-limitations}
+\input{sections/v2/10-conclusion}
+\begingroup
+\referencefont
+\small
+\raggedright
+\bibliographystyle{unsrt}
+\bibliography{references}
+\endgroup
+\clearpage
+\appendix
+\renewcommand{\thesection}{\Alph{section}}
+\renewcommand{\thesubsection}{\Alph{section}.\arabic{subsection}}
+\setcounter{equation}{0}
+\renewcommand{\theequation}{A.\arabic{equation}}
+\input{sections/v2/11-protocol-details}
+\input{sections/v2/12-security-details}
+\end{document}

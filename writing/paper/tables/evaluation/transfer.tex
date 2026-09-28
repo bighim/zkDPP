@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering\small
+\caption{Delivery and recall paths}
+\label{tab:eval-transfer}
+\begin{tabularx}{\columnwidth}{@{}p{28mm}crY@{}}
+\toprule
+Path & Audit & Gas & Value \\ \midrule
+Direct baseline & Off & 2,366,228 & Observed \\
+SharedSecret direct & On & 2,724,242 & Observed \\
+Transfer $\to$ Proceed & On & 5,361,496 & Row sum \\
+Transfer $\to$ Recall & On & 5,362,498 & Reported; sum matches \\
+\bottomrule
+\end{tabularx}
+\par\smallskip\begin{minipage}{\columnwidth}\footnotesize The Proceed path is computed from two event costs, not timed as one continuous delivery run.\end{minipage}
+\end{table}

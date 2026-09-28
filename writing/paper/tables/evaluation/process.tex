@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering\small
+\caption{Process cost by input and output count}
+\label{tab:eval-process}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lrrrr@{}}
+\toprule
+Sweep & $M$ & $N$ & Constraints & Gas \\ \midrule
+Inputs & 2 & 1 & 55,402 & 1,887,935 \\
+Inputs & 3 & 1 & 72,116 & 1,920,611 \\
+Inputs & 4 & 1 & 88,832 & 2,009,039 \\
+Outputs & 2 & 1 & 55,402 & 1,887,935 \\
+Outputs & 2 & 2 & 69,172 & 2,800,596 \\
+Outputs & 2 & 3 & 82,944 & 3,763,779 \\
+\bottomrule
+\end{tabular*}
+\par\smallskip\begin{minipage}{\columnwidth}\footnotesize Input sum $(320,30,231)$ and output sum $(300,30,261)$ are fixed. The $2\to1$ baseline differs by 21,318 gas from Table~\ref{tab:eval-events}; the cause is unresolved.\end{minipage}
+\end{table}

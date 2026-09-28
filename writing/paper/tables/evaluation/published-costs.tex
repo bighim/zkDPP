@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering\small
+\caption{Published and measured transaction gas}
+\label{tab:eval-published}
+\begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{24mm}rY@{}}
+\toprule
+System or path & Gas & Scope \\ \midrule
+Azeroth zkTransfer~\cite{jeong-azeroth-2023} & 1,555,957 & Published; change in ENA \\
+Direct baseline & 2,366,228 & No audit; change Note \\
+SharedSecret direct & 2,724,242 & Audit; shared spend identifier \\
+zkDPP Transfer & 3,577,414 & Audit; Voucher and change Note \\
+zkDPP Transfer $\to$ Proceed & 5,361,496 & Normal receipt; two-event sum \\
+\bottomrule
+\end{tabularx}
+\par\smallskip\begin{minipage}{\columnwidth}\footnotesize Azeroth: Groth16, MiMC7, depth 32. Remaining rows: this evaluation. Different settings and functionality preclude an efficiency ranking.\end{minipage}
+\end{table}

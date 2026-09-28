@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering\small
+\caption{Matched audit-off and audit-on costs}
+\label{tab:eval-audit}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lrrrrrr@{}}
+\toprule
+Event & $C_{\rm off}$ & $C_{\rm on}$ & $\Delta C$ & $G_{\rm off}$ & $G_{\rm on}$ & $\Delta G$ \\ \midrule
+Entry & 5,980 & 18,115 & 12,135 & 2,059,123 & 2,258,715 & 199,592 \\
+Transfer & 35,645 & 49,883 & 14,238 & 3,221,268 & 3,577,414 & 356,146 \\
+Proceed & 23,123 & 35,858 & 12,735 & 1,519,228 & 1,784,082 & 264,854 \\
+Recall & 23,252 & 35,987 & 12,735 & 1,520,722 & 1,785,084 & 264,362 \\
+Merge & 38,208 & 51,543 & 13,335 & 1,599,289 & 1,888,301 & 289,012 \\
+Split & 34,671 & 48,608 & 13,937 & 2,373,759 & 2,730,046 & 356,287 \\
+Process & 42,067 & 55,402 & 13,335 & 1,557,348 & 1,866,617 & 309,269 \\
+Exit & 16,407 & 27,940 & 11,533 & 403,572 & 534,277 & 130,705 \\
+Issue & 24,424 & 35,957 & 11,533 & 438,706 & 678,565 & 239,859 \\
+\bottomrule
+\end{tabular*}
+\par\smallskip\begin{minipage}{\textwidth}\footnotesize $C$: constraints; $G$: gas. Inputs, state, permissions and tree conditions are matched. Differences are on minus off.\end{minipage}
+\end{table*}

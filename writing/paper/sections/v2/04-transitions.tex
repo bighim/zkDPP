@@ -1,0 +1,182 @@
+% Event rules; encoding and setup details are in Appendix A.
+공통 검증에 더할 회계 규칙은 거래 종류와 정책으로 정한다.
+일반 일곱 거래는 고정 검증기를, 가공과 발급은 등록된 정책의
+검증기를 사용한다. 가공은 해당 적용 범위의 사용 권한도 필요하다.
+각 경로는 최종 영지식증명 하나를 제출한다.
+\begin{table}[t]
+\centering\small
+\caption{Verification and authorization routes}
+\label{tab:policy}
+\begin{tabularx}{\columnwidth}{@{}lYY@{}}
+\toprule
+Events & Verifier & Policy and scope \\
+\midrule
+Ordinary seven & Fixed per event & No registry or scope grant \\
+Process & Registered policy & Policy and scope grant \\
+Issue & Registered policy & Policy only \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+원장은 증명과 함께 입력의 등록·소유권·현재 미소비·활성 상태,
+중복 입력, 출력의 신규성, 해당 정책·권한·기한을 검사한다.
+통과하면 입력 소비, 출력 생성과 감사 기록을 한 트랜잭션에서
+갱신하고, 하나라도 실패하면 모두 취소한다.
+정확한 공개 입력과 설정·수락 절차는 부록~\ref{app:acceptance}에 둔다.
+
+Table~\ref{tab:events}는 아홉 거래의 입출력을 보여 준다.
+$N,V,C$는 각각 회계 증표·이전 증표·Claim이며,
+$N_C$는 보내고 남은 회계 증표다. 아래 계산식은 각 거래의
+참조 회계 규칙이다. 다른 등록 정책의 결과에는 그 정책이
+실제로 검사한 조건만 적용된다.
+\begin{table}[t]
+\centering\small
+\caption{Ordered event inputs and outputs}
+\label{tab:events}
+\begin{tabularx}{\columnwidth}{@{}lYrr@{}}
+\toprule
+Event & Transition & Parents & Future IDs \\
+\midrule
+Entry & $\varnothing\to N$ & 0 & 1 \\
+Transfer & $N\to(V,N_C)$ & 1 & 2 \\
+Proceed & $V\to N_R$ & 1 & 1 \\
+Recall & $V\to N_S$ & 1 & 1 \\
+Merge & $(N_1,N_2)\to N$ & 2 & 1 \\
+Split & $N\to(N_1,N_2)$ & 1 & 2 \\
+Process & $N^m\to N^n$ & $m$ & $n$ \\
+Exit & $N\to\varnothing$ & 1 & 0 \\
+Issue & $N\to C$ & 1 & 0 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{등록과 이전}
+
+초기 등록(Entry)은 외부에서 인정한 근거를 처음 원장에 들여온다.
+입력 없이 일반용 회계 증표를 만들며 $q>0$, $0\leq a\leq q$,
+$e=e_0\geq0$을 요구한다. 생성자와 최초 소유자는 같고,
+신뢰된 등록 승인자의 승인이 필요하다. 초기 탄소를 생략했을 때의
+값 처리 등 세부 입력 규칙은 부록~\ref{app:acceptance}에 둔다.
+
+이전(Transfer)은 일반용 회계 증표를 소비하여,
+보내는 몫의 이전 증표와 남기는 몫의 회계 증표를 만든다.
+두 출력은 입력 문서와 역할을 유지한다.
+송신자는 입력 소유자이고 수신자는 이전 증표에 고정된다.
+아래첨자 $\mathrm{in},T,C$는 입력·보내는 몫·남기는 몫이다.
+\begin{align}
+ q_{\mathrm{in}}&=q_T+q_C,\quad q_T>0,\quad q_C\geq0,\nonumber\\
+ a_C&=\left\lfloor\frac{a_{\mathrm{in}}q_C}{q_{\mathrm{in}}}\right\rfloor,
+ \quad a_T=a_{\mathrm{in}}-a_C,\nonumber\\
+ e_C&=\left\lfloor\frac{e_{\mathrm{in}}q_C}{q_{\mathrm{in}}}\right\rfloor,\nonumber\\
+ e_T&=e_{\mathrm{in}}-e_C+\delta_T
+ \label{eq:transfer}
+\end{align}
+남기는 몫은 질량에 비례해 정수로 배분하고,
+나머지 크레딧·탄소는 보내는 몫에 넣는다.
+$\delta_T\geq0$는 운송 탄소 증분으로 보내는 몫에 더한다.
+전량 이전에서도 $q_C=a_C=e_C=0$인 잔여 증표를 만든다.
+
+이전 증표는 수신자의 인수 또는 송신자의 회수로 해결된다.
+각자는 자기 소유권 비밀을 증명하고 같은 $rvnf$를 소비하여,
+문서·역할·회계 값을 유지한 자기 회계 증표를 받는다.
+따라서 먼저 수락된 한 경로만 성공한다.
+
+이 구성에서 회수는 기한이 지난 뒤가 아니라 \emph{기한까지} 허용한다.
+기한 $D$는 이전 증표와 같은 공개값이며, 이전 시에는 현재보다
+미래여야 한다. 회수 거래는 실제 실행 시
+\begin{equation}
+ \mathsf{CurrentEpoch}()\leq D
+ \label{eq:recall}
+\end{equation}
+를 만족해야 한다. 에포크는 블록 높이로 정한 시간 구간이다.
+증명을 만든 시각은 기한 판정에 쓰지 않는다.
+인수에는 기한 제한이 없으며, 기한 이후 미해결 이전은 인수로만 해결한다.
+두 경로 모두 현재 미소비·활성 검사를 거친다.
+
+\subsection{생산 회계 규칙}
+
+병합(Merge)은 소유자와 문서 해시가 같은 두 일반용 증표를 합친다.
+출력의 소유자·문서·역할은 유지하고 회계 값은 더한다.
+\begin{equation}
+ (q,a,e)_{\mathrm{out}}=(q_1+q_2,a_1+a_2,e_1+e_2)
+ \label{eq:merge}
+\end{equation}
+같은 입력을 두 번 넣는 것은 공통 중복 검사에서 거부한다.
+
+분할(Split)은 질량이 양수인 일반용 증표를 둘로 나눈다.
+두 출력은 입력의 소유자·문서·역할을 유지한다.
+$q_{\mathrm{in}}=q_1+q_2$일 때 배분은 다음과 같다.
+\begin{align}
+ a_2&=\left\lfloor\frac{a_{\mathrm{in}}q_2}{q_{\mathrm{in}}}\right\rfloor,
+ &a_1&=a_{\mathrm{in}}-a_2,\nonumber\\
+ e_2&=\left\lfloor\frac{e_{\mathrm{in}}q_2}{q_{\mathrm{in}}}\right\rfloor,
+ &e_1&=e_{\mathrm{in}}-e_2
+ \label{eq:split}
+\end{align}
+$\lfloor\cdot\rfloor$는 소수 부분을 버린 정수다.
+두 번째 몫을 먼저 계산하고 첫 번째 몫에 나머지를 주므로
+반올림 잔여량이 사라지지 않는다.
+질량 0 출력은 크레딧과 탄소도 0이어야 한다.
+
+가공(Process)은 등록 정책에 따라 $m$개 입력을 $n$개 출력으로 바꾼다.
+서로 다른 일반용 입력과 모든 출력은 공정 수행자 소유이며,
+$m,n\geq1$과 지원 범위를 배포에서 정한다.
+정책은 출력 역할과 순서를 미리 고정하고 하나 이상을 일반용으로
+지정한다. 증명자가 수치를 본 뒤 역할을 바꿀 수는 없다.
+
+입력 질량은 일반용 출력, 폐기물 출력과 손실로 나뉜다.
+$I_E,I_W$는 각각 일반용·폐기물 출력의 위치 집합이고,
+$Q_{\mathrm{in}},Q_E,Q_W$는 입력·일반용 출력·폐기물 출력의 질량 합이다.
+\begin{equation}
+ \begin{gathered}
+ Q_{\mathrm{in}}=Q_E+Q_W+q_{\mathrm{loss}},\\
+ q_{\mathrm{loss}}\geq0,\qquad Q_E>0
+ \end{gathered}
+ \label{eq:mass}
+\end{equation}
+재활용 크레딧은 일반용 출력에만 배분한다.
+\begin{equation}
+ \sum_i a_i^{\mathrm{in}}=\sum_{j\in I_E}a_j^{\mathrm{out}}
+ \label{eq:credit}
+\end{equation}
+각 출력의 $0\leq a_j\leq q_j$ 범위 안에서 배분하며 폐기물의 크레딧은 0이다.
+
+탄소는 입력의 합에 공정 증분 $\delta_P\geq0$을 더하고,
+일반용 출력의 질량에 비례해 나눈다. 정수 배분의 잔여량은
+정해진 첫 일반용 출력 $j_0$에 준다.
+\begin{align}
+ E&=\sum_i e_i^{\mathrm{in}}+\delta_P,\quad\delta_P\geq0,\nonumber\\
+ e_j^{\mathrm{out}}&=\left\lfloor\frac{Eq_j^{\mathrm{out}}}{Q_E}\right\rfloor
+     \quad(j\in I_E,\ j\ne j_0),\nonumber\\
+ e_{j_0}^{\mathrm{out}}&=E-\sum_{j\in I_E\setminus\{j_0\}}e_j^{\mathrm{out}}
+ \label{eq:process-carbon}
+\end{align}
+폐기물의 탄소는 0이며, 질량 0 출력도 지정 역할과 잔여량
+수신 순서를 바꾸지 않는다. 이는 탄소를 일반용 출력에 귀속시키는
+회계 규칙으로, 폐기물의 실제 배출량이 0이라는 뜻은 아니다.
+이 배분의 한계는 \ref{sec:limits}절에서 살펴본다.
+
+출력 문서는 입력과 달라질 수 있다. 질량 손실과 탄소 증분은
+외부에서 주는 값이며, 이 식만으로 재료의 호환성이나 실제 공정
+수행을 확인하지는 않는다. 정수 범위와 나눗셈의 검사는
+부록~\ref{app:formats}에 명시한다.
+
+\subsection{DPP 발급·검증}
+\label{sec:dpp}
+
+근거의 사용을 마치는 방법은 종료와 발급이다.
+종료(Exit)는 일반용 또는 폐기물 증표를 소비하고 출력은 만들지 않는다.
+실제 입력은 감사 기록에 남기며, 폐기물의 유일한 소비 경로다.
+
+발급(Issue)은 질량이 양수인 일반용 증표를 소비하여 Claim을 만든다.
+정책이 재활용 크레딧 비율의 하한을 $\tau_R=u_R/v_R$,
+탄소 집약도의 상한을 $\tau_C=u_C/v_C$로 정하면
+\begin{equation}
+ v_Ra\geq u_Rq,\qquad v_Ce\leq u_Cq
+ \label{eq:issue}
+\end{equation}
+를 검사한다. 분모는 양수이고 단위·배율과 정수 범위가 맞아야 한다.
+이 검사는 양변에 분모를 곱해 나눗셈 없이 수행한다.
+문서 해시 $d$·정책 $p$·공개 논스 $c$는 식~\eqref{eq:claim}에 연결된다.
+입력 소비와 Claim·생성·감사 기록은 함께 갱신되므로,
+같은 증표를 다시 발급하거나 발급 뒤 종료할 수 없다.
