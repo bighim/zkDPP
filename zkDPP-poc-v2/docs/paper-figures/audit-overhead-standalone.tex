@@ -1,0 +1,20 @@
+\documentclass[border=6pt]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+\begin{document}
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1,horizontal sep=1.8cm},width=7.8cm,height=6.0cm,grid=major,major grid style={gray!18},axis line style={gray!60},tick label style={font=\small},label style={font=\small},title style={font=\small\bfseries},legend style={font=\footnotesize,draw=none},scaled ticks=false]
+\nextgroupplot[ybar,single ybar legend,ymin=0,ylabel={Constraints (thousands)},title={(a) Circuit cost},symbolic x coords={Entry,Transfer,Proceed,Recall,Merge,Split,Process,Exit,Issue},xtick=data,x tick label style={rotate=45,anchor=east,font=\footnotesize},enlarge x limits=0.08,legend style={at={(0.5,-0.40)},anchor=north,legend columns=2}]
+\addplot+[ybar,bar width=4pt,bar shift=-2.6pt,draw=blue!65!black,fill=blue!65!black!65,mark=none] coordinates {(Entry,5.98) (Transfer,35.645) (Proceed,23.123) (Recall,23.252) (Merge,38.208) (Split,34.671) (Process,42.067) (Exit,16.407) (Issue,24.424)};
+\addplot+[ybar,bar width=4pt,bar shift=2.6pt,draw=orange!85!black,fill=orange!85!black!65,mark=none] coordinates {(Entry,18.115) (Transfer,49.883) (Proceed,35.858) (Recall,35.987) (Merge,51.543) (Split,48.608) (Process,55.402) (Exit,27.94) (Issue,35.957)};
+\legend{Audit off,Audit on}
+
+\nextgroupplot[ybar,single ybar legend,ymin=0,ylabel={Gas (millions)},title={(b) Transaction cost},symbolic x coords={Entry,Transfer,Proceed,Recall,Merge,Split,Process,Exit,Issue},xtick=data,x tick label style={rotate=45,anchor=east,font=\footnotesize},enlarge x limits=0.08,legend style={at={(0.5,-0.40)},anchor=north,legend columns=2}]
+\addplot+[ybar,bar width=4pt,bar shift=-2.6pt,draw=blue!65!black,fill=blue!65!black!65,mark=none] coordinates {(Entry,2.059123) (Transfer,3.221268) (Proceed,1.519228) (Recall,1.520722) (Merge,1.599289) (Split,2.373759) (Process,1.557348) (Exit,0.403572) (Issue,0.438706)};
+\addplot+[ybar,bar width=4pt,bar shift=2.6pt,draw=orange!85!black,fill=orange!85!black!65,mark=none] coordinates {(Entry,2.258715) (Transfer,3.577414) (Proceed,1.784082) (Recall,1.785084) (Merge,1.888301) (Split,2.730046) (Process,1.866617) (Exit,0.534277) (Issue,0.678565)};
+\legend{Audit off,Audit on}
+
+\end{groupplot}
+\end{tikzpicture}
+\end{document}

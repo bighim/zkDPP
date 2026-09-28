@@ -1,0 +1,53 @@
+\par\noindent\begin{minipage}{\linewidth}
+    \centering\resizebox{\linewidth}{!}{\begin{tikzpicture}
+            \begin{groupplot}[group style={group size=2 by 1,horizontal sep=1.8cm},width=7.8cm,height=6.0cm,grid=major,major grid style={gray!18},axis line style={gray!60},tick label style={font=\small},label style={font=\small},title style={font=\small\bfseries},legend style={font=\footnotesize,draw=none},scaled ticks=false]
+                \nextgroupplot[ybar,single ybar legend,ymin=0,ylabel={Constraints (thousands)},title={(a) Circuit cost},symbolic x coords={Entry,Transfer,Proceed,Recall,Merge,Split,Process,Exit,Issue},xtick=data,x tick label style={rotate=45,anchor=east,font=\footnotesize},enlarge x limits=0.08,legend style={at={(0.5,-0.40)},anchor=north,legend columns=2}]
+                \addplot+[ybar,bar width=4pt,bar shift=-2.6pt,draw=blue!65!black,fill=blue!65!black!65,mark=none] coordinates {(Entry,5.98) (Transfer,35.645) (Proceed,23.123) (Recall,23.252) (Merge,38.208) (Split,34.671) (Process,42.067) (Exit,16.407) (Issue,24.424)};
+                \addplot+[ybar,bar width=4pt,bar shift=2.6pt,draw=orange!85!black,fill=orange!85!black!65,mark=none] coordinates {(Entry,18.115) (Transfer,49.883) (Proceed,35.858) (Recall,35.987) (Merge,51.543) (Split,48.608) (Process,55.402) (Exit,27.94) (Issue,35.957)};
+                \legend{Audit off,Audit on}
+
+                \nextgroupplot[ybar,single ybar legend,ymin=0,ylabel={Gas (millions)},title={(b) Transaction cost},symbolic x coords={Entry,Transfer,Proceed,Recall,Merge,Split,Process,Exit,Issue},xtick=data,x tick label style={rotate=45,anchor=east,font=\footnotesize},enlarge x limits=0.08,legend style={at={(0.5,-0.40)},anchor=north,legend columns=2}]
+                \addplot+[ybar,bar width=4pt,bar shift=-2.6pt,draw=blue!65!black,fill=blue!65!black!65,mark=none] coordinates {(Entry,2.059123) (Transfer,3.221268) (Proceed,1.519228) (Recall,1.520722) (Merge,1.599289) (Split,2.373759) (Process,1.557348) (Exit,0.403572) (Issue,0.438706)};
+                \addplot+[ybar,bar width=4pt,bar shift=2.6pt,draw=orange!85!black,fill=orange!85!black!65,mark=none] coordinates {(Entry,2.258715) (Transfer,3.577414) (Proceed,1.784082) (Recall,1.785084) (Merge,1.888301) (Split,2.730046) (Process,1.866617) (Exit,0.534277) (Issue,0.678565)};
+                \legend{Audit off,Audit on}
+
+            \end{groupplot}
+        \end{tikzpicture}}
+    \par\smallskip{\small 그림 1. 동일 Event의 Audit 유무에 따른 비용 비교.}\par\medskip
+    \par\medskip\noindent
+    \begin{minipage}[t]{.49\linewidth}\centering
+        {\small\setlength{\tabcolsep}{7pt}\renewcommand{\arraystretch}{1.12}
+            \textbf{(a) Constraints}\par\smallskip
+            \begin{tabular}{@{}lrrr@{}}\toprule
+                \textbf{Event} & \textbf{Audit X} & \textbf{Audit O} & \textbf{증가량}    \\
+                \midrule
+                Entry          & 5,980            & 18,115           & \textbf{12,135} \\
+                Transfer       & 35,645           & 49,883           & \textbf{14,238} \\
+                Proceed        & 23,123           & 35,858           & \textbf{12,735} \\
+                Recall         & 23,252           & 35,987           & \textbf{12,735} \\
+                Merge          & 38,208           & 51,543           & \textbf{13,335} \\
+                Split          & 34,671           & 48,608           & \textbf{13,937} \\
+                Process        & 42,067           & 55,402           & \textbf{13,335} \\
+                Exit           & 16,407           & 27,940           & \textbf{11,533} \\
+                Issue          & 24,424           & 35,957           & \textbf{11,533} \\
+                \bottomrule\end{tabular}}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{.49\linewidth}\centering
+        {\small\setlength{\tabcolsep}{7pt}\renewcommand{\arraystretch}{1.12}
+            \textbf{(b) Gas}\par\smallskip
+            \begin{tabular}{@{}lrrr@{}}\toprule
+                \textbf{Event} & \textbf{Audit X} & \textbf{Audit O} & \textbf{증가량}     \\
+                \midrule
+                Entry          & 2,059,123        & 2,258,715        & \textbf{199,592} \\
+                Transfer       & 3,221,268        & 3,577,414        & \textbf{356,146} \\
+                Proceed        & 1,519,228        & 1,784,082        & \textbf{264,854} \\
+                Recall         & 1,520,722        & 1,785,084        & \textbf{264,362} \\
+                Merge          & 1,599,289        & 1,888,301        & \textbf{289,012} \\
+                Split          & 2,373,759        & 2,730,046        & \textbf{356,287} \\
+                Process        & 1,557,348        & 1,866,617        & \textbf{309,269} \\
+                Exit           & 403,572          & 534,277          & \textbf{130,705} \\
+                Issue          & 438,706          & 678,565          & \textbf{239,859} \\
+                \bottomrule\end{tabular}}
+    \end{minipage}
+    \par\medskip
+\end{minipage}\par\medskip

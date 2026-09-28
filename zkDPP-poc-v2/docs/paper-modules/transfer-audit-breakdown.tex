@@ -1,0 +1,32 @@
+\par\medskip\noindent\begin{minipage}{\linewidth}
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering\small
+        \textbf{Transfer의 Audit 추가 Constraints}\par\smallskip
+        \begin{tabular}{@{}lr@{}}\toprule
+            \textbf{비용 요인}            & \textbf{Constraints} \\
+            \midrule
+            R·Z scalar multiplication & 8,611                \\
+            키·mask 계산                 & 2,399                \\
+            난수·암호문 등 검증               & 1,723                \\
+            출력 nf·rvnf 계산             & 1,505                \\
+            \midrule
+            \textbf{합계}               & \textbf{14,238}      \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering\small
+        \textbf{Transfer의 Audit 추가 Gas}\par\smallskip
+        \begin{tabular}{@{}lr@{}}\toprule
+            \textbf{비용 요인}          & \textbf{Gas}     \\
+            \midrule
+            % AuditRecord 본문 및 cm·rv의 AuditRecord ID 기록을 합산.
+            AuditRecord SSTORE      & 324,100          \\
+            Proof 검증 호출 증가분         & 4,585            \\
+            SLOAD·calldata 등 기타 증가분 & 27,461           \\
+            \midrule
+            \textbf{합계}             & \textbf{356,146} \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+\end{minipage}\par\medskip

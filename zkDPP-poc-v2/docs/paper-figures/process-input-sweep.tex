@@ -1,0 +1,10 @@
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1,horizontal sep=1.8cm},width=7.8cm,height=6.0cm,grid=major,major grid style={gray!18},axis line style={gray!60},tick label style={font=\small},label style={font=\small},title style={font=\small\bfseries},legend style={font=\footnotesize,draw=none},scaled ticks=false]
+\nextgroupplot[xlabel={Input commitments ($M$)},ylabel={Constraints (thousands)},title={(a) Constraints},xtick={2,3,4},ymin=0,ymax=100]
+\addplot+[color=blue!65!black,mark=*,mark size=2.8pt,mark options={solid,fill=white,draw=blue!65!black},thick] coordinates {(2,55.402) (3,72.116) (4,88.832)};
+
+\nextgroupplot[xlabel={Input commitments ($M$)},ylabel={Gas (millions)},title={(b) Gas},xtick={2,3,4},ymin=0,ymax=4.2]
+\addplot+[color=blue!65!black,mark=*,mark size=2.8pt,mark options={solid,fill=white,draw=blue!65!black},thick] coordinates {(2,1.887935) (3,1.920611) (4,2.009039)};
+
+\end{groupplot}
+\end{tikzpicture}

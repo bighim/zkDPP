@@ -1,0 +1,40 @@
+\par\noindent\begin{minipage}{\linewidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{groupplot}[group style={group size=2 by 1,horizontal sep=2.5cm},width=6.7cm,height=6.3cm,grid=major,major grid style={gray!18},axis line style={gray!60},tick label style={font=\small},label style={font=\small},title style={font=\bfseries},scaled ticks=false,xmode=log,ymode=log,xmin=7,xmax=1400,ymin=0.04,ymax=100,xtick={10,100,1000},ytick={0.1,1,10,100},ylabel={Time (s)},legend style={at={(0.5,-0.27)},anchor=north,legend columns=2,font=\small,draw=none}]
+            \nextgroupplot[title={(a) Tracing},xlabel={Unique visited AuditRecords}]
+            \addplot+[color=blue!65!black,mark=*,mark size=2.8pt,mark options={solid,fill=white},thick] coordinates {(10,0.066552708) (100,0.680694458) (1000,9.760276625)};
+            \addplot+[color=orange!85!black,mark=square*,mark size=2pt,mark options={solid,fill=white},thick] coordinates {(10,0.068203167) (100,0.55413275) (1000,8.102012541)};
+            \legend{Forward,Backward}
+            \nextgroupplot[title={(b) Freeze},xlabel={Freeze targets}]
+            \addplot+[color=teal!70!black,mark=triangle*,mark size=2.8pt,mark options={solid,fill=white},thick] coordinates {(10,0.219802208) (100,2.448003417) (1000,60.539842)};
+        \end{groupplot}
+    \end{tikzpicture}
+    \par\medskip{\small 그림 2. 같은 공급망 시나리오의 Tracing·Freeze 시간.}\par\medskip
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering\small\setlength{\tabcolsep}{6pt}
+        \textbf{Tracing}\par\smallskip
+        \begin{tabular}{@{}rrr@{}}\toprule
+            \shortstack{\textbf{Visited}\\\textbf{AuditRecords}} & \shortstack{\textbf{Forward}\\\textbf{(s)}} & \shortstack{\textbf{Backward}\\\textbf{(s)}} \\
+            \midrule
+            10                                                   & 0.067                                       & 0.068                                        \\
+            100                                                  & 0.681                                       & 0.554                                        \\
+            1,000                                                & 9.760                                       & 8.102                                        \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering\small\setlength{\tabcolsep}{7pt}
+        \textbf{Freeze}\par\smallskip
+        \begin{tabular}{@{}rr@{}}\toprule
+            \textbf{Freeze targets} & \textbf{Time (s)}               \\
+            \midrule
+            10                      & 0.220                           \\
+            100                     & 2.448                           \\
+            1,000                   & 60.540                          \\
+            \midrule
+            \multicolumn{2}{@{}c@{}}{\textbf{Gas per target: 49,434}} \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+\end{minipage}\par\medskip

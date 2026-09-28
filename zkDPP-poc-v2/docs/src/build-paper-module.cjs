@@ -1,0 +1,23 @@
+// Render one editable Figure module without regenerating the report or its data.
+const fs = require('node:fs');
+const path = require('node:path');
+const {execFileSync} = require('node:child_process');
+const docs = path.resolve(__dirname, '..');
+const name = process.argv[2];
+if (!name || !/^[a-z0-9-]+$/.test(name)) throw new Error('Usage: node src/build-paper-module.cjs MODULE_NAME');
+const modulePath = path.join(docs, 'paper-modules', name + '.tex');
+if (!fs.existsSync(modulePath)) throw new Error('Unknown module: ' + name);
+require('./format-paper-tex.cjs').formatFiles([modulePath]);
+const main = fs.readFileSync(path.join(docs, 'paper-evaluation-results.tex'), 'utf8');
+const boundary = main.indexOf('\\begin{document}');
+if (boundary < 0) throw new Error('Missing document preamble');
+const build = fs.mkdtempSync(path.join(require('node:os').tmpdir(), 'zkdpp-figure-'));
+const source = main.slice(0, boundary) + '\\begin{document}\n\\pagestyle{empty}\n\\input{paper-modules/' + name + '.tex}\n\\end{document}\n';
+const tex = path.join(build, name + '.tex');
+fs.writeFileSync(tex, source);
+execFileSync('xelatex', ['-interaction=batchmode', '-halt-on-error', '-output-directory=' + build, tex], {cwd: docs, stdio: 'inherit'});
+const exportsDir = path.join(docs, 'paper-modules', 'exports');
+fs.mkdirSync(exportsDir, {recursive: true});
+const result = path.join(exportsDir, name + '.pdf');
+fs.copyFileSync(path.join(build, name + '.pdf'), result);
+console.log(result);

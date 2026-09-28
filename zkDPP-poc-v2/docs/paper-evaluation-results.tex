@@ -1,0 +1,201 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{kotex}
+\usepackage[margin=18mm]{geometry}
+\usepackage{amsmath,booktabs,array,graphicx,needspace}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlength{\emergencystretch}{1em}
+\renewcommand{\arraystretch}{1.18}
+\begin{document}
+{\LARGE\bfseries zkDPP 논문용 실험 결과 초안}\par\medskip
+\section*{실험 환경}
+\input{paper-modules/environment.tex}
+\needspace{8\baselineskip}\section*{1. 공급망 Event별 실행 비용}
+\textbf{실험을 진행한 이유}\newline
+zkDPP의 Event는 공급망 동작에 더해 Proof를 검증하고 AuditRecord도 기록합니다.\newline
+이 작업들을 모두 수행하면, Event 하나를 실행하는 데 비용과 시간이 너무 많이 드는 것은 아닐까요?
+
+\textbf{실험 목적}\newline
+9개 Event의 Constraints, 실제 transaction Gas, E2E를 측정합니다.\newline
+
+\textbf{표·그래프 구성}\newline
+Event 종류는 연속적인 증가 변수가 아니므로 정확한 값을 비교할 수 있는 표를 사용합니다.\newline
+
+\textbf{고정 조건}\newline
+모든 Supply Chain Event는 AuditRecord를 기록합니다.\newline
+State는 3개이며 Process의 입출력은 2$\rightarrow$1입니다.\newline
+
+\input{paper-modules/event-costs.tex}
+\par\noindent\begin{minipage}{\linewidth}
+    \textbf{해석}\newline
+    비용의 핵심 증가 원인은 다음과 같습니다.\newline
+
+    \textbf{Constraints}: Merkle Path 검증 + Encrypted AuditRecord 검증 + State 관계 검증 + cm/nf 계산\newline
+    \textbf{Gas}: Merkle Tree Update + Proof 검증 +  AuditRecord 저장 비용\newline
+
+    Merkle Path 1회 검증, Merkle Tree 2회 Update를 진행하는 Transfer를 대표적인 Event로 선택해, Constraints와 Gas 소비를 분석합니다.\newline
+
+    Audit과 관련된 추가 비용은 2.1절에서 추가로 분석했습니다.\newline
+
+    \input{paper-modules/merkle-counts.tex}
+    \noindent\begin{minipage}[t]{0.48\linewidth}
+        \vspace{0pt}\centering\small
+        \input{paper-modules/transfer-constraints-breakdown.tex}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.48\linewidth}
+        \vspace{0pt}\centering\small
+        \input{paper-modules/transfer-gas-breakdown.tex}
+    \end{minipage}
+\end{minipage}\par
+
+\clearpage
+\needspace{8\baselineskip}\section*{2. Audit 추가 비용과 Auditor 수행 비용}
+
+\needspace{6\baselineskip}\subsection*{2.1 Event별 Audit 추가 비용}
+\textbf{실험을 진행한 이유}\newline
+zkDPP의 Event는 Auditing에 필요한 정보를 암호화해 기록합니다.\newline
+Audit이 없는 같은 Event보다 Constraints와 Gas가 크게 증가하는 것은 아닐까요?
+
+\textbf{표·그래프 구성}\newline
+입력·State·권한·Tree 조건을 맞춘 Audit X/O 막대를 Event별로 나란히 배치합니다.\newline
+Constraints와 Gas는 단위가 다르므로 그래프를 분리하고, 표에는 각각의 증가량을 표시합니다.
+
+
+\input{paper-modules/audit-overhead.tex}
+
+\textbf{해석}
+
+\textbf{Constraints 증가량은 약 1.1만--1.4만 개로, Event별로 비슷합니다.}\newline
+Encrypted AuditRecord 검증에 필요한 R·Z의 scalar multiplication 두 번이 큰 공통 비용을 만듭니다.\newline
+암호화할 Field 수와 출력 nf·rvnf 계산에 따라 나머지 증가량이 달라집니다.
+
+\textbf{Gas 증가량은 약 13만--36만이며, Traceability 정보를 기록하는 SSTORE 비용이 크게 반영됩니다.}\newline
+Contract는 Event가 만든 cm·rv·h마다 해당 Event의 AuditRecord ID를 기록합니다.\newline
+따라서 출력 cm·rv·h와 AuditRecord에 담는 암호화 값이 많아질수록 SSTORE 횟수도 증가합니다.
+
+\input{paper-modules/transfer-audit-breakdown.tex}
+
+
+\clearpage
+\needspace{6\baselineskip}\subsection*{2.2 Tracing·Freeze 비용}
+\textbf{실험을 진행한 이유}\newline
+Tracing은 연결된 AuditRecord를 조회하고 복호화해야 합니다.\newline
+공급망이 길어져 방문할 기록이 많아지면, 추적에 너무 오래 걸리는 것은 아닐까요?\newline
+Freeze도 대상마다 transaction을 실행하므로, 동결 대상이 많아지면 시간과 Gas 부담이 커지는 것은 아닐까요?
+
+\textbf{표·그래프 구성}\newline
+Tracing과 Freeze를 병렬로 배치하고, 같은 시간 단위와 로그축 범위로 비교합니다.\newline
+이 Split 시나리오에서는 방문 AuditRecord 수와 Freeze 대상 수가 각각 10·100·1,000개입니다.
+
+\textbf{측정 범위}\newline
+Tracing은 기록 조회·복호화·연결 탐색 시간입니다.\newline
+Freeze는 제출 전 상태 검사부터 개별 동결 transaction·최종 상태 확인까지입니다.\newline
+
+\input{paper-modules/tracing-freeze.tex}
+
+\clearpage
+\needspace{8\baselineskip}\section*{3. zkTransfer와 Voucher 전달 Tradeoff 비용}
+\textbf{실험을 진행한 이유}\newline
+zkTransfer는 한 번에 Receiver Note를 만들지만, Voucher 전달은 Transfer와 Proceed 두 단계가 필요합니다.\newline
+Proof와 transaction이 하나씩 늘어나면 Gas가 당연히 증가할꺼라 생각해요.\newline
+zkTransfer를 조금 변경한 SharedSecret 구조로도 Traceability는 제공할 수 있어보이는데, 왜 Voucher가 필요할까요?
+
+\textbf{SharedSecret zkTransfer란?}\newline
+기존 zkTransfer는 owner secret sk를 사용해 nf=H(cm, sk)를 계산합니다.\newline
+SharedSecret zkTransfer는 이를 shared secret `o`로 계산하도록 변경한 구조입니다.\newline
+Sender와 Receiver가 opening을 공유하므로, Sender도 Receiver Note의 nf를 계산할 수 있습니다.\newline
+Receiver Note의 nf를 계산할 수 있으면, Receiver가 Note를 소비하는 시점을 식별할 수 있는 문제가 있습니다.\newline
+이후로는 sharedSecret zkTrasnfer를 zkTransfer\textsuperscript{2}로 표기하겠습니다.
+
+\textbf{Vocher를 도입함으로써 얻는 장점}
+
+\textbf{1. Receiver 수령 전 Sender의 Recall}\newline
+Receiver가 Proceed하기 전에는 Sender가 허용된 기한 안에서 Recall할 수 있습니다.\newline
+Sender가 직접 Note를 회수할 수 있다는 점이 중요합니다.\newline
+
+\textbf{2. Sender에게는 후속 소비를 숨기고, Auditor에게는 추적을 허용}\newline
+SharedSecret zkTransfer에서는 Sender도 Receiver Note의 nf를 계산해 후속 소비를 식별할 수 있습니다.\newline
+Voucher 방식에서는 Receiver가 Voucher를 소비한 시점을 알지만, 실제로 Note를 소비한 시점을 알 수 없습니다.\newline
+Sender는 Voucher의 nf를 계산할 수 있으므로, Sender가 Note를 소비 할 때 Receiver의 rvnf를 AuditRecord에 등록할 수 있습니다.\newline
+Auditor는 암호화된 rvnf를 복원해 Forward Tracing을 수행할 수 있습니다.\newline
+
+\textbf{비교 조건}\newline
+\textbf{zkTransfer\textsuperscript{1}:} Audit 없는 owner secret 기반 zkTrasnfer입니다.\newline
+\textbf{zkTransfer\textsuperscript{2}:} Audit을 지원하지만 Sender도 후속 소비를 식별할 수 있는 직접 전달입니다.\newline
+\textbf{zkDPP:} Audit을 포함한 Transfer $\rightarrow$ Recall 경로의 합계입니다.
+
+표는 세 방식의 기능과 Gas를 비교합니다.\newline
+Recall 경로는 정상 수령 경로와 결과가 다르며, Audit 조건도 달라 Voucher만의 순수 추가 비용은 아닙니다.
+
+\input{paper-modules/transfer-tradeoff.tex}
+
+\textbf{Azeroth의 zkTransfer와 총 Gas에서 크게 차이나는 이유}\newline
+Azeroth의 zkTrasnfer의 총 Gas는 1,555,957로 실험한 zkTransfer\textsuperscript{1}와 총 Gas가 크게 차이납니다.\newline
+Azeroth의 zkTransfer에서는 Sender의 잔여분을 암호화 계정 잔액인 ENA에 보관합니다.\newline
+zkDPP에서 사용하는 zkTransfer\textsuperscript{1}는 Sender의 잔여분을 새로운 Note로 생성하여 Note Tree에 등록하고, address를 Sender로 지정합니다.
+Balance 방식과 UTXO 방식의 차이로 인해 총 Gas 소비량에서 차이가 발생합니다.\newline
+
+\clearpage
+\needspace{8\baselineskip}\section*{4. Process 입출력 cm 수에 따른 비용}
+\textbf{실험을 진행한 이유}\newline
+공정에 따라 여러 원료를 투입하거나 제품·부산물 생산이 많은 경우가 있습니다. Event별 실행 비용에서 Process는 2-to-1으로 작성되어 있습니다.\newline
+입력·출력 cm 수가 늘어나면, Process의 비용이 크게 증가하는 것은 아닐까요?
+
+\textbf{실험 목적·범위}\newline
+공정의 입력·출력 개수에 따른 Constraints와 Gas의 변화 경향을 확인합니다.\newline
+모든 산업별 공정을 구현하는 대신, 기존 POC의 Sustainability Claim을 증명하기 위한 State로 범위를 제한해 경향성을 파악합니다.
+
+\textbf{통제 조건}\newline
+입출력 개수의 영향을 분리하기 위해 입력 State의 합(320,30,231)과 출력 State의 합(300,30,261)을 고정합니다.\newline
+출력 N=1에서 입력 M을 늘리고 입력 M=2에서 출력 N을 늘립니다.
+
+\textbf{표·그래프 구성}\newline
+입력 증가와 출력 증가의 영향을 구분하기 위해 두 묶음의 그래프를 사용합니다.\newline
+각 그래프의 왼쪽 축은 Constraints, 오른쪽 축은 Gas이며 색으로 구분합니다.\newline
+두 그래프의 축 범위는 같게 유지하고, 아래 표에 정확한 수치를 제공합니다.
+
+
+\noindent\begin{minipage}[t]{0.48\linewidth}
+    \vspace{0pt}
+    \input{paper-modules/process-input-sweep.tex}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\linewidth}
+    \vspace{0pt}
+    \input{paper-modules/process-output-sweep.tex}
+\end{minipage}
+
+
+\clearpage
+\needspace{8\baselineskip}\section*{5. k-of-n Master Key 복구 비용}
+\textbf{실험을 진행한 이유}\newline
+Auditor는 Committee로부터 전달받은 k개의 share로 Master Key를 복구합니다.\newline
+k값에 따라서 복구 시간이 얼마나 늘어나나요?
+
+\textbf{측정 범위}\newline
+Committee의 공개키와 위원별 public share는 사전에 검증해 보관합니다.\newline
+받은 k개 share의 검증, Lagrange 보간, 복구한 키의 공개키 일치 확인을 측정합니다.\newline
+키 생성·DKG·통신·승인 대기는 제외합니다.
+
+\textbf{비교 조건}\newline
+Committee n=10을 고정하고 share k를 2·3·5·7·10개로 늘립니다.\newline
+각 case는 warm-up 후 공식 1회 측정하며, 내부 1,000회 복구의 평균 시간을 표시합니다.
+
+\input{paper-modules/key-recovery.tex}
+
+\textbf{해석}\newline
+k가 늘면 검증할 share 수와 Lagrange 보간의 연산량이 증가합니다.\newline
+복구식은 선택한 k개 share와 위원 ID를 사용하며, 전체 위원 수 n은 직접 포함하지 않습니다.
+
+\[
+    SK=\sum_{i\in Q}\lambda_i s_i \pmod q,\qquad
+    \lambda_i=\prod_{\substack{j\in Q\\j\ne i}}\frac{-x_j}{x_i-x_j}\pmod q,\qquad |Q|=k.
+\]
+$Q$는 선택한 위원 집합, $s_i$는 share, $x_i$는 위원 ID이며 나눗셈은 modulo $q$의 역원 연산입니다.\newline
+$n$은 전체 위원 수와 $k\le n$ 조건을 정하지만, 고정된 $Q$의 복구 연산량을 늘리지 않습니다.
+
+\end{document}

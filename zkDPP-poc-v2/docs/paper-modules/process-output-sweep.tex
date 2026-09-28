@@ -1,0 +1,27 @@
+\par\noindent\begin{minipage}{\linewidth}
+    \centering\begin{tikzpicture}
+        \begin{axis}[width=6.6cm,height=5.8cm,xmin=0.8,xmax=3.2,xtick={1,2,3},scaled ticks=false,tick label style={font=\small},label style={font=\small},axis y line*=left,axis x line*=bottom,ymin=0,ymax=100,ytick={0,20,40,60,80,100},xlabel={Output commitments ($N$)},ylabel={Constraints (thousands)},y axis line style={blue!65!black},y tick style={blue!65!black},yticklabel style={blue!65!black},ylabel style={blue!65!black},grid=major,major grid style={gray!18},legend style={at={(0.5,-0.24)},anchor=north,legend columns=2,draw=none,font=\small}]
+            \addplot[color=blue!65!black,mark=*,mark options={fill=white},thick] coordinates {(1,55.402) (2,69.172) (3,82.944)};
+            \addlegendentry{Constraints}
+            \addlegendimage{color=orange!85!black,mark=square*,mark options={fill=white},thick}
+            \addlegendentry{Gas}
+        \end{axis}
+        \begin{axis}[width=6.6cm,height=5.8cm,xmin=0.8,xmax=3.2,xtick={1,2,3},scaled ticks=false,tick label style={font=\small},label style={font=\small},axis y line*=right,axis x line=none,ymin=0,ymax=4.2,ytick={0,1,2,3,4},ylabel={Gas (millions)},y axis line style={orange!85!black},y tick style={orange!85!black},yticklabel style={orange!85!black},ylabel style={orange!85!black}]
+            \addplot[color=orange!85!black,mark=square*,mark options={fill=white},thick] coordinates {(1,1.887935) (2,2.800596) (3,3.763779)};
+        \end{axis}
+    \end{tikzpicture}
+    \par\smallskip{\small 그림 4. 출력 수 증가 (M=2).}\par\medskip
+    \par\medskip\noindent
+    \begin{center}
+        {\small\setlength{\tabcolsep}{7pt}\renewcommand{\arraystretch}{1.12}
+            \textbf{Inputs M=2}\par\smallskip
+            \begin{tabular}{@{}lrr@{}}\toprule
+                \textbf{Output N} & \textbf{Constraints} & \textbf{Gas} \\
+                \midrule
+                1                 & 55,402               & 1,887,935    \\
+                2                 & 69,172               & 2,800,596    \\
+                3                 & 82,944               & 3,763,779    \\
+                \bottomrule\end{tabular}}
+    \end{center}
+    \par\medskip
+\end{minipage}\par\medskip

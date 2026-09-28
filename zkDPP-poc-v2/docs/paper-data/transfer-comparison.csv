@@ -1,0 +1,3 @@
+route,audit_record,gas,aggregation
+zkTransfer,no,2366228,median of direct transaction
+Transfer->Recall,yes,5362498,sum of Event medians

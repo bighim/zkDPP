@@ -1,0 +1,20 @@
+\documentclass[border=6pt]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+\begin{document}
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1,horizontal sep=1.8cm},width=7.8cm,height=6.0cm,grid=major,major grid style={gray!18},axis line style={gray!60},tick label style={font=\small},label style={font=\small},title style={font=\small\bfseries},legend style={font=\footnotesize,draw=none},scaled ticks=false]
+\nextgroupplot[ybar,single ybar legend,ymin=0,ylabel={Constraints (thousands)},title={(a) Circuit cost},symbolic x coords={2-1,2-2,3-2,3-3,4-3},xtick=data,x tick label style={rotate=45,anchor=east,font=\footnotesize},enlarge x limits=0.08,legend style={at={(0.5,-0.40)},anchor=north,legend columns=2}]
+\addplot+[ybar,bar width=4pt,bar shift=-2.6pt,draw=blue!65!black,fill=blue!65!black!65,mark=none] coordinates {(2-1,42.067) (2-2,54.635) (3-2,70.749) (3-3,83.319) (4-3,99.435)};
+\addplot+[ybar,bar width=4pt,bar shift=2.6pt,draw=orange!85!black,fill=orange!85!black!65,mark=none] coordinates {(2-1,55.402) (2-2,69.172) (3-2,85.886) (3-3,99.658) (4-3,116.374)};
+\legend{Audit off,Audit on}
+
+\nextgroupplot[ybar,single ybar legend,ymin=0,ylabel={Gas (millions)},title={(b) Transaction cost},symbolic x coords={2-1,2-2,3-2,3-3,4-3},xtick=data,x tick label style={rotate=45,anchor=east,font=\footnotesize},enlarge x limits=0.08,legend style={at={(0.5,-0.40)},anchor=north,legend columns=2}]
+\addplot+[ybar,bar width=4pt,bar shift=-2.6pt,draw=blue!65!black,fill=blue!65!black!65,mark=none] coordinates {(2-1,1.578678) (2-2,2.399811) (3-2,2.460103) (3-3,3.281751) (4-3,3.317565)};
+\addplot+[ybar,bar width=4pt,bar shift=2.6pt,draw=orange!85!black,fill=orange!85!black!65,mark=none] coordinates {(2-1,1.887923) (2-2,2.80056) (3-2,2.885333) (3-3,3.798464) (4-3,3.858766)};
+\legend{Audit off,Audit on}
+
+\end{groupplot}
+\end{tikzpicture}
+\end{document}

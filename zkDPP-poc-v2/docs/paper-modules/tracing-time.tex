@@ -1,0 +1,23 @@
+\par\noindent\begin{minipage}{\linewidth}
+    \centering\begin{tikzpicture}
+        \begin{axis}[width=9cm,height=6.5cm,grid=major,major grid style={gray!18},axis line style={gray!60},tick label style={font=\small},label style={font=\small},scaled ticks=false,xmode=log,ymode=log,log basis x=10,log basis y=10,xlabel={Unique visited AuditRecords},ylabel={Tracing time (s)},legend style={at={(0.5,-0.25)},anchor=north,legend columns=2,font=\small,draw=none}]
+            \addplot+[color=blue!65!black,mark=*,mark size=2.8pt,mark options={solid,fill=white,draw=blue!65!black},thick] coordinates {(10,0.066552708) (100,0.6806944580000001) (1000,9.760276625000001)};
+            \addplot+[color=orange!85!black,mark=square*,mark size=2pt,mark options={solid,fill=white,draw=orange!85!black},thick] coordinates {(10,0.068203167) (100,0.55413275) (1000,8.102012541)};
+            \legend{Forward,Backward}
+        \end{axis}
+    \end{tikzpicture}
+    \par\smallskip{\small 그림 2. Visited AuditRecord 수에 따른 Tracing 시간.}\par\medskip
+    \par\medskip\noindent
+    \begin{center}
+        {\small\setlength{\tabcolsep}{7pt}\renewcommand{\arraystretch}{1.12}
+            \textbf{Tracing time}\par\smallskip
+            \begin{tabular}{@{}lrr@{}}\toprule
+                \textbf{Visited AuditRecords} & \textbf{Forward (s)} & \textbf{Backward (s)} \\
+                \midrule
+                10                            & 0.067                & 0.068                 \\
+                100                           & 0.681                & 0.554                 \\
+                1,000                         & 9.760                & 8.102                 \\
+                \bottomrule\end{tabular}}
+    \end{center}
+    \par\medskip
+\end{minipage}\par\medskip
