@@ -1,0 +1,78 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage{kotex}
+\usepackage[margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,graphicx,booktabs,tabularx}
+\usepackage{iftex}
+\ifXeTeX
+  \usepackage{unicode-math}
+  \setmathfont{latinmodern-math.otf}
+    \IfFontExistsTF{Nanum Myeongjo}{
+        \setmainhangulfont{Nanum Myeongjo}
+    }{
+        \setmainhangulfont[
+            Path=/System/Library/AssetsV2/com_apple_MobileAsset_Font8/4c932c71d74fc9e4c1bd9cbf270374b0b3ee7519.asset/AssetData/,
+            FontIndex=0,
+            BoldFont=NanumMyeongjo.ttc,
+            BoldFeatures={FontIndex=1}
+        ]{NanumMyeongjo.ttc}
+    }
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+% Set to \reviewcommentsfalse to hide all review comments in the PDF.
+\newif\ifreviewcomments
+\reviewcommentstrue
+\newcommand{\reviewcomment}[2]{%
+    \ifreviewcomments
+        \par\smallskip\noindent
+        \begingroup\setlength{\fboxsep}{8pt}%
+        \fcolorbox{blue!25!gray}{blue!3}{%
+            \parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{%
+                \small\raggedright
+                \textbf{\textcolor{blue!45!black}{검토 의견 #1}}\par\smallskip
+                #2%
+            }%
+        }%
+        \endgroup\par\medskip
+    \fi
+}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlength{\emergencystretch}{3em}
+\renewcommand{\arraystretch}{1.18}
+\begin{document}
+\begin{center}{\LARGE\bfseries zkDPP: 비공개 공급망 회계와\\승인된 이력 추적 및 사용 차단}\par\medskip
+    zkDPP: Private supply-chain accounting,\\authorized provenance tracing, and use prevention
+\end{center}
+\input{00.Abstract.tex}
+\clearpage
+\input{01.Introduction.tex}
+\clearpage
+\input{02.Related-Work.tex}
+\clearpage
+\input{03.System-and-Trust-Model.tex}
+\clearpage
+\input{04.Objects-and-Ledger-State.tex}
+\clearpage
+\input{05.Transitions-and-Accounting.tex}
+\clearpage
+\input{06.Public-DPP-Verification.tex}
+\clearpage
+\input{07.Tracing-and-Freezing.tex}
+\clearpage
+\input{08.Security-Requirements.tex}
+\clearpage
+\input{09.Security-Proofs.tex}
+\clearpage
+\input{10.Model-Validation.tex}
+\clearpage
+\input{11.Scope-and-Limitations.tex}
+\clearpage
+\input{12.Conclusion.tex}
+\clearpage
+\input{13.References.tex}
+\end{document}
