@@ -1,299 +1,168 @@
 \section{검증 및 실험 평가}
 \label{sec:evaluation}
 
-이 절은 프로토콜 구성과 조건부 분석을 보완하여 두 가지를 확인한다.
-첫째, 기록을 따라가고 남은 대상을 차단하는 동작이 맞는가.
-둘째, 거래와 감사에 얼마나 많은 계산·원장 작업·시간이 필요한가.
-먼저 측정 방법을 설명하고, 동작과 비용의 결과를 제시한 뒤
-기존 연구와 비교할 수 있는 범위를 정리한다.
+이 절에서는 먼저 잘못된 원료 기록에서 이어진 거래를 찾아
+해당 기록의 사용을 막는 절차를 검사한다. 이어서 거래 처리와
+감사 자료에 드는 비용을 측정하고, 전달·가공 방식에 따라
+그 비용이 어떻게 달라지는지 살펴본다. 검사 프로그램,
+기능 시험, 성능 측정은 서로 다른 범위의 결과이므로
+각 결과가 확인한 내용과 확인하지 못한 내용을 함께 밝힌다.
 
-\subsection{실험 환경 및 방법}
+\subsection{평가 방법}
 
-Table~\ref{tab:evidence-scope}는 보안 분석과 평가 근거의 역할을
-구분한다. 기호 모델은 정해진 사례의 논리 동작을, 시제품 실행은
-대표 경로의 연결을, 성능 자료는 선택한 조건의 비용을 보여 준다.
-이들은 동일한 판본을 사용한 하나의 통합 검증 결과가 아니다.
+zkDPP는 거래 종류·정책·입출력 수에 따라 회로를 준비하고,
+각 회로에 해당 거래의 회계 검사와 감사 자료의 결합 검사를 넣는다.
+여러 회로를 준비할 때 공통 설정 자료를 재사용하기 위해
+PLONK-KZG를 선택했다. 이 자료를 범용 SRS라 부르며,
+정해진 최대 크기 안의 회로들이 공유할 수
+있다~\cite{gabizon-plonk-2019}.
+회로별 증명·검증 키와 검증기는 따로 준비해야 하지만,
+이 크기 범위에서는 새 회로마다 신뢰 설정을 다시 수행할 필요는 없다.
+본 실험은 연구용 SRS를 사용했으며 운영 환경의 신뢰 설정 절차는
+평가하지 않았다.
 
-\begin{table}[ht]
-\centering\small
-\caption{Scope of the analysis and evaluation evidence}
-\label{tab:evidence-scope}
-\begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{.19\columnwidth}Y@{}}
-\toprule
-Evidence & Supported result and boundary \\ \midrule
-Proofs & Conditional correctness, soundness, and passive privacy; no concrete conformance result. \\
-Symbolic model & Selected accounting, tracing, and completion cases; no cryptographic execution or full specification validation. \\
-Prototype & Selected paths at \texttt{8560fd3}; test verifier and single audit-key version. \\
-Costs & Measured workload costs; independent-run variability and some version/configuration mappings remain unresolved. \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-성능 측정 환경은 Table~\ref{tab:eval-env}와 같다.
-회로는 PLONK-KZG와 BLS12-381을 사용하고, 감사 암호화에는
-Jubjub와 Poseidon2를 사용한다. 원장 실행 환경은 로컬 Anvil이다.
-기호 검사, 고정된 시제품 판본의 실행 기록과 성능 측정 자료는
-평가 아티팩트에 정리되어 있다~\cite{zkdpp-evaluation-artifact-2026}.
-
+표~\ref{tab:eval-env}는 성능 측정에 사용한 컴퓨터와
+프로그램을 보여 준다. 증명 회로는 PLONK-KZG와 BLS12-381,
+감사 자료 암호화는 Jubjub와 Poseidon2를 사용했고,
+거래는 로컬 시험 원장인 Anvil에서 실행했다.
+거래 비용은 질량 $q$, 배분한 재활용 크레딧 $a$,
+탄소 회계 값 $e$를 다루는 실행에서 얻었다.
+성능 수치는 이 환경의 기존 보고값이며, 원시 실행을 독립적으로
+재현하지는 않았다~\cite{zkdpp-performance-report-2026}.
+이 절의 성능표에서 별도 설명이 없으면 Process는 입력 2개·출력 1개다.
+이는 \ref{sec:implementation-limits}절에서 설명할 고정 3입력·2출력
+구현의 비용이 아니다. 또한 Process 비용과 아래의 보존 회로 입력
+검사는 질량 0 출력의 탄소 잔여 수신자를 제한하기 전 판본의 결과다.
+현행 일반 배분 규칙을 반영한 회로 비용은 아직 측정하지 않았다.
 \input{tables/evaluation/environment}
 
-비용은 세 지표로 본다. \emph{제약 수}는 증명 회로에 표현한
-계산 조건의 수다. \emph{gas}는 원장이 거래를 처리할 때 수행한
-작업량을 나타내는 단위로, 지불 금액 자체는 아니다.
-성공한 거래 영수증의 \texttt{gasUsed} 값을 사용한다.
-\emph{전체 실행 시간}(E2E)은 비공개 입력을 준비하기 시작한 때부터
-거래가 성공했다는 영수증을 확인할 때까지의 시간이다.
-세 지표가 측정하는 작업은 서로 다르다.
-감사 유무 비교에서는 같은 종류의 거래에 대해 입력·상태·권한·트리
-조건을 맞추고, Process 실험에서는 상태 합을 고정한 채 입출력
-개수를 바꾼다. 추적의 작업량은 중복을 제외한 방문 감사 기록 수,
-동결의 작업량은 대상 수이다. 두 작업은 별도로 측정하므로
-그 시간을 합산한 전체 감사 지연은 제시하지 않는다.
+\subsection{추적과 차단 기능}
 
-기호 모델은 암호 계산을 직접 실행하는 대신, 기록과 연결에
-이름을 붙여 규칙을 검사하는 작은 프로그램이다.
-선택한 유한 사례에서 회계·추적·완료 조건이 맞는지 확인한다.
-시제품의 대표 기능 검증은 커밋 \texttt{8560fd3}의 실행 기록과
-제한 테스트를 사용한다. 이 판본의 원장 시나리오는 실제 증명의
-유효성을 검사하지 않는 시험용 검증기로 거래를 생성한다.
-감사키도 단일 키 판본이므로 현행 두 키 구성의 검증과 구분한다.
-회로 제약 검사는 별도로 제시한다.
-
-시간 지표는 관측된 실행값으로 제시한다. 키 복구는 준비 실행 후
-공식 측정 한 번에 포함된 1,000회 내부 복구의 평균이며,
-그 밖의 시간에는 별도 실행을 몇 번 반복했고 결과가 얼마나
-달랐는지에 관한 자료가 없다. 따라서 시간 값은 관측한 실행의
-비용이며, 반복 실행의 안정성을 나타내는 통계는 아니다.
-추가 확인이 필요한 근거는 \ref{sec:implementation-limits}절에 모았다.
-
-\subsection{시스템 동작 및 성능 평가}
-
-동작 검사는 문제 원료의 근거가 여러 갈래로 나뉜 사례에서 시작한다.
-어떤 기록을 찾아야 하고 무엇을 막아야 하는지 먼저 확인한다.
-그 뒤 거래 종류별 비용, 감사 기능의 추가 비용과
-작업 규모·전달 방식·공정 입출력 수에 따른 변화를 살펴본다.
-
+먼저 실제 암호 연산과 원장 없이 거래 기록의 연결 규칙만
+옮긴 검사 프로그램에서, 문제가 된 기록을 출발점으로 삼아
+어디까지 추적하고 무엇을 차단해야 하는지 확인했다.
 \input{sections/v2/09a-model-validation}
 
-\paragraph{시제품의 추적·차단 실행.}
-시제품의 대표 시나리오는 $A\rightarrow(B,C)$,
-$B\rightarrow(D,E)$로 분기된 이력이다.
-감사자는 $A$에서 미소비 대상 $C,D,E$를 찾고 각 대상의 동결을
-요청한 뒤 최종 상태를 확인한다. 저장된 Anvil RPC 결과에는
-기준 블록 7, 대상 3개, 동결 거래 3건과 확인 블록 10이 기록되어
-있으며, 결과는 \Alg{COMPLETE\_AT\_CHECKPOINT}이다.
-이는 해당 분기 그래프에서 조회·복호화·추적·동결·결과 확인이
-연결된 실행 근거이다.
-
-Table~\ref{tab:eval-functional}은 이 실행과 제한 테스트의 결과를
-대표 경로·시험 조건별로 정리한다.
-
+다음은 일부 기능을 원장에 연결한 시험이다. 원료 $A$를
+$B,C$로 나누고 $B$를 다시 $D,E$로 나눈 사례에서,
+프로그램은 블록 7의 $A$에서 출발해 아직 소비되지 않은
+$C,D,E$를 찾았다. 각 대상에 동결 거래를 한 번씩 제출하고,
+블록 10에서 세 대상이 모두 차단됐음을 확인해
+\Alg{COMPLETE\_AT\_CHECKPOINT}를 보고했다.
+표~\ref{tab:eval-functional}는 이 원장 시험과 별도로 수행한
+메모리 시험·오류 상황 시험을 구분해 보여 준다.
+인용한 보존 원장 시험에는 실제 증명을 확인하지 않는 시험용
+검증기와 단일 감사키를 사용했다. 아홉 거래 종류의 회로 입력도
+Issue의 두 정책형을 포함한 열 개 사례에서 제약 조건을
+만족하는지만 검사했다. 따라서 이 결과가 현행 설계 전체의
+통합 구현을 검증한 것은 아니다~\cite{zkdpp-prototype-tests-2026}.
 \input{tables/evaluation/functional}
 
-\paragraph{기본 거래와 감사 추가 비용.}
-Table~\ref{tab:eval-events}는 감사 기능을 포함한 아홉 거래의
-비용이다. 제약 수는 18,115--55,402개, gas는
-534,277--3,577,414, E2E는 674.484--1,497.729\,ms로 나타났다.
-Process의 제약 수, Transfer의 gas, Split의 E2E가 각각 가장
-컸다. 한 지표가 가장 크다고 다른 지표도 가장 큰 것은 아니다.
-증명에서 검사할 계산, 원장에 기록할 작업과 전체 처리 시간이
-서로 다르기 때문이다.
+\subsection{거래와 감사 비용}
 
+표~\ref{tab:eval-events}는 감사 자료를 넣은 거래 한 번의
+비용을 세 가지로 보여 준다.
+제약 수는 거래가 규칙을 지켰음을 증명할 때 확인해야 하는
+계산 조건의 개수다. gas는 원장이 거래를 처리하는 데 쓰는
+자원량이고, E2E는 비공개 입력 준비부터 거래 성공 확인까지
+걸린 시간이다. 거래별 E2E의 독립 실행 횟수와 변동 폭은
+보고되지 않았다.
+
+이 조건에서 제약 수는 Process,
+gas는 Transfer, E2E는 Split이 가장 컸다. 즉 회로가
+검사할 조건이 가장 많은 거래와 원장 자원을 가장 많이 쓰는
+거래, 시간이 가장 오래 걸린 거래가 서로 달랐다.
 \input{tables/evaluation/events}
 
-Transfer의 비용을 나누어 보면 어떤 작업이 큰 몫을
-차지하는지 알 수 있다. Transfer는 회계 증표 하나를 소비하고
-이전 증표와 잔여 회계 증표를 생성한다. 이 거래의 제약 수는 머클 경로 검증 9,825개,
-감사 암호문 검증 14,238개, 상태 범위·배분 검증 17,994개,
-커미트먼트·소비 식별자·소유자 주소 계산 7,826개로,
-합계 49,883개이다. 원장에서는 머클 트리 해시 계산
-1,422,404 gas와 조회·저장 1,276,500 gas의 합이
-2,698,904 gas로 전체의 75.44\%를 차지하였다.
-
-감사 기능 때문에 추가되는 비용은 같은 조건에서 감사 자료를
-포함한 경우(on)와 제외한 경우(off)를 빼서 구한다.
-제약 수 $C$와 gas $G$에 대해
-$\Delta C=C_{\rm on}-C_{\rm off}$,
-$\Delta G=G_{\rm on}-G_{\rm off}$로 계산한다.
-Fig.~\ref{fig:eval-audit}와 Table~\ref{tab:eval-audit}에서
-추가 제약 수는 11,533--14,238개, 추가 gas는
-130,705--356,287이다. off를 분모로 한 상대 증가율은
-각각 31.70--202.93\%와 9.69--54.67\%이다.
-Entry는 추가 제약 수가 12,135개이지만 off 값이 5,980개로
-작아 상대 증가율이 202.93\%로 나타났다.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=.94\textwidth]{figures/evaluation/audit.png}
-\caption{Circuit constraints and transaction gas with and without audit data. The panels use different units.}
-\label{fig:eval-audit}
-\end{figure*}
+표~\ref{tab:eval-audit}는 같은 조건에서 감사 자료만
+빼고 다시 측정한 거래와 비교한다. 감사 자료를 넣으면
+제약 수가 11,533--14,238개, gas가 130,705--356,287
+늘었다. 감사 자료가 없는 거래를 기준으로 보면 각각
+31.70--202.93\%, 9.69--54.67\% 증가했다.
+예를 들어 Transfer에서 늘어난 gas의 91.00\%는
+감사 기록을 원장에 저장하는 데서 나왔다. 늘어난 제약 수의
+60.48\%는 감사용 곱셈 두 번에서 나왔다. 두 비율은
+각각 다른 비용의 증가분을 기준으로 계산했다.
 \input{tables/evaluation/audit}
 
-감사 암호화를 계산할 때에는 타원곡선의 점에 정수를 곱하는
-스칼라 곱셈이 사용된다. Transfer의 감사 추가 제약 14,238개 중
-이 연산 두 번은
-8,611개로 60.48\%를 차지하였다. 나머지는 키·마스크 계산
-2,399개, 난수·암호문 검증 1,723개와 출력 소비 식별자 계산
-1,505개이다. 감사 추가 gas 356,146 중 감사 기록 저장의
-저장 연산 SSTORE는 324,100 gas로 91.00\%이며, 증명 검증 호출 증가분은
-4,585 gas, 기타 조회·calldata 증가분은 27,461 gas이다.
-따라서 이 거래에서는 두 스칼라 곱셈과 감사 자료 저장이 각각
-추가 회로 비용과 추가 원장 비용의 주요 부분을 차지한다.
-이 비율은 Transfer의 감사 추가 비용에 대한 분해이다.
-
-\paragraph{추적·동결 규모와 로컬 키 복구.}
-추적 규모 $V$는 고유 방문 감사 기록 수, 동결 규모 $F$는 대상
-수이다. 같은 Split 시나리오에서 각 작업을 10, 100, 1,000개
-규모로 측정하였다. 추적에는 기록 조회·복호화·탐색을, 동결에는
-제출 전 상태 검사·대상별 거래 실행·최종 상태 확인을 포함한다.
-동결 구현은 대상 하나마다 거래 하나를 제출한다.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=.94\textwidth]{figures/evaluation/tracing-freeze.png}
-\caption{Tracing and freezing time. Both panels use logarithmic time axes; $V$ counts visited records and $F$ counts freeze targets. Lines connect measured points.}
-\label{fig:eval-trace}
-\end{figure*}
+문제가 된 기록을 찾은 뒤에는 후속 기록을 따라가고,
+그중 아직 소비되지 않은 대상을 동결해야 한다.
+표~\ref{tab:eval-trace}는 두 단계의 시간을 \emph{따로}
+측정한 결과다. 추적 시간은 기록을 조회·복호화하고
+연결을 따라가는 데 걸린 시간이며, 동결 시간은 상태 확인,
+대상별 원장 거래 제출, 최종 확인을 포함한다.
+기록 1,000개를 방문하는 후속 추적은 9.760초였고,
+대상 1,000개를 동결하는 시험은 60.540초였다.
+대상마다 동결 거래 한 번이 필요하다. 두 실험의
+1,000은 같은 이력의 기록 수와 대상 수를 뜻하지 않으므로
+두 시간을 더해 전체 대응 시간으로 볼 수 없다.
+측정한 세 규모만으로 더 큰 이력의 비용도 예측할 수 없다.
+활성 회계 증표 한 개의 동결은 49,434 gas였으며,
+다른 타입이나 여러 대상의 묶음 동결은 측정하지 않았다.
 \input{tables/evaluation/tracing-freeze}
 
-Table~\ref{tab:eval-trace}에서 기록 1,000개의 선행 추적은
-8.102초, 후속 추적은 9.760초이며, 대상 1,000개의 동결은
-60.540초이다. 규모가 100에서 1,000으로 증가할 때 시간은
-각각 약 14.62배, 14.33배와 24.73배가 되었다.
-이 구간에서 동결의 시간 증가가 더 크게 나타났으며,
-다만 세 크기만 측정했으므로 더 큰 모든 작업량에서도
-어떤 비율로 시간이 늘어날지 일반화할 수는 없다.
-활성 회계 증표 하나를 동결 상태로 바꾸는 거래의 gas는
-49,434이다. 이는 해당 타입과 상태 전이에 대한 단일 거래의
-값으로, 이전 증표나 배치 동결의 비용과 구분한다.
-수행 시간 측정과 \ref{sec:audit}절의 전체 완료 조건 검증도
-서로 다른 평가 대상이다.
-
-로컬 키 복구는 위원회 공개키와 위원별 공개 조각을 사전에
-검증한 뒤, 선택한 $k$개 조각을 검증하고, 조각을 수학적으로 합치는
-라그랑주 보간으로 비밀값을 복구한 뒤,
-그 결과가 공개키와 맞는지 확인하는 시간을 측정하였다.
-전체 위원 수 $n=10$에서 $k$를 2, 3, 5, 7, 10으로 바꾸었다.
-공개 자료의 사전 검증, 키 생성·분산 키 생성(DKG), 통신과 승인
-대기는 측정 구간에서 제외하였다.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/evaluation/key.png}
-\caption{Local key recovery for $n=10$. Each point is the mean of 1,000 internal recoveries in one timed run after warm-up.}
-\label{fig:eval-key}
-\end{figure}
+표~\ref{tab:eval-key}는 감사 자료를 열기 위한 준비 과정 중
+\emph{컴퓨터 안에서 감사 비밀키를 복원하는 계산}의 시간만 보여 준다.
+위원 10명 중 사용할 키 조각을 2개에서 10개로 늘렸다.
+공개 자료를 미리 검사한 뒤 조각 검증, 결합, 복원한 키의
+대조에 걸린 시간만 쟀다. 각 조건의 값은 한 측정 안에서
+복원을 1,000회 반복한 평균이다. 키 생성, 위원과의 통신,
+감사 승인 대기는 포함하지 않았다. 이는 별도 키 보호 암호문을
+복호화하는 것이 아니라 감사 비밀키 자체를 복원하는 계산이다.
+따라서 이 수치를 승인부터 자료 열람까지의
+소요 시간으로 해석할 수 없다.
 \input{tables/evaluation/key}
 
-Fig.~\ref{fig:eval-key}와 Table~\ref{tab:eval-key}에서 복구 시간은
-0.188--0.737\,ms이다. 선택한 조각 집합의 보간식에는 전체 위원
-수 $n$이 직접 등장하지 않지만, 이 측정은 $n$을 변화시킨 비교가
-아니다. 또한 복구 대상 비밀값과 임계값 $K$의 설정을 현행 두 키
-구성에 연결해야 하므로, 이 값을 감사 데이터 키 $SK_B$의
-승인·제공 전체 지연으로 해석하지 않는다.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=.92\textwidth]{figures/evaluation/process.png}
-\caption{Process costs when increasing inputs (top) or outputs (bottom). Matching metrics use the same vertical range; lines connect measured points.}
-\label{fig:eval-process}
-\end{figure*}
-
-\paragraph{전달 방식과 공정 입출력의 영향.}
-직접 전달은 송신 거래에서 수신자 회계 증표를 생성하고,
-이전 증표 방식은 Transfer로 미해결 이전을 만든 뒤 Proceed로
-수령을 완료한다. Table~\ref{tab:eval-transfer}은 직접 전달,
-SharedSecret 변형과 정상 수령·회수 경로를 구분한다.
-
-\input{tables/evaluation/transfer}
-
-정상 수령의 합산 비용은
-$3{,}577{,}414+1{,}784{,}082=5{,}361{,}496$ gas이다.
-회수 경로의 5,362,498 gas는 Transfer와 Recall의 합이다.
-정상 수령 합산값은 감사 없는 직접 전달의 약 2.266배다.
-그러나 두 방식은 감사 기능의 유무도 다르고 거래 단계 수도 다르다.
-따라서 이전 증표를 사용했기 때문에만 비용이 그만큼
-늘었다고 해석할 수는 없다. 합산값은 연속 실행의 직접
-측정값과도 구분한다.
-
-이전 증표는 미해결 상태에서 기한·권한 조건을 만족하면 회수할 수
-있으며, Proceed와 Recall이 같은 $rvnf$를 소비하므로 먼저
-수락된 경로만 성공한다.
-비교용 SharedSecret 직접 전달은 공유값 $o_{\rm shared}$를 이용한
-$nf_{\rm shared}=H(cm,o_{\rm shared})$로 소비 식별자 계산 방식을 바꾼다.
-송신자도 $cm,o_{\rm shared}$를 알면 수신자 회계 증표의 소비 거래를 식별할 수
-있으나 소비 권한을 얻는 것은 아니다.
-이 변형의 2,724,242 gas는 감사 없는 직접 전달보다
-358,014 gas 크다. 감사 자료와 식별자 계산 방식이 함께 달라
-감사 기능만의 비용으로 해석하지 않는다.
-
-이전 증표의 공유 개방값으로 송신자가 계산하는 것은 $rvnf$이다.
-인수 후 수신자 회계 증표의 $nf$는 수신자 소유 비밀에 의존하므로
-그 개방값만으로 직접 계산할 수 없다. 이는 공개 시각·메타데이터를
-이용한 모든 추론을 배제하는 성질은 아니다.
-감사자는 Transfer에서 $rvnf$를 복원하여 Proceed를 찾고,
-그 기록에서 수신자 회계 증표의 미래 $nf$를 복원한다.
-잔여 회계 증표도 별도의 미래 식별자를 통해 추적한다.
-
-공정 규모는 출력 $N=1$에서 입력 $M$을 2, 3, 4로,
-입력 $M=2$에서 출력 $N$을 1, 2, 3으로 바꾸어 평가하였다.
-입력 상태 합 $(320,30,231)$과 출력 상태 합 $(300,30,261)$을
-고정하였다. 이 조건은 시제품의 세 상태 성분에 대한 것으로
-모든 산업 공정을 대표하지 않는다.
-
+표~\ref{tab:eval-process}는 가공 거래의 입력 수 또는 출력 수만
+바꿨을 때의 비용이다. 입력의 합 $(q,a,e)=(320,30,231)$과
+출력의 합 $(300,30,261)$은 고정했다. 입력을 2개에서 4개로
+늘리면 제약 수는 60.34\%, gas는 6.41\% 늘었다.
+출력을 1개에서 3개로 늘리면 각각 49.71\%, 99.36\% 늘었다.
+이 범위에서는 출력 수가 gas에 더 큰 영향을 주었다.
+다만 표~\ref{tab:eval-events}의 기본 Process와 이 실험의
+입력 2개·출력 1개 gas는 21,318만큼 다르며,
+그 원인은 확인되지 않았다.
 \input{tables/evaluation/process}
 
-Table~\ref{tab:eval-process}에서 입력을 2개에서 4개로 늘리면
-제약 수는 60.34\%, gas는 6.41\% 증가하였다. 출력을 1개에서
-3개로 늘리면 각각 49.71\%와 99.36\% 증가하였다.
-이 구간에서는 출력 증가가 입력 증가보다 gas에 더 큰 변화를
-동반하였다. 입력이 늘면 기존 기록을 검사하는 일이 추가되고,
-출력이 늘면 새 기록을 등록하는 일이 추가된다.
-관측값은 이 차이와 부합하지만, 어느 연산이 얼마를 차지하는지는
-비용을 더 나누어 측정해야 알 수 있다.
-이 실험의 $M=2,N=1$ gas는 1,887,935로 기본 거래의
-1,866,617과 21,318 차이가 난다. 증가율은 공정 규모 실험
-안의 기준값으로 계산하며, 두 실행의 차이는 미확인으로 남긴다.
+\subsection{설계 선택과 기존 연구의 비교}
 
-\subsection{기존 연구와의 비교}
+표~\ref{tab:eval-transfer}는 원료를 직접 넘길 때와
+이전 증표를 만들어 수신자가 인수하거나 송신자가 회수할 때를
+비교한다. 직접 전달은 거래 한 번으로 끝난다. 이전 증표를
+사용하면 Transfer 뒤에 Proceed 또는 Recall이 한 번 더
+필요하지만, 송신자는 수신자가 인수하기 전 허용된 기한 안에
+이전을 회수할 수 있다. 인수 뒤 수신자의 회계 증표가
+소비되는 시점도 수신자의 소유 비밀 없이는 직접 계산할 수 없다.
+반면 비교용 SharedSecret 직접 전달에서는 송신자가 그
+소비 식별자를 계산할 수 있다.
+Transfer와 Proceed의 5,361,496 gas는 두 거래의 값을
+더한 수치다. 방식마다 감사 자료의 유무와 거래 수도 달라
+gas 차이를 이전 증표 하나의 비용으로 볼 수는 없다.
+\input{tables/evaluation/transfer}
 
-\input{tables/evaluation/published-costs}
+서론의 증명 수 비교는 앞의 PLONK-KZG 측정과 별도로 수행한
+BN254/Groth16·Poseidon2 예비 실험이다.
+Sahai 등의 두 입력 병합 거래에서 사용한 증명 분해
+방식~\cite{sahai-supply-chain-2020}을 참고해
+증명 여섯 개를 따로 검증할 때와 하나로 묶어 검증할 때를
+비교했다. 증명 크기의 합은 각각 1,536바이트와 256바이트,
+로컬 순차 검증 시간의 중앙값은 각각 6.289\,ms와
+1.056\,ms였다(각 5회 측정)~\cite{zkdpp-sahai-microbenchmark-2026}.
+다만 예비 구현에는 여섯 증명이 같은 거래에 속하는지
+확인하는 검사가 빠져 있고, 머클 관계도 원 논문과 다르다.
+따라서 이 결과는 같은 보안 조건에서 두 전체 프로토콜을
+비교한 결과도, 현행 zkDPP의 성능 측정도 아니다.
+이 비교가 다루는 비용은 제출할 증명 자체와 반복 검증의 부담이다.
+관계를 한 회로에 모아도 검사 항목이 늘면 회로·키의 크기와
+증명 생성 비용은 커질 수 있다.
 
-Table~\ref{tab:related}의 기능 비교를 바탕으로,
-평가에서는 추적·차단의 작업 단위와 거래 비용을 비교한다.
-Sahai 등의 공급망 전이와 Babel 등의 자격증명·토큰 연결은
-응용 측면의 기준선이며, GGM의 후속 출력 추적, Azeroth의
-거래 결합 감사 정보와 CAP의 정책별 열람·동결은 감사·집행의
-선행 구성이다. zkDPP의 기능 검증은 이를 회계 전이,
-제품 주장·종료의 구분, 미소비 회계 증표·미해결 이전 증표의
-차단으로 연결한 대표 경로를 확인한다. 같은 응용 관계와 신뢰
-조건을 갖는 구성보다 우수하다는 결론은 이 검증에서 도출하지 않는다.
-
-Azeroth는 Groth16, MiMC7, 깊이 32의 설정에서
-zkTransfer의 비용을 1,555,957 gas로 보고한다~\cite{jeong-azeroth-2023}.
-Table~\ref{tab:eval-published}은 이 값과 본 평가의 전달 비용을
-작업 범위와 함께 제시한다. Azeroth는 암호화 계정(ENA)과
-머클 노트를 함께 사용하여 잔여 금액을 ENA에 반영하고,
-본 평가의 직접 전달 기준선은 잔여분을 새 회계 증표로 등록한다.
-증명계·검증기·해시·원장 조건도 같지 않다.
-이 표는 각 전달 방식에서 무엇을 하나의 작업으로 측정했는지
-보여 주며, gas 차이를 잔여분 처리 방식 하나의 효과로 분리하지는 못한다.
-자체 직접 전달은 Azeroth를 같은 환경에서 재현한 결과가 아니다.
-
-Sahai의 Hyperledger Fabric 구현은 EVM gas와 다른 지표를
-사용한다~\cite{sahai-supply-chain-2020}.
-Babel 등의 측정은 분산 원장을 사용하지 않는 운영자 원장을
-대상으로 하므로 그 연산 시간을 거래 영수증 확인까지 포함한
-E2E와 직접 비교할 수 없다~\cite{babel-hicss-2025}.
-CAP의 동결도 레코드의 소비·재발행으로 이루어져 현재 상태를
-변경하는 zkDPP와 작업 구성이 다르다~\cite{espresso-cap-spec-2022}.
-따라서 본 평가는 대표 기능의 연결과 기능별 비용·규모 변화를
-제시하며, 외부 시스템과의 효율성 순위를 정하지 않는다.
-% Flush evaluation floats; restore the full text height after double-column floats.
-\clearpage
-\makeatletter
-\global\@colht\textheight
-\global\@colroom\textheight
-\global\vsize\textheight
-\makeatother
+Azeroth는 Groth16·MiMC7과 깊이 32의 상태 트리에서
+zkTransfer 1,555,957 gas를 보고한다~\cite{jeong-azeroth-2023}.
+그 설계는 송신자의 잔액을 암호화된 계정에 남기는 반면,
+여기서 측정한 직접 전달은 잔여분을 새 회계 증표로 만든다.
+Sahai의 Hyperledger Fabric 측정, Babel의 운영자 원장 시간,
+CAP의 소비·재발행 동결도 여기서 측정한 EVM 거래와
+같은 작업이 아니다~\cite{sahai-supply-chain-2020,
+babel-hicss-2025,espresso-cap-spec-2022}.
+측정 조건과 기능이 서로 달라 이 수치만으로
+외부 시스템과의 성능 순위를 정할 수 없다.

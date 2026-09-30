@@ -1,10 +1,11 @@
-\begin{table}[t]
-\centering\small
-\caption{Per-event costs with audit data}
+\begin{center}
+\begin{minipage}{\columnwidth}
+\centering\small\captionsetup{hypcap=false}
+\captionof{table}{감사 자료를 포함한 거래별 비용}
 \label{tab:eval-events}
 \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lrrr@{}}
 \toprule
-Event & Constraints & Gas & E2E (ms) \\ \midrule
+거래 & 제약 수 & gas & E2E (ms) \\ \midrule
 Entry & 18,115 & 2,258,715 & 770.834 \\
 Transfer & 49,883 & 3,577,414 & 1,464.369 \\
 Proceed & 35,858 & 1,784,082 & 1,278.965 \\
@@ -16,5 +17,6 @@ Exit & 27,940 & 534,277 & 674.484 \\
 Issue & 35,957 & 678,565 & 1,225.264 \\
 \bottomrule
 \end{tabular*}
-\par\smallskip\begin{minipage}{\columnwidth}\footnotesize Three accounting components; Process has 2 inputs and 1 output. E2E values are observations without independent-run dispersion. The Process baseline differs from Table~\ref{tab:eval-process}.\end{minipage}
-\end{table}
+\par\smallskip\begin{minipage}{\columnwidth}\footnotesize 회계 값은 $(q,a,e)$이며, Process는 입력 2개·출력 1개다. E2E의 독립 실행 횟수와 변동 폭은 보고되지 않았다. Process의 gas 기준값은 표~\ref{tab:eval-process}와 다르다.\end{minipage}
+\end{minipage}
+\end{center}

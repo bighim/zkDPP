@@ -1,17 +1,19 @@
-\begin{table}[t]
-\centering\small
-\caption{Process cost by input and output count}
+\begin{center}
+\begin{minipage}{\columnwidth}
+\centering\small\captionsetup{hypcap=false}
+\captionof{table}{가공 거래의 입력·출력 수에 따른 비용}
 \label{tab:eval-process}
 \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lrrrr@{}}
 \toprule
-Sweep & $M$ & $N$ & Constraints & Gas \\ \midrule
-Inputs & 2 & 1 & 55,402 & 1,887,935 \\
-Inputs & 3 & 1 & 72,116 & 1,920,611 \\
-Inputs & 4 & 1 & 88,832 & 2,009,039 \\
-Outputs & 2 & 1 & 55,402 & 1,887,935 \\
-Outputs & 2 & 2 & 69,172 & 2,800,596 \\
-Outputs & 2 & 3 & 82,944 & 3,763,779 \\
+변경 & 입력 수 & 출력 수 & 제약 수 & gas \\ \midrule
+입력 수 & 2 & 1 & 55,402 & 1,887,935 \\
+입력 수 & 3 & 1 & 72,116 & 1,920,611 \\
+입력 수 & 4 & 1 & 88,832 & 2,009,039 \\
+출력 수 & 2 & 1 & 55,402 & 1,887,935 \\
+출력 수 & 2 & 2 & 69,172 & 2,800,596 \\
+출력 수 & 2 & 3 & 82,944 & 3,763,779 \\
 \bottomrule
 \end{tabular*}
-\par\smallskip\begin{minipage}{\columnwidth}\footnotesize Input sum $(320,30,231)$ and output sum $(300,30,261)$ are fixed. The $2\to1$ baseline differs by 21,318 gas from Table~\ref{tab:eval-events}; the cause is unresolved.\end{minipage}
-\end{table}
+\par\smallskip\begin{minipage}{\columnwidth}\footnotesize 입력 합 $(q,a,e)=(320,30,231)$과 출력 합 $(300,30,261)$을 고정했다. 입력 2개·출력 1개의 gas는 표~\ref{tab:eval-events}와 21,318 차이 나며 원인은 미확인이다.\end{minipage}
+\end{minipage}
+\end{center}

@@ -1,10 +1,11 @@
-\begin{table}[t]
-\centering\small
-\caption{Local key recovery after public-data validation}
+\begin{center}
+\begin{minipage}{\columnwidth}
+\centering\small\captionsetup{hypcap=false}
+\captionof{table}{공개 자료 확인 후 감사 비밀키 복원 시간}
 \label{tab:eval-key}
 \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}rrr@{}}
 \toprule
-Committee $n$ & Selected $k$ & Mean (ms) \\ \midrule
+전체 위원 수 & 사용 조각 수 & 평균 (ms) \\ \midrule
 10 & 2 & 0.188 \\
 10 & 3 & 0.251 \\
 10 & 5 & 0.384 \\
@@ -12,5 +13,6 @@ Committee $n$ & Selected $k$ & Mean (ms) \\ \midrule
 10 & 10 & 0.737 \\
 \bottomrule
 \end{tabular*}
-\par\smallskip\begin{minipage}{\columnwidth}\footnotesize One timed run per condition after warm-up, averaging 1,000 internal recoveries. Includes selected-share verification, interpolation and recovered-key public-key matching.\end{minipage}
-\end{table}
+\par\smallskip\begin{minipage}{\columnwidth}\footnotesize 준비 실행 뒤 조건마다 한 번 측정하고, 그 안에서 복원 1,000회의 평균을 구했다. 선택한 조각의 검증·결합·복원한 키의 공개키 대조를 포함한다.\end{minipage}
+\end{minipage}
+\end{center}

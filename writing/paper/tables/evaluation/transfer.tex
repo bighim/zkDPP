@@ -1,15 +1,22 @@
-\begin{table}[t]
-\centering\small
-\caption{Delivery and recall paths}
+\begin{center}
+\begin{minipage}{\columnwidth}
+\centering\small\captionsetup{hypcap=false}
+\captionof{table}{원료 전달 방식별 비용과 기능}
 \label{tab:eval-transfer}
-\begin{tabularx}{\columnwidth}{@{}p{28mm}crY@{}}
+\begin{tabularx}{\columnwidth}{@{}p{20mm}rY@{}}
 \toprule
-Path & Audit & Gas & Value \\ \midrule
-Direct baseline & Off & 2,366,228 & Observed \\
-SharedSecret direct & On & 2,724,242 & Observed \\
-Transfer $\to$ Proceed & On & 5,361,496 & Row sum \\
-Transfer $\to$ Recall & On & 5,362,498 & Reported; sum matches \\
+방식 & gas & 기능 차이 \\ \midrule
+직접 전달 & 2,366,228 & 감사 자료와 송신자 회수 기능 없음 \\
+SharedSecret & 2,724,242 & 감사 자료 있음; 송신자가 후속 소비 식별 가능 \\
+T $\to$ Proceed & 5,361,496 & 인수 전 회수 가능; 인수 뒤 소비는 직접 식별 불가 \\
+T $\to$ Recall & 5,362,498 & 송신자가 인수 전에 회수 \\
 \bottomrule
 \end{tabularx}
-\par\smallskip\begin{minipage}{\columnwidth}\footnotesize The Proceed path is computed from two event costs, not timed as one continuous delivery run.\end{minipage}
-\end{table}
+\par\smallskip\begin{minipage}{\columnwidth}\footnotesize
+T는 Transfer다. 직접 전달에는 감사 자료가 없고 다른 방식에는 있다.
+기능 차이는 설계에서 도출한 것이며 프라이버시 측정값은 아니다.
+T $\to$ Proceed의 gas는 두 거래의 합이다. T $\to$ Recall은
+보고된 경로 총합이며 두 거래의 합과 일치한다.
+\end{minipage}
+\end{minipage}
+\end{center}

@@ -1,4 +1,14 @@
 % DPP-purpose and ledger-background sources checked 2026-09-26.
+% PLONK primary ePrint metadata and bounded-SRS statement checked 2026-09-30.
+@misc{gabizon-plonk-2019,
+  author       = {Ariel Gabizon and Zachary J. Williamson and Oana Ciobotaru},
+  title        = {{PLONK}: Permutations over Lagrange-bases for Oecumenical
+                  Noninteractive arguments of Knowledge},
+  howpublished = {Cryptology ePrint Archive, Paper 2019/953},
+  year         = {2019},
+  note         = {\href{https://eprint.iacr.org/2019/953}{ePrint}}
+}
+
 @misc{ec-dpp-overview,
   author       = {{European Commission}},
   title        = {Digital Product Passport},
@@ -212,13 +222,13 @@
   url = {https://ietresearch.onlinelibrary.wiley.com/doi/10.1049/ise2/1765419}
 }
 
-% Official author PDF v0.5 checked 2026-09-12, sections 11.3.2 and 11.6.2.
+% Official author PDF v0.5: sections 10.5 and 11.5 rechecked 2026-09-30; prior checks 2026-09-12.
 @misc{boneh-shoup-2020,
   author = {Dan Boneh and Victor Shoup},
   title = {A Graduate Course in Applied Cryptography},
   year = {2020},
   howpublished = {Online textbook, version 0.5},
-  note = {Sections 11.3.2 and 11.6.2; \href{https://crypto.stanford.edu/~dabo/cryptobook/BonehShoup_0_5.pdf}{Author PDF}},
+  note = {Sections 10.5, 11.3.2, 11.5, 11.6.2 and 20.3.5; \href{https://crypto.stanford.edu/~dabo/cryptobook/BonehShoup_0_5.pdf}{Author PDF}},
   url = {https://crypto.stanford.edu/~dabo/cryptobook/BonehShoup_0_5.pdf}
 }
 
@@ -232,14 +242,55 @@
   url          = {https://eprint.iacr.org/2023/273}
 }
 
-% Local evidence bundle: writing/outputs/zkdpp-evaluation-corrected-2026-09-21/.
-% Performance report, archived M1 tests, and symbolic checks are distinct evidence.
-@misc{zkdpp-evaluation-artifact-2026,
+% Primary text checked: https://people.cs.pitt.edu/~litman/courses/cs2001/lectures/lecture-02-p612-shamir.pdf
+@article{shamir-secret-sharing-1979,
+  author = {Adi Shamir},
+  title = {How to Share a Secret},
+  journal = {Communications of the ACM},
+  volume = {22},
+  number = {11},
+  pages = {612--613},
+  year = {1979},
+  doi = {10.1145/359168.359176},
+  url = {https://doi.org/10.1145/359168.359176}
+}
+
+% Author-reported values: writing/outputs/zkdpp-evaluation-corrected-2026-09-21/sources/reported-results.pdf.
+@misc{zkdpp-performance-report-2026,
   author = {{zkDPP project}},
-  title = {{zkDPP} Evaluation Report and Validation Artifacts},
+  title = {{zkDPP} Performance Evaluation: Corrected Results},
   year = {2026},
-  howpublished = {Unpublished project materials},
-  note = {Performance report received September 21, 2026; archived prototype commit 8560fd3 and symbolic validation program}
+  howpublished = {Unpublished project report},
+  note = {Nine-page report received 21 September 2026; original measurements not independently reproduced}
+}
+
+% Symbolic model: writing/paper/artifact/model_check.py; limits in .paper-os/evidence_log.md.
+@misc{zkdpp-symbolic-model-2026,
+  author = {{zkDPP project}},
+  title = {{zkDPP} Symbolic Model and Validation Checks},
+  year = {2026},
+  howpublished = {Unpublished project code and results},
+  note = {334 trace comparisons and 408 total checks; model-start discrepancy retained}
+}
+
+% Archived M1 tests: writing/outputs/zkdpp-evaluation-corrected-2026-09-21/sources/m1-*.
+@misc{zkdpp-prototype-tests-2026,
+  author = {{zkDPP project}},
+  title = {{zkDPP} Archived Prototype Function Tests},
+  year = {2026},
+  howpublished = {Unpublished project test records},
+  note = {Archived revision 8560fd3; test verifier and single audit key}
+}
+
+% Read-only source scope inspection, distinct from the preserved performance report.
+@misc{zkdpp-implementation-profile-2026,
+  author = {{zkDPP project}},
+  title = {{zkDPP} Implementation Snapshot: Fixed and Experimental Process Profiles},
+  year = {2026},
+  howpublished = {Project source code},
+  note = {Revision \texttt{483f4a0}; inspected 30 September 2026;
+          \href{https://github.com/bighim/zkDPP/tree/483f4a0280d832f95a6842997ca89e35bcbb0879/zkDPP-poc-v2}{source snapshot};
+          execution and performance not independently reproduced}
 }
 
 % Local measurements: implementation/poc-v2/experiments/iscc-atomic-vs-composite/results/sahai-6-vs-1/.

@@ -1,16 +1,18 @@
-\begin{table*}[t]
-\centering\small
-\caption{Prototype functional checks and their evidence scope}
+\begin{center}
+\begin{minipage}{\columnwidth}
+\centering\small\captionsetup{hypcap=false}
+\captionof{table}{선택한 기능 시험의 결과}
 \label{tab:eval-functional}
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{35mm}YY@{}}
+\begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{24mm}Y@{}}
 \toprule
-Check & Observed result & Evidence scope \\ \midrule
-Branch tracing and freezing & $C,D,E$ recovered; 3 freeze transactions; checkpoint completion & Archived Anvil RPC run; test verifier \\
-Entire target set & 3 targets and 3 freeze calls; complete & Memory-backed test \\
-Trace failure & No freeze calls; trace failure & Failure-path test \\
-Consumption before freeze & Consumed target retained; incomplete & Failure-path test \\
-Valid circuit inputs & 10 representative relations satisfy constraints & Compilation, public-input and IsSolved tests \\
+시험 & 관찰 결과와 시험 방법 \\ \midrule
+분기·동결 & $C,D,E$ 발견, 동결 거래 3건, 최종 시점 완료(보존된 원장 실행) \\
+대상 전체 동결 & 대상 3개와 동결 호출 3회 확인, 완료(메모리 시험) \\
+추적 실패 & 동결 호출 없음(오류 상황 시험) \\
+동결 전 소비 & 대상을 유지하고 미완료 보고(오류 상황 시험) \\
+회로 입력 & 대표 관계 10개가 제약 조건을 만족함(입력 검사) \\
 \bottomrule
 \end{tabularx}
-\par\smallskip\begin{minipage}{\textwidth}\footnotesize Prototype commit 8560fd3; archived tests from 9 September 2026. A test verifier does not validate real proofs.\end{minipage}
-\end{table*}
+\par\smallskip\footnotesize 보존된 2026년 9월 9일 시험(개정 8560fd3). 원장 실행의 시험용 검증기는 실제 증명을 확인하지 않는다.
+\end{minipage}
+\end{center}
