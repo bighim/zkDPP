@@ -5,7 +5,7 @@
 \label{tab:eval-key}
 \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}rrr@{}}
 \toprule
-전체 위원 수 & 사용 조각 수 & 평균 (ms) \\ \midrule
+전체 위원 수 $N$ & 임계값 $K$ & 평균 (ms) \\ \midrule
 10 & 2 & 0.188 \\
 10 & 3 & 0.251 \\
 10 & 5 & 0.384 \\
@@ -13,6 +13,6 @@
 10 & 10 & 0.737 \\
 \bottomrule
 \end{tabular*}
-\par\smallskip\begin{minipage}{\columnwidth}\footnotesize 준비 실행 뒤 조건마다 한 번 측정하고, 그 안에서 복원 1,000회의 평균을 구했다. 선택한 조각의 검증·결합·복원한 키의 공개키 대조를 포함한다.\end{minipage}
+\par\smallskip\begin{minipage}{\columnwidth}\footnotesize 각 조건에서 $K$개 조각을 사용했다. 준비 1회 뒤 공식 측정 1회 안에서 복원 1,000회의 평균을 구했다. 조각 검증·결합·복원한 키의 공개키 대조를 포함한다.\end{minipage}
 \end{minipage}
 \end{center}

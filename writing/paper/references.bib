@@ -282,6 +282,32 @@
   note = {Archived revision 8560fd3; test verifier and single audit key}
 }
 
+% Stored real-verifier runs; checked against pinned Anvil/audit JSON, not newly rerun.
+@misc{zkdpp-m1hf-execution-2026,
+  author = {{zkDPP project}},
+  title = {{zkDPP M1-HF}: Proof Verification, Tracing, and Freezing Execution Records},
+  year = {2026},
+  howpublished = {Project code and stored execution records},
+  note = {Revision \texttt{164d51e};
+          \href{https://github.com/bighim/zkDPP/blob/164d51e447919be9ba961f8a64c018cd05c7d7b1/zkDPP-poc-v2/milestones/M1-HF-spec-conformance-result.md}{report and raw-record links};
+          \href{https://github.com/bighim/zkDPP/blob/164d51e447919be9ba961f8a64c018cd05c7d7b1/zkDPP-poc-v2/features/v2events/circuits.go}{event circuits};
+          \href{https://github.com/bighim/zkDPP/blob/164d51e447919be9ba961f8a64c018cd05c7d7b1/zkDPP-poc-v2/internal/circuitutil/audit_encryption.go}{audit-binding constraints};
+          inspected 2 October 2026; not independently rerun}
+}
+
+% Raw event/recovery values and aggregation checked locally in evaluation-evidence.txt.
+@misc{zkdpp-evaluation-data-2026,
+  author = {{zkDPP project}},
+  title = {{zkDPP} Evaluation Data and Aggregation Supplement},
+  year = {2026},
+  howpublished = {Project measurement data and aggregation code},
+  note = {Revision \texttt{483f4a0};
+          \href{https://github.com/bighim/zkDPP/tree/483f4a0280d832f95a6842997ca89e35bcbb0879/zkDPP-poc-v2/docs/paper-data}{tables and provenance},
+          \href{https://github.com/bighim/zkDPP/blob/483f4a0280d832f95a6842997ca89e35bcbb0879/zkDPP-poc-v2/docs/src/build-paper-results.cjs}{aggregation code},
+          \href{https://github.com/bighim/zkDPP/blob/483f4a0280d832f95a6842997ca89e35bcbb0879/zkDPP-poc-v2/output/paper-supplement/prepared-recovery/result.json}{key-recovery records};
+          inspected 2 October 2026}
+}
+
 % Read-only source scope inspection, distinct from the preserved performance report.
 @misc{zkdpp-implementation-profile-2026,
   author = {{zkDPP project}},
@@ -291,6 +317,27 @@
   note = {Revision \texttt{483f4a0}; inspected 30 September 2026;
           \href{https://github.com/bighim/zkDPP/tree/483f4a0280d832f95a6842997ca89e35bcbb0879/zkDPP-poc-v2}{source snapshot};
           execution and performance not independently reproduced}
+}
+
+% Primary ePrint abstract/metadata checked 5 October 2026; 2026-04-23 revision.
+@misc{sefranek-plonk-simulation-2024,
+  author = {Marek Sefranek},
+  title = {How (Not) to Simulate {PLONK}},
+  year = {2024},
+  howpublished = {Cryptology ePrint Archive, Paper 2024/848},
+  note = {\href{https://eprint.iacr.org/2024/848}{ePrint 2024/848}},
+  doi = {10.1007/978-3-031-71070-4_5},
+  url = {https://eprint.iacr.org/2024/848}
+}
+
+% Exact module source read: backend/backend.go and backend/plonk/bls12-381/prove.go.
+@misc{gnark-plonk-options-015,
+  author = {{Consensys}},
+  title = {gnark v0.15.0: {PLONK} Prover Configuration and Randomization},
+  year = {2026},
+  howpublished = {Source code},
+  note = {\href{https://github.com/Consensys/gnark/blob/v0.15.0/backend/backend.go}{prover options};
+          \href{https://github.com/Consensys/gnark/blob/v0.15.0/backend/plonk/bls12-381/prove.go}{BLS12-381 prover}; inspected 5 October 2026}
 }
 
 % Local measurements: implementation/poc-v2/experiments/iscc-atomic-vs-composite/results/sahai-6-vs-1/.

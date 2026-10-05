@@ -14,12 +14,10 @@
 경우에만 보고한다. 명시한 암호·원장·권한 가정 아래 정상 실행의
 정확성과 잘못된 거래·추적·완료 보고를 거부하는 건전성을 증명한다.
 공개 확인 자료와 K개 미만 조각을 보는 수동 외부 관찰자의
-프라이버시도 분석한다. 기호 모델의 사례와
-보존된 시험용 검증기 판본의 대표 실행을 검사한다. 별도의
-성능 자료로 아홉 거래의 비용 및 추적·동결 시간을 평가한다.
+프라이버시도 분석한다. 실제 증명을 검증한 대표 거래 이력에서
+추적·동결 절차의 동작을 확인하고, 별도의 성능 자료로
+아홉 거래의 비용 및 추적·동결 시간을 평가한다.
 측정 조건에서 감사 기능은 gas를 9.69--54.67\% 증가시켰다.
-이 결과는 이미 발급된 제품 주장의 취소나 물리적 회수를 보장하지
-않으며, 현행 설계 전체의 구현 적합성을 확립한 결과도 아니다.
 
 \begin{center}\textbf{ABSTRACT}\end{center}
 Supply chains split, combine, and transfer materials as products are made.
@@ -41,14 +39,11 @@ assumptions, we prove correctness and soundness against invalid transactions
 and false tracing or completion results. We also analyze passive-observer
 privacy for honest histories with equal permitted leakage, including public
 share-verification data and fewer than K secret shares.
-We check selected cases in a symbolic model and representative runs of
-an archived implementation using a test verifier. Separate
+We examine stored transaction runs with real proof verification and
+associated tracing and freezing results. Separate
 measurements report costs for nine event types and tracing and freezing
 times. Audit data increased transaction gas by
 9.69--54.67\% under the measured conditions.
-The construction does not revoke issued product claims or enforce
-physical recall. The evaluation does not establish full implementation
-conformance to the current design.
 
 \smallskip
 \noindent\textbf{Keywords:} Digital product passport, Zero-knowledge proof,
