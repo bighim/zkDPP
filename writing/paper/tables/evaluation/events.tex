@@ -6,17 +6,17 @@
 \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lrrr@{}}
 \toprule
 거래 & 제약 수 & gas & E2E (ms) \\ \midrule
-Entry & 18,115 & 2,258,715 & 770.834 \\
-Transfer & 49,883 & 3,577,414 & 1,464.369 \\
-Proceed & 35,858 & 1,784,082 & 1,278.965 \\
-Recall & 35,987 & 1,785,084 & 1,250.315 \\
-Merge & 51,543 & 1,888,301 & 1,361.248 \\
-Split & 48,608 & 2,730,046 & 1,497.729 \\
-Process & 55,402 & 1,866,617 & 1,335.974 \\
-Exit & 27,940 & 534,277 & 674.484 \\
-Issue & 35,957 & 678,565 & 1,225.264 \\
+Entry & 18,115 & 2,258,715 & \shortstack[r]{770.834\\\scriptsize[750.529, 881.576]} \\
+Transfer & 49,883 & 3,577,414 & \shortstack[r]{1,464.369\\\scriptsize[1,349.669, 1,541.041]} \\
+Proceed & 35,858 & 1,784,082 & \shortstack[r]{1,278.965\\\scriptsize[1,213.766, 1,330.913]} \\
+Recall & 35,987 & 1,785,084 & \shortstack[r]{1,250.315\\\scriptsize[1,193.623, 1,527.191]} \\
+Merge & 51,543 & 1,888,301 & \shortstack[r]{1,361.248\\\scriptsize[1,243.049, 1,687.575]} \\
+Split & 48,608 & 2,730,046 & \shortstack[r]{1,497.729\\\scriptsize[1,333.420, 1,564.472]} \\
+Process & 55,402 & 1,866,617 & \shortstack[r]{1,335.974\\\scriptsize[1,308.756, 1,417.352]} \\
+Exit & 27,940 & 534,277 & \shortstack[r]{674.484\\\scriptsize[649.884, 705.232]} \\
+Issue & 35,957 & 678,565 & \shortstack[r]{1,225.264\\\scriptsize[1,084.983, 1,259.957]} \\
 \bottomrule
 \end{tabular*}
-\par\smallskip\begin{minipage}{\columnwidth}\footnotesize Process는 입력 2개·출력 1개다. 준비 1회 뒤 공식 5회의 gas·E2E 중앙값이며, 반복별 값과 범위는 보충자료~\cite{zkdpp-evaluation-data-2026}에 있다.\end{minipage}
+\par\smallskip\begin{minipage}{\columnwidth}\footnotesize Process는 입력 2개·출력 1개다. 준비 1회 뒤 공식 5회의 gas·E2E 중앙값이다. E2E의 대괄호는 5회 중 최소·최대이며, 각 거래의 gas 최소·최대 차이는 24--84다. 반복별 원시 기록과 집계 코드는 공개 저장소에 제공한다~\cite{zkdpp-evaluation-data-2026}.\end{minipage}
 \end{minipage}
 \end{center}

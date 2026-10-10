@@ -149,15 +149,16 @@ $\ell$은 생성점 $G$의 위수이며, 아래 덧셈·뺄셈은 평문 유한�
 \begin{equation}
  \begin{aligned}
  R&=\eta G,\qquad Z=\eta PK_B,\\
- \kappa&=H_{\mathsf{AuditKey}}(Z_x,Z_y),\\
- C_j&=M_j+H_{\mathsf{AuditMask}}(\kappa,j).
+ k_{\rm sym}&=H_{\mathsf{AuditKey}}(Z_x,Z_y),\\
+ C_j&=M_j+H_{\mathsf{AuditMask}}(k_{\rm sym},j).
  \end{aligned}
  \label{eq:audit-vector-encryption}
 \end{equation}
-인덱스 $j$는 전체 목록에서 0부터 시작한다. 저장할 때는 부모의
+$k_{\rm sym}$은 유도한 대칭키이며, 인덱스 $j$는 전체 목록에서
+0부터 시작한다. 저장할 때는 부모의
 암호화 값 $m$개와 미래 식별자의 암호화 값 $s$개를 두 배열로
 나누지만, 같은 $R$을 쓰는 한 암호문이다. 감사자는 두 배열을 다시
-이어 붙이고 $Z=SK_B R$로 같은 $\kappa$를 계산해 각 마스크를 뺀다.
+이어 붙이고 $Z=SK_B R$로 같은 $k_{\rm sym}$을 계산해 각 마스크를 뺀다.
 미래 식별자 배열에서도 인덱스를 0으로 다시 시작하지 않는다.
 
 Transfer의 출력 순서는 이전 증표·잔여 회계 증표이고,

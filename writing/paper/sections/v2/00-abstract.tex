@@ -7,11 +7,13 @@
 공개 정보만으로 그 대상을 찾기 어렵다.
 본 논문은 이러한 검증과 사후 대응을 연결하는 zkDPP를 제안한다.
 참여자는 상세 수치와 거래 연결을 공개하지 않고도 각 거래가
-정해진 회계 규칙을 지켰음을 증명한다. 동시에 실제 입력과 다음
-사용을 식별할 정보를 암호화해 남긴다. 승인된 감사자는 이 정보를
+정해진 회계 규칙을 지켰음을 증명한다. 동시에 암호화한 감사 자료가
+실제 입력과 출력의 미래 소비 식별자에 대응함을 함께 검증한다.
+승인된 감사자는 이 정보를
 열어 이력을 따라가고, 아직 사용되지 않은 관련 기록 전체를 동결한다.
-전체 차단의 완료는 같은 원장 시점에서 모든 대상을 다시 확인한
-경우에만 보고한다. 명시한 암호·원장·권한 가정 아래 정상 실행의
+전체 차단에서는 대상 선정부터 공통 확인까지 관련 기록의 소비와
+동결 해제가 중단된다고 가정하고, 같은 원장 시점에서 모든 대상을
+다시 확인한 경우에만 완료를 보고한다. 명시한 암호·원장·권한 가정 아래 정상 실행의
 정확성과 잘못된 거래·추적·완료 보고를 거부하는 건전성을 증명한다.
 공개 확인 자료와 K개 미만 조각을 보는 수동 외부 관찰자의
 프라이버시도 분석한다. 실제 증명을 검증한 대표 거래 이력에서
@@ -29,12 +31,14 @@ all such records when a ledger hides transaction links.
 This paper presents zkDPP, which connects private accounting with
 authorized tracing and use prevention. Participants prove that each
 transaction follows the accounting rules without revealing its detailed
-values or input links. Each transaction also encrypts its actual input
-references and the identifiers needed to recognize later use of its
+values or input links. The same proof also binds the encrypted audit data
+to the actual input references and the future spend identifiers of its
 outputs. An authorized auditor decrypts this information, follows the
 history, and freezes the entire set of related unspent records.
-Completion is reported only after all targets are checked at one common
-ledger checkpoint. Under explicit cryptographic, ledger, and authority
+For whole-target containment, related record consumption and unfreezing
+are assumed to remain paused from target selection through the common
+check. Completion is reported only after all targets are checked at one
+common ledger checkpoint. Under explicit cryptographic, ledger, and authority
 assumptions, we prove correctness and soundness against invalid transactions
 and false tracing or completion results. We also analyze passive-observer
 privacy for honest histories with equal permitted leakage, including public
