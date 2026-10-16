@@ -16,3 +16,7 @@ audit-query harness has its own `go.mod` and `go.sum`. The proof setup code
 generates verifier contracts and proof fixtures needed by the Solidity tests.
 This source publication does not add generated keys, setup artifacts, or new
 benchmark results.
+
+## Current numerical data
+
+The source index above records the b11b6e7 publication. The 2026-10-16 run01 numerical refresh is provided as [current tables](../docs/paper-data/current-results.md), [official numeric observations and aggregation instructions](../docs/paper-data/README.md). This numeric refresh preserves the original measurements and regenerates the published CSVs without rerunning benchmarks.

@@ -1,0 +1,546 @@
+{
+  "edition": "2026-10-16-run01",
+  "setting": "gnark-v0.15.0 PLONK-KZG quotient-shard randomization enabled for all generated PLONK proofs",
+  "events": [
+    {
+      "event": "Entry",
+      "constraints": 18115,
+      "plainConstraints": 5980,
+      "gas": {
+        "median": 2258727,
+        "min": 2258679,
+        "max": 2258751,
+        "n": 5
+      },
+      "plainGas": {
+        "median": 2059123,
+        "min": 2059123,
+        "max": 2059171,
+        "n": 5
+      },
+      "e2eMS": {
+        "median": 613.25875,
+        "min": 605.777291,
+        "max": 616.542041,
+        "n": 5
+      }
+    },
+    {
+      "event": "Transfer",
+      "constraints": 49883,
+      "plainConstraints": 35645,
+      "gas": {
+        "median": 3577390,
+        "min": 3577342,
+        "max": 3577414,
+        "n": 5
+      },
+      "plainGas": {
+        "median": 3221244,
+        "min": 3221232,
+        "max": 3221292,
+        "n": 5
+      },
+      "e2eMS": {
+        "median": 1105.16175,
+        "min": 1098.104459,
+        "max": 1128.982666,
+        "n": 5
+      }
+    },
+    {
+      "event": "Proceed",
+      "constraints": 35858,
+      "plainConstraints": 23123,
+      "gas": {
+        "median": 1784082,
+        "min": 1784058,
+        "max": 1784118,
+        "n": 5
+      },
+      "plainGas": {
+        "median": 1519252,
+        "min": 1519228,
+        "max": 1519264,
+        "n": 5
+      },
+      "e2eMS": {
+        "median": 990.117584,
+        "min": 978.901417,
+        "max": 1018.46975,
+        "n": 5
+      }
+    },
+    {
+      "event": "Recall",
+      "constraints": 35987,
+      "plainConstraints": 23252,
+      "gas": {
+        "median": 1785084,
+        "min": 1785072,
+        "max": 1785120,
+        "n": 5
+      },
+      "plainGas": {
+        "median": 1520722,
+        "min": 1520698,
+        "max": 1520758,
+        "n": 5
+      },
+      "e2eMS": {
+        "median": 987.416042,
+        "min": 975.745958,
+        "max": 1002.917792,
+        "n": 5
+      }
+    },
+    {
+      "event": "Merge",
+      "constraints": 51543,
+      "plainConstraints": 38208,
+      "gas": {
+        "median": 1888325,
+        "min": 1888313,
+        "max": 1888325,
+        "n": 5
+      },
+      "plainGas": {
+        "median": 1599277,
+        "min": 1599229,
+        "max": 1599301,
+        "n": 5
+      },
+      "e2eMS": {
+        "median": 1049.808375,
+        "min": 1041.55475,
+        "max": 1079.734583,
+        "n": 5
+      }
+    },
+    {
+      "event": "Split",
+      "constraints": 48608,
+      "plainConstraints": 34671,
+      "gas": {
+        "median": 2730034,
+        "min": 2729986,
+        "max": 2730058,
+        "n": 5
+      },
+      "plainGas": {
+        "median": 2373771,
+        "min": 2373735,
+        "max": 2373807,
+        "n": 5
+      },
+      "e2eMS": {
+        "median": 1116.926625,
+        "min": 1110.458375,
+        "max": 1136.668166,
+        "n": 5
+      }
+    },
+    {
+      "event": "Process",
+      "constraints": 55402,
+      "plainConstraints": 42067,
+      "gas": {
+        "median": 1866617,
+        "min": 1866545,
+        "max": 1866641,
+        "n": 5
+      },
+      "plainGas": {
+        "median": 1557336,
+        "min": 1557288,
+        "max": 1557384,
+        "n": 5
+      },
+      "e2eMS": {
+        "median": 1056.654208,
+        "min": 1048.774166,
+        "max": 1130.902542,
+        "n": 5
+      }
+    },
+    {
+      "event": "Exit",
+      "constraints": 27940,
+      "plainConstraints": 16407,
+      "gas": {
+        "median": 534289,
+        "min": 534217,
+        "max": 534313,
+        "n": 5
+      },
+      "plainGas": {
+        "median": 403572,
+        "min": 403548,
+        "max": 403584,
+        "n": 5
+      },
+      "e2eMS": {
+        "median": 573.998792,
+        "min": 557.388083,
+        "max": 575.349125,
+        "n": 5
+      }
+    },
+    {
+      "event": "Issue",
+      "constraints": 35957,
+      "plainConstraints": 24424,
+      "gas": {
+        "median": 678589,
+        "min": 678529,
+        "max": 678637,
+        "n": 5
+      },
+      "plainGas": {
+        "median": 438730,
+        "min": 438658,
+        "max": 438754,
+        "n": 5
+      },
+      "e2eMS": {
+        "median": 921.809333,
+        "min": 909.173125,
+        "max": 933.643375,
+        "n": 5
+      }
+    }
+  ],
+  "process": [
+    {
+      "inputs": 2,
+      "outputs": 1,
+      "off": {
+        "inputs": 2,
+        "outputs": 1,
+        "variant": "plain",
+        "run": 1,
+        "constraints": 42067,
+        "gas": 1578702
+      },
+      "on": {
+        "inputs": 2,
+        "outputs": 1,
+        "variant": "audit",
+        "run": 1,
+        "constraints": 55402,
+        "gas": 1887947
+      }
+    },
+    {
+      "inputs": 3,
+      "outputs": 1,
+      "off": {
+        "inputs": 3,
+        "outputs": 1,
+        "variant": "plain",
+        "run": 1,
+        "constraints": 58181,
+        "gas": 1586871
+      },
+      "on": {
+        "inputs": 3,
+        "outputs": 1,
+        "variant": "audit",
+        "run": 1,
+        "constraints": 72116,
+        "gas": 1920563
+      }
+    },
+    {
+      "inputs": 4,
+      "outputs": 1,
+      "off": {
+        "inputs": 4,
+        "outputs": 1,
+        "variant": "plain",
+        "run": 1,
+        "constraints": 74297,
+        "gas": 1650731
+      },
+      "on": {
+        "inputs": 4,
+        "outputs": 1,
+        "variant": "audit",
+        "run": 1,
+        "constraints": 88832,
+        "gas": 2009015
+      }
+    },
+    {
+      "inputs": 2,
+      "outputs": 2,
+      "off": {
+        "inputs": 2,
+        "outputs": 2,
+        "variant": "plain",
+        "run": 1,
+        "constraints": 54635,
+        "gas": 2399859
+      },
+      "on": {
+        "inputs": 2,
+        "outputs": 2,
+        "variant": "audit",
+        "run": 1,
+        "constraints": 69172,
+        "gas": 2800536
+      }
+    },
+    {
+      "inputs": 2,
+      "outputs": 3,
+      "off": {
+        "inputs": 2,
+        "outputs": 3,
+        "variant": "plain",
+        "run": 1,
+        "constraints": 67205,
+        "gas": 3271573
+      },
+      "on": {
+        "inputs": 2,
+        "outputs": 3,
+        "variant": "audit",
+        "run": 1,
+        "constraints": 82944,
+        "gas": 3763839
+      }
+    }
+  ],
+  "routes": [
+    {
+      "route": "direct",
+      "audit": "no",
+      "transactions": 1,
+      "gas": 2366252,
+      "min": 2366216,
+      "max": 2366264,
+      "aggregation": "median of five direct transactions",
+      "samples": "5"
+    },
+    {
+      "route": "shared",
+      "audit": "yes",
+      "transactions": 1,
+      "gas": 2724194,
+      "min": 2724194,
+      "max": 2724194,
+      "aggregation": "one official observation",
+      "samples": "1"
+    },
+    {
+      "route": "proceed",
+      "audit": "yes",
+      "transactions": 2,
+      "gas": 5361472,
+      "aggregation": "sum of audited Transfer and Proceed medians",
+      "samples": "5+5"
+    },
+    {
+      "route": "recall",
+      "audit": "yes",
+      "transactions": 2,
+      "gas": 5362474,
+      "aggregation": "sum of audited Transfer and Recall medians",
+      "samples": "5+5"
+    }
+  ],
+  "same": [
+    {
+      "arm": "U",
+      "prove": {
+        "median": 885.1395835000001,
+        "min": 870.637625,
+        "max": 901.237542,
+        "n": 30
+      },
+      "verify": {
+        "median": 2.649292,
+        "min": 2.544,
+        "max": 3.11225,
+        "n": 30
+      },
+      "abi": 1412,
+      "gas": {
+        "median": 342166,
+        "min": 342166,
+        "max": 342166,
+        "n": 30
+      },
+      "keyBytes": 6340752,
+      "nativeProofBytes": 664,
+      "solidityProofBytes": 1056,
+      "publicInputBytes": 288,
+      "canonicalNativeBytes": 965
+    },
+    {
+      "arm": "D-sequential",
+      "prove": {
+        "median": 1308.183646,
+        "min": 1286.567208,
+        "max": 1342.8075,
+        "n": 30
+      },
+      "verify": {
+        "median": 5.2657915,
+        "min": 5.137875,
+        "max": 5.556459,
+        "n": 30
+      },
+      "abi": 2564,
+      "gas": {
+        "median": 677542,
+        "min": 677542,
+        "max": 677542,
+        "n": 30
+      },
+      "keyBytes": 9535776,
+      "nativeProofBytes": 1328,
+      "solidityProofBytes": 2112,
+      "publicInputBytes": 288,
+      "canonicalNativeBytes": 1633
+    },
+    {
+      "arm": "D-parallel-2",
+      "prove": {
+        "median": 1196.197854,
+        "min": 1179.301375,
+        "max": 1251.453833,
+        "n": 30
+      },
+      "verify": {
+        "median": 5.3417915,
+        "min": 5.137458,
+        "max": 11.119833,
+        "n": 30
+      },
+      "abi": 2564,
+      "gas": {
+        "median": 677542,
+        "min": 677542,
+        "max": 677542,
+        "n": 30
+      },
+      "keyBytes": 9535776,
+      "nativeProofBytes": 1328,
+      "solidityProofBytes": 2112,
+      "publicInputBytes": 288,
+      "canonicalNativeBytes": 1633
+    }
+  ],
+  "three": [
+    {
+      "arm": "A-sequential",
+      "prove": {
+        "median": 555.6994165,
+        "min": 549.13325,
+        "max": 598.265583,
+        "n": 30
+      },
+      "verify": {
+        "median": 15.510146,
+        "min": 15.184666,
+        "max": 16.193292,
+        "n": 30
+      },
+      "abi": 7236,
+      "gas": {
+        "median": 2009339,
+        "min": 2009339,
+        "max": 2009339,
+        "n": 30
+      },
+      "keyBytes": 1327536,
+      "nativeProofBytes": 3984,
+      "solidityProofBytes": 6336,
+      "publicInputBytes": 480,
+      "canonicalNativeBytes": 4497
+    },
+    {
+      "arm": "A-parallel-2",
+      "prove": {
+        "median": 497.642333,
+        "min": 491.140833,
+        "max": 537.626541,
+        "n": 30
+      },
+      "verify": {
+        "median": 15.416478999999999,
+        "min": 14.983042,
+        "max": 16.423708,
+        "n": 30
+      },
+      "abi": 7236,
+      "gas": {
+        "median": 2009339,
+        "min": 2009339,
+        "max": 2009339,
+        "n": 30
+      },
+      "keyBytes": 1327536,
+      "nativeProofBytes": 3984,
+      "solidityProofBytes": 6336,
+      "publicInputBytes": 480,
+      "canonicalNativeBytes": 4497
+    },
+    {
+      "arm": "B",
+      "prove": {
+        "median": 452.8968545,
+        "min": 446.100084,
+        "max": 551.055667,
+        "n": 30
+      },
+      "verify": {
+        "median": 2.6427085000000003,
+        "min": 2.564708,
+        "max": 2.941375,
+        "n": 30
+      },
+      "abi": 1604,
+      "gas": {
+        "median": 349139,
+        "min": 349139,
+        "max": 349139,
+        "n": 30
+      },
+      "keyBytes": 3195024,
+      "nativeProofBytes": 664,
+      "solidityProofBytes": 1056,
+      "publicInputBytes": 480,
+      "canonicalNativeBytes": 1157
+    },
+    {
+      "arm": "C",
+      "prove": {
+        "median": 890.8194794999999,
+        "min": 868.13625,
+        "max": 945.206959,
+        "n": 30
+      },
+      "verify": {
+        "median": 2.637042,
+        "min": 2.574,
+        "max": 2.907042,
+        "n": 30
+      },
+      "abi": 1412,
+      "gas": {
+        "median": 342246,
+        "min": 342246,
+        "max": 342246,
+        "n": 30
+      },
+      "keyBytes": 6340752,
+      "nativeProofBytes": 664,
+      "solidityProofBytes": 1056,
+      "publicInputBytes": 288,
+      "canonicalNativeBytes": 965
+    }
+  ]
+}

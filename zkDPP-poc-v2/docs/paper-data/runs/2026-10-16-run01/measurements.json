@@ -1,0 +1,4384 @@
+{
+  "edition": "2026-10-16-run01",
+  "setting": "gnark-v0.15.0 PLONK-KZG quotient-shard randomization enabled for all generated PLONK proofs",
+  "environment": {
+    "macOS": "26.6.2 (25G83)",
+    "GOMAXPROCS": 8,
+    "localAnvil": "1.7.1-Homebrew",
+    "hardfork": "Prague",
+    "go": "1.25.7"
+  },
+  "events": [
+    {
+      "event": "Entry",
+      "variant": "audit",
+      "run": 1,
+      "constraints": 18115,
+      "gas": 2258727,
+      "e2eMS": 613.25875,
+      "sstoreGas": 970100
+    },
+    {
+      "event": "Entry",
+      "variant": "audit",
+      "run": 2,
+      "constraints": 18115,
+      "gas": 2258679,
+      "e2eMS": 607.726083,
+      "sstoreGas": 970100
+    },
+    {
+      "event": "Entry",
+      "variant": "audit",
+      "run": 3,
+      "constraints": 18115,
+      "gas": 2258751,
+      "e2eMS": 614.361708,
+      "sstoreGas": 970100
+    },
+    {
+      "event": "Entry",
+      "variant": "audit",
+      "run": 4,
+      "constraints": 18115,
+      "gas": 2258703,
+      "e2eMS": 605.777291,
+      "sstoreGas": 970100
+    },
+    {
+      "event": "Entry",
+      "variant": "audit",
+      "run": 5,
+      "constraints": 18115,
+      "gas": 2258727,
+      "e2eMS": 616.542041,
+      "sstoreGas": 970100
+    },
+    {
+      "event": "Transfer",
+      "variant": "audit",
+      "run": 1,
+      "constraints": 49883,
+      "gas": 3577402,
+      "e2eMS": 1120.61125,
+      "sstoreGas": 1385500
+    },
+    {
+      "event": "Transfer",
+      "variant": "audit",
+      "run": 2,
+      "constraints": 49883,
+      "gas": 3577342,
+      "e2eMS": 1101.2875,
+      "sstoreGas": 1385500
+    },
+    {
+      "event": "Transfer",
+      "variant": "audit",
+      "run": 3,
+      "constraints": 49883,
+      "gas": 3577390,
+      "e2eMS": 1105.16175,
+      "sstoreGas": 1385500
+    },
+    {
+      "event": "Transfer",
+      "variant": "audit",
+      "run": 4,
+      "constraints": 49883,
+      "gas": 3577342,
+      "e2eMS": 1128.982666,
+      "sstoreGas": 1385500
+    },
+    {
+      "event": "Transfer",
+      "variant": "audit",
+      "run": 5,
+      "constraints": 49883,
+      "gas": 3577414,
+      "e2eMS": 1098.104459,
+      "sstoreGas": 1385500
+    },
+    {
+      "event": "Proceed",
+      "variant": "audit",
+      "run": 1,
+      "constraints": 35858,
+      "gas": 1784082,
+      "e2eMS": 989.353083,
+      "sstoreGas": 487700
+    },
+    {
+      "event": "Proceed",
+      "variant": "audit",
+      "run": 2,
+      "constraints": 35858,
+      "gas": 1784058,
+      "e2eMS": 1018.46975,
+      "sstoreGas": 487700
+    },
+    {
+      "event": "Proceed",
+      "variant": "audit",
+      "run": 3,
+      "constraints": 35858,
+      "gas": 1784094,
+      "e2eMS": 990.117584,
+      "sstoreGas": 487700
+    },
+    {
+      "event": "Proceed",
+      "variant": "audit",
+      "run": 4,
+      "constraints": 35858,
+      "gas": 1784070,
+      "e2eMS": 978.901417,
+      "sstoreGas": 487700
+    },
+    {
+      "event": "Proceed",
+      "variant": "audit",
+      "run": 5,
+      "constraints": 35858,
+      "gas": 1784118,
+      "e2eMS": 990.189833,
+      "sstoreGas": 487700
+    },
+    {
+      "event": "Recall",
+      "variant": "audit",
+      "run": 1,
+      "constraints": 35987,
+      "gas": 1785108,
+      "e2eMS": 975.745958,
+      "sstoreGas": 487700
+    },
+    {
+      "event": "Recall",
+      "variant": "audit",
+      "run": 2,
+      "constraints": 35987,
+      "gas": 1785120,
+      "e2eMS": 986.146459,
+      "sstoreGas": 487700
+    },
+    {
+      "event": "Recall",
+      "variant": "audit",
+      "run": 3,
+      "constraints": 35987,
+      "gas": 1785072,
+      "e2eMS": 1002.917792,
+      "sstoreGas": 487700
+    },
+    {
+      "event": "Recall",
+      "variant": "audit",
+      "run": 4,
+      "constraints": 35987,
+      "gas": 1785084,
+      "e2eMS": 987.416042,
+      "sstoreGas": 487700
+    },
+    {
+      "event": "Recall",
+      "variant": "audit",
+      "run": 5,
+      "constraints": 35987,
+      "gas": 1785084,
+      "e2eMS": 997.401666,
+      "sstoreGas": 487700
+    },
+    {
+      "event": "Merge",
+      "variant": "audit",
+      "run": 1,
+      "constraints": 51543,
+      "gas": 1888325,
+      "e2eMS": 1051.434958,
+      "sstoreGas": 581100
+    },
+    {
+      "event": "Merge",
+      "variant": "audit",
+      "run": 2,
+      "constraints": 51543,
+      "gas": 1888313,
+      "e2eMS": 1041.55475,
+      "sstoreGas": 581100
+    },
+    {
+      "event": "Merge",
+      "variant": "audit",
+      "run": 3,
+      "constraints": 51543,
+      "gas": 1888313,
+      "e2eMS": 1044.48275,
+      "sstoreGas": 581100
+    },
+    {
+      "event": "Merge",
+      "variant": "audit",
+      "run": 4,
+      "constraints": 51543,
+      "gas": 1888325,
+      "e2eMS": 1049.808375,
+      "sstoreGas": 581100
+    },
+    {
+      "event": "Merge",
+      "variant": "audit",
+      "run": 5,
+      "constraints": 51543,
+      "gas": 1888325,
+      "e2eMS": 1079.734583,
+      "sstoreGas": 581100
+    },
+    {
+      "event": "Split",
+      "variant": "audit",
+      "run": 1,
+      "constraints": 48608,
+      "gas": 2729986,
+      "e2eMS": 1116.680917,
+      "sstoreGas": 671700
+    },
+    {
+      "event": "Split",
+      "variant": "audit",
+      "run": 2,
+      "constraints": 48608,
+      "gas": 2730058,
+      "e2eMS": 1116.926625,
+      "sstoreGas": 671700
+    },
+    {
+      "event": "Split",
+      "variant": "audit",
+      "run": 3,
+      "constraints": 48608,
+      "gas": 2730034,
+      "e2eMS": 1110.458375,
+      "sstoreGas": 671700
+    },
+    {
+      "event": "Split",
+      "variant": "audit",
+      "run": 4,
+      "constraints": 48608,
+      "gas": 2730034,
+      "e2eMS": 1136.668166,
+      "sstoreGas": 671700
+    },
+    {
+      "event": "Split",
+      "variant": "audit",
+      "run": 5,
+      "constraints": 48608,
+      "gas": 2730034,
+      "e2eMS": 1120.567458,
+      "sstoreGas": 671700
+    },
+    {
+      "event": "Process",
+      "variant": "audit",
+      "run": 1,
+      "constraints": 55402,
+      "gas": 1866593,
+      "e2eMS": 1056.654208,
+      "sstoreGas": 549700
+    },
+    {
+      "event": "Process",
+      "variant": "audit",
+      "run": 2,
+      "constraints": 55402,
+      "gas": 1866641,
+      "e2eMS": 1053.7545,
+      "sstoreGas": 549700
+    },
+    {
+      "event": "Process",
+      "variant": "audit",
+      "run": 3,
+      "constraints": 55402,
+      "gas": 1866545,
+      "e2eMS": 1048.774166,
+      "sstoreGas": 549700
+    },
+    {
+      "event": "Process",
+      "variant": "audit",
+      "run": 4,
+      "constraints": 55402,
+      "gas": 1866629,
+      "e2eMS": 1130.902542,
+      "sstoreGas": 549700
+    },
+    {
+      "event": "Process",
+      "variant": "audit",
+      "run": 5,
+      "constraints": 55402,
+      "gas": 1866617,
+      "e2eMS": 1061.882959,
+      "sstoreGas": 549700
+    },
+    {
+      "event": "Exit",
+      "variant": "audit",
+      "run": 1,
+      "constraints": 27940,
+      "gas": 534313,
+      "e2eMS": 575.117709,
+      "sstoreGas": 131500
+    },
+    {
+      "event": "Exit",
+      "variant": "audit",
+      "run": 2,
+      "constraints": 27940,
+      "gas": 534289,
+      "e2eMS": 573.998792,
+      "sstoreGas": 131500
+    },
+    {
+      "event": "Exit",
+      "variant": "audit",
+      "run": 3,
+      "constraints": 27940,
+      "gas": 534265,
+      "e2eMS": 561.2105,
+      "sstoreGas": 131500
+    },
+    {
+      "event": "Exit",
+      "variant": "audit",
+      "run": 4,
+      "constraints": 27940,
+      "gas": 534301,
+      "e2eMS": 557.388083,
+      "sstoreGas": 131500
+    },
+    {
+      "event": "Exit",
+      "variant": "audit",
+      "run": 5,
+      "constraints": 27940,
+      "gas": 534217,
+      "e2eMS": 575.349125,
+      "sstoreGas": 131500
+    },
+    {
+      "event": "Issue",
+      "variant": "audit",
+      "run": 1,
+      "constraints": 35957,
+      "gas": 678637,
+      "e2eMS": 933.643375,
+      "sstoreGas": 255600
+    },
+    {
+      "event": "Issue",
+      "variant": "audit",
+      "run": 2,
+      "constraints": 35957,
+      "gas": 678589,
+      "e2eMS": 921.809333,
+      "sstoreGas": 255600
+    },
+    {
+      "event": "Issue",
+      "variant": "audit",
+      "run": 3,
+      "constraints": 35957,
+      "gas": 678589,
+      "e2eMS": 909.173125,
+      "sstoreGas": 255600
+    },
+    {
+      "event": "Issue",
+      "variant": "audit",
+      "run": 4,
+      "constraints": 35957,
+      "gas": 678589,
+      "e2eMS": 912.794208,
+      "sstoreGas": 255600
+    },
+    {
+      "event": "Issue",
+      "variant": "audit",
+      "run": 5,
+      "constraints": 35957,
+      "gas": 678529,
+      "e2eMS": 924.287042,
+      "sstoreGas": 255600
+    },
+    {
+      "event": "Entry",
+      "variant": "plain",
+      "run": 1,
+      "constraints": 5980,
+      "gas": 2059123,
+      "e2eMS": 295.883917,
+      "sstoreGas": 794300
+    },
+    {
+      "event": "Entry",
+      "variant": "plain",
+      "run": 2,
+      "constraints": 5980,
+      "gas": 2059123,
+      "e2eMS": 300.957792,
+      "sstoreGas": 794300
+    },
+    {
+      "event": "Entry",
+      "variant": "plain",
+      "run": 3,
+      "constraints": 5980,
+      "gas": 2059171,
+      "e2eMS": 306.191209,
+      "sstoreGas": 794300
+    },
+    {
+      "event": "Entry",
+      "variant": "plain",
+      "run": 4,
+      "constraints": 5980,
+      "gas": 2059171,
+      "e2eMS": 302.035833,
+      "sstoreGas": 794300
+    },
+    {
+      "event": "Entry",
+      "variant": "plain",
+      "run": 5,
+      "constraints": 5980,
+      "gas": 2059123,
+      "e2eMS": 301.144083,
+      "sstoreGas": 794300
+    },
+    {
+      "event": "Transfer",
+      "variant": "plain",
+      "run": 1,
+      "constraints": 35645,
+      "gas": 3221244,
+      "e2eMS": 1082.789708,
+      "sstoreGas": 1061400
+    },
+    {
+      "event": "Transfer",
+      "variant": "plain",
+      "run": 2,
+      "constraints": 35645,
+      "gas": 3221292,
+      "e2eMS": 1063.293208,
+      "sstoreGas": 1061400
+    },
+    {
+      "event": "Transfer",
+      "variant": "plain",
+      "run": 3,
+      "constraints": 35645,
+      "gas": 3221232,
+      "e2eMS": 1067.64175,
+      "sstoreGas": 1061400
+    },
+    {
+      "event": "Transfer",
+      "variant": "plain",
+      "run": 4,
+      "constraints": 35645,
+      "gas": 3221232,
+      "e2eMS": 1054.552042,
+      "sstoreGas": 1061400
+    },
+    {
+      "event": "Transfer",
+      "variant": "plain",
+      "run": 5,
+      "constraints": 35645,
+      "gas": 3221268,
+      "e2eMS": 1043.138167,
+      "sstoreGas": 1061400
+    },
+    {
+      "event": "Proceed",
+      "variant": "plain",
+      "run": 1,
+      "constraints": 23123,
+      "gas": 1519264,
+      "e2eMS": 633.105792,
+      "sstoreGas": 250000
+    },
+    {
+      "event": "Proceed",
+      "variant": "plain",
+      "run": 2,
+      "constraints": 23123,
+      "gas": 1519252,
+      "e2eMS": 627.157458,
+      "sstoreGas": 250000
+    },
+    {
+      "event": "Proceed",
+      "variant": "plain",
+      "run": 3,
+      "constraints": 23123,
+      "gas": 1519228,
+      "e2eMS": 625.327417,
+      "sstoreGas": 250000
+    },
+    {
+      "event": "Proceed",
+      "variant": "plain",
+      "run": 4,
+      "constraints": 23123,
+      "gas": 1519240,
+      "e2eMS": 630.584459,
+      "sstoreGas": 250000
+    },
+    {
+      "event": "Proceed",
+      "variant": "plain",
+      "run": 5,
+      "constraints": 23123,
+      "gas": 1519252,
+      "e2eMS": 621.723792,
+      "sstoreGas": 250000
+    },
+    {
+      "event": "Recall",
+      "variant": "plain",
+      "run": 1,
+      "constraints": 23252,
+      "gas": 1520722,
+      "e2eMS": 622.2875,
+      "sstoreGas": 250000
+    },
+    {
+      "event": "Recall",
+      "variant": "plain",
+      "run": 2,
+      "constraints": 23252,
+      "gas": 1520710,
+      "e2eMS": 613.262458,
+      "sstoreGas": 250000
+    },
+    {
+      "event": "Recall",
+      "variant": "plain",
+      "run": 3,
+      "constraints": 23252,
+      "gas": 1520758,
+      "e2eMS": 611.254875,
+      "sstoreGas": 250000
+    },
+    {
+      "event": "Recall",
+      "variant": "plain",
+      "run": 4,
+      "constraints": 23252,
+      "gas": 1520722,
+      "e2eMS": 629.5765,
+      "sstoreGas": 250000
+    },
+    {
+      "event": "Recall",
+      "variant": "plain",
+      "run": 5,
+      "constraints": 23252,
+      "gas": 1520698,
+      "e2eMS": 631.006666,
+      "sstoreGas": 250000
+    },
+    {
+      "event": "Merge",
+      "variant": "plain",
+      "run": 1,
+      "constraints": 38208,
+      "gas": 1599301,
+      "e2eMS": 1037.551292,
+      "sstoreGas": 321300
+    },
+    {
+      "event": "Merge",
+      "variant": "plain",
+      "run": 2,
+      "constraints": 38208,
+      "gas": 1599229,
+      "e2eMS": 1039.107583,
+      "sstoreGas": 321300
+    },
+    {
+      "event": "Merge",
+      "variant": "plain",
+      "run": 3,
+      "constraints": 38208,
+      "gas": 1599301,
+      "e2eMS": 1005.864917,
+      "sstoreGas": 321300
+    },
+    {
+      "event": "Merge",
+      "variant": "plain",
+      "run": 4,
+      "constraints": 38208,
+      "gas": 1599277,
+      "e2eMS": 1033.491833,
+      "sstoreGas": 321300
+    },
+    {
+      "event": "Merge",
+      "variant": "plain",
+      "run": 5,
+      "constraints": 38208,
+      "gas": 1599253,
+      "e2eMS": 1018.988541,
+      "sstoreGas": 321300
+    },
+    {
+      "event": "Split",
+      "variant": "plain",
+      "run": 1,
+      "constraints": 34671,
+      "gas": 2373771,
+      "e2eMS": 1092.505708,
+      "sstoreGas": 347600
+    },
+    {
+      "event": "Split",
+      "variant": "plain",
+      "run": 2,
+      "constraints": 34671,
+      "gas": 2373735,
+      "e2eMS": 1083.093083,
+      "sstoreGas": 347600
+    },
+    {
+      "event": "Split",
+      "variant": "plain",
+      "run": 3,
+      "constraints": 34671,
+      "gas": 2373759,
+      "e2eMS": 1069.604542,
+      "sstoreGas": 347600
+    },
+    {
+      "event": "Split",
+      "variant": "plain",
+      "run": 4,
+      "constraints": 34671,
+      "gas": 2373771,
+      "e2eMS": 1067.341958,
+      "sstoreGas": 347600
+    },
+    {
+      "event": "Split",
+      "variant": "plain",
+      "run": 5,
+      "constraints": 34671,
+      "gas": 2373807,
+      "e2eMS": 1096.477959,
+      "sstoreGas": 347600
+    },
+    {
+      "event": "Process",
+      "variant": "plain",
+      "run": 1,
+      "constraints": 42067,
+      "gas": 1557384,
+      "e2eMS": 1017.446041,
+      "sstoreGas": 270000
+    },
+    {
+      "event": "Process",
+      "variant": "plain",
+      "run": 2,
+      "constraints": 42067,
+      "gas": 1557372,
+      "e2eMS": 1018.283875,
+      "sstoreGas": 270000
+    },
+    {
+      "event": "Process",
+      "variant": "plain",
+      "run": 3,
+      "constraints": 42067,
+      "gas": 1557288,
+      "e2eMS": 1023.089417,
+      "sstoreGas": 270000
+    },
+    {
+      "event": "Process",
+      "variant": "plain",
+      "run": 4,
+      "constraints": 42067,
+      "gas": 1557336,
+      "e2eMS": 1055.1075,
+      "sstoreGas": 270000
+    },
+    {
+      "event": "Process",
+      "variant": "plain",
+      "run": 5,
+      "constraints": 42067,
+      "gas": 1557312,
+      "e2eMS": 1032.233208,
+      "sstoreGas": 270000
+    },
+    {
+      "event": "Exit",
+      "variant": "plain",
+      "run": 1,
+      "constraints": 16407,
+      "gas": 403548,
+      "e2eMS": 525.271667,
+      "sstoreGas": 20000
+    },
+    {
+      "event": "Exit",
+      "variant": "plain",
+      "run": 2,
+      "constraints": 16407,
+      "gas": 403584,
+      "e2eMS": 521.714584,
+      "sstoreGas": 20000
+    },
+    {
+      "event": "Exit",
+      "variant": "plain",
+      "run": 3,
+      "constraints": 16407,
+      "gas": 403572,
+      "e2eMS": 528.833708,
+      "sstoreGas": 20000
+    },
+    {
+      "event": "Exit",
+      "variant": "plain",
+      "run": 4,
+      "constraints": 16407,
+      "gas": 403584,
+      "e2eMS": 534.343958,
+      "sstoreGas": 20000
+    },
+    {
+      "event": "Exit",
+      "variant": "plain",
+      "run": 5,
+      "constraints": 16407,
+      "gas": 403548,
+      "e2eMS": 514.365958,
+      "sstoreGas": 20000
+    },
+    {
+      "event": "Issue",
+      "variant": "plain",
+      "run": 1,
+      "constraints": 24424,
+      "gas": 438742,
+      "e2eMS": 551.814917,
+      "sstoreGas": 40000
+    },
+    {
+      "event": "Issue",
+      "variant": "plain",
+      "run": 2,
+      "constraints": 24424,
+      "gas": 438754,
+      "e2eMS": 537.818542,
+      "sstoreGas": 40000
+    },
+    {
+      "event": "Issue",
+      "variant": "plain",
+      "run": 3,
+      "constraints": 24424,
+      "gas": 438658,
+      "e2eMS": 563.884083,
+      "sstoreGas": 40000
+    },
+    {
+      "event": "Issue",
+      "variant": "plain",
+      "run": 4,
+      "constraints": 24424,
+      "gas": 438730,
+      "e2eMS": 538.140625,
+      "sstoreGas": 40000
+    },
+    {
+      "event": "Issue",
+      "variant": "plain",
+      "run": 5,
+      "constraints": 24424,
+      "gas": 438694,
+      "e2eMS": 546.495834,
+      "sstoreGas": 40000
+    }
+  ],
+  "process": [
+    {
+      "inputs": 2,
+      "outputs": 1,
+      "variant": "audit",
+      "run": 1,
+      "constraints": 55402,
+      "gas": 1887947
+    },
+    {
+      "inputs": 2,
+      "outputs": 1,
+      "variant": "plain",
+      "run": 1,
+      "constraints": 42067,
+      "gas": 1578702
+    },
+    {
+      "inputs": 3,
+      "outputs": 1,
+      "variant": "audit",
+      "run": 1,
+      "constraints": 72116,
+      "gas": 1920563
+    },
+    {
+      "inputs": 3,
+      "outputs": 1,
+      "variant": "plain",
+      "run": 1,
+      "constraints": 58181,
+      "gas": 1586871
+    },
+    {
+      "inputs": 4,
+      "outputs": 1,
+      "variant": "audit",
+      "run": 1,
+      "constraints": 88832,
+      "gas": 2009015
+    },
+    {
+      "inputs": 4,
+      "outputs": 1,
+      "variant": "plain",
+      "run": 1,
+      "constraints": 74297,
+      "gas": 1650731
+    },
+    {
+      "inputs": 2,
+      "outputs": 2,
+      "variant": "audit",
+      "run": 1,
+      "constraints": 69172,
+      "gas": 2800536
+    },
+    {
+      "inputs": 2,
+      "outputs": 2,
+      "variant": "plain",
+      "run": 1,
+      "constraints": 54635,
+      "gas": 2399859
+    },
+    {
+      "inputs": 2,
+      "outputs": 3,
+      "variant": "audit",
+      "run": 1,
+      "constraints": 82944,
+      "gas": 3763839
+    },
+    {
+      "inputs": 2,
+      "outputs": 3,
+      "variant": "plain",
+      "run": 1,
+      "constraints": 67205,
+      "gas": 3271573
+    }
+  ],
+  "routes": [
+    {
+      "route": "direct",
+      "run": 1,
+      "transactions": 1,
+      "gas": 2366228
+    },
+    {
+      "route": "direct",
+      "run": 2,
+      "transactions": 1,
+      "gas": 2366252
+    },
+    {
+      "route": "direct",
+      "run": 3,
+      "transactions": 1,
+      "gas": 2366216
+    },
+    {
+      "route": "direct",
+      "run": 4,
+      "transactions": 1,
+      "gas": 2366264
+    },
+    {
+      "route": "direct",
+      "run": 5,
+      "transactions": 1,
+      "gas": 2366252
+    },
+    {
+      "route": "proceed",
+      "run": 1,
+      "transactions": 2,
+      "gas": 4742551
+    },
+    {
+      "route": "proceed",
+      "run": 2,
+      "transactions": 2,
+      "gas": 4742599
+    },
+    {
+      "route": "proceed",
+      "run": 3,
+      "transactions": 2,
+      "gas": 4742623
+    },
+    {
+      "route": "proceed",
+      "run": 4,
+      "transactions": 2,
+      "gas": 4742539
+    },
+    {
+      "route": "proceed",
+      "run": 5,
+      "transactions": 2,
+      "gas": 4742635
+    },
+    {
+      "route": "recall",
+      "run": 1,
+      "transactions": 2,
+      "gas": 4744105
+    },
+    {
+      "route": "recall",
+      "run": 2,
+      "transactions": 2,
+      "gas": 4744105
+    },
+    {
+      "route": "recall",
+      "run": 3,
+      "transactions": 2,
+      "gas": 4744057
+    },
+    {
+      "route": "recall",
+      "run": 4,
+      "transactions": 2,
+      "gas": 4744165
+    },
+    {
+      "route": "recall",
+      "run": 5,
+      "transactions": 2,
+      "gas": 4744153
+    }
+  ],
+  "shared": [
+    {
+      "run": 1,
+      "gas": 2724194
+    }
+  ],
+  "same": {
+    "native": [
+      {
+        "Run": 1,
+        "Round": 0,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1196.274125,
+        "VerifyMS": 5.179625,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 0,
+        "Arm": "U",
+        "ProveMS": 887.3035,
+        "VerifyMS": 2.740792,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 0,
+        "Arm": "D-sequential",
+        "ProveMS": 1307.328125,
+        "VerifyMS": 5.2365,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 1,
+        "Arm": "U",
+        "ProveMS": 871.607667,
+        "VerifyMS": 2.670708,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 1,
+        "Arm": "D-sequential",
+        "ProveMS": 1328.315833,
+        "VerifyMS": 5.137875,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 1,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1187.576541,
+        "VerifyMS": 5.160583,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 2,
+        "Arm": "D-sequential",
+        "ProveMS": 1298.356042,
+        "VerifyMS": 5.369083,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 2,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1205.224625,
+        "VerifyMS": 5.183125,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 2,
+        "Arm": "U",
+        "ProveMS": 883.432208,
+        "VerifyMS": 2.625584,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 3,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1188.787958,
+        "VerifyMS": 5.137458,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 3,
+        "Arm": "U",
+        "ProveMS": 879.663167,
+        "VerifyMS": 2.649084,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 3,
+        "Arm": "D-sequential",
+        "ProveMS": 1301.634834,
+        "VerifyMS": 5.278,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 4,
+        "Arm": "U",
+        "ProveMS": 874.200042,
+        "VerifyMS": 2.666875,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 4,
+        "Arm": "D-sequential",
+        "ProveMS": 1308.641333,
+        "VerifyMS": 5.24675,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 4,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1207.072458,
+        "VerifyMS": 5.443041,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 5,
+        "Arm": "D-sequential",
+        "ProveMS": 1294.085958,
+        "VerifyMS": 5.282667,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 5,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1189.403625,
+        "VerifyMS": 5.216542,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 5,
+        "Arm": "U",
+        "ProveMS": 884.714208,
+        "VerifyMS": 2.689583,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 6,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1216.806542,
+        "VerifyMS": 5.285708,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 6,
+        "Arm": "U",
+        "ProveMS": 873.789625,
+        "VerifyMS": 2.626667,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 6,
+        "Arm": "D-sequential",
+        "ProveMS": 1291.078666,
+        "VerifyMS": 5.283292,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 7,
+        "Arm": "U",
+        "ProveMS": 885.545083,
+        "VerifyMS": 2.602167,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 7,
+        "Arm": "D-sequential",
+        "ProveMS": 1295.061875,
+        "VerifyMS": 5.264333,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 7,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1209.160875,
+        "VerifyMS": 5.377125,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 8,
+        "Arm": "D-sequential",
+        "ProveMS": 1309.994708,
+        "VerifyMS": 5.23,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 8,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1185.515834,
+        "VerifyMS": 5.169083,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 8,
+        "Arm": "U",
+        "ProveMS": 881.369167,
+        "VerifyMS": 2.603458,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 9,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1199.94375,
+        "VerifyMS": 5.208042,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 1,
+        "Round": 9,
+        "Arm": "U",
+        "ProveMS": 890.848791,
+        "VerifyMS": 2.699792,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 9,
+        "Arm": "D-sequential",
+        "ProveMS": 1300.730709,
+        "VerifyMS": 5.556459,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 0,
+        "Arm": "U",
+        "ProveMS": 901.237542,
+        "VerifyMS": 2.75675,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 0,
+        "Arm": "D-sequential",
+        "ProveMS": 1309.077667,
+        "VerifyMS": 5.26725,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 0,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1189.421833,
+        "VerifyMS": 5.429292,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 1,
+        "Arm": "D-sequential",
+        "ProveMS": 1298.0365,
+        "VerifyMS": 5.536083,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 1,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1207.417625,
+        "VerifyMS": 5.448042,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 1,
+        "Arm": "U",
+        "ProveMS": 882.175958,
+        "VerifyMS": 2.646791,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 2,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1209.305333,
+        "VerifyMS": 5.236583,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 2,
+        "Arm": "U",
+        "ProveMS": 884.886625,
+        "VerifyMS": 2.634375,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 2,
+        "Arm": "D-sequential",
+        "ProveMS": 1302.031042,
+        "VerifyMS": 5.311125,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 3,
+        "Arm": "U",
+        "ProveMS": 887.899542,
+        "VerifyMS": 2.583667,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 3,
+        "Arm": "D-sequential",
+        "ProveMS": 1311.675167,
+        "VerifyMS": 5.297166,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 3,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1184.356333,
+        "VerifyMS": 5.417625,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 4,
+        "Arm": "D-sequential",
+        "ProveMS": 1308.936958,
+        "VerifyMS": 5.199875,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 4,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1190.809417,
+        "VerifyMS": 5.146959,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 4,
+        "Arm": "U",
+        "ProveMS": 877.3125,
+        "VerifyMS": 2.651292,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 5,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1187.851833,
+        "VerifyMS": 5.344667,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 5,
+        "Arm": "U",
+        "ProveMS": 897.258167,
+        "VerifyMS": 2.604375,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 5,
+        "Arm": "D-sequential",
+        "ProveMS": 1301.918167,
+        "VerifyMS": 5.157208,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 6,
+        "Arm": "U",
+        "ProveMS": 870.637625,
+        "VerifyMS": 2.6495,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 6,
+        "Arm": "D-sequential",
+        "ProveMS": 1305.154125,
+        "VerifyMS": 5.335916,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 6,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1183.291,
+        "VerifyMS": 5.403875,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 7,
+        "Arm": "D-sequential",
+        "ProveMS": 1286.567208,
+        "VerifyMS": 5.25825,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 7,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1185.652,
+        "VerifyMS": 5.424209,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 7,
+        "Arm": "U",
+        "ProveMS": 885.338042,
+        "VerifyMS": 2.544,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 8,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1182.932459,
+        "VerifyMS": 5.296375,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 8,
+        "Arm": "U",
+        "ProveMS": 882.081333,
+        "VerifyMS": 2.683917,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 8,
+        "Arm": "D-sequential",
+        "ProveMS": 1325.41,
+        "VerifyMS": 5.225083,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 9,
+        "Arm": "U",
+        "ProveMS": 897.794708,
+        "VerifyMS": 2.593417,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 9,
+        "Arm": "D-sequential",
+        "ProveMS": 1297.797791,
+        "VerifyMS": 5.14,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 2,
+        "Round": 9,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1208.673833,
+        "VerifyMS": 5.155833,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 0,
+        "Arm": "D-sequential",
+        "ProveMS": 1317.6005,
+        "VerifyMS": 5.221333,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 0,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1203.643459,
+        "VerifyMS": 5.403583,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 0,
+        "Arm": "U",
+        "ProveMS": 891.132875,
+        "VerifyMS": 2.726541,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 1,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1219.936167,
+        "VerifyMS": 5.428542,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 1,
+        "Arm": "U",
+        "ProveMS": 890.070084,
+        "VerifyMS": 2.896458,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 1,
+        "Arm": "D-sequential",
+        "ProveMS": 1311.4675,
+        "VerifyMS": 5.192583,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 2,
+        "Arm": "U",
+        "ProveMS": 895.310917,
+        "VerifyMS": 2.639166,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 2,
+        "Arm": "D-sequential",
+        "ProveMS": 1314.887208,
+        "VerifyMS": 5.397375,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 2,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1203.590208,
+        "VerifyMS": 5.170916,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 3,
+        "Arm": "D-sequential",
+        "ProveMS": 1324.402083,
+        "VerifyMS": 5.197875,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 3,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1179.301375,
+        "VerifyMS": 5.338916,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 3,
+        "Arm": "U",
+        "ProveMS": 887.10075,
+        "VerifyMS": 2.687667,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 4,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1196.121583,
+        "VerifyMS": 11.119833,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 4,
+        "Arm": "U",
+        "ProveMS": 896.730834,
+        "VerifyMS": 2.62825,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 4,
+        "Arm": "D-sequential",
+        "ProveMS": 1324.114292,
+        "VerifyMS": 5.296125,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 5,
+        "Arm": "U",
+        "ProveMS": 880.597208,
+        "VerifyMS": 3.11225,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 5,
+        "Arm": "D-sequential",
+        "ProveMS": 1307.725959,
+        "VerifyMS": 5.162166,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 5,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1201.301542,
+        "VerifyMS": 5.42775,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 6,
+        "Arm": "D-sequential",
+        "ProveMS": 1331.446125,
+        "VerifyMS": 5.385333,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 6,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1251.453833,
+        "VerifyMS": 5.469959,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 6,
+        "Arm": "U",
+        "ProveMS": 898.92925,
+        "VerifyMS": 2.753208,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 7,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1195.565708,
+        "VerifyMS": 5.366625,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 7,
+        "Arm": "U",
+        "ProveMS": 881.226833,
+        "VerifyMS": 2.642125,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 7,
+        "Arm": "D-sequential",
+        "ProveMS": 1310.394166,
+        "VerifyMS": 5.349542,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 8,
+        "Arm": "U",
+        "ProveMS": 891.40375,
+        "VerifyMS": 2.658125,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 8,
+        "Arm": "D-sequential",
+        "ProveMS": 1305.47125,
+        "VerifyMS": 5.221542,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 8,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1192.340916,
+        "VerifyMS": 5.187834,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 9,
+        "Arm": "D-sequential",
+        "ProveMS": 1342.8075,
+        "VerifyMS": 5.350333,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 9,
+        "Arm": "D-parallel-2",
+        "ProveMS": 1197.300458,
+        "VerifyMS": 5.385833,
+        "NativeProofBytes": 1328,
+        "SolidityProofBytes": 2112,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 1633
+      },
+      {
+        "Run": 3,
+        "Round": 9,
+        "Arm": "U",
+        "ProveMS": 884.941125,
+        "VerifyMS": 2.615667,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      }
+    ],
+    "evm": [
+      {
+        "arm": "U",
+        "run": 1,
+        "round": 0,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 1,
+        "round": 0,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 1,
+        "round": 1,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 1,
+        "round": 1,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "D",
+        "run": 1,
+        "round": 2,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 1,
+        "round": 2,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "U",
+        "run": 1,
+        "round": 3,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 1,
+        "round": 3,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 1,
+        "round": 4,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 1,
+        "round": 4,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "D",
+        "run": 1,
+        "round": 5,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 1,
+        "round": 5,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "U",
+        "run": 1,
+        "round": 6,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 1,
+        "round": 6,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 1,
+        "round": 7,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 1,
+        "round": 7,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "D",
+        "run": 1,
+        "round": 8,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 1,
+        "round": 8,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "U",
+        "run": 1,
+        "round": 9,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 1,
+        "round": 9,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 2,
+        "round": 0,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 2,
+        "round": 0,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "D",
+        "run": 2,
+        "round": 1,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 2,
+        "round": 1,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "U",
+        "run": 2,
+        "round": 2,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 2,
+        "round": 2,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 2,
+        "round": 3,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 2,
+        "round": 3,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "D",
+        "run": 2,
+        "round": 4,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 2,
+        "round": 4,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "U",
+        "run": 2,
+        "round": 5,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 2,
+        "round": 5,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 2,
+        "round": 6,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 2,
+        "round": 6,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "D",
+        "run": 2,
+        "round": 7,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 2,
+        "round": 7,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "U",
+        "run": 2,
+        "round": 8,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 2,
+        "round": 8,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 2,
+        "round": 9,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 2,
+        "round": 9,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "D",
+        "run": 3,
+        "round": 0,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 3,
+        "round": 0,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "U",
+        "run": 3,
+        "round": 1,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 3,
+        "round": 1,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 3,
+        "round": 2,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 3,
+        "round": 2,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "D",
+        "run": 3,
+        "round": 3,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 3,
+        "round": 3,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "U",
+        "run": 3,
+        "round": 4,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 3,
+        "round": 4,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 3,
+        "round": 5,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 3,
+        "round": 5,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "D",
+        "run": 3,
+        "round": 6,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 3,
+        "round": 6,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "U",
+        "run": 3,
+        "round": 7,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 3,
+        "round": 7,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 3,
+        "round": 8,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "D",
+        "run": 3,
+        "round": 8,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "D",
+        "run": 3,
+        "round": 9,
+        "verificationExecutionGas": 677542,
+        "canonicalABIBytes": 2564
+      },
+      {
+        "arm": "U",
+        "run": 3,
+        "round": 9,
+        "verificationExecutionGas": 342166,
+        "canonicalABIBytes": 1412
+      }
+    ],
+    "keyBytes": {
+      "U": 6340752,
+      "D": 9535776
+    }
+  },
+  "three": {
+    "native": [
+      {
+        "Run": 1,
+        "Round": 0,
+        "Arm": "B",
+        "ProveMS": 453.612208,
+        "VerifyMS": 2.653292,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 1,
+        "Round": 0,
+        "Arm": "C",
+        "ProveMS": 896.676166,
+        "VerifyMS": 2.677625,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 0,
+        "Arm": "A-sequential",
+        "ProveMS": 553.034667,
+        "VerifyMS": 15.45525,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 0,
+        "Arm": "A-parallel-2",
+        "ProveMS": 499.229209,
+        "VerifyMS": 15.368375,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 1,
+        "Arm": "C",
+        "ProveMS": 893.411542,
+        "VerifyMS": 2.575792,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 1,
+        "Arm": "A-sequential",
+        "ProveMS": 554.241833,
+        "VerifyMS": 15.435208,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 1,
+        "Arm": "A-parallel-2",
+        "ProveMS": 491.750709,
+        "VerifyMS": 15.205875,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 1,
+        "Arm": "B",
+        "ProveMS": 452.43,
+        "VerifyMS": 2.658958,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 1,
+        "Round": 2,
+        "Arm": "A-sequential",
+        "ProveMS": 553.807208,
+        "VerifyMS": 15.279125,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 2,
+        "Arm": "A-parallel-2",
+        "ProveMS": 493.924416,
+        "VerifyMS": 15.197125,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 2,
+        "Arm": "B",
+        "ProveMS": 452.71875,
+        "VerifyMS": 2.60875,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 1,
+        "Round": 2,
+        "Arm": "C",
+        "ProveMS": 892.875583,
+        "VerifyMS": 2.634959,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 3,
+        "Arm": "A-parallel-2",
+        "ProveMS": 497.28625,
+        "VerifyMS": 15.15125,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 3,
+        "Arm": "B",
+        "ProveMS": 450.954459,
+        "VerifyMS": 2.676583,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 1,
+        "Round": 3,
+        "Arm": "C",
+        "ProveMS": 912.436458,
+        "VerifyMS": 2.699791,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 3,
+        "Arm": "A-sequential",
+        "ProveMS": 555.411708,
+        "VerifyMS": 15.651083,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 4,
+        "Arm": "B",
+        "ProveMS": 450.584333,
+        "VerifyMS": 2.813375,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 1,
+        "Round": 4,
+        "Arm": "C",
+        "ProveMS": 885.405708,
+        "VerifyMS": 2.625125,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 4,
+        "Arm": "A-sequential",
+        "ProveMS": 549.87425,
+        "VerifyMS": 15.540625,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 4,
+        "Arm": "A-parallel-2",
+        "ProveMS": 491.140833,
+        "VerifyMS": 15.453417,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 5,
+        "Arm": "C",
+        "ProveMS": 888.776167,
+        "VerifyMS": 2.625042,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 5,
+        "Arm": "A-sequential",
+        "ProveMS": 554.444167,
+        "VerifyMS": 15.593375,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 5,
+        "Arm": "A-parallel-2",
+        "ProveMS": 494.606708,
+        "VerifyMS": 15.463083,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 5,
+        "Arm": "B",
+        "ProveMS": 450.677666,
+        "VerifyMS": 2.941375,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 1,
+        "Round": 6,
+        "Arm": "A-sequential",
+        "ProveMS": 551.959833,
+        "VerifyMS": 15.714917,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 6,
+        "Arm": "A-parallel-2",
+        "ProveMS": 495.285292,
+        "VerifyMS": 15.410167,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 6,
+        "Arm": "B",
+        "ProveMS": 450.484209,
+        "VerifyMS": 2.630834,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 1,
+        "Round": 6,
+        "Arm": "C",
+        "ProveMS": 892.744666,
+        "VerifyMS": 2.739959,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 7,
+        "Arm": "A-parallel-2",
+        "ProveMS": 496.977416,
+        "VerifyMS": 15.358792,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 7,
+        "Arm": "B",
+        "ProveMS": 450.208459,
+        "VerifyMS": 2.6155,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 1,
+        "Round": 7,
+        "Arm": "C",
+        "ProveMS": 892.217667,
+        "VerifyMS": 2.616167,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 7,
+        "Arm": "A-sequential",
+        "ProveMS": 557.502834,
+        "VerifyMS": 15.184666,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 8,
+        "Arm": "B",
+        "ProveMS": 466.104542,
+        "VerifyMS": 2.620458,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 1,
+        "Round": 8,
+        "Arm": "C",
+        "ProveMS": 887.022834,
+        "VerifyMS": 2.707333,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 8,
+        "Arm": "A-sequential",
+        "ProveMS": 553.370833,
+        "VerifyMS": 15.369875,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 8,
+        "Arm": "A-parallel-2",
+        "ProveMS": 494.929875,
+        "VerifyMS": 15.823459,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 9,
+        "Arm": "C",
+        "ProveMS": 893.831458,
+        "VerifyMS": 2.7435,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 1,
+        "Round": 9,
+        "Arm": "A-sequential",
+        "ProveMS": 549.13325,
+        "VerifyMS": 15.342417,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 9,
+        "Arm": "A-parallel-2",
+        "ProveMS": 500.075416,
+        "VerifyMS": 15.797375,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 1,
+        "Round": 9,
+        "Arm": "B",
+        "ProveMS": 448.772875,
+        "VerifyMS": 2.564708,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 2,
+        "Round": 0,
+        "Arm": "C",
+        "ProveMS": 891.94825,
+        "VerifyMS": 2.654959,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 0,
+        "Arm": "A-sequential",
+        "ProveMS": 560.519459,
+        "VerifyMS": 15.519042,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 0,
+        "Arm": "A-parallel-2",
+        "ProveMS": 509.69575,
+        "VerifyMS": 15.26625,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 0,
+        "Arm": "B",
+        "ProveMS": 446.100084,
+        "VerifyMS": 2.670416,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 2,
+        "Round": 1,
+        "Arm": "A-sequential",
+        "ProveMS": 553.497875,
+        "VerifyMS": 15.496708,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 1,
+        "Arm": "A-parallel-2",
+        "ProveMS": 498.148584,
+        "VerifyMS": 14.983042,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 1,
+        "Arm": "B",
+        "ProveMS": 453.831125,
+        "VerifyMS": 2.593167,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 2,
+        "Round": 1,
+        "Arm": "C",
+        "ProveMS": 945.206959,
+        "VerifyMS": 2.626875,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 2,
+        "Arm": "A-parallel-2",
+        "ProveMS": 498.467,
+        "VerifyMS": 15.4145,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 2,
+        "Arm": "B",
+        "ProveMS": 454.096208,
+        "VerifyMS": 2.78525,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 2,
+        "Round": 2,
+        "Arm": "C",
+        "ProveMS": 874.706416,
+        "VerifyMS": 2.718791,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 2,
+        "Arm": "A-sequential",
+        "ProveMS": 558.351708,
+        "VerifyMS": 15.360958,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 3,
+        "Arm": "B",
+        "ProveMS": 454.7655,
+        "VerifyMS": 2.686,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 2,
+        "Round": 3,
+        "Arm": "C",
+        "ProveMS": 884.389583,
+        "VerifyMS": 2.907042,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 3,
+        "Arm": "A-sequential",
+        "ProveMS": 555.987125,
+        "VerifyMS": 15.709,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 3,
+        "Arm": "A-parallel-2",
+        "ProveMS": 496.766416,
+        "VerifyMS": 15.25,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 4,
+        "Arm": "C",
+        "ProveMS": 875.441,
+        "VerifyMS": 2.672333,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 4,
+        "Arm": "A-sequential",
+        "ProveMS": 553.457042,
+        "VerifyMS": 15.754542,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 4,
+        "Arm": "A-parallel-2",
+        "ProveMS": 497.220458,
+        "VerifyMS": 15.685667,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 4,
+        "Arm": "B",
+        "ProveMS": 465.692208,
+        "VerifyMS": 2.608708,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 2,
+        "Round": 5,
+        "Arm": "A-sequential",
+        "ProveMS": 561.485625,
+        "VerifyMS": 15.473209,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 5,
+        "Arm": "A-parallel-2",
+        "ProveMS": 493.88225,
+        "VerifyMS": 15.53475,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 5,
+        "Arm": "B",
+        "ProveMS": 450.447917,
+        "VerifyMS": 2.76775,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 2,
+        "Round": 5,
+        "Arm": "C",
+        "ProveMS": 883.594083,
+        "VerifyMS": 2.628083,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 6,
+        "Arm": "A-parallel-2",
+        "ProveMS": 492.699875,
+        "VerifyMS": 15.473375,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 6,
+        "Arm": "B",
+        "ProveMS": 458.473833,
+        "VerifyMS": 2.639542,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 2,
+        "Round": 6,
+        "Arm": "C",
+        "ProveMS": 896.32825,
+        "VerifyMS": 2.61825,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 6,
+        "Arm": "A-sequential",
+        "ProveMS": 552.878375,
+        "VerifyMS": 15.463958,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 7,
+        "Arm": "B",
+        "ProveMS": 450.498542,
+        "VerifyMS": 2.606834,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 2,
+        "Round": 7,
+        "Arm": "C",
+        "ProveMS": 903.807333,
+        "VerifyMS": 2.603,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 7,
+        "Arm": "A-sequential",
+        "ProveMS": 561.178583,
+        "VerifyMS": 15.480583,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 7,
+        "Arm": "A-parallel-2",
+        "ProveMS": 495.890375,
+        "VerifyMS": 15.113708,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 8,
+        "Arm": "C",
+        "ProveMS": 910.065958,
+        "VerifyMS": 2.654083,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 2,
+        "Round": 8,
+        "Arm": "A-sequential",
+        "ProveMS": 564.454083,
+        "VerifyMS": 15.610708,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 8,
+        "Arm": "A-parallel-2",
+        "ProveMS": 497.576375,
+        "VerifyMS": 15.242333,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 8,
+        "Arm": "B",
+        "ProveMS": 453.074959,
+        "VerifyMS": 2.675458,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 2,
+        "Round": 9,
+        "Arm": "A-sequential",
+        "ProveMS": 550.637625,
+        "VerifyMS": 15.50125,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 9,
+        "Arm": "A-parallel-2",
+        "ProveMS": 508.633791,
+        "VerifyMS": 15.19775,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 2,
+        "Round": 9,
+        "Arm": "B",
+        "ProveMS": 462.016875,
+        "VerifyMS": 2.60775,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 2,
+        "Round": 9,
+        "Arm": "C",
+        "ProveMS": 896.574166,
+        "VerifyMS": 2.585167,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 0,
+        "Arm": "A-sequential",
+        "ProveMS": 554.818083,
+        "VerifyMS": 15.307417,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 0,
+        "Arm": "A-parallel-2",
+        "ProveMS": 503.245583,
+        "VerifyMS": 15.418458,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 0,
+        "Arm": "B",
+        "ProveMS": 452.561209,
+        "VerifyMS": 2.6805,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 3,
+        "Round": 0,
+        "Arm": "C",
+        "ProveMS": 889.690709,
+        "VerifyMS": 2.591958,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 1,
+        "Arm": "A-parallel-2",
+        "ProveMS": 502.124,
+        "VerifyMS": 15.335625,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 1,
+        "Arm": "B",
+        "ProveMS": 450.277959,
+        "VerifyMS": 2.621875,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 3,
+        "Round": 1,
+        "Arm": "C",
+        "ProveMS": 898.122875,
+        "VerifyMS": 2.622084,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 1,
+        "Arm": "A-sequential",
+        "ProveMS": 576.22175,
+        "VerifyMS": 15.726334,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 2,
+        "Arm": "B",
+        "ProveMS": 461.071833,
+        "VerifyMS": 2.692708,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 3,
+        "Round": 2,
+        "Arm": "C",
+        "ProveMS": 886.89175,
+        "VerifyMS": 2.739209,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 2,
+        "Arm": "A-sequential",
+        "ProveMS": 556.604875,
+        "VerifyMS": 16.193292,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 2,
+        "Arm": "A-parallel-2",
+        "ProveMS": 497.708291,
+        "VerifyMS": 15.639583,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 3,
+        "Arm": "C",
+        "ProveMS": 887.952167,
+        "VerifyMS": 2.679208,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 3,
+        "Arm": "A-sequential",
+        "ProveMS": 564.287584,
+        "VerifyMS": 15.985875,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 3,
+        "Arm": "A-parallel-2",
+        "ProveMS": 499.376167,
+        "VerifyMS": 15.513958,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 3,
+        "Arm": "B",
+        "ProveMS": 458.641083,
+        "VerifyMS": 2.709625,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 3,
+        "Round": 4,
+        "Arm": "A-sequential",
+        "ProveMS": 598.265583,
+        "VerifyMS": 16.127208,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 4,
+        "Arm": "A-parallel-2",
+        "ProveMS": 532.255958,
+        "VerifyMS": 16.423708,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 4,
+        "Arm": "B",
+        "ProveMS": 473.635708,
+        "VerifyMS": 2.596708,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 3,
+        "Round": 4,
+        "Arm": "C",
+        "ProveMS": 924.436666,
+        "VerifyMS": 2.613042,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 5,
+        "Arm": "A-parallel-2",
+        "ProveMS": 537.626541,
+        "VerifyMS": 16.089875,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 5,
+        "Arm": "B",
+        "ProveMS": 551.055667,
+        "VerifyMS": 2.627,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 3,
+        "Round": 5,
+        "Arm": "C",
+        "ProveMS": 883.341042,
+        "VerifyMS": 2.630458,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 5,
+        "Arm": "A-sequential",
+        "ProveMS": 588.656917,
+        "VerifyMS": 15.713833,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 6,
+        "Arm": "B",
+        "ProveMS": 483.321167,
+        "VerifyMS": 2.608958,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 3,
+        "Round": 6,
+        "Arm": "C",
+        "ProveMS": 884.330625,
+        "VerifyMS": 2.784042,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 6,
+        "Arm": "A-sequential",
+        "ProveMS": 563.336542,
+        "VerifyMS": 15.4855,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 6,
+        "Arm": "A-parallel-2",
+        "ProveMS": 499.394334,
+        "VerifyMS": 15.296583,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 7,
+        "Arm": "C",
+        "ProveMS": 878.315208,
+        "VerifyMS": 2.679917,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 7,
+        "Arm": "A-sequential",
+        "ProveMS": 587.881542,
+        "VerifyMS": 15.573167,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 7,
+        "Arm": "A-parallel-2",
+        "ProveMS": 495.679834,
+        "VerifyMS": 15.717333,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 7,
+        "Arm": "B",
+        "ProveMS": 449.963958,
+        "VerifyMS": 2.645875,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 3,
+        "Round": 8,
+        "Arm": "A-sequential",
+        "ProveMS": 554.331709,
+        "VerifyMS": 15.346416,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 8,
+        "Arm": "A-parallel-2",
+        "ProveMS": 501.651084,
+        "VerifyMS": 15.62475,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 8,
+        "Arm": "B",
+        "ProveMS": 455.477041,
+        "VerifyMS": 2.582125,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 3,
+        "Round": 8,
+        "Arm": "C",
+        "ProveMS": 878.194792,
+        "VerifyMS": 2.574,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 9,
+        "Arm": "A-parallel-2",
+        "ProveMS": 501.425875,
+        "VerifyMS": 15.677791,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      },
+      {
+        "Run": 3,
+        "Round": 9,
+        "Arm": "B",
+        "ProveMS": 447.220208,
+        "VerifyMS": 2.688125,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 1157
+      },
+      {
+        "Run": 3,
+        "Round": 9,
+        "Arm": "C",
+        "ProveMS": 868.13625,
+        "VerifyMS": 2.639125,
+        "NativeProofBytes": 664,
+        "SolidityProofBytes": 1056,
+        "PublicInputBytes": 288,
+        "CanonicalNativeBytes": 965
+      },
+      {
+        "Run": 3,
+        "Round": 9,
+        "Arm": "A-sequential",
+        "ProveMS": 568.340917,
+        "VerifyMS": 15.826792,
+        "NativeProofBytes": 3984,
+        "SolidityProofBytes": 6336,
+        "PublicInputBytes": 480,
+        "CanonicalNativeBytes": 4497
+      }
+    ],
+    "evm": [
+      {
+        "arm": "B",
+        "run": 1,
+        "round": 0,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 1,
+        "round": 0,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 1,
+        "round": 0,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "C",
+        "run": 1,
+        "round": 1,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 1,
+        "round": 1,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 1,
+        "round": 1,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "A",
+        "run": 1,
+        "round": 2,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 1,
+        "round": 2,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 1,
+        "round": 2,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "B",
+        "run": 1,
+        "round": 3,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 1,
+        "round": 3,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 1,
+        "round": 3,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 1,
+        "round": 4,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 1,
+        "round": 4,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 1,
+        "round": 4,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "C",
+        "run": 1,
+        "round": 5,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 1,
+        "round": 5,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 1,
+        "round": 5,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "A",
+        "run": 1,
+        "round": 6,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 1,
+        "round": 6,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 1,
+        "round": 6,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "B",
+        "run": 1,
+        "round": 7,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 1,
+        "round": 7,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 1,
+        "round": 7,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 1,
+        "round": 8,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 1,
+        "round": 8,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 1,
+        "round": 8,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "C",
+        "run": 1,
+        "round": 9,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 1,
+        "round": 9,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 1,
+        "round": 9,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 2,
+        "round": 0,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 2,
+        "round": 0,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 2,
+        "round": 0,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "A",
+        "run": 2,
+        "round": 1,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 2,
+        "round": 1,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 2,
+        "round": 1,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "B",
+        "run": 2,
+        "round": 2,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 2,
+        "round": 2,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 2,
+        "round": 2,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 2,
+        "round": 3,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 2,
+        "round": 3,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 2,
+        "round": 3,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "C",
+        "run": 2,
+        "round": 4,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 2,
+        "round": 4,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 2,
+        "round": 4,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "A",
+        "run": 2,
+        "round": 5,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 2,
+        "round": 5,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 2,
+        "round": 5,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "B",
+        "run": 2,
+        "round": 6,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 2,
+        "round": 6,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 2,
+        "round": 6,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 2,
+        "round": 7,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 2,
+        "round": 7,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 2,
+        "round": 7,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "C",
+        "run": 2,
+        "round": 8,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 2,
+        "round": 8,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 2,
+        "round": 8,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "A",
+        "run": 2,
+        "round": 9,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 2,
+        "round": 9,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 2,
+        "round": 9,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 3,
+        "round": 0,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 3,
+        "round": 0,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 3,
+        "round": 0,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "B",
+        "run": 3,
+        "round": 1,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 3,
+        "round": 1,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 3,
+        "round": 1,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 3,
+        "round": 2,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 3,
+        "round": 2,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 3,
+        "round": 2,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "C",
+        "run": 3,
+        "round": 3,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 3,
+        "round": 3,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 3,
+        "round": 3,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "A",
+        "run": 3,
+        "round": 4,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 3,
+        "round": 4,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 3,
+        "round": 4,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "B",
+        "run": 3,
+        "round": 5,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 3,
+        "round": 5,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 3,
+        "round": 5,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 3,
+        "round": 6,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 3,
+        "round": 6,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 3,
+        "round": 6,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "C",
+        "run": 3,
+        "round": 7,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 3,
+        "round": 7,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 3,
+        "round": 7,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "A",
+        "run": 3,
+        "round": 8,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      },
+      {
+        "arm": "B",
+        "run": 3,
+        "round": 8,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 3,
+        "round": 8,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "B",
+        "run": 3,
+        "round": 9,
+        "verificationExecutionGas": 349139,
+        "canonicalABIBytes": 1604
+      },
+      {
+        "arm": "C",
+        "run": 3,
+        "round": 9,
+        "verificationExecutionGas": 342246,
+        "canonicalABIBytes": 1412
+      },
+      {
+        "arm": "A",
+        "run": 3,
+        "round": 9,
+        "verificationExecutionGas": 2009339,
+        "canonicalABIBytes": 7236
+      }
+    ],
+    "keyBytes": {
+      "A": 1327536,
+      "B": 3195024,
+      "C": 6340752
+    }
+  }
+}

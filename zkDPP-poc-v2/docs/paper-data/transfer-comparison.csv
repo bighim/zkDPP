@@ -1,3 +1,5 @@
 route,audit_record,gas,aggregation
-zkTransfer,no,2366228,median of direct transaction
-Transfer->Recall,yes,5362498,sum of Event medians
+zkTransfer,no,2366252,median of five direct transactions
+SharedSecret,yes,2724194,one official observation
+Transfer->Proceed,yes,5361472,sum of audited Transfer and Proceed medians
+Transfer->Recall,yes,5362474,sum of audited Transfer and Recall medians

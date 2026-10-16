@@ -1,3 +1,7 @@
+// Current numeric edition; the fallback below preserves the historical extractor.
+if (require('fs').existsSync(require('path').join(__dirname, '../paper-data/runs/2026-10-16-run01/measurements.json'))) {
+  require('./build-current-paper-data.cjs');
+} else {
 // Read-only extraction from the published experiment Raw; no benchmark execution.
 const fs = require('fs');
 const path = require('path');
@@ -225,3 +229,5 @@ fs.writeFileSync(path.join(docs,'paper-evaluation-results.tex'),tex);
 }
 fs.writeFileSync(path.join(datadir,'provenance.json'),JSON.stringify({source:'published experiments and verified Process supplement',warmups:{legacy:1,process:0},officialRuns:{legacy:5,process:1},statistic:{legacy:'median',process:'single observation'},errorBars:'not displayed; min-max retained in CSV',displayedGraphSeries:['chain'],newSupplementIncluded:true,inputs},null,2)+'\n');
 console.log(JSON.stringify({figures:Object.keys(figures),inputs:Object.keys(inputs),officialRuns:{legacy:5,process:1},supplementIncluded:true}));
+
+}

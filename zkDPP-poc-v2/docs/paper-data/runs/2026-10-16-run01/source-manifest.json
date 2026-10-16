@@ -1,0 +1,44 @@
+{
+  "edition": "2026-10-16-run01",
+  "setting": "gnark-v0.15.0 PLONK-KZG quotient-shard randomization enabled for all generated PLONK proofs",
+  "environment": {
+    "macOS": "26.6.2 (25G83)",
+    "GOMAXPROCS": 8,
+    "localAnvil": "1.7.1-Homebrew",
+    "hardfork": "Prague",
+    "go": "1.25.7"
+  },
+  "normalizedMeasurementSHA256": "4c18f48f1185446180c539285aa35a4695af733492f0d4e5304f65cfa81ab2bf",
+  "originalInputSHA256": {
+    "summary.json": "dd6578191a59163831eb8c8d548bd43842f3f7c94ab7b1e7e3c427ca581758ff",
+    "workspace/zkDPP-poc-v2/output/experiments/experiment-1.json": "428872ceb8b798059d4bd09c65201be4af6c5033d36f21508ee52f6646aca973",
+    "workspace/zkDPP-poc-v2/output/experiments/experiment-3.json": "c3ccc202644ab3d174cde286d4558af2baaaf8627497f832ad21757c61f0c239",
+    "workspace/zkDPP-poc-v2/output/paper-supplement/process-2-1-audit.json": "0b14a7b0d58ba23be9f23cf83c775691e283256071da72ec9e60c9a120f75fa1",
+    "workspace/zkDPP-poc-v2/output/paper-supplement/process-2-1-plain.json": "b31de7a15247511ae7a8daebeb541b5a4ef3d42a1b4f37975fcf617243e57866",
+    "workspace/zkDPP-poc-v2/output/paper-supplement/process-3-1-audit.json": "4542b9d53c3d59a296ffb1305a2c406a797ea047706d79aa44aa67e84a7054da",
+    "workspace/zkDPP-poc-v2/output/paper-supplement/process-3-1-plain.json": "0c5c218d14b3c5b381585f7235e82645f80bc2f093cf9e2fed4a7d8478371fc9",
+    "workspace/zkDPP-poc-v2/output/paper-supplement/process-4-1-audit.json": "e35f45fd05f308baa25b315dcfecf24f21560d80cd3ff671063ccf66b50a0003",
+    "workspace/zkDPP-poc-v2/output/paper-supplement/process-4-1-plain.json": "12e8a73602f9b76ad73de2d5ff502e9dda0c42e01b4d22d8e77eb4228fccbbcd",
+    "workspace/zkDPP-poc-v2/output/paper-supplement/process-2-2-audit.json": "c881312d18e691e2eb9c28f86d10c2c6166ed8576393a87e1ff632d85bd6c7b1",
+    "workspace/zkDPP-poc-v2/output/paper-supplement/process-2-2-plain.json": "b127f9942812f30f32f009f1f33e7dcbb445d707972396f0f7b2bab504be1f92",
+    "workspace/zkDPP-poc-v2/output/paper-supplement/process-2-3-audit.json": "d153ff0fb405c400e1257680695659e215c32f24ad5f23aff933616e8289895e",
+    "workspace/zkDPP-poc-v2/output/paper-supplement/process-2-3-plain.json": "c91c9e9e447f694a8c8a757c338034be529b5f27a00a73d2cdb9c855ab4a094a",
+    "workspace/zkDPP-poc-v2/output/experiments/experiment-2.json": "abdee9fe8c38b426c272ffb3e73dad2980f5e6ec2e61d77985dc6555453827e9",
+    "workspace/zkDPP-poc-v2/output/paper-supplement/shared-transfer/result.json": "64bc5f2fbdc04aad1108ce825e6d0c640722f59e38d6c2b039cdc2cd9dd187c8",
+    "same/raw/native-run-01.json": "555f11d0e8094a06992a17620921e8baa868e1c1750d343cad786784f168ad10",
+    "same/raw/native-run-02.json": "c06e4d3a519ea2149bb3529fdf228d67ecbdc867307bacbf0ddbfdf492e47231",
+    "same/raw/native-run-03.json": "f32b84b6d479f822b8c44dd5c6cb2c1ff92382c4c38c1a42fad06c6d650273fe",
+    "same/raw/evm.json": "e661f9a50bac7ae96f5b7abd521281e0e9a4c7b94e7bae5779e7841e68d22c5f",
+    "three/raw/native-run-01.json": "00cd3fa7964ff2140974821095c50ddb697cd38a76a8f93d196f6d0de6d9195f",
+    "three/raw/native-run-02.json": "ffcf4f6df272a472f2956e6c8e433a0d8fc3096c402be367f0fcdb1fcb3c2293",
+    "three/raw/native-run-03.json": "630432cc4729bdf79d57730a9c69ad689f6044ac860f472230b7d40bd066ac95",
+    "three/raw/evm.json": "614f263c67263a1157abb69abc41878d7cae87c20d917bd5798dad1816c5fb92"
+  },
+  "normalization": "Official numeric observations only; proof bytes and private assignments are not needed for this aggregation. Original raw files remain preserved. No experiment rerun.",
+  "aggregation": {
+    "events": "5 official observations per event and audit flag; median/min/max",
+    "process": "one official observation per shape and audit flag",
+    "transfer": "direct five-run median; SharedSecret one official observation; two-stage audited cost is sum of individual event medians",
+    "merge": "three processes times ten official observations per arm; pooled median"
+  }
+}

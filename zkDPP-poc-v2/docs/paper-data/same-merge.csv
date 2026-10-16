@@ -1,0 +1,4 @@
+arm,samples,prove_ms_median,prove_ms_min,prove_ms_max,verify_ms_median,verify_ms_min,verify_ms_max,canonical_abi_bytes,verification_execution_gas,unique_proving_key_bytes,native_proof_bytes,solidity_proof_bytes,public_input_bytes,canonical_native_bytes
+U,30,885.1395835000001,870.637625,901.237542,2.649292,2.544,3.11225,1412,342166,6340752,664,1056,288,965
+D-sequential,30,1308.183646,1286.567208,1342.8075,5.2657915,5.137875,5.556459,2564,677542,9535776,1328,2112,288,1633
+D-parallel-2,30,1196.197854,1179.301375,1251.453833,5.3417915,5.137458,11.119833,2564,677542,9535776,1328,2112,288,1633

@@ -1,4 +1,5 @@
-route,transactions,gas_median,gas_min,gas_max
-direct,1,2366228,2366168,2366264
-proceed,2,4742647,4742611,4742671
-recall,2,4744093,4744069,4744141
+route,transactions,gas_median,gas_min,gas_max,aggregation,samples
+direct,1,2366252,2366216,2366264,median of five direct transactions,5
+shared,1,2724194,2724194,2724194,one official observation,1
+proceed,2,5361472,,,sum of audited Transfer and Proceed medians,5+5
+recall,2,5362474,,,sum of audited Transfer and Recall medians,5+5

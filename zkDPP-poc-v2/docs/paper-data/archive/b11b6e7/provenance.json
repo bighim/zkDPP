@@ -1,0 +1,29 @@
+{
+  "source": "published experiments and verified Process supplement",
+  "warmups": {
+    "legacy": 1,
+    "process": 0
+  },
+  "officialRuns": {
+    "legacy": 5,
+    "process": 1
+  },
+  "statistic": {
+    "legacy": "median",
+    "process": "single observation"
+  },
+  "errorBars": "not displayed; min-max retained in CSV",
+  "displayedGraphSeries": [
+    "chain"
+  ],
+  "newSupplementIncluded": true,
+  "inputs": {
+    "output/experiments/experiment-1.json": "073ffa339e4f2add596f20fa20b6e40bf0e58d4bab0781a5b59689ce986d9e41",
+    "output/experiments/experiment-2.json": "bb05e0039940162ff5d93c8539d40fb63844690179fcb6e876217cc043c573a1",
+    "output/experiments/experiment-3.json": "6df15a8c1b3faa038de74b99a874b0c77271d44bdb81f60a074cdea65b9a2077",
+    "output/experiments/experiment-4.json": "0a90e033f25f9abf017f2d5866b4b1026cc7d7e5adfb5876c86befe08e4747e6",
+    "output/experiments/experiment-8.json": "7e8b3d936d562b75d3ae8764708522fa637cf46e8944980b0af1ce987c37b658",
+    "output/paper-supplement/process-independent.json": "e7c60743e56b4b487fc7dceb61d936f6df939aa34a2d9190eb4436f9245c55a9",
+    "output/paper-supplement/verification-after.json": "fc16ef76768756bffce74e0c6d3863dddc2726db8a45b028fd02294a74034d18"
+  }
+}
